@@ -1,0 +1,181 @@
+apply plugin: 'com.android.application'
+apply plugin: 'com.android.databinding'
+apply from: '../gradle/byoutline/retrolambdaConfig.gradle'
+apply from: "$rootDir/gradle/checkstyle.gradle"
+apply from: "$rootDir/gradle/pmd.gradle"
+apply plugin: 'jacoco'
+apply plugin: 'com.neenbedankt.android-apt'
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'com.android.databinding:dataBinder:1.0-rc2'
+    }
+}
+
+repositories {
+    jcenter()
+    flatDir {
+        dirs 'libs'
+    }
+
+    maven { url "http://oss.sonatype.org/content/repositories/snapshots/" }
+    maven { url 'http://clinker.47deg.com/nexus/content/groups/public' }
+}
+
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "23.0.1"
+
+    defaultConfig {
+        applicationId "com.byoutline.kickmaterial"
+        minSdkVersion 18
+        targetSdkVersion 23
+        versionCode 1
+        versionName "1.0"
+
+        multiDexEnabled false
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            debuggable false
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    applicationVariants.all { variant ->
+        variant.outputs.each { output ->
+            def file = output.outputFile
+            output.outputFile = new File(file.parent, "kickmaterial-" + defaultConfig.versionName + ".apk")
+        }
+    }
+
+    testOptions {
+        //unitTests.returnDefaultValues = true
+    }
+
+    lintOptions {
+        lintConfig file("lint.xml")
+    }
+
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/ASL2.0'
+        exclude 'META-INF/services/javax.annotation.processing.Processor'
+        exclude 'LICENSE.txt'
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    productFlavors {
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile project(':appjava')
+    compile 'com.android.support:support-v4:23.0.1'
+    compile 'com.android.support:appcompat-v7:23.0.1'
+    compile 'com.android.support:cardview-v7:23.0.1'
+    compile 'com.android.support:recyclerview-v7:23.0.1'
+    compile 'com.android.support:support-annotations:23.0.1'
+    compile 'com.android.support:palette-v7:23.0.1'
+    compile 'com.jakewharton:butterknife:7.0.1'
+    compile('com.byoutline.secretsauce:secretsauce:0.4.6') { transitive = true }
+    compile 'com.byoutline.ottocachedfield:ottocachedfield:1.5.0'
+    compile 'com.byoutline.androidstubserver:stubserver:1.4.1'
+    compile 'com.byoutline.mockserver:mockserver:1.4.2'
+    compile 'com.squareup.retrofit:retrofit:1.9.0'
+    compile 'com.squareup.okhttp:okhttp:2.5.0'
+    compile 'com.squareup.okhttp:okhttp-urlconnection:2.4.0'
+    compile 'com.squareup.picasso:picasso:2.5.2'
+    compile 'javax.inject:javax.inject:1'
+    // For dagger 2
+    compile 'com.google.dagger:dagger:2.0.1'
+    apt 'com.google.dagger:dagger-compiler:2.0.1'
+    provided 'javax.annotation:jsr250-api:1.0'
+
+    apt 'com.android.databinding:compiler:1.0-rc2'
+
+    compile 'com.kenai.nbpwr:edu-umd-cs-findbugs-annotations:1.3.2-201002241900'
+    compile 'com.jakewharton.timber:timber:2.7.1'
+    compile 'com.github.shell-software:fab:1.0.5'
+    compile 'commons-collections:commons-collections:3.2.1'
+    compile 'me.tatarka:bindingcollectionadapter:0.14'
+    compile 'me.tatarka:bindingcollectionadapter-recyclerview:0.14'
+    retrolambdaConfig 'net.orfjackal.retrolambda:retrolambda:2.0.6'
+
+    androidTestCompile 'com.android.support.test.espresso:espresso-core:2.0'
+    androidTestCompile 'com.android.support.test:testing-support-lib:0.1'
+    androidTestCompile 'com.google.code.findbugs:jsr305:3.0.0'
+    androidTestCompile 'com.android.support:support-annotations:23.0.1'
+    testCompile 'junit:junit:4.12'
+    testCompile 'org.mockito:mockito-core:1.9.5'
+    testCompile 'com.squareup.assertj:assertj-android:1.0.0'
+    testCompile 'org.robolectric:robolectric:2.4'
+    testCompile 'com.google.code.findbugs:jsr305:3.0.0'
+}
+
+
+retrolambda {
+    jdk System.getenv("JAVA8_HOME")
+    oldJdk System.getenv("JAVA7_HOME")
+    javaVersion JavaVersion.VERSION_1_7
+}
+
+// code coverage
+jacoco {
+    toolVersion "0.7.1.201405082137"
+}
+
+// Define coverage source.
+// If you have rs/aidl etc... add them here.
+def coverageSourceDirs = [
+        'src/main/java',
+]
+
+task jacocoTestReport(type: JacocoReport, dependsOn: "testDebug") {
+    group = "Reporting"
+    description = "Generate Jacoco coverage reports after running tests."
+    reports {
+        xml.enabled = true
+        html.enabled = true
+    }
+    classDirectories = fileTree(
+            dir: './build/intermediates/classes/debug',
+            excludes: ['**/R*.class',
+                       '**/*$InjectAdapter.class',
+                       '**/*$ModuleAdapter.class',
+                       '**/*$ViewInjector*.class'
+            ])
+    sourceDirectories = files(coverageSourceDirs)
+    executionData = files("$buildDir/jacoco/testDebug.exec")
+    // Bit hacky but fixes https://code.google.com/p/android/issues/detail?id=69174.
+    // We iterate through the compiled .class tree and rename $$ to $.
+    doFirst {
+        new File("$buildDir/intermediates/classes/").eachFileRecurse { file ->
+            if (file.name.contains('$$')) {
+                file.renameTo(file.path.replace('$$', '$'))
+            }
+        }
+    }
+}
+
+//configurations.all {
+//    // check for updates every build
+//    resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
+//}

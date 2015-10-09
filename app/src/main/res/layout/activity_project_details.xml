@@ -1,0 +1,368 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:fab="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="project"
+            type="com.byoutline.observablecachedfield.ObservableField&lt;com.byoutline.kickmaterial.model.ProjectDetails>"/>
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+
+        <com.byoutline.kickmaterial.views.ObservableScrollView
+            android:id="@+id/scroll_view"
+            style="@style/ProjectSeparator"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:fillViewport="true"
+            android:overScrollMode="never">
+
+
+            <FrameLayout
+                android:id="@+id/scroll_view_child"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipChildren="false">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="@dimen/project_details_total_scroll_margin"
+                    android:animateLayoutChanges="true"
+                    android:orientation="vertical"
+                    android:paddingBottom="@dimen/project_number_details_padding"
+                    android:paddingTop="@dimen/project_number_details_padding">
+
+
+                    <com.byoutline.secretsauce.views.CustomFontTextView
+                        style="@style/ProjectDescription"
+                        android:layout_marginLeft="@dimen/project_number_details_padding"
+                        android:layout_marginRight="@dimen/project_number_details_padding"
+                        android:text="@string/description"/>
+
+                    <com.byoutline.secretsauce.views.CustomFontTextView
+                        android:id="@+id/project_description_tv"
+                        style="@style/ProjectDescription"
+                        android:layout_marginLeft="@dimen/project_number_details_padding"
+                        android:layout_marginRight="@dimen/project_number_details_padding"
+                        android:layout_marginTop="5dp"
+                        android:ellipsize="end"
+                        android:maxLines="2"
+                        android:text="@{project.get().desc}"
+                        tools:text="@string/description"
+                    />
+
+                    <com.byoutline.secretsauce.views.CustomFontTextView
+                        android:id="@+id/read_more_btn"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="@dimen/project_number_details_padding"
+                        android:layout_marginRight="@dimen/project_number_details_padding"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/read_more"
+                        android:textColor="@color/green_primary"/>
+
+                    <View
+                        style="@style/ProjectSeparator"
+                        android:layout_height="2dp"
+                        android:layout_marginTop="20dp"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingLeft="@dimen/project_number_details_padding"
+                        android:paddingTop="@dimen/project_number_details_padding">
+
+                        <com.byoutline.secretsauce.views.RoundedImageView
+                            android:id="@+id/author_photo_iv"
+                            android:layout_width="@dimen/project_auth_photo_size"
+                            android:layout_height="@dimen/project_auth_photo_size"
+                            app:all_rounded_corners="true"
+                            app:corner_radius="200dp"
+                            app:imageUrl="@{project.get().getProjectCreatorAvatar()}"
+                            app:error="@{@drawable/avatar_placeholder}"
+                        />
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:paddingLeft="15dp">
+
+
+                            <com.byoutline.secretsauce.views.CustomFontTextView
+                                android:id="@+id/project_author_name_label_tv"
+                                style="@style/ProjectAuthorDetails"
+                                android:layout_marginTop="5dp"
+                                android:text="@string/created_by"/>
+
+                            <com.byoutline.secretsauce.views.CustomFontTextView
+                                android:id="@+id/project_author_name_tv"
+                                style="@style/ProjectAuthorDetails"
+                                android:text="@{project.get().getAuthorName()}"
+                                android:textColor="@color/project_author_name"
+                                android:textSize="@dimen/font_16"
+                                tools:text="The Last Tuesday Society"/>
+
+
+                            <View
+                                style="@style/ProjectSeparator"
+                                android:layout_height="1dp"
+                                android:layout_marginTop="15dp"/>
+
+
+                            <LinearLayout
+                                android:id="@+id/project_comments_ll"
+                                style="@style/ProjectAuthorDescContainer">
+
+
+                                <com.byoutline.secretsauce.views.CustomFontTextView
+                                    style="@style/ProjectAuthorDescStyle"
+                                    android:text="@string/comments"/>
+
+                                <View
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"/>
+
+                                <com.byoutline.secretsauce.views.CustomFontTextView
+                                    android:id="@+id/comments_count_value_tv"
+                                    style="@style/ProjectAuthorValueStyle"
+                                    android:text="@{String.valueOf(project.get().commentsCount)}"
+                                    tools:text="458"/>
+
+
+                            </LinearLayout>
+
+                            <View
+                                style="@style/ProjectSeparator"
+                                android:layout_height="1dp"/>
+
+                            <LinearLayout
+                                android:id="@+id/project_updates_ll"
+                                style="@style/ProjectAuthorDescContainer">
+
+                                <com.byoutline.secretsauce.views.CustomFontTextView
+                                    style="@style/ProjectAuthorDescStyle"
+                                    android:text="@string/updates"/>
+
+                                <View
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"/>
+
+                                <com.byoutline.secretsauce.views.CustomFontTextView
+                                    android:id="@+id/updates_count_value_tv"
+                                    style="@style/ProjectAuthorValueStyle"
+                                    android:text="@{String.valueOf(project.get().updatesCount)}"
+                                    tools:text="178"/>
+
+                            </LinearLayout>
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+            </FrameLayout>
+
+        </com.byoutline.kickmaterial.views.ObservableScrollView>
+
+
+        <RelativeLayout
+            android:id="@+id/details_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:clipToPadding="false"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/project_number_details_padding"
+            android:visibility="visible"
+        >
+
+            <!-- Background photo -->
+            <FrameLayout
+                android:id="@+id/project_photo_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/project_photo_iv"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/project_details_photo_height"
+                    android:adjustViewBounds="true"
+                    android:contentDescription="@string/content_description_project_photo"
+                    android:scaleType="centerCrop"
+                    android:transitionName="@string/transition_project_photo"
+                    tools:ignore="UnusedAttribute"
+                    tools:src="@drawable/photo_big"/>
+
+            </FrameLayout>
+
+
+            <include layout="@layout/toolbar"/>
+
+            <LinearLayout
+                android:id="@+id/project_details_title_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/project_number_details_padding"
+                android:layout_marginRight="@dimen/project_number_details_padding_double"
+                android:layout_marginTop="@dimen/titles_container_margin_top"
+                android:orientation="vertical"
+                android:paddingBottom="5dp">
+
+                <com.byoutline.secretsauce.views.CustomFontTextView
+                    android:id="@+id/project_title_tv"
+                    style="@style/LightFontStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:gravity="center_vertical"
+                    android:lines="2"
+                    android:maxLines="2"
+                    android:text="@{project.get().getProjectName()}"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/font_22"
+                    android:transitionName="@string/transition_project_title"
+                    tools:ignore="UnusedAttribute"
+                    tools:text="Rossies place show"/>
+
+                <!-- Session subtitle -->
+                <com.byoutline.secretsauce.views.CustomFontTextView
+                    android:id="@+id/project_subtitle_tv"
+                    style="@style/LightFontStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="top"
+                    android:lines="2"
+                    android:paddingRight="30dp"
+                    android:textColor="@color/white_73"
+                    android:textSize="@dimen/font_14"
+                    tools:text="@string/project_details_made_by"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/details_container"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/project_details_container_height"
+                android:layout_below="@+id/project_details_title_container"
+                android:background="@color/beige"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/project_number_details_padding"
+                android:paddingLeft="@dimen/project_number_details_padding"
+                android:paddingRight="@dimen/project_number_details_padding"
+                android:paddingTop="0dp">
+
+
+                <com.byoutline.secretsauce.views.CustomFontTextView
+                    android:id="@+id/project_backing_progress"
+                    style="@style/ProjectItemBoldValue.Normal.Light"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="14dp"
+                    android:text="@string/backing_in_progress"
+                    android:textSize="@dimen/font_14"/>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.byoutline.secretsauce.views.CustomFontTextView
+                        android:id="@+id/project_item_big_gathered_money_tv"
+                        style="@style/ProjectItemLightWhite"
+                        android:layout_width="0dp"
+                        android:layout_weight="2"
+                        android:transitionName="@string/transition_gathered_money_amount"
+                        tools:ignore="UnusedAttribute"
+                        tools:text="$132 999"/>
+
+                    <com.byoutline.secretsauce.views.CustomFontTextView
+                        android:id="@+id/project_item_big_backers_tv"
+                        style="@style/ProjectItemLightWhite"
+                        android:text="@{Integer.toString(project.get().backers)}"
+                        android:transitionName="@string/transition_backers_count"
+                        tools:ignore="UnusedAttribute"
+                        tools:text="4 026"/>
+
+                    <com.byoutline.secretsauce.views.CustomFontTextView
+                        android:id="@+id/project_item_big_days_left"
+                        style="@style/ProjectItemLightWhite"
+                        android:transitionName="@string/transition_days_left"
+                        tools:ignore="UnusedAttribute"
+                        tools:text="9"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                >
+
+                    <com.byoutline.secretsauce.views.CustomFontTextView
+                        android:id="@+id/project_item_big_pledged_of_tv"
+                        style="@style/ProjectItemBoldValue.Normal.Light"
+                        android:layout_weight="2"
+                        android:text="@string/pledged_of"
+                        android:transitionName="@string/transition_gathered_money_amount_label"
+                        tools:ignore="UnusedAttribute"/>
+
+                    <com.byoutline.secretsauce.views.CustomFontTextView
+                        style="@style/ProjectItemBoldValue.Normal.Light"
+                        android:text="@string/backers"
+                        android:transitionName="@string/transition_backers_count_label"
+                        tools:ignore="UnusedAttribute"/>
+
+                    <com.byoutline.secretsauce.views.CustomFontTextView
+                        android:id="@+id/project_item_time_left_type_tv"
+                        style="@style/ProjectItemBoldValue.Normal.Light"
+                        android:text="@string/days_left"
+                        android:transitionName="@string/transition_days_left_label"
+                        tools:ignore="UnusedAttribute"/>
+
+                </LinearLayout>
+
+                <com.byoutline.kickmaterial.views.DisabledSeekBar
+                    android:id="@+id/project_item_big_progress_sb"
+                    style="@style/SeekBarStyle"
+                    android:layout_gravity="bottom"
+                    android:layout_marginBottom="0dp"
+                    android:transitionName="@string/transition_project_progress"
+                    tools:ignore="UnusedAttribute"/>
+
+            </LinearLayout>
+
+            <com.software.shell.fab.ActionButton
+                android:id="@+id/play_video_btn"
+                style="@style/ActionButtonStyle"
+                android:layout_above="@+id/details_container"
+                android:layout_alignParentRight="true"
+                android:layout_marginBottom="-28dp"
+                android:layout_marginRight="@dimen/project_number_details_padding"
+                android:clipToPadding="false"
+                android:elevation="8dp"
+                android:visibility="visible"
+                fab:button_color="@color/green_primary"
+                fab:button_colorPressed="@color/green_dark"
+                fab:image="@drawable/play_ico"
+                fab:image_size="18dp"
+                tools:ignore="UnusedAttribute"/>
+
+        </RelativeLayout>
+
+    </FrameLayout>
+</layout>

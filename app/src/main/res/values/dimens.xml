@@ -1,0 +1,65 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <!-- Per the design guidelines, navigation drawers should be between 240dp and 320dp:
+         https://developer.android.com/design/patterns/navigation-drawer.html -->
+    <dimen name="navigation_drawer_width">240dp</dimen>
+    <dimen name="project_item_big_height">360dp</dimen>
+    <dimen name="project_item_big_photo_height">180dp</dimen>
+    <dimen name="progress_radius">20dp</dimen>
+    <dimen name="project_item_big_padding">12dp</dimen>
+
+
+    <!-- Action Bar auto-hide-on-scroll behavior parameters -->
+    <dimen name="action_bar_auto_hide_min_y">152dp</dimen>
+    <dimen name="action_bar_auto_hide_sensivity">48dp</dimen>
+
+
+    <!-- Fonts sizes -->
+    <dimen name="font_20">20sp</dimen>
+    <dimen name="font_13">13sp</dimen>
+    <dimen name="font_22">22sp</dimen>
+    <dimen name="font_21">21sp</dimen>
+    <dimen name="font_11">11sp</dimen>
+    <dimen name="font_15">15sp</dimen>
+    <dimen name="font_16">16sp</dimen>
+    <dimen name="font_14">14sp</dimen>
+    <dimen name="font_31">31sp</dimen>
+    <dimen name="font_34">34sp</dimen>
+
+
+    <dimen name="back_project_button_height">56dp</dimen>
+    <dimen name="back_project_button_height_half">-28dp</dimen>
+    <dimen name="project_number_details_padding">20dp</dimen>
+
+    <dimen name="button_size">56dp</dimen>
+    <dimen name="category_list_item_height">60dp</dimen>
+    <dimen name="category_dot_size">8dp</dimen>
+    <dimen name="category_spacing">25dp</dimen>
+
+    <dimen name="category_checked_size">32dp</dimen>
+    <dimen name="project_item_small_padding">5dp</dimen>
+    <dimen name="progress_height">3dp</dimen>
+    <dimen name="project_header_padding_top">35dp</dimen>
+    <dimen name="project_header_padding_bottom">35dp</dimen>
+    <dimen name="project_auth_padding">15dp</dimen>
+    <dimen name="project_auth_photo_size">52dp</dimen>
+    <dimen name="global_list_card_view_radius">4dp</dimen>
+    <dimen name="recyler_padding">8dp</dimen>
+    <dimen name="status_bar_height">25dip</dimen>
+
+    <dimen name="project_details_header_margin">50dp</dimen>
+
+    <dimen name="project_details_photo_height">230dp</dimen>
+    <dimen name="project_details_container_height">140dp</dimen>
+    <dimen name="project_details_total_scroll_margin">360dp</dimen>
+    <dimen name="project_details_titles_padding_right">82dp</dimen>
+    <dimen name="titles_container_margin_top">132dp</dimen>
+    <dimen name="project_number_details_padding_double">40dp</dimen>
+    <dimen name="status_bar_height_half">12.5dp</dimen>
+    <dimen name="project_item_corner_radius">6dp</dimen>
+
+
+</resources>

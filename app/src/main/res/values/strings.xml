@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">KickMaterial</string>
+    <!-- Categories -->
+    <string name="sort_magic">Magic</string>
+    <string name="sort_popularity">Popularity</string>
+    <string name="sort_newest">Newest</string>
+    <string name="sort_end_date">Ending soon</string>
+    <string name="sort_most_funded">Most funded</string>
+    <!-- Unsorted -->
+    <string name="title_section1">Section 1</string>
+    <string name="title_section2">Section 2</string>
+    <string name="pledged_of">pledged of $%1$s</string>
+    <string name="backers">backers</string>
+    <string name="days_left">days left</string>
+    <string name="description">Description</string>
+    <string name="read_more">READ MORE</string>
+    <string name="explore">Explore an inspiring creative universe</string>
+    <string name="choose_category">Select category</string>
+    <string name="search_hint">Search</string>
+
+
+    <string name="art">Art</string>
+    <string name="comics">Comics</string>
+    <string name="crafts">Crafts</string>
+    <string name="dance">Dance</string>
+    <string name="design">Design</string>
+    <string name="fashion">Fashion</string>
+    <string name="film_video"><![CDATA[Film&Video]]></string>
+    <string name="food">Food</string>
+    <string name="games">Games</string>
+    <string name="journalism">Journalism</string>
+    <string name="music">Music</string>
+    <string name="photography">Photography</string>
+    <string name="publishing">Publishing</string>
+    <string name="technology">Technology</string>
+    <string name="theater">Theater</string>
+    <string name="all_categories">All categories</string>
+    <string name="created_by">Created by</string>
+    <string name="comments">Comments</string>
+    <string name="updates">Updates</string>
+    <string name="details">Details</string>
+    <string name="currency_usd">USD</string>
+    <string name="select_pledge">Select a pledge level</string>
+    <string name="reward_more_than">More than %1$d</string>
+    <string name="reward_value">%1$.0f+</string>
+    <string name="transition_project_photo">project_photo</string>
+    <string name="transition_fab">transition_fab</string>
+    <string name="transition_project_title">transition_project_title</string>
+    <string name="transition_project_progress">transition_project_progress</string>
+    <string name="transition_days_left">transition_days_left</string>
+    <string name="transition_backers_count">transition_backers_count</string>
+    <string name="transition_gathered_money_amount">transition_gathered_money_amount</string>
+    <string name="transition_days_left_label">transition_days_left_label</string>
+    <string name="transition_backers_count_label">transition_backers_count_label</string>
+    <string name="transition_gathered_money_amount_label">transition_gathered_money_amount_label</string>
+    <string name="project_details_made_by">by %1$s</string>
+    <string name="backing_in_progress">Backing progress</string>
+    <string name="funded">Funded</string>
+    <string name="back_project">Back project</string>
+    <string name="content_description_project_photo">project photo</string>
+    <string name="search">Search</string>
+
+</resources>

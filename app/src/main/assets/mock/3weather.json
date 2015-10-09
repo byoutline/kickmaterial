@@ -1,0 +1,67 @@
+{
+  "id": 3,
+  "name": "Alarm with temperature",
+  "blurb": "I love to sleep so I always weak up at last moment. Often I ride bike to work which takes like 30 additional minutes of preparations. I hate situations when, where I leave house and get surprised by rain. I'm angry that I did weak not take an umbrella or did not take a bus to save some time. After few unpleasant incidents with my phones weather app I've decided to create my own. It will display always fresh information and will cooperate with my alarm clock, inform me about temperature, what clothes to take and will I need and umbrella. My project is partially done, but I need money for better graphic design and for promotion expanses. I hope that you will help me :)",
+  "goal": 5000,
+  "pledged": 456,
+  "currency_symbol": "$",
+  "deadline": 1440591132,
+  "launched_at": 1437912732,
+  "backers_count": 1600,
+  "photo": {
+    "full": "http://localhost:8099/projects/3.jpg",
+    "med": "http://localhost:8099/projects/3.jpg"
+  },
+  "creator": {
+    "id": 3,
+    "name": "Emelotte Prinat",
+    "avatar": {
+      "medium": "http://localhost:8099/profile/3p.jpg",
+      "source": "TODO"
+    },
+    "urls": {
+      "web": {
+        "user": "https://www.flickr.com/photos/spierisf/"
+      }
+    }
+  },
+  "urls": {
+    "web": {
+      "project": "http://localhost:8099/projects/3"
+    },
+    "api": {
+      "project": "http://localhost:8099/projects/3?signature=1427292197.abcd"
+    }
+  },
+  "video": {
+    "id": 3,
+    "base": "http://localhost:8099/KickMaterial.mp4",
+    "webm": "http://localhost:8099/KickMaterial.webm",
+    "width": 1280,
+    "height": 720
+  },
+  "comments_count": 67,
+  "updates_count": 55,
+  "rewards": [
+    {
+      "id": 4187344,
+      "minimum": 70,
+      "reward": " Demo version of app which will allow you to test basic functions. You will discover the beauty of long sleep. App will help you organize your morning to get off on the right foot.",
+      "urls": {
+        "api": {
+          "reward": "http://localhost:8099/rewards/3a?signature=1427292197.abcd"
+        }
+      }
+    },
+    {
+      "id": 4187318,
+      "minimum": 270,
+      "reward": "Full year access to application + VIP premium account which will come with plenty of great features!",
+      "urls": {
+        "api": {
+          "reward": "http://localhost:8099/rewards/3b?signature=1427292197.abcd"
+        }
+      }
+    }
+  ]
+}

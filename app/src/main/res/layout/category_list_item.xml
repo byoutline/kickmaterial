@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="categoryItem"
+            type="com.byoutline.kickmaterial.model.Category"/>
+
+        <variable
+            name="categoryClickListener"
+            type="com.byoutline.kickmaterial.adapters.CategoryClickListener"/>
+
+    </data>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/category_container_cv"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/category_list_item_height"
+        card_view:cardBackgroundColor="@{categoryItem.getBgColor()}"
+        card_view:cardCornerRadius="4dp"
+        card_view:cardPreventCornerOverlap="false"
+        app:onClick="@{categoryClickListener}"
+        app:category="@{categoryItem}"
+    >
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/category_spacing"
+            android:paddingRight="@dimen/category_spacing">
+
+            <FrameLayout
+                android:layout_width="@dimen/category_checked_size"
+                android:layout_height="@dimen/category_checked_size">
+
+
+                <ImageView
+                    android:id="@+id/category_dot_color"
+                    android:layout_width="@dimen/category_dot_size"
+                    android:layout_height="@dimen/category_dot_size"
+                    android:layout_gravity="center"
+                    android:src="@drawable/circle"
+                    app:colorFilterRes="@{categoryItem.colorResId}"/>
+
+
+                <FrameLayout
+                    android:id="@+id/checked_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="gone">
+
+                    <ImageView
+                        android:id="@+id/category_checked_iv"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/circle"
+                        app:colorFilterRes="@{categoryItem.colorResId}"/>
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="9dp"
+                        android:src="@drawable/icon_tick"/>
+                </FrameLayout>
+
+            </FrameLayout>
+
+
+            <com.byoutline.secretsauce.views.CustomFontTextView
+                android:id="@+id/category_name_tv"
+                style="@style/RegularFontStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/category_spacing"
+                android:layout_marginRight="@dimen/category_spacing"
+                android:layout_weight="1"
+                android:text="@{categoryItem.nameResId}"
+                android:textColor="@color/category_name"
+                android:textSize="@dimen/font_15"
+                tools:text="Comics"/>
+
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#15000000"/>
+
+    </android.support.v7.widget.CardView>
+</layout>

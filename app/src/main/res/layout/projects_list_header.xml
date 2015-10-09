@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <com.byoutline.secretsauce.views.CustomFontTextView
+        style="@style/ThinFontStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+
+        android:paddingTop="@dimen/project_header_padding_top"
+        android:paddingBottom="@dimen/project_header_padding_bottom"
+        android:text="@string/explore"
+        android:textColor="@color/black"
+        android:textSize="@dimen/font_34"/>
+</layout>
+

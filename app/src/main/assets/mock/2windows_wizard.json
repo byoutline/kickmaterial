@@ -1,0 +1,71 @@
+{
+  "id": 2,
+  "name": "Windows wizard",
+  "blurb": "This idea was born on a a sunny day, when my mom was fighting with dirty windows. At that moment I understood that a seemingly simple task was taking up a lot of time and energy, despite the hard work the window was still smeared. This situation inspired me to construct the \"Windows Wizard\", a robot, which cleans and polish windows by itself. It doesnt matter how big the mess, what the weather is, it will handle everything - BY ITSELF. I know that for many people the worst type of cleaning is cleaning windows. Thankfully, this problem is disappearing thanks to my \"Windows Wizard\".",
+  "goal": 900,
+  "pledged": 320,
+  "currency_symbol": "$",
+  "deadline": 1436706000,
+  "launched_at": 1434373200,
+  "backers_count": 113,
+  "photo": {
+    "full": "http://localhost:8099/projects/2.jpg",
+    "med": "http://localhost:8099/projects/2.jpg"
+  },
+  "creator": {
+    "id": 2,
+    "name": "Piter Rids",
+    "avatar": {
+      "medium": "http://localhost:8099/profile/2p.jpg",
+      "source": "https://www.flickr.com/photos/danncove/5622557366/in/photolist-9yR5qf-a1VBWb-a6g9nd-9yCCLC-9ZdN5h-guPBTB-qS9igd-5FQjJ9-8aN1dh-aybhGU-cQSBxG-8jxPgb-8foRuS-a7a4gv-d9num1-gJN1tL-5t7DLY-8BRePk-ag2N1c-7e2xvo-nAvjVV-cWe8nL-gm7CSt-buRL1L-nDTCxs-5mw8Qa-51EdYC-dqhgpq-b8scHZ-auzn3y-qbKfs4-55iyeb-p5oEu6-aCWNwh-61TRv1-9Dfjpw-nJJEPM-74EjeF-aD7aWh-s5eCWW-r9mgTQ-cxqRxd-aVELJt-kQecGK-czz82W-7hji2w-4wSEHv-7NVwJH-a8HBjH-5nUu64"
+    },
+    "urls": {
+      "web": {
+        "user": "https://www.flickr.com/photos/26085795@N02/"
+      }
+    }
+  },
+  "urls": {
+    "web": {
+      "project": "http://localhost:8099/projects/2"
+    },
+    "api": {
+      "project": "http://localhost:8099/projects/2?signature=1427292197.abcd"
+    }
+  },
+  "video": {
+    "id": 1,
+    "base": "http://localhost:8099/KickMaterial.mp4",
+    "webm": "http://localhost:8099/KickMaterial.webm",
+    "width": 1280,
+    "height": 720
+  },
+  "comments_count": 36,
+  "updates_count": 12,
+  "rewards": [
+    {
+      "minimum": 1,
+      "reward": "No Reward"
+    },
+    {
+      "id": 4187306,
+      "minimum": 6,
+      "reward": "It will be gratifying, that you appreciate my hard work and dedication. I will send you a brochure with before and after pictures of windows which I developed during my construction if the \"Window Wizard\".",
+      "urls": {
+        "api": {
+          "reward": "http://localhost:8099/rewards/2a?signature=1427292197.abcd"
+        }
+      }
+    },
+    {
+      "id": 4187318,
+      "minimum": 60,
+      "reward": "On my website and blog I will place your name on a list of donors supporting my project as well as my golden tips for clean windows (a few small tricks which will make your cleaning much easier), additionally an invitation to a concert, of a band \"Life Behind Glass\"  having the goal of financing a commercial of my invention. Of course you will also receive VIP seating!",
+      "urls": {
+        "api": {
+          "reward": "http://localhost:8099/rewards/2b?signature=1427292197.abcd"
+        }
+      }
+    }
+  ]
+}

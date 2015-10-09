@@ -1,0 +1,23 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto"
+      xmlns:tools="http://schemas.android.com/tools"
+      tools:context="com.example.toolbar.MainActivity">
+
+    <item
+        android:id="@+id/favourite_project"
+        android:icon="@drawable/favourite_ico"
+        android:menuCategory="secondary"
+        android:orderInCategory="1"
+        android:title="@string/back_project"
+        app:showAsAction="ifRoom"/>
+
+
+    <item
+        android:id="@+id/back_project"
+        android:icon="@drawable/dolar_ico_small"
+        android:menuCategory="secondary"
+        android:orderInCategory="1"
+        android:title="@string/back_project"
+        app:showAsAction="ifRoom"/>
+
+</menu>

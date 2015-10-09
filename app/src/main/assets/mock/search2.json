@@ -1,0 +1,184 @@
+{
+  "projects": [
+    {
+      "id": 8,
+      "name": "Active shoes",
+      "blurb": "Welcome, my name is Daniel and I to actively spend my time. Every free moment I jog, walk or play tennis. Sport is not only health its my great passion, something that gives meaning to my life and gives me lots of joy. As a jogging enthusiast I always try to be up to date with the latest technologies for athletes: gear and energy food.there needs to be a constant change and upgrade, which gave me the idea for something special, for a product that will revolutionize the sports industry. The multipurpose shoes measuring steps, distance, tome, effort, mobilizing muscles, and can even have GPS. at first I though this invention would only work for myself, but this year, I wanted to share and move my product to the market for mass production.",
+      "goal": 7000.0,
+      "pledged": 602.0,
+      "currency_symbol": "$",
+      "deadline": 1437480000,
+      "launched_at": 1434110400,
+      "backers_count": 270,
+      "photo": {
+        "full": "http://localhost:8099/projects/8.jpg",
+        "med": "http://localhost:8099/projects/8.jpg"
+      },
+      "creator": {
+        "id": 8,
+        "name": "Daniel George Stell",
+        "avatar": {
+          "medium": "http://localhost:8099/profile/8p.jpg"
+        },
+        "urls": {
+          "web": {
+            "user": "https://www.flickr.com/photos/lukema"
+          }
+        }
+      },
+      "urls": {
+        "web": {
+          "project": "http://localhost:8099/projects/8"
+        },
+        "api": {
+          "project": "http://localhost:8099/projects/8?signature=1427292197.abcd"
+        }
+      }
+    },
+    {
+      "id": 9,
+      "name": "The Strong Hand",
+      "blurb": "Hi, im Marta, I like pure and clean form and straightforward gadgets. I think very practically, my life dream has always been doing something for people, creating something which helps with everyday life. Realizing my idea took many years, there was testing, the first prototype, how to accomplish my goal which ended in failure many times. Today I stand in front of you with the fruit of my effort and struggles with a gadget which will revolutionize the always hated heavy lifting. I present to you \"The Strong Hand\" one of a kind handle which causes that the weight held in your hand will disperse evenly and this eill help you carry lift and move even more. the nightmare of not being able to lift something will be gone. your days of asking for help are over, and ordinary task will become fun and they will gain new meaning. The Strong Hand is not a thing you have encountered before, it is completely new idea crated by myself for you. the simple mechanism which is used by lifts, it spreads the entire weight across your palm not focusing on one specific point. Thanks to this the weight lifted by us seems lighter.  There is a whole range of use for the gadget beginning with groceries, ending with house renovations, caring for children or older people, or handicapped who need to be taken care of.",
+      "goal": 7000.0,
+      "pledged": 602.0,
+      "currency_symbol": "$",
+      "deadline": 1437480000,
+      "launched_at": 1434110400,
+      "backers_count": 270,
+      "photo": {
+        "full": "http://localhost:8099/projects/9.jpg",
+        "med": "http://localhost:8099/projects/9.jpg"
+      },
+      "creator": {
+        "id": 8,
+        "name": "Barbara Jeggar",
+        "avatar": {
+          "medium": "http://localhost:8099/profile/9p.jpg"
+        },
+        "urls": {
+          "web": {
+            "user": "https://www.flickr.com/photos/valeriebb"
+          }
+        }
+      },
+      "urls": {
+        "web": {
+          "project": "http://localhost:8099/projects/9"
+        },
+        "api": {
+          "project": "http://localhost:8099/projects/9?signature=1427292197.abcd"
+        }
+      }
+    },
+    {
+      "id": 10,
+      "name": "Kiss Beauty",
+      "blurb": "I met Thomas 2 years ago in Louisiana, he lived in an apartment by himself and did not have money and was absorbed by work. His idea became his everything, he spent years of research to create this, which then inspired me to change my life plan. His goal was to create a lotion/cream , that eliminates wrinkles in 60 seconds. When he told me about his work in this field I didn't believe what I heard, there are many similar products on the market but in reality they dont guve the wanted effects, which are shown in commercials. But I agreed to sacrifice myself for 10 min, which turned out to be the best choice of my life. My thinking took a 180 degree turn and lead to my career choice I am now in a place where ideas and technology need financial support and where big dreams plead to become true. I have exactly 30 days, on KickMaterial, to raise money necessary to prosuce the first \"Kiss Beauty\" I know that there is no second place where people. with real interests support and observe the needs of technologic talents. Thats why were counting on you. Thomas and I, we believe that you will help us win life.",
+      "goal": 7000.0,
+      "pledged": 602.0,
+      "currency_symbol": "$",
+      "deadline": 1437480000,
+      "launched_at": 1434110400,
+      "backers_count": 270,
+      "photo": {
+        "full": "http://localhost:8099/projects/10.jpg",
+        "med": "http://localhost:8099/projects/10.jpg"
+      },
+      "creator": {
+        "id": 10,
+        "name": "Stanislav Slonski",
+        "avatar": {
+          "medium": "http://localhost:8099/profile/10p.jpg"
+        },
+        "urls": {
+          "web": {
+            "user": "https://www.flickr.com/photos/tasselflower"
+          }
+        }
+      },
+      "urls": {
+        "web": {
+          "project": "http://localhost:8099/projects/10"
+        },
+        "api": {
+          "project": "http://localhost:8099/projects/10?signature=1427292197.abcd"
+        }
+      }
+    },
+    {
+      "id": 12,
+      "name": "bat-stop",
+      "blurb": "\"These are the only mammals that are able to fly great deal of the time they spend their life in a nocturnal fashion. Their specific trait is hanging their head down. Bats have a special body build  hind limbs which they have to thank for this ability.\". This description of these animals doesn't sound scary but I assure you that you will change your mind when one of these creatures flies into your room or gets tangled in your hair Its possible you have encountered gadgets used to scare away mosquitos. A special sound not tolerated by bugs creates a great barrier, which they cannot cross. Same with the Super Toperz. Bats are blind, in turn they send out special waves, which bounce off obstacles guiding them through the air. My invention sends out a wave which is considered an obstacle by the bat, with this we can somewhat control the flight of the bat. Pilot allows to set up a wall that all mammals will be restricted from.",
+      "goal": 12000.0,
+      "pledged": 5016.0,
+      "currency_symbol": "$",
+      "deadline": 1441627932,
+      "launched_at": 1438949532,
+      "backers_count": 411,
+      "photo": {
+        "full": "http://localhost:8099/projects/12.jpg",
+        "med": "http://localhost:8099/projects/12.jpg"
+      },
+      "creator": {
+        "id": 12,
+        "name": "mcHolly Doug",
+        "avatar": {
+          "medium": "http://localhost:8099/profile/12p.jpg"
+        },
+        "urls": {
+          "web": {
+            "user": "https://www.flickr.com/photos/pldms"
+          }
+        }
+      },
+      "urls": {
+        "web": {
+          "project": "http://localhost:8099/projects/12"
+        },
+        "api": {
+          "project": "http://localhost:8099/projects/12?signature=1427292197.abcd"
+        }
+      }
+    },
+    {
+      "id": 13,
+      "name": "Aureol hate",
+      "blurb": "We are a young couple, a little crazy we love to travel but most of all discovering new places.  During our last trip to Japan we saw a people which during a storm was using his hat with extra foil which covered the entire body rescuing it from rain. This unusual sight inspired us to build an upgraded version of the hat. The mechanism works together with rain, the built in sensors register rain and trigger the flow of air which blows away raindrops from your head",
+      "goal": 7000.0,
+      "pledged": 602.0,
+      "currency_symbol": "$",
+      "deadline": 1439467932,
+      "launched_at": 1436789532,
+      "backers_count": 270,
+      "photo": {
+        "full": "http://localhost:8099/projects/13.jpg",
+        "med": "http://localhost:8099/projects/13.jpg"
+      },
+      "creator": {
+        "id": 13,
+        "name": "Claudia Camilla and Mark Falath",
+        "avatar": {
+          "medium": "http://localhost:8099/profile/13p.jpg"
+        },
+        "urls": {
+          "web": {
+            "user": "https://www.flickr.com/photos/natura_pagana"
+          }
+        }
+      },
+      "urls": {
+        "web": {
+          "project": "http://localhost:8099/projects/13"
+        },
+        "api": {
+          "project": "http://localhost:8099/projects/13?signature=1427292197.abcd"
+        }
+      }
+    }
+  ],
+  "urls": {
+    "api": {
+      "more_projects": "http://localhost:8099/v1/discover?include_potd=true&page=2&per_page=12&signature=1427292197.abcd&sort=magic&staff_picks=true"
+    }
+  }
+}

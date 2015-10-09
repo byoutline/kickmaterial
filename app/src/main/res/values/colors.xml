@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
+
+    <color name="green_primary">#00E16A</color>
+    <color name="green_primary_light">#40E16A</color>
+    <color name="green_primary_50">#7d00E16A</color>
+
+    <color name="green_dark">#14a458</color>
+    <color name="green_dark_50">#7d14a458</color>
+    <color name="green_light">#e2f4ea</color>
+
+    <color name="text_dark">#22303c</color>
+    <color name="text_dark_black">#1c2020</color>
+    <color name="fragment_bg">#e9e7e2</color>
+    <color name="white_73">#BAffffff</color>
+    <color name="white_89">#E3ffffff</color>
+    <color name="black_11">#1C000000</color>
+    <color name="white_57">#87ffffff</color>
+    <color name="beige">#c6abaa</color>
+    <color name="text_grey">#A1A1A1</color>
+
+
+    <color name="main_bg">#f2f2f2</color>
+    <color name="ab_text_color">#555555</color>
+    <color name="status_bar_color">#e0e0e0</color>
+    <!--<color name="status_bar_color">@android:color/transparent</color>-->
+
+
+    <color name="art">#FFC3AE</color>
+    <color name="comics">#FFFC6F</color>
+    <color name="crafts">#FF7FAD</color>
+    <color name="dance">#AF97FD</color>
+    <color name="design">#2752FF</color>
+    <color name="fashion">#FF9CD8</color>
+    <color name="film_video">#FF576C</color>
+    <color name="food">#DA2042</color>
+    <color name="games">#21CBAE</color>
+    <color name="journalism">#12BCEA</color>
+    <color name="music">#69FFD2</color>
+    <color name="photography">#00E3E5</color>
+    <color name="publishing">#E4DED2</color>
+    <color name="technology">#3A95FF</color>
+    <color name="theater">#FF7D5F</color>
+
+
+    <color name="category_name">#545454</color>
+    <color name="category_count">#bebebe</color>
+    <color name="black_75">#bf000000</color>
+    <color name="black_50">#7d000000</color>
+    <color name="project_author_name">#919191</color>
+    <color name="reward_semi_trans_white">#1CFAFAFA</color>
+
+
+</resources>

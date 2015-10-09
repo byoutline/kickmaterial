@@ -1,0 +1,292 @@
+{
+  "requests": [
+    {
+      "method": "GET",
+      "path": {
+        "base": "/v1/discover",
+        "queries":
+        {
+          "client_id": ".*"
+        }
+      },
+      "response file": "discover.json"
+    },
+    {
+      "method": "GET",
+      "path": {
+        "base": "/v1/discover",
+        "queries":
+        {
+          "client_id": ".*",
+          "page": "2",
+          "per_page": ".*"
+        }
+      },
+      "response file": "discover2.json"
+    },
+    {
+      "method": "GET",
+      "path": {
+        "base": "/v1/discover",
+        "queries":
+        {
+          "sort": ".*",
+          "category_id": "1",
+          "client_id": ".*",
+          "page": ".*",
+          "per_page": ".*"
+        }
+      },
+      "response file": "search3.json"
+    },
+    {
+      "method": "GET",
+      "path": {
+        "base": "/v1/discover",
+        "queries":
+        {
+          "sort": ".*",
+          "category_id": "3",
+          "client_id": ".*",
+          "page": ".*",
+          "per_page": ".*"
+        }
+      },
+      "response file": "search2.json"
+    },
+    {
+      "method": "GET",
+      "path": {
+        "base": "/v1/discover",
+        "queries":
+        {
+          "sort": ".*",
+          "category_id": ".*",
+          "client_id": ".*",
+          "page": ".*",
+          "per_page": ".*"
+        }
+      },
+      "response file": "search4.json"
+    },
+    {
+      "method": "GET",
+      "path": {
+        "base": "/v1/discover",
+        "queries":
+        {
+          "term": ".{1}",
+          "sort": ".*",
+          "client_id": ".*",
+          "page": ".*",
+          "per_page": ".*"
+        }
+      },
+      "response file": "search1.json"
+    },
+    {
+      "method": "GET",
+      "path": {
+        "base": "/v1/discover",
+        "queries":
+        {
+          "term": ".{2}",
+          "sort": ".*",
+          "client_id": ".*",
+          "page": ".*",
+          "per_page": ".*"
+        }
+      },
+      "response file": "search2.json"
+    },
+    {
+      "method": "GET",
+      "path": {
+        "base": "/v1/discover",
+        "queries":
+        {
+          "term": ".{3}",
+          "sort": ".*",
+          "client_id": ".*",
+          "page": ".*",
+          "per_page": ".*"
+        }
+      },
+      "response file": "search3.json"
+    },
+    {
+      "method": "GET",
+      "path": {
+        "base": "/v1/discover",
+        "queries":
+        {
+          "term": ".{4}",
+          "sort": ".*",
+          "client_id": ".*",
+          "page": ".*",
+          "per_page": ".*"
+        }
+      },
+      "response file": "search4.json"
+    },
+    {
+      "method": "GET",
+      "path": {
+        "base": "/v1/discover",
+        "queries":
+        {
+          "term": ".*",
+          "sort": ".*",
+          "client_id": ".*",
+          "page": ".*",
+          "per_page": ".*"
+        }
+      },
+      "response file": "search5.json"
+    },
+    {
+      "method": "GET",
+      "path": {
+        "base": "/v1/projects/1",
+        "queries":
+        {
+          "signature": ".*abcd",
+          "client_id": ".*"
+        }
+      },
+      "response file": "1smart_thermos.json"
+    },
+    {
+      "method": "GET",
+      "path": {
+        "base": "/v1/projects/2",
+        "queries":
+        {
+          "signature": ".*abcd",
+          "client_id": ".*"
+        }
+      },
+      "response file": "2windows_wizard.json"
+    },
+    {
+      "method": "GET",
+      "path": {
+        "base": "/v1/projects/3",
+        "queries":
+        {
+          "signature": ".*abcd",
+          "client_id": ".*"
+        }
+      },
+      "response file": "3weather.json"
+    },
+    {
+      "method": "GET",
+      "path": {
+        "base": "/v1/projects/4",
+        "queries":
+        {
+          "signature": ".*abcd",
+          "client_id": ".*"
+        }
+      },
+      "response file": "4shopping_list.json"
+    },
+    {
+      "method": "GET",
+      "path": {
+        "base": "/v1/projects/5",
+        "queries":
+        {
+          "signature": ".*abcd",
+          "client_id": ".*"
+        }
+      },
+      "response file": "5bicycle_GPS.json"
+    },
+    {
+      "method": "GET",
+      "path": {
+        "base": "/v1/projects/6",
+        "queries":
+        {
+          "signature": ".*abcd",
+          "client_id": ".*"
+        }
+      },
+      "response file": "6artist.json"
+    },
+    {
+      "method": "GET",
+      "path": {
+        "base": "/v1/projects/7",
+        "queries":
+        {
+          "signature": ".*abcd",
+          "client_id": ".*"
+        }
+      },
+      "response file": "7without_a_ticket.json"
+    },
+    {
+      "method": "GET",
+      "path": {
+        "base": "/v1/projects/8",
+        "queries":
+        {
+          "signature": ".*abcd",
+          "client_id": ".*"
+        }
+      },
+      "response file": "8shoes.json"
+    },
+    {
+      "method": "GET",
+      "path": {
+        "base": "/v1/projects/9",
+        "queries":
+        {
+          "signature": ".*abcd",
+          "client_id": ".*"
+        }
+      },
+      "response file": "9strong_hand.json"
+    },
+    {
+      "method": "GET",
+      "path": {
+        "base": "/v1/projects/10",
+        "queries":
+        {
+          "signature": ".*abcd",
+          "client_id": ".*"
+        }
+      },
+      "response file": "10kiss_beauty.json"
+    },
+    {
+      "method": "GET",
+      "path": {
+        "base": "/v1/projects/12",
+        "queries":
+        {
+          "signature": ".*abcd",
+          "client_id": ".*"
+        }
+      },
+      "response file": "12bat_stop.json"
+    },
+    {
+      "method": "GET",
+      "path": {
+        "base": "/v1/projects/13",
+        "queries":
+        {
+          "signature": ".*abcd",
+          "client_id": ".*"
+        }
+      },
+      "response file": "13hat.json"
+    }
+  ]
+}

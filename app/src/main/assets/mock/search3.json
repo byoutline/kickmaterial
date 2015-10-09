@@ -1,0 +1,79 @@
+{
+  "projects": [
+    {
+      "id": 12,
+      "name": "bat-stop",
+      "blurb": "\"These are the only mammals that are able to fly great deal of the time they spend their life in a nocturnal fashion. Their specific trait is hanging their head down. Bats have a special body build  hind limbs which they have to thank for this ability.\". This description of these animals doesn't sound scary but I assure you that you will change your mind when one of these creatures flies into your room or gets tangled in your hair Its possible you have encountered gadgets used to scare away mosquitos. A special sound not tolerated by bugs creates a great barrier, which they cannot cross. Same with the Super Toperz. Bats are blind, in turn they send out special waves, which bounce off obstacles guiding them through the air. My invention sends out a wave which is considered an obstacle by the bat, with this we can somewhat control the flight of the bat. Pilot allows to set up a wall that all mammals will be restricted from.",
+      "goal": 12000.0,
+      "pledged": 5016.0,
+      "currency_symbol": "$",
+      "deadline": 1441627932,
+      "launched_at": 1438949532,
+      "backers_count": 411,
+      "photo": {
+        "full": "http://localhost:8099/projects/12.jpg",
+        "med": "http://localhost:8099/projects/12.jpg"
+      },
+      "creator": {
+        "id": 12,
+        "name": "mcHolly Doug",
+        "avatar": {
+          "medium": "http://localhost:8099/profile/12p.jpg"
+        },
+        "urls": {
+          "web": {
+            "user": "https://www.flickr.com/photos/pldms"
+          }
+        }
+      },
+      "urls": {
+        "web": {
+          "project": "http://localhost:8099/projects/12"
+        },
+        "api": {
+          "project": "http://localhost:8099/projects/12?signature=1427292197.abcd"
+        }
+      }
+    },
+    {
+      "id": 13,
+      "name": "Aureol hate",
+      "blurb": "We are a young couple, a little crazy we love to travel but most of all discovering new places.  During our last trip to Japan we saw a people which during a storm was using his hat with extra foil which covered the entire body rescuing it from rain. This unusual sight inspired us to build an upgraded version of the hat. The mechanism works together with rain, the built in sensors register rain and trigger the flow of air which blows away raindrops from your head",
+      "goal": 7000.0,
+      "pledged": 602.0,
+      "currency_symbol": "$",
+      "deadline": 1439467932,
+      "launched_at": 1436789532,
+      "backers_count": 270,
+      "photo": {
+        "full": "http://localhost:8099/projects/13.jpg",
+        "med": "http://localhost:8099/projects/13.jpg"
+      },
+      "creator": {
+        "id": 13,
+        "name": "Claudia Camilla and Mark Falath",
+        "avatar": {
+          "medium": "http://localhost:8099/profile/13p.jpg"
+        },
+        "urls": {
+          "web": {
+            "user": "https://www.flickr.com/photos/natura_pagana"
+          }
+        }
+      },
+      "urls": {
+        "web": {
+          "project": "http://localhost:8099/projects/13"
+        },
+        "api": {
+          "project": "http://localhost:8099/projects/13?signature=1427292197.abcd"
+        }
+      }
+    }
+  ],
+  "urls": {
+    "api": {
+      "more_projects": "http://localhost:8099/v1/discover?include_potd=true&page=2&per_page=12&signature=1427292197.abcd&sort=magic&staff_picks=true"
+    }
+  }
+}

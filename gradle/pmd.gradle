@@ -1,0 +1,68 @@
+configurations {
+    codequality
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    codequality 'pmd:pmd:4.2.6'
+}
+
+task pmd(type: AndroidPmdTask) {
+    ignoreFailures true
+    showViolations false
+}
+
+check.dependsOn(pmd)
+
+///////////////////////////////////////////////
+////////////// Groovy Task Class //////////////
+///////////////////////////////////////////////
+import org.gradle.api.internal.project.IsolatedAntBuilder
+
+/**
+ * See parameters at http://pmd.sourceforge.net/pmd-4.2.6/ant-task.html
+ */
+class AndroidPmdTask extends DefaultTask {
+    @InputFile @Optional File rulesetFile  = new File("$project.rootDir/config/pmd/ruleset.xml")
+    @InputFile @Optional File xslFile = new File("$project.rootDir/config/pmd/pmd-nicerhtml.xsl")
+    @OutputFile @Optional File outputFile = new File("$project.buildDir/reports/pmd/pmd-${project.name}.xml")
+    FileCollection pmdClasspath = project.configurations.codequality
+    Boolean ignoreFailures = false
+    Boolean showViolations = true
+    Project gradleProject = project
+
+    def AndroidPmdTask() {
+        description = 'Runs PMD against Android sourcesets.'
+        group = 'Code Quality'
+    }
+
+    @TaskAction
+    def runPmd() {
+        outputFile.parentFile.mkdirs()
+        def antBuilder = services.get(IsolatedAntBuilder)
+        antBuilder.withClasspath(pmdClasspath).execute {
+            ant.taskdef(name: 'pmd', classname: 'net.sourceforge.pmd.ant.PMDTask')
+            ant.pmd(shortFilenames: 'true',
+                    failonruleviolation: !ignoreFailures,
+                    rulesetfiles: rulesetFile.toURI().toString()) {
+                formatter(type: 'xml', toFile: outputFile, toConsole: showViolations)
+                fileset(dir: gradleProject.projectDir.getPath()) {
+                    gradleProject.android.sourceSets.each { sourceSet ->
+                        sourceSet.java.srcDirs.each { file ->
+                            include(name: gradleProject.relativePath(file))
+                        }
+                    }
+                }
+            }
+            
+            if (outputFile.exists() && xslFile != null && xslFile.exists()) {
+                ant.xslt(in: outputFile,
+                         style: xslFile,
+                         out: outputFile.absolutePath.replaceFirst(~/\.[^\.]+$/, ".html"))
+            }
+        }
+    }
+}

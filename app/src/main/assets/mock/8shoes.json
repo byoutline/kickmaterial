@@ -1,0 +1,72 @@
+{
+  "id": 8,
+  "name": "Active shoes",
+  "blurb": "Welcome, my name is Daniel and i to actively spend my time. Every free moment I jog, walk or play tennis. Sport is not only health its my great passion, something that gives meaning to my life and gives me lots of joy. As a jogging enthusiast I always try to be up to date with the latest technologies for athletes: gear and energy food.there needs to be a constant change and upgrade, which gave me the idea for something special, for a product that will revolutionize the sports industry. The multipupose shoes measuring steps, distance, tome, effort, mobilizing muscles, and can even have GPS. at first I though this invention would only work for myself, but this year, I wanted to share and move my product to the market for mass production.",
+  "goal": 7000,
+  "pledged": 602,
+  "currency_symbol": "$",
+  "deadline": 1437480000,
+  "launched_at": 1434110400,
+  "backers_count": 270,
+  "photo": {
+    "full": "https://www.flickr.com/photos/lukema/8183925418/in/photolist-dtbKUo-84KUvk-f4XFVs-c4RRyG-5cYgJ8-72ahWg-6Rw8M8-d3vRF-pa3MA4-4odUrS-dqyRJh-cVvTAJ-dL4NDK-7AN7tC-qyjaqJ-ej2SAM-cLnVjN-a65n6f-nHb715-nhHyZr-4Wbo9z-8k3Ny4-s1EM5z-dTUnqm-qJBQhK-a9ZtuV-8HfFnd-d2txe1-6gKqM2-8NHtpe-dRAB2d-e1bAKF-4cYBfG-9ci6uz-a9Ztjk-kxwFeM-ruTqtw-7akVpg-7BHKG2-61okRG-4t5X3E-ruYWYT-ke2DB6-6wtFXi-5Jn9t4-kPyfXH-4mh8PC-d9rb1j-9ZBvYA-f555U5",
+    "med": "https://www.flickr.com/photos/lukema/8183925418/in/photolist-dtbKUo-84KUvk-f4XFVs-c4RRyG-5cYgJ8-72ahWg-6Rw8M8-d3vRF-pa3MA4-4odUrS-dqyRJh-cVvTAJ-dL4NDK-7AN7tC-qyjaqJ-ej2SAM-cLnVjN-a65n6f-nHb715-nhHyZr-4Wbo9z-8k3Ny4-s1EM5z-dTUnqm-qJBQhK-a9ZtuV-8HfFnd-d2txe1-6gKqM2-8NHtpe-dRAB2d-e1bAKF-4cYBfG-9ci6uz-a9Ztjk-kxwFeM-ruTqtw-7akVpg-7BHKG2-61okRG-4t5X3E-ruYWYT-ke2DB6-6wtFXi-5Jn9t4-kPyfXH-4mh8PC-d9rb1j-9ZBvYA-f555U5"
+  },
+  "creator": {
+    "id": 8,
+    "name": "Daniel George Stell",
+    "avatar": {
+      "medium": "http://localhost:8099/profile/8p.jpg",
+      "source": "https://www.flickr.com/photos/georgedement/15469207338/in/photolist-pyXJpm-7KS8Zz-7KUApX-7KZisY-9q4X6r-pyWivh-7KWemA-7KWbVu-7L14H6-7KVrEF-pyTdKj-7KZmmd-7KWcYd-7KSdwi-7KUenD-7KUw7T-7KYyQu-e4b3QC-7KUAma-mbY7vt-7KV3XB-7L4XZA-7KWcNq-7L4Qas-7KW6V7-7KS9Bn-czjvFN-7KYYfq-7KUAsM-7KUxkn-7KZhJq-7L11sc-7KS8Pg-7KWc3Y-7KS9RR-7KZk75-pyPPEZ-6vqTXE-6vmETt-6vmF4B-pyQLuP-pyRGYZ-pRtr5j-pyWC7W-f4zXgX-7KYGgf-pPeD93-oUtVSw-7L4Sp3-7L4K5q"
+    },
+    "urls": {
+      "web": {
+        "user": "https://www.flickr.com/photos/lukema"
+      }
+    }
+  },
+  "urls": {
+    "web": {
+      "project": "http://localhost:8099/projects/8"
+    },
+    "api": {
+      "project": "http://localhost:8099/projects/8?signature=1427292197.abcd"
+    }
+  },
+  "video": {
+    "id": 1,
+    "base": "http://localhost:8099/KickMaterial.mp4",
+    "webm": "http://localhost:8099/KickMaterial.webm",
+    "width": 1280,
+    "height": 720
+  },
+  "comments_count": 15,
+  "updates_count": 4,
+  "rewards": [
+    {
+      "minimum": 1,
+      "reward": "No Reward"
+    },
+    {
+      "id": 4187306,
+      "minimum": 85,
+      "reward": " Breathing footbed for any kind of shoes: slippers, trainers, flip-flops wellingtons and even high heels. Thanks to them everyday walking, running and strolls won't be tiring. Footbed allows air to flow by thanks to special insulating coating",
+      "urls": {
+        "api": {
+          "reward": "http://localhost:8099/rewards/8a?signature=1427292197.abcd"
+        }
+      }
+    },
+    {
+      "id": 4187318,
+      "minimum": 850,
+      "reward": "Check \"Active shoes\" yourself.",
+      "urls": {
+        "api": {
+          "reward": "http://localhost:8099/rewards/8b?signature=1427292197.abcd"
+        }
+      }
+    }
+  ]
+}
+            

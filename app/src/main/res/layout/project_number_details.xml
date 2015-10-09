@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <merge tools:showIn="@layout/project_grid_item_big">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/project_item_big_padding"
+            android:paddingRight="@dimen/project_item_big_padding">
+
+
+            <com.byoutline.secretsauce.views.CustomFontTextView
+                android:id="@+id/project_item_big_gathered_money_tv"
+                style="@style/ProjectItemLightWhite"
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:transitionName="@string/transition_gathered_money_amount"
+                tools:ignore="UnusedAttribute"
+                tools:text="$132 999"/>
+
+            <com.byoutline.secretsauce.views.CustomFontTextView
+                android:id="@+id/project_item_big_backers_tv"
+                style="@style/ProjectItemLightWhite"
+                android:transitionName="@string/transition_backers_count"
+                tools:ignore="UnusedAttribute"
+                tools:text="4 026"/>
+
+            <com.byoutline.secretsauce.views.CustomFontTextView
+                android:id="@+id/project_item_big_days_left"
+                style="@style/ProjectItemLightWhite"
+                android:transitionName="@string/transition_days_left"
+                tools:ignore="UnusedAttribute"
+                tools:text="9"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/project_item_big_padding"
+            android:paddingRight="@dimen/project_item_big_padding">
+
+
+            <com.byoutline.secretsauce.views.CustomFontTextView
+                android:id="@+id/project_item_big_pledged_of_tv"
+                style="@style/ProjectItemBoldValue.Normal.Light"
+                android:layout_weight="2"
+                android:text="@string/pledged_of"
+                android:transitionName="@string/transition_gathered_money_amount_label"
+                tools:ignore="UnusedAttribute"/>
+
+            <com.byoutline.secretsauce.views.CustomFontTextView
+                android:id="@+id/project_item_big_backers_label_tv"
+                style="@style/ProjectItemBoldValue.Normal.Light"
+                android:text="@string/backers"
+                android:transitionName="@string/transition_backers_count_label"
+                tools:ignore="UnusedAttribute"/>
+
+            <com.byoutline.secretsauce.views.CustomFontTextView
+                android:id="@+id/project_item_time_left_type_tv"
+                style="@style/ProjectItemBoldValue.Normal.Light"
+                android:text="@string/days_left"
+                android:transitionName="@string/transition_days_left_label"
+                tools:ignore="UnusedAttribute"/>
+
+        </LinearLayout>
+    </merge>
+</layout>

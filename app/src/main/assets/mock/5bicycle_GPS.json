@@ -1,0 +1,73 @@
+{
+  "id": 5,
+  "name": "Bicycle with GPS",
+  "blurb": "Have you ever forgotten the spot where you parked your bike? If so I have created something special for you! A bike with it's own personal navigation system. The built in gadget allows fast location of the vehicle. It is also very helpful in the case of misplacing your bike or theft. From now on you can leave your bike anywhere, without the thought that its \"the last time you'll see it\".",
+  "goal": 4000,
+  "pledged": 3911,
+  "currency_symbol": "$",
+  "deadline": 1449921600,
+  "launched_at": 1447329600,
+  "backers_count": 1670,
+  "photo": {
+    "full": "http://localhost:8099/projects/5.jpg",
+    "med": "http://localhost:8099/projects/5.jpg"
+  },
+  "creator": {
+    "id": 5,
+    "name": "Emelotte Prinat",
+    "avatar": {
+      "medium": "http://localhost:8099/profile/5p.jpg",
+      "source": "https://www.flickr.com/photos/56380734@N05/8971972658/in/photolist-eEPGTL-ehTtMX-jSkYkB-eEQC7Q-pXJnEW-eENLBD-eZ3mpn-8aDBcF-eEKBjR-9VPhx2-eEN9gG-4zoc1n-eEPmJ6-kon7rB-eEFSMv-eFo2gS-9qqYHf-aunn6z-pVoa57-nTqWE1-f9ztwp-6CrTsk-7K2iuo-edHj14-51npF9-eEUtjS-5SJeDp-7Wimag-nSnqnM-vGPy8n-9V9hYF-bxHBZZ-bnmPVu-bQ9hiT-eFgr6g-dSds3q-kopuyC-4FHAuP-5uuGgM-9uR3fy-2LAMJb-39UXyD-dHTJPq-cdZDWQ-8jgqb9-67LC1d-ctoDMU-adLe8H-9Sfuuf-cBGzXJ"
+    },
+    "urls": {
+      "web": {
+        "user": "https://www.flickr.com/photos/goossens/"
+      }
+    }
+  },
+  "urls": {
+    "web": {
+      "project": "http://localhost:8099/projects/5"
+    },
+    "api": {
+      "project": "http://localhost:8099/projects/5?signature=1427292197.abcd"
+    }
+  },
+  "video": {
+    "id": 5,
+    "base": "http://localhost:8099/KickMaterial.mp4",
+    "webm": "http://localhost:8099/KickMaterial.webm",
+    "width": 1280,
+    "height": 720
+  },
+  "comments_count": 67,
+  "updates_count": 55,
+  "rewards": [
+    {
+      "minimum": 1,
+      "reward": "You receive a thank you email for backing up this project:)"
+    },
+    {
+      "id": 4187344,
+      "minimum": 59,
+      "reward": "You will receive a prototype of the GPS installed in the frame of the bike . Warning! this option is limited considering the small number of gadgets in stock.",
+      "description": "You will receive a prototype of the GPS installed in the frame of the bike . Warning! this option is limited considering the small number of gadgets in stock.",
+      "urls": {
+        "api": {
+          "reward": "http://localhost:8099/rewards/5a?signature=1427292197.abcd"
+        }
+      }
+    },
+    {
+      "id": 4187318,
+      "minimum": 1000,
+      "reward": "The modern bikes with built in GPS systems, which will prove themselves in town. The highest quality of materials, professional work, very sturdy and resistant to all climate types. Each of the bikes will be hand made by myself, which will guarantee precise installation of each part and attention to detail. Also for fans of bike trips, as well as intense bikers. Co-created by organizers of \"Poland Bike\" and a 5 year warranty!",
+      "description": "The modern bikes with built in GPS systems, which will prove themselves in town. The highest quality of materials, professional work, very sturdy and resistant to all climate types. Each of the bikes will be hand made by myself, which will guarantee precise installation of each part and attention to detail. Also for fans of bike trips, as well as intense bikers. Co-created by organizers of \"Poland Bike\" and a 5 year warranty!",
+      "urls": {
+        "api": {
+          "reward": "http://localhost:8099/rewards/5b?signature=1427292197.abcd"
+        }
+      }
+    }
+  ]
+}

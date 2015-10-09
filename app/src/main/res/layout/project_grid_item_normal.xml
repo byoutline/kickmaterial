@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="6dp"
+        card_view:cardBackgroundColor="@android:color/transparent"
+        card_view:cardCornerRadius="@dimen/project_item_corner_radius"
+        card_view:cardPreventCornerOverlap="false">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/project_item_big_photo_height">
+
+            <include layout="@layout/project_grid_item_photo"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:orientation="vertical">
+
+                <com.byoutline.secretsauce.views.CustomFontTextView
+                    android:id="@+id/project_item_big_title_tv"
+                    style="@style/ProjectItemNameStyle"
+                    android:textSize="18sp"
+                    android:transitionName="@string/transition_project_title"
+                    tools:ignore="UnusedAttribute"
+                    tools:text="Project Title"/>
+
+                <com.byoutline.kickmaterial.views.DisabledSeekBar
+                    android:id="@+id/project_item_big_progress_sb"
+                    style="@style/SeekBarStyle"
+                    android:layout_marginBottom="6dp"
+                    android:layout_marginLeft="@dimen/project_item_big_padding"
+                    android:layout_marginRight="@dimen/project_item_big_padding"
+                    android:layout_marginTop="6dp"
+                    android:maxHeight="6dp"
+                    android:minHeight="6dp"
+                    android:transitionName="@string/transition_project_progress"
+                    tools:ignore="UnusedAttribute"/>
+
+            </LinearLayout>
+
+        </FrameLayout>
+
+    </android.support.v7.widget.CardView>
+</layout>

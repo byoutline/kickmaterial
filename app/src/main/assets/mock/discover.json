@@ -1,0 +1,254 @@
+{
+  "projects": [
+    {
+      "id": 1,
+      "name": "Smart thermos",
+      "blurb": "This device was invented w the thought of amateurs of hot drinks, people who are constantly travelling or carry out a fast pace life having no time to calmly drink tea, or coffee?  We all know this feeling, that after a few hours we are drinking a cold liquid rather than a hot coffee. thanks to  \"Smart Thermos\" this problem disappears. The specially made walls filled with ........... cause that the original temperature of the beverage stays for 5h, and doesn't fall below 50% after 10 hours. Also the thermometer on the inside informs on the current heat level of heat. Additionally, I installed a coulor code system allowing for an intuitive guess at the temperature. Blue - Cold Red - Hot Orange- warm/ room temperature",
+      "goal": 7000.0,
+      "pledged": 602.0,
+      "currency_symbol": "$",
+      "deadline": 1437480000,
+      "launched_at": 1434110400,
+      "backers_count": 270,
+      "photo": {
+        "full": "http://localhost:8099/projects/1.jpg",
+        "med": "http://localhost:8099/projects/1.jpg"
+      },
+      "creator": {
+        "id": 1,
+        "name": "Melissa Vick Dikker",
+        "avatar": {
+          "medium": "http://localhost:8099/profile/1p.jpg"
+        },
+        "urls": {
+          "web": {
+            "user": "https://www.flickr.com/photos/norio-nakayama/"
+          }
+        }
+      },
+      "urls": {
+        "web": {
+          "project": "http://localhost:8099/projects/1"
+        },
+        "api": {
+          "project": "http://localhost:8099/projects/1?signature=1427292197.abcd"
+        }
+      }
+    },
+    {
+      "id": 2,
+      "name": "Windows wizard",
+      "blurb": "This idea was born on a a sunny day, when my mom was fighting with dirty windows. At that moment I understood that a seemingly simple task was taking up a lot of time and energy, despite the hard work the window was still smeared. This situation inspired me to construct the \"Windows Wizard\", a robot, which cleans and polish windows by itself. It doesnt matter how big the mess, what the weather is, it will handle everything- BY ITSELF. I know that for many people the worst type of cleaning is cleaning windows. Thankfully, this problem is disappearing thanks to my \"Windows Wizard\".",
+      "goal": 900.0,
+      "pledged": 320.0,
+      "currency_symbol": "$",
+      "deadline": 1436706000,
+      "launched_at": 1434373200,
+      "backers_count": 113,
+      "photo": {
+        "full": "http://localhost:8099/projects/2.jpg",
+        "med": "http://localhost:8099/projects/2.jpg"
+      },
+      "creator": {
+        "id": 2,
+        "name": "Piter Rids",
+        "avatar": {
+          "medium": "http://localhost:8099/profile/2p.jpg"
+        },
+        "urls": {
+          "web": {
+            "user": "https://www.flickr.com/photos/26085795@N02/"
+          }
+        }
+      },
+      "urls": {
+        "web": {
+          "project": "http://localhost:8099/projects/2"
+        },
+        "api": {
+          "project": "http://localhost:8099/projects/2?signature=1427292197.abcd"
+        }
+      }
+    },
+    {
+      "id": 3,
+      "name": "Alarm with temperature",
+      "blurb": "I love to sleep so I always weak up at last moment. Often I ride bike to work which takes like 30 additional minutes of preparations. I hate situations when, where I leave house and get surprised by rain. I'm angry that I did weak not take an umbrella or did not take a bus to save some time. After few unpleasant incidents with my phones weather app I've decided to create my own. It will display always fresh information and will cooperate with my alarm clock, inform me about temperature, what clothes to take and will I need and umbrella. My project is partially done, but I need money for better graphic design and for promotion expanses. I hope that you will help me :)",
+      "goal": 5000.0,
+      "pledged": 456.0,
+      "currency_symbol": "$",
+      "deadline": 1440591132,
+      "launched_at": 1437912732,
+      "backers_count": 1600,
+      "photo": {
+        "full": "http://localhost:8099/projects/3.jpg",
+        "med": "http://localhost:8099/projects/3.jpg"
+      },
+      "creator": {
+        "id": 3,
+        "name": "Emelotte Prinat",
+        "avatar": {
+          "medium": "http://localhost:8099/profile/3p.jpg"
+        },
+        "urls": {
+          "web": {
+            "user": "https://www.flickr.com/photos/spierisf/"
+          }
+        }
+      },
+      "urls": {
+        "web": {
+          "project": "http://localhost:8099/projects/3"
+        },
+        "api": {
+          "project": "http://localhost:8099/projects/3?signature=1427292197.abcd"
+        }
+      }
+    },
+    {
+      "id": 4,
+      "name": "Shopping creator",
+      "blurb": "My friend Mike often complains that shopping is very difficult. Browsing the shops, comparing prices and making choices to fit his taste is very tiresome. As a busy businessman he tries to save time by outsourcing this task to other people. Unfortunately he is often disappointed by the results. One day I've stumbled upon an idea how to make shopping easier, shorter and more pleasant for people like Mike. Today we have advanced Internet shopping websites and mobile application that allows people to easily see what products are available. We can extend this system by aggregating data from all virtual shops. Fast product matching that fits client is out main proposed feature.",
+      "goal": 1100.0,
+      "pledged": 213.0,
+      "currency_symbol": "$",
+      "deadline": 1439816400,
+      "launched_at": 1437742800,
+      "backers_count": 2089,
+      "photo": {
+        "full": "http://localhost:8099/projects/4.jpg",
+        "med": "http://localhost:8099/projects/4.jpg"
+      },
+      "creator": {
+        "id": 4,
+        "name": "Stephen Cingle",
+        "avatar": {
+          "medium": "http://localhost:8099/profile/4p.jpg"
+        },
+        "urls": {
+          "web": {
+            "user": "https://www.flickr.com/photos/dave_kepcove/"
+          }
+        }
+      },
+      "urls": {
+        "web": {
+          "project": "http://localhost:8099/projects/4"
+        },
+        "api": {
+          "project": "http://localhost:8099/projects/4?signature=1427292197.abcd"
+        }
+      }
+    },
+    {
+      "id": 5,
+      "name": "Bicycle with GPS",
+      "blurb": "Have you ever forgotten the spot where you parked your bike? If so I have created something special for you! A bike with it's own personal navigation system. The built in gadget allows fast location of the vehicle. It is also very helpful in the case of misplacing your bike or theft. From now on you can leave your bike anywhere, without the thought that its \"the last time you'll see it\".",
+      "goal": 4000.0,
+      "pledged": 3911.0,
+      "currency_symbol": "$",
+      "deadline": 1449921600,
+      "launched_at": 1447329600,
+      "backers_count": 1670,
+      "photo": {
+        "full": "http://localhost:8099/projects/5.jpg",
+        "med": "http://localhost:8099/projects/5.jpg"
+      },
+      "creator": {
+        "id": 5,
+        "name": "Emelotte Prinat",
+        "avatar": {
+          "medium": "http://localhost:8099/5p.png"
+        },
+        "urls": {
+          "web": {
+            "user": "https://www.flickr.com/photos/goossens/"
+          }
+        }
+      },
+      "urls": {
+        "web": {
+          "project": "http://localhost:8099/projects/5"
+        },
+        "api": {
+          "project": "http://localhost:8099/projects/5?signature=1427292197.abcd"
+        }
+      }
+    },
+    {
+      "id": 6,
+      "name": "My best masterpieces",
+      "blurb": "Hello. My name s Marika and I am professor in Arts on Warsaw  University on painting field. Painting is also my hobby. Since 10 years I've tried to discover the heritage of european paintings. I have a big dream to create the album collecting the arts corresponding to the taste of people of out century. The definition of beauty changes a lot during past two centuries. Something what two hundred years ago was considered as the masterpiece, today is misunderstendable. However we assume, that we should not undermine the art expert's opinion even if we are not convinced about their beauty and singularity. I was observing this occurence of \"accepting the compositions\" a year ago during our visit in Louvre, Paris. We conducted the survey in which asked  the visitors to choose one of five arts of the artist, which delight him the most, and then the arts, which in his opinion are the most appreciated, valued or showed as an example of composition. the answers were surprising. The paintings the most associated with the painter, presented in brochures, exhibited in the museums all over the world weren't covered with those- in visitor's opinion- the most beautiful. My goal is simple- during the year, beginning form August 28, which is the date of collection the sum of money needed to project completion, together with the students from \"love renesans\" student club we will research the artistic taste of people age 16-99. We will ask about taking part in short survey, in which they choose on of the most beautiful-in their opinion- masterpieces of every of 30 european master painters. The scores will let us create the unique album, corresponding to the contemporary canon of beauty. I am convinced that project implementation, in which also you can have your part, not only will contribute to cognition a great amount of forgotten and unappreciated by the art experts arts, but also will let the people who don't have any contact with the art in everyday life find their favourite artist. Today the visitors can have no idea of the artist's existence because of unpopularity of his arts, but who knows, if exactly this arts won't meet the artistic expectations of the visitors.",
+      "goal": 1000.0,
+      "pledged": 16.0,
+      "currency_symbol": "$",
+      "deadline": 1440680400,
+      "launched_at": 1438002000,
+      "backers_count": 455,
+      "photo": {
+        "full": "http://localhost:8099/projects/6.jpg",
+        "med": "http://localhost:8099/projects/6.jpg"
+      },
+      "creator": {
+        "id": 6,
+        "name": "Laura Amelia Depardieu",
+        "avatar": {
+          "medium": "http://localhost:8099/profile/6p.jpg"
+        },
+        "urls": {
+          "web": {
+            "user": "https://www.flickr.com/photos/ssoosay"
+          }
+        }
+      },
+      "urls": {
+        "web": {
+          "project": "http://localhost:8099/projects/6"
+        },
+        "api": {
+          "project": "http://localhost:8099/projects/6?signature=1427292197.abcd"
+        }
+      }
+    },
+    {
+      "id": 7,
+      "name": "Without a Ticket",
+      "blurb": "A famous saying of Confucius goes: \"Do everything so that honesty pays off more than theft, but is not theft\". To answer this quote I decided to create an aplication, which can lead to overuse, but in many situation it becomes very helpful, especially when tickets have become more expensive and for many people have become a financial burden. Many times we forget to buy a ticket and we dont have enough money or the ability to do this. Then the ideal solution becomes my app. The app \"Without a Ticket\" is based on the idea of mutaual help through the exchange of information. The users exchange between themselves information on the topic of ticket inspectors in means of communication (in Poland this is mainly ZTM and PKP), everyone has the ability to observe their availibility taking into acount all the registrations as well as limiting oureves to a certain areas. The creation if the application isnt bankruptcy or stealing from the transportation companies but to help in extreme cases in which  you can find an honest person who pays for their means of transportation. Thats why the application is equipped with a barrier which guarantees  from too much use of the app. information about the presence of inspectors can be heard 24h but to gathering the information only 2 times a month. Other than the main function \"Without\" a ticket has many options allowing for communication, mutual gaming, or gaining points . In the offer you will find premium and super premium accounts giving extra abilities.  Don't waste time and use the app now and connect to create mutual help!",
+      "goal": 7000.0,
+      "pledged": 602.0,
+      "currency_symbol": "$",
+      "deadline": 1437480000,
+      "launched_at": 1434110400,
+      "backers_count": 270,
+      "photo": {
+        "full": "http://localhost:8099/projects/7.jpg",
+        "med": "http://localhost:8099/projects/7.jpg"
+      },
+      "creator": {
+        "id": 6,
+        "name": "Sophia Piekut",
+        "avatar": {
+          "medium": "http://localhost:8099/profile/7p.jpg"
+        },
+        "urls": {
+          "web": {
+            "user": "https://www.flickr.com/photos/blondinrikard"
+          }
+        }
+      },
+      "urls": {
+        "web": {
+          "project": "http://localhost:8099/projects/7"
+        },
+        "api": {
+          "project": "http://localhost:8099/projects/7?signature=1427292197.abcd"
+        }
+      }
+    }
+  ],
+  "urls": {
+    "api": {
+      "more_projects": "http://localhost:8099/v1/discover?include_potd=true&page=2&per_page=12&signature=1427292197.abcd"
+    }
+  }
+}

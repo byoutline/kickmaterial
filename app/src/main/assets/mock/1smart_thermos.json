@@ -1,0 +1,74 @@
+{
+  "id": 1,
+  "name": "Smart thermos",
+  "blurb": "This device was invented w the thought of amateurs of hot drinks, people who are constantly travelling or carry out a fast pace life having no time to calmly drink tea or coffee?  We all know this feeling, that after a few hours we are drinking a cold liquid rather than a hot coffee. thanks to  \"Smart Thermos\" this problem disappears. The specially made walls filled with ........... cause that the original temperature of the beverage stays for 5h, and doesn't fall below 50% after 10 hours. Also the thermometer on the inside informs on the current heat level of heat. Additionally, I installed a colour code system allowing for an intuitive guess at the temperature. Blue - Cold Red - Hot Orange- warm/ room temperature",
+  "goal": 7000,
+  "pledged": 602,
+  "currency_symbol": "$",
+  "deadline": 1437480000,
+  "launched_at": 1434110400,
+  "backers_count": 270,
+  "photo": {
+    "full": "http://localhost:8099/projects/1.jpg",
+    "med": "http://localhost:8099/projects/1.jpg"
+  },
+  "creator": {
+    "id": 1,
+    "name": "Melissa Vick Dikker",
+    "avatar": {
+      "medium": "http://localhost:8099/profile/1p.jpg",
+      "source": "https://www.flickr.com/photos/tetrapak/6266439692/in/photolist-axK9cE-6wk4jw-mEd8kV-fVWDyf-54F5wm-DAN7S-kXRxm1-eDEqQu-eapSfS-bxULyr-4HHJ5v-8GhS6y-ashoan-dqhH5f-2JJEB-7Qbfeu-frMDBY-nkm4CG-8sXtci-jQq9tY-taN6x-tWyQQ1-bjBFgb-8uHcQX-nx7FM6-9FPmkB-dSds3q-oRArhU-m2xwtR-2JebDf-8TWso7-9J4HFP-bjBVUm-futssE-bHXULX-8A8sFG-qtzdJw-9oQuEz-2gvCb4-sPKMcC-7Aa7Ke-9d836S-g72z5f-ogJtFf-7J5fyn-kowxrX-nqQGAa-4gkNcD-2a3pha-mKjEYS"
+    },
+    "urls": {
+      "web": {
+        "user": "https://www.flickr.com/photos/norio-nakayama/"
+      }
+    }
+  },
+  "urls": {
+    "web": {
+      "project": "http://localhost:8099/projects/1"
+    },
+    "api": {
+      "project": "http://localhost:8099/projects/1?signature=1427292197.abcd"
+    }
+  },
+  "video": {
+    "id": 1,
+    "base": "http://localhost:8099/KickMaterial.mp4",
+    "webm": "http://localhost:8099/KickMaterial.webm",
+    "width": 1280,
+    "height": 720
+  },
+  "comments_count": 15,
+  "updates_count": 4,
+  "rewards": [
+    {
+      "minimum": 1,
+      "reward": "No Reward"
+    },
+    {
+      "id": 4187306,
+      "minimum": 8,
+      "reward": " Thanks to this you support young talents, you will be added to the list of donors of Heart For Innovation foundation. I will be very grateful and I invite you to a tea tasting with the developed by myself \"Smart Thermos\"",
+      "description": "Thanks to this you support young talents, you will be added to the list of donors of Heart For Innovation foundation. I will be very grateful and I invite you to a tea tasting with the developed by myself \"Smart Thermos\"",
+      "urls": {
+        "api": {
+          "reward": "http://localhost:8099/rewards/1a?signature=1427292197.abcd"
+        }
+      }
+    },
+    {
+      "id": 4187318,
+      "minimum": 16,
+      "reward": "This prize will allow you to be a part of the making process of my invention, in my home laboratory we will make a \"Smart Thermos\" and as before we will be able to enjoy the long lasting temperature of the drink, without the risk of burning yourself.",
+      "description": "This prize will allow you to be a part of the making process of my invention, in my home laboratory we will make a \"Smart Thermos\" and as before we will be able to enjoy the long lasting temperature of the drink, without the risk of burning yourself.",
+      "urls": {
+        "api": {
+          "reward": "http://localhost:8099/rewards/1b?signature=1427292197.abcd"
+        }
+      }
+    }
+  ]
+}
+            

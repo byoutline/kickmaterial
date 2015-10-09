@@ -1,0 +1,72 @@
+{
+  "id": 13,
+  "name": "Aureol hate",
+  "blurb": "We are a young couple, a little crazy we love to travel but most of all discovering new places.  During our last trip to Japan we saw a people which during a storm was using his hat with extra foil which covered the entire body rescuing it from rain. This unusual sight inspired us to build an upgraded version of the hat. The mechanism works together with rain, the built in sensors register rain and trigger the flow of air which blows away raindrops from your head",
+  "goal": 7000,
+  "pledged": 602,
+  "currency_symbol": "$",
+  "deadline": 1439467932,
+  "launched_at": 1436789532,
+  "backers_count": 270,
+  "photo": {
+    "full": "https://www.flickr.com/photos/natura_pagana/3802901392/in/photolist-6N3S6o-ngjgKW-eadZH7-92GWVn-pjJGM5",
+    "med": "https://www.flickr.com/photos/natura_pagana/3802901392/in/photolist-6N3S6o-ngjgKW-eadZH7-92GWVn-pjJGM5"
+  },
+  "creator": {
+    "id": 13,
+    "name": "Claudia Camilla and Mark Falath",
+    "avatar": {
+      "medium": "http://localhost:8099/profile/13p.jpg",
+      "source": "https://www.flickr.com/photos/burgtender/4910841630/in/photolist-8tXm8h-8tCJkE-8oDy4n-kfTCNf-ryK7Nw-rk147u-ahut26-na3XBC-63ButG-4HMZfG-nrsDnA-wK2pC-4BtXE2-tnXLFC-j1hTwA-mdzaRt-mCnyBi-9VGLUW-7p7zqD-cN7LE-rk4Dwi-6QTxyU-g3BUZQ-wspnz6-ay6vnf-pk9HGM-EtgLM-oCEpAf-7mPhpC-bW8Mzs-4YT7dg-78rzaB-2foHa-boVcf-9ZeGRH-iRf1qz-R6Bvf-8vdAy4-c2qha-psAp6C-bzAiqN-5aN4ty-cF1eks-kEgCuP-bLLj2V-7voTmW-gnw5q-bi1qfp-oChNtx-9VDWpP"
+    },
+    "urls": {
+      "web": {
+        "user": "https://www.flickr.com/photos/natura_pagana"
+      }
+    }
+  },
+  "urls": {
+    "web": {
+      "project": "http://localhost:8099/projects/13"
+    },
+    "api": {
+      "project": "http://localhost:8099/projects/13?signature=1427292197.abcd"
+    }
+  },
+  "video": {
+    "id": 1,
+    "base": "http://localhost:8099/KickMaterial.mp4",
+    "webm": "http://localhost:8099/KickMaterial.webm",
+    "width": 1280,
+    "height": 720
+  },
+  "comments_count": 37,
+  "updates_count": 9,
+  "rewards": [
+    {
+      "minimum": 1,
+      "reward": "No Reward"
+    },
+    {
+      "id": 4187306,
+      "minimum": 25,
+      "reward": " 2 different pictures of your face in our invention. the dimensions 30x30 matte paper.",
+      "urls": {
+        "api": {
+          "reward": "http://localhost:8099/rewards/13a?signature=1427292197.abcd"
+        }
+      }
+    },
+    {
+      "id": 4187318,
+      "minimum": 250,
+      "reward": "the rainproof Hat is available in 5 colors. ",
+      "urls": {
+        "api": {
+          "reward": "http://localhost:8099/rewards/13b?signature=1427292197.abcd"
+        }
+      }
+    }
+  ]
+}
+            

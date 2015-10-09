@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <style name="AppTheme" parent="AppTheme.BaseTranslucentStatus">
+        <item name="android:windowContentTransitions">true</item>
+        <!--<item name="android:windowAllowEnterTransitionOverlap">true</item>-->
+        <!--<item name="android:windowAllowReturnTransitionOverlap">true</item>-->
+
+        <!--&lt;!&ndash; specify enter and exit transitions &ndash;&gt;-->
+        <!--<item name="android:windowEnterTransition">@android:transition/fade</item>-->
+        <!--<item name="android:windowExitTransition">@android:transition/explode</item>-->
+
+        <!-- specify shared element transitions -->
+        <!--<item name="android:windowSharedElementEnterTransition">@android:transition/move</item>-->
+        <!--<item name="android:windowSharedElementExitTransition">@android:transition/move</item>-->
+
+        <!--<item name="android:windowSharedElementExitTransition">@transition/shared_element_exit</item>-->
+        <!--<item name="android:windowSharedElementEnterTransition">@transition/shared_element_enter</item>-->
+        <!--<item name="android:windowSharedElementReenterTransition">@transition/shared_element_enter</item>-->
+        <!--<item name="android:windowSharedElementReturnTransition">@transition/shared_element_exit</item>-->
+
+        <!--<item name="android:windowSharedElementExitTransition">@transition/shared_element</item>-->
+        <item name="android:windowSharedElementEnterTransition">@transition/shared_element</item>
+        <!--<item name="android:windowSharedElementReenterTransition">@transition/shared_element</item>-->
+        <!--<item name="android:windowSharedElementReturnTransition">@transition/shared_element</item>-->
+    </style>
+
+    <style name="ActionButtonStyle" parent="ActionButtonStyleBase">
+        <item name="android:transitionName">@string/transition_fab</item>
+        <item name="android:elevation">8dp</item>
+    </style>
+
+    <style name="SeekBarStyle" parent="SeekBarStyleBase">
+        <item name="android:elevation">@dimen/cardview_default_elevation</item>
+    </style>
+
+</resources>

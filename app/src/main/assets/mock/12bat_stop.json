@@ -1,0 +1,69 @@
+{
+  "id": 12,
+  "name": "bat-stop",
+  "blurb": "\"These are the only mammals that are able to fly great deal of the time they spend their life in a nocturnal fashion. Their specific trait is hanging their head down. Bats have a special body build  hind limbs which they have to thank for this ability.\". This description of these animals doesn't sound scary but I assure you that you will change your mind when one of these creatures flies into your room or gets tangled in your hair Its possible you have encountered gadgets used to scare away mosquitos. A special sound not tolerated by bugs creates a great barrier, which they cannot cross. Same with the Bat-Stop. Bats are blind, in turn they send out special waves, which bounce off obstacles guiding them through the air. My invention sends out a wave which is considered an obstacle by the bat, with this we can somewhat control the flight of the bat. Pilot allows to set up a wall that all mammals will be restricted from.",
+  "goal": 12000,
+  "pledged": 5016,
+  "currency_symbol": "$",
+  "deadline": 1441627932,
+  "launched_at": 1438949532,
+  "backers_count": 411,
+  "photo": {
+    "full": "https://www.flickr.com/photos/pldms/5850403553/in/photolist-9UYR9M-aP2hqT-dtjNJZ-7nJtXW-8azu31-caXkx7-4AXq4k-96r8L8-4F6XZR-8M45m7-4gTs7N-dWKFRF-nkXcAA-caXmko-dLBNRk-8FGWD4-71a37N-6gd1dd-FJAL-4jV73r-3Bftu9-oTys3e-7xSfp3-d6D7Yf-B5tL-5Kd1Tg-boRpJh-ohZFSG-aobvNF-7bYJkA-f577pP-76JFQU-5MiMKP-wbaV1Q-s5nsmm-51YMPe-3JQucq-74H2oW-a2eHUD-8jAsfK-eaYLfn-btyVZV-8urZCo-5vwv7-KY9Z8-6xSVJq-dcxaXB-6FTRT4-orwCei-msr3z",
+    "med": "https://www.flickr.com/photos/pldms/5850403553/in/photolist-9UYR9M-aP2hqT-dtjNJZ-7nJtXW-8azu31-caXkx7-4AXq4k-96r8L8-4F6XZR-8M45m7-4gTs7N-dWKFRF-nkXcAA-caXmko-dLBNRk-8FGWD4-71a37N-6gd1dd-FJAL-4jV73r-3Bftu9-oTys3e-7xSfp3-d6D7Yf-B5tL-5Kd1Tg-boRpJh-ohZFSG-aobvNF-7bYJkA-f577pP-76JFQU-5MiMKP-wbaV1Q-s5nsmm-51YMPe-3JQucq-74H2oW-a2eHUD-8jAsfK-eaYLfn-btyVZV-8urZCo-5vwv7-KY9Z8-6xSVJq-dcxaXB-6FTRT4-orwCei-msr3z"
+  },
+  "creator": {
+    "id": 12,
+    "name": "mcHolly Doug",
+    "avatar": {
+    },
+    "urls": {
+      "web": {
+        "user": "https://www.flickr.com/photos/pldms"
+      }
+    }
+  },
+  "urls": {
+    "web": {
+      "project": "http://localhost:8099/projects/12"
+    },
+    "api": {
+      "project": "http://localhost:8099/projects/12?signature=1427292197.abcd"
+    }
+  },
+  "video": {
+    "id": 6,
+    "base": "http://localhost:8099/KickMaterial.mp4",
+    "webm": "http://localhost:8099/KickMaterial.webm",
+    "width": 1280,
+    "height": 720
+  },
+  "comments_count": 2,
+  "updates_count": 23,
+  "rewards": [
+    {
+      "minimum": 67,
+      "reward": "There are around 400 types of bats. In the hardcover 250 pages. Its sent to your email with a special dedication. This options available to 3 people, who as first choose to support me with the large sum. this will give you 1% of the co operation with the selling of my product/invention."
+    },
+    {
+      "id": 4187344,
+      "minimum": 150,
+      "reward": " invention \"bat - stop\".",
+      "urls": {
+        "api": {
+          "reward": "http://localhost:8099/rewards/12a?signature=1427292197.abcd"
+        }
+      }
+    },
+    {
+      "id": 4187318,
+      "minimum": 3000,
+      "reward": "This options available to 3 people, who as first choose to support me with the large sum. this will give you 1% of the co operation with the selling of my product/invention.",
+      "urls": {
+        "api": {
+          "reward": "http://localhost:8099/rewards/12b?signature=1427292197.abcd"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,71 @@
+{
+  "id": 9,
+  "name": "The Strong Hand",
+  "blurb": "Hi, im Marta, I like pure and clean form and straightforward gadgets. I think very practically, my life dream has always been doing something for people, creating something which helps with everyday life. Realizing my idea took many years, there was testing, the first prototype, how to accomplish my goal which ended in failure many times. Today I stand in front of you with the fruit of my effort and struggles with a gadget which will revolutionize the always hated heavy lifting. I present to you \"The Strong Hand\" one of a kind handle which causes that the weight held in your hand will disperse evenly and this eill help you carry lift and move even more. the nightmare of not being able to lift something will be gone. your days of asking for help are over, and ordinary task will become fun and they will gain new meaning. The Strong Hand is not a thing you have encountered before, it is completely new idea crated by myself for you. the simple mechanism which is used by lifts, it spreads the entire weight across your palm not focusing on one specific point. Thanks to this the weight lifted by us seems lighter.  There is a whole range of use for the gadget beginning with groceries, ending with house renovations, caring for children or older people, or handicapped who need to be taken care of.",
+  "goal": 7000,
+  "pledged": 602,
+  "currency_symbol": "$",
+  "deadline": 1437480000,
+  "launched_at": 1434110400,
+  "backers_count": 270,
+  "photo": {
+    "full": "https://www.flickr.com/photos/valeriebb/3436708898/in/photolist-6eG2PG-5SqUMC-ayiNsE-a3Jbv6-gJPzZF-f2BHW3-f7gpCk-7CQA6h-6wqQyf-o5uWjF-2Zunxo-2jqN5H-cPKRDh-9KZ39K-5oPjej-4qUFAQ-7QkM3-5w4B85-e5Rzr5-fBvdoL-7BX5Q5-8zqKEV-6gUXm7-wQ9K9h-sTEA7-7XLLL8-9oVodW-ywRn-ijsSdU-7wdYtK-hcrTPb-7uHYQc-7Huy5b-7wzT2N-2jqN64-4kJCAZ-9JLCpM-5LN2EJ-3mGPen-6YGg5E-piXXgy-64YwpF-9HH9YF-bkWe2G-w9v9wu-o7CdAB-8XUgXA-5yo8P9-mnfqsN-54Gz3S",
+    "med": "https://www.flickr.com/photos/valeriebb/3436708898/in/photolist-6eG2PG-5SqUMC-ayiNsE-a3Jbv6-gJPzZF-f2BHW3-f7gpCk-7CQA6h-6wqQyf-o5uWjF-2Zunxo-2jqN5H-cPKRDh-9KZ39K-5oPjej-4qUFAQ-7QkM3-5w4B85-e5Rzr5-fBvdoL-7BX5Q5-8zqKEV-6gUXm7-wQ9K9h-sTEA7-7XLLL8-9oVodW-ywRn-ijsSdU-7wdYtK-hcrTPb-7uHYQc-7Huy5b-7wzT2N-2jqN64-4kJCAZ-9JLCpM-5LN2EJ-3mGPen-6YGg5E-piXXgy-64YwpF-9HH9YF-bkWe2G-w9v9wu-o7CdAB-8XUgXA-5yo8P9-mnfqsN-54Gz3S"
+  },
+  "creator": {
+    "id": 2,
+    "name": "Barbara Jeggar",
+    "avatar": {
+      "medium": "http://localhost:8099/profile/9p.jpg"
+    },
+    "urls": {
+      "web": {
+        "user": "https://www.flickr.com/photos/valeriebb"
+      }
+    }
+  },
+  "urls": {
+    "web": {
+      "project": "http://localhost:8099/projects/9"
+    },
+    "api": {
+      "project": "http://localhost:8099/projects/9?signature=1427292197.abcd"
+    }
+  },
+  "video": {
+    "id": 1,
+    "base": "http://localhost:8099/KickMaterial.mp4",
+    "webm": "http://localhost:8099/KickMaterial.webm",
+    "width": 1280,
+    "height": 720
+  },
+  "comments_count": 15,
+  "updates_count": 4,
+  "rewards": [
+    {
+      "minimum": 1,
+      "reward": "No Reward"
+    },
+    {
+      "id": 4187306,
+      "minimum": 15,
+      "reward": " Otrzymujesz dostęp do konta na 1 miesiąc, możesz korzystać z niego bez limitu.",
+      "urls": {
+        "api": {
+          "reward": "http://localhost:8099/rewards/9a?signature=1427292197.abcd"
+        }
+      }
+    },
+    {
+      "id": 4187318,
+      "minimum": 30,
+      "reward": "Trzymiesięczny dostęp do konta premrium plus bez żadnych ograniczeń oraz karta miejska. ",
+      "urls": {
+        "api": {
+          "reward": "http://localhost:8099/rewards/9b?signature=1427292197.abcd"
+        }
+      }
+    }
+  ]
+}
+            

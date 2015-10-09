@@ -1,0 +1,71 @@
+{
+  "id": 4,
+  "name": "Shopping creator",
+  "blurb": "My friend Mike often complains that shopping is very difficult. Browsing the shops, comparing prices and making choices to fit his taste is very tiresome. As a busy businessman he tries to save time by outsourcing this task to other people. Unfortunately he is often disappointed by the results. One day I've stumbled upon an idea how to make shopping easier, shorter and more pleasant for people like Mike. Today we have advanced Internet shopping websites and mobile application that allows people to easily see what products are available. We can extend this system by aggregating data from all virtual shops. Fast product matching that fits client is out main proposed feature. User could set in account his preferred product type, price, quality, company, taste, and more precise details for his shopping list.",
+  "goal": 1100,
+  "pledged": 213,
+  "currency_symbol": "$",
+  "deadline": 1439816400,
+  "launched_at": 1437742800,
+  "backers_count": 2089,
+  "photo": {
+    "full": "http://localhost:8099/projects/4.jpg",
+    "med": "http://localhost:8099/projects/4.jpg"
+  },
+  "creator": {
+    "id": 4,
+    "name": "Stephen Cingle",
+    "avatar": {
+      "medium": "http://localhost:8099/profile/4p.jpg",
+      "source": "http://no_image"
+    },
+    "urls": {
+      "web": {
+        "user": "https://www.flickr.com/photos/mstewartphotography"
+      }
+    }
+  },
+  "urls": {
+    "web": {
+      "project": "http://localhost:8099/projects/4"
+    },
+    "api": {
+      "project": "http://localhost:8099/projects/4?signature=1427292197.abcd"
+    }
+  },
+  "video": {
+    "id": 4,
+    "base": "http://localhost:8099/KickMaterial.mp4",
+    "webm": "http://localhost:8099/KickMaterial.webm",
+    "width": 1280,
+    "height": 720
+  },
+  "comments_count": 67,
+  "updates_count": 55,
+  "rewards": [
+    {
+      "minimum": 7,
+      "reward": "I'll show you how the system works and you will receive access to application for 1 week."
+    },
+    {
+      "id": 4187344,
+      "minimum": 70,
+      "reward": " You will receive special bundle. For whole year you can use demo version of application.",
+      "urls": {
+        "api": {
+          "reward": "http://localhost:8099/rewards/4a?signature=1427292197.abcd"
+        }
+      }
+    },
+    {
+      "id": 4187318,
+      "minimum": 670,
+      "reward": "For this price your shopping problems will disappear forever. You will get application for great price with full feature sets and access to future updates. You save 50% over release price!",
+      "urls": {
+        "api": {
+          "reward": "http://localhost:8099/rewards/4b?signature=1427292197.abcd"
+        }
+      }
+    }
+  ]
+}

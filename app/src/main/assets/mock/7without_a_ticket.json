@@ -1,0 +1,71 @@
+{
+  "id": 7,
+  "name": "Without a Ticket",
+  "blurb": "A famous saying of Confucius goes: \"Do everything so that honesty pays off more than theft, but is not theft\". To answer this quote I decided to create an application, which can lead to overuse, but in many situation it becomes very helpful, especially when tickets have become more expensive and for many people have become a financial burden. Many times we forget to buy a ticket and we dont have enough money or the ability to do this. Then the ideal solution becomes my app. The app \"Without a Ticket\" is based on the idea of mutaual help through the exchange of information. The users exchange between themselves information on the topic of ticket inspectors in means of communication (in Poland this is mainly ZTM and PKP), everyone has the ability to observe their availibility taking into acount all the registrations as well as limiting oureves to a certain areas. The creation if the application isnt bankruptcy or stealing from the transportation companies but to help in extreme cases in which  you can find an honest person who pays for their means of transportation. Thats why the application is equipped with a barrier which guarantees  from too much use of the app. information about the presence of inspectors can be heard 24h but to gathering the information only 2 times a month. Other than the main function \"Without\" a ticket has many options allowing for communication, mutual gaming, or gaining points . In the offer you will find premium and super premium accounts giving extra abilities.  Don't waste time and use the app now and connect to create mutual help!",
+  "goal": 7000,
+  "pledged": 602,
+  "currency_symbol": "$",
+  "deadline": 1437480000,
+  "launched_at": 1434110400,
+  "backers_count": 270,
+  "photo": {
+    "full": "https://www.flickr.com/photos/blondinrikard/13036474684/in/photolist-kRZkJU-zTfPT-oX3Vym-dMXLXj-cXLad-6Soz35-atT8TE-8DsUSH-uqut6-65f13-5UK27x-4HKLgP-dTpSnY-cyrAzm-b8heCn-d4GRD-6SjuxD-9bGCiG-d1vGf-p6kicd-dU5QYm-6iX3vo-dsvDT1-6Ds2nP-9JBSmA-bm9NT-7FZ87U-72qiBc-8663Lj-2xhZo-7rr3A1-65f25-65f1C-65eZD-65eYZ-JBCz1-ekaupj-fqxCCR-fqxC9X-fqxBB8-fqMShN-fqxAdV-fqMR6C-fqxzkH-fqxyN8-fqxy7B-fqMNH1-fqMMzh-fqxvt6-fqMLgd",
+    "med": "https://www.flickr.com/photos/blondinrikard/13036474684/in/photolist-kRZkJU-zTfPT-oX3Vym-dMXLXj-cXLad-6Soz35-atT8TE-8DsUSH-uqut6-65f13-5UK27x-4HKLgP-dTpSnY-cyrAzm-b8heCn-d4GRD-6SjuxD-9bGCiG-d1vGf-p6kicd-dU5QYm-6iX3vo-dsvDT1-6Ds2nP-9JBSmA-bm9NT-7FZ87U-72qiBc-8663Lj-2xhZo-7rr3A1-65f25-65f1C-65eZD-65eYZ-JBCz1-ekaupj-fqxCCR-fqxC9X-fqxBB8-fqMShN-fqxAdV-fqMR6C-fqxzkH-fqxyN8-fqxy7B-fqMNH1-fqMMzh-fqxvt6-fqMLgd"
+  },
+  "creator": {
+    "id": 2,
+    "name": "Sophia Piekut",
+    "avatar": {
+      "medium": "http://localhost:8099/profile/7p.jpg",
+      "source": "https://www.flickr.com/photos/faceme/2624989314/in/photolist-4ZXKSs-9wc8Ne-byBJui-ftikY7-aAnSgy-92f6Ys-4XwiYk-9t56hY-byBHHp-bSnvGe-ew1GfX-9BjTYH-ap2yEo-96jneS-auG4oe-aWmxEt-bDK3Ba-635dTE-auYgkD-eUfJZY-auYhZ8-bSnw4V-mWbSqQ-9wMmhS-odFcNu-6Mehan-93xJ5z-aSVYuZ-ofS3rk-qvvwYo-9Cn8Yo-ax2qGK-d9QVDN-agvtMB-9DoXQN-aiMDUn-8VbE3N-9DmgmD-agvnR4-891gED-95rcgU-4zobV4-b4qPDF-degfEW-dFSNrR-8zKgSZ-deggE8-bAZ5cM-kfyRsk-ap3Xuq"
+    },
+    "urls": {
+      "web": {
+        "user": "https://www.flickr.com/photos/blondinrikard"
+      }
+    }
+  },
+  "urls": {
+    "web": {
+      "project": "http://localhost:8099/projects/7"
+    },
+    "api": {
+      "project": "http://localhost:8099/projects/7?signature=1427292197.abcd"
+    }
+  },
+  "video": {
+    "id": 1,
+    "base": "http://localhost:8099/KickMaterial.mp4",
+    "webm": "http://localhost:8099/KickMaterial.webm",
+    "width": 1280,
+    "height": 720
+  },
+  "comments_count": 15,
+  "updates_count": 4,
+  "rewards": [
+    {
+      "minimum": 1,
+      "reward": "No Reward"
+    },
+    {
+      "id": 4187306,
+      "minimum": 15,
+      "reward": " You gain a one month access to the account and you can use it without limit.",
+      "urls": {
+        "api": {
+          "reward": "http://localhost:8099/rewards/7a?signature=1427292197.abcd"
+        }
+      }
+    },
+    {
+      "id": 4187318,
+      "minimum": 30,
+      "reward": "The three month access to the premium plus account without limitations as well as  city car. ",
+      "urls": {
+        "api": {
+          "reward": "http://localhost:8099/rewards/7b?signature=1427292197.abcd"
+        }
+      }
+    }
+  ]
+}

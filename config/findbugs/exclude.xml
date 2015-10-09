@@ -1,0 +1,10 @@
+<FindBugsFilter>
+    <Match>
+        <Or>
+            <Class name="~org.lenition.rosette.R.*" />
+            <Class name="~.*Binding" />
+            <Class name="~.*Fixture" />
+        </Or>
+        <Bug category="PERFORMANCE,MALICIOUS_CODE,STYLE,SECURITY,CORRECTNESS,MT_CORRECTNESS,BAD_PRACTICE,I18N" />
+    </Match>
+</FindBugsFilter>

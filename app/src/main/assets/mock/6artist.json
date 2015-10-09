@@ -1,0 +1,66 @@
+{
+    "id": 6,
+    "name": "My best masterpieces",
+    "blurb": "Hello. My name is Marika and I am professor in Arts on Warsaw  University on painting field. Painting is also my hobby. Since 10 years I've tried to discover the heritage of european paintings. I have a big dream to create the album collecting the arts corresponding to the taste of people of out century. The definition of beauty changes a lot during past two centuries. Something what two hundred years ago was considered as the masterpiece, today is misunderstendable. However we assume, that we should not undermine the art expert's opinion even if we are not convinced about their beauty and singularity. I was observing this occurence of \"accepting the compositions\" a year ago during our visit in Louvre, Paris. We conducted the survey in which asked  the visitors to choose one of five arts of the artist, which delight him the most, and then the arts, which in his opinion are the most appreciated, valued or showed as an example of composition. the answers were surprising. The paintings the most associated with the painter, presented in brochures, exhibited in the museums all over the world weren't covered with those- in visitor's opinion- the most beautiful. My goal is simple- during the year, beginning form August 28, which is the date of collection the sum of money needed to project completion, together with the students from \"love renesans\" student club we will research the artistic taste of people age 16-99. We will ask about taking part in short survey, in which they choose on of the most beautiful-in their opinion- masterpieces of every of 30 european master painters. The scores will let us create the unique album, corresponding to the contemporary canon of beauty. I am convinced that project implementation, in which also you can have your part, not only will contribute to cognition a great amount of forgotten and unappreciated by the art experts arts, but also will let the people who don't have any contact with the art in everyday life find their favourite artist. Today the visitors can have no idea of the artist's existence because of unpopularity of his arts, but who knows, if exactly this arts won't meet the artistic expectations of the visitors.",
+    "pledged": 16,
+    "currency_symbol": "$",
+    "deadline": 1440680400,
+    "launched_at": 1438002000,
+    "backers_count": 455,
+    "photo": {
+        "full": "https://www.flickr.com/photos/ssoosay/5982423836/in/photolist-a7Duby-qBVTek-pHvbjy-qkpPfs-qkvHn2-qkneMj-qe55ZF-rjQpR1-qzDCa7-qChPuf-qkvJm6-qtvKo7-qKkqLN-qnWjCy-qvxRhz-qtdN9S-qdWkU5-qBUxS3-qFnEZs-qvkcoZ-qppzFk-qBTf3k-qCLyTW-qfHRWT-qvv3Gp-pzmbgx-qtfzoh-qkq1Pw-qBYxZx-qBmfwz-pz7DSU-rjXMoB-pEYbCo-qek5fK-qCJ1DQ-qFcZT9-qksLX4-qemQaK-pyGsFx-pJhchL-qEYMvQ-qoCDGV-qBUHDY-qFhcVR-pyNQaH-qkkdoy-qk5ujF-qkvyL4-qkjsuQ-pFaLmn",
+        "med": "https://www.flickr.com/photos/ssoosay/5982423836/in/photolist-a7Duby-qBVTek-pHvbjy-qkpPfs-qkvHn2-qkneMj-qe55ZF-rjQpR1-qzDCa7-qChPuf-qkvJm6-qtvKo7-qKkqLN-qnWjCy-qvxRhz-qtdN9S-qdWkU5-qBUxS3-qFnEZs-qvkcoZ-qppzFk-qBTf3k-qCLyTW-qfHRWT-qvv3Gp-pzmbgx-qtfzoh-qkq1Pw-qBYxZx-qBmfwz-pz7DSU-rjXMoB-pEYbCo-qek5fK-qCJ1DQ-qFcZT9-qksLX4-qemQaK-pyGsFx-pJhchL-qEYMvQ-qoCDGV-qBUHDY-qFhcVR-pyNQaH-qkkdoy-qk5ujF-qkvyL4-qkjsuQ-pFaLmn"
+    },
+    "creator": {
+        "id": 6,
+        "name": "Laura Amelia Depardieu",
+        "avatar": {
+            "medium": "http://localhost:8099/profile/6p.jpg",
+            "source": "https://www.flickr.com/photos/pedrosimoes7/135246139/in/photolist-cXaXZ-7NugV5-5FXJ99-dV4fPY-aBZ9mP-gSJsed-a7hFtQ-53FzbH-axK9cE-6wk4jw-mEd8kV-fVWDyf-Hw84R-54F5wm-DAN7S-ktxtTU-eDEqQu-eapSfS-bxULyr-4HHJ5v-8GhS6y-ashoan-dqhH5f-2JJEB-budpfT-7J5fyn-7Qbfeu-frMDBY-nkm4CG-8sXtci-jQq9tY-taN6x-tWyQQ1-bjBFgb-8uHcQX-nx7FM6-9FPmkB-dSds3q-oRArhU-m2xwtR-2JebDf-8TWso7-6f8EMi-4RQmh7-9J4HFP-bjBVUm-futssE-bHXULX-8A8sFG-qtzdJw"
+        },
+        "urls": {
+            "web": {
+                "user": "https://www.flickr.com/photos/ssoosay"
+            }
+        }
+    },
+    "urls": {
+        "web": {
+            "project": "http://localhost:8099/projects/6"
+        },
+        "api": {
+            "project": "http://localhost:8099/projects/6?signature=1427292197.abcd"
+        }
+    },
+    "video": {
+        "id": 6,
+        "base": "http://localhost:8099/KickMaterial.mp4",
+        "webm": "http://localhost:8099/KickMaterial.webm",
+        "width": 1280,
+        "height": 720
+    },
+    "comments_count": 2,
+    "updates_count": 23,
+    "rewards": [
+        {
+            "id": 4187317,
+            "minimum": 50,
+            "reward": "Postcard with work of your favourite artists. 15x10 size. List of available works to choose from is at www.artliberaless.com",
+            "urls": {
+                "api": {
+                    "reward": "http://localhost:8099/rewards/6a?signature=1427292197.abcd"
+                }
+            }
+        },
+        {
+            "id": 4187318,
+            "minimum": 750,
+            "reward": "Three postcards with works of your chosen artists, and additionally a poster of Gustaw Klimt painting \" Kiss\" (30x40 size). List of available works to choose from is at www.artliberaless.com",
+            "urls": {
+                "api": {
+                    "reward": "http://localhost:8099/rewards/6b?signature=1427292197.abcd"
+                }
+            }
+        }
+    ]
+}

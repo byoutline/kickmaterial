@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        card_view:cardBackgroundColor="@color/white"
+        card_view:cardCornerRadius="@dimen/global_list_card_view_radius">
+
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                      android:layout_width="match_parent"
+                      android:layout_height="120dp">
+
+
+            <ImageView
+                android:id="@+id/search_item_photo_iv"
+                android:layout_width="95dp"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/content_description_project_photo"
+                android:scaleType="centerCrop"
+                android:transitionName="@string/transition_project_photo"
+                tools:ignore="UnusedAttribute"
+                tools:src="@drawable/photo_big"/>
+
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="100"
+                android:orientation="vertical"
+                android:padding="15dp">
+
+                <com.byoutline.secretsauce.views.CustomFontTextView
+                    android:id="@+id/search_item_title_tv"
+                    style="@style/RegularFontStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:paddingBottom="10dp"
+                    android:textColor="@color/category_name"
+                    android:textSize="@dimen/font_16"
+                    android:transitionName="@string/transition_project_title"
+                    tools:ignore="UnusedAttribute"
+                    tools:text="3d Doodler 2.0. World's first 3d printing pen reinvented. 3d Doodler 2.0. World's first 3d printing pen reinvented."/>
+
+                <com.byoutline.secretsauce.views.CustomFontTextView
+                    android:id="@+id/search_item_desc_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:textColor="@color/text_grey"
+                    tools:text="The world's first and best 3d printing pen just got even better The world's first and best 3d printing pen just got even better"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+</layout>

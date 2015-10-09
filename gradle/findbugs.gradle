@@ -1,0 +1,90 @@
+configurations {
+    findbugs
+    findbugsPlugins
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    //compile "com.google.code.findbugs:annotations:$versions.findbugs"
+    findbugs "com.google.code.findbugs:findbugs-ant:$versions.findbugs"
+}
+
+task findbugs(type: AndroidFindBugsTask) {
+    ignoreFailures true
+    xslFile = new File("$project.rootDir/config/findbugs/fancy.xsl")
+}
+
+///////////////////////////////////////////////
+////////////// Groovy Task Class //////////////
+///////////////////////////////////////////////
+import org.gradle.api.internal.project.IsolatedAntBuilder
+
+/**
+ * See parameters at http://findbugs.sourceforge.net/manual/anttask.html
+ */
+class AndroidFindBugsTask extends DefaultTask {
+    @InputFile @Optional File excludeFile = new File("$project.rootDir/config/findbugs/exclude.xml")
+    @InputFile @Optional File xslFile = new File("$project.rootDir/config/findbugs/default.xsl")
+    @OutputFile File outputFile = new File("$project.buildDir/reports/findbugs/findbugs-${project.name}.xml")
+    FileCollection findbugsClasspath = project.configurations.findbugs
+    FileCollection pluginClasspath = project.configurations.findbugsPlugins
+    Boolean ignoreFailures = false
+    Project gradleProject = project
+    String errorProp = 'findbugsError'
+    String warningsProp = 'findbugsWarnings'
+
+    def AndroidFindBugsTask() {
+        description = 'Runs FindBugs against Android sourcesets.'
+        group = 'Code Quality'
+        dependsOn 'assemble'
+        dependsOn 'assemblePlayDebugAndroidTest'
+        dependsOn 'assemblePlayDebug'
+    }
+
+    @TaskAction
+    def findBugs() {
+        outputFile.parentFile.mkdirs()
+        def antBuilder = services.get(IsolatedAntBuilder)
+        antBuilder.withClasspath(findbugsClasspath).execute {
+            ant.taskdef(name: 'findbugs', classname: 'edu.umd.cs.findbugs.anttask.FindBugsTask')
+            ant.findbugs(debug: 'true',
+                        errorProperty: errorProp,
+                        warningsProperty: warningsProp,
+                        output: 'xml:withMessages',
+                        outputFile: outputFile,
+                        excludeFilter: excludeFile,
+                        jvmargs: '-Xmx768M') {
+                findbugsClasspath.addToAntBuilder(ant, 'classpath')
+                pluginClasspath.addToAntBuilder(ant, 'pluginList')
+                auxclassPath(path: gradleProject.configurations.compile.asPath)
+                gradleProject.android.sourceSets*.java.srcDirs.each { srcDir ->
+                    sourcePath(path: srcDir)
+                }
+                "class"(location: "$gradleProject.buildDir/intermediates/classes")
+            }
+
+            if (ant.project.properties[errorProp]) {
+                throw new GradleException("FindBugs encountered an error. Run with --debug to get more information.")
+            }
+
+            if (ant.project.properties[warningsProp] && !ignoreFailures) {
+                if (outputFile) {
+                    throw new GradleException("FindBugs rule violations were found. See the report at ${outputFile}.")
+                } else {
+                    throw new GradleException("FindBugs rule violations were found.")
+                }
+            }
+
+            if (outputFile.exists() && xslFile != null && xslFile.exists()) {
+                ant.xslt(in:   outputFile,
+                        style: xslFile,
+                        out:   outputFile.absolutePath.replaceFirst(~/\.[^\.]+$/, ".html")
+                )
+            }
+
+        }
+    }
+}

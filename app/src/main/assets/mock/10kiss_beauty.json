@@ -1,0 +1,71 @@
+{
+  "id": 10,
+  "name": "Kiss Beauty",
+  "blurb": "I met Thomas 2 years ago in Louisiana, he lived in an apartment by himself and did not have money and was absorbed by work. His idea became his everything, he spent years of research to create this, which then inspired me to change my life plan. His goal was to create a lotion/cream , that eliminates wrinkles in 60 seconds. When he told me about his work in this field I didn't believe what I heard, there are many similar products on the market but in reality they don't give the wanted effects, which are shown in commercials. But I agreed to sacrifice myself for 10 min, which turned out to be the best choice of my life. My thinking took a 180 degree turn and lead to my career choice I am now in a place where ideas and technology need financial support and where big dreams plead to become true. I have exactly 30 days, on KickMaterial, to raise money necessary to produce the first \"Kiss Beauty\" I know that there is no second place where people. with real interests support and observe the needs of technologic talents. Thats why were counting on you. Thomas and I, we believe that you will help us win life.",
+  "goal": 7000,
+  "pledged": 602,
+  "currency_symbol": "$",
+  "deadline": 1437480000,
+  "launched_at": 1434110400,
+  "backers_count": 270,
+  "photo": {
+    "full": "https://www.flickr.com/photos/tasselflower/6800270382/in/photolist-bmVat5-6ZaRKy-7DU2Sm-apzHVs-6MUT5a-8h7TkP-6tmDE3-64WMRt-7eZyqQ-8JAsfN-rar8aj-6y93A8-6qhYxz-7fahup-668ocA-brcLqU-8AMPhz-7DPhNx-7QcDgJ-eVTcPr-65THcF-o5t3DJ-7Vd3hJ-uWbeui-oKqwQE-6UUNtv-qUb5BC-asgL2P-fudwjc-pR4Z9Q-dim2Tb-6UUMkz-pGfG4a-rbY8T4-6tT2fB-s2LteT-ppRE6M-7fr1SJ-o5tF4r-7APBVQ-5V9FmJ-7YuHe8-gVFZMG-qDMXov-qSXjt1-7xqqxF-8JH7hY-oKtmpT-668ocs-hcj3yx",
+    "med": "https://www.flickr.com/photos/tasselflower/6800270382/in/photolist-bmVat5-6ZaRKy-7DU2Sm-apzHVs-6MUT5a-8h7TkP-6tmDE3-64WMRt-7eZyqQ-8JAsfN-rar8aj-6y93A8-6qhYxz-7fahup-668ocA-brcLqU-8AMPhz-7DPhNx-7QcDgJ-eVTcPr-65THcF-o5t3DJ-7Vd3hJ-uWbeui-oKqwQE-6UUNtv-qUb5BC-asgL2P-fudwjc-pR4Z9Q-dim2Tb-6UUMkz-pGfG4a-rbY8T4-6tT2fB-s2LteT-ppRE6M-7fr1SJ-o5tF4r-7APBVQ-5V9FmJ-7YuHe8-gVFZMG-qDMXov-qSXjt1-7xqqxF-8JH7hY-oKtmpT-668ocs-hcj3yx"
+  },
+  "creator": {
+    "id": 10,
+    "name": "Stanislav Slonski",
+    "avatar": {
+      "medium": "http://localhost:8099/profile/10p.jpg"
+    },
+    "urls": {
+      "web": {
+        "user": "https://www.flickr.com/photos/tasselflower"
+      }
+    }
+  },
+  "urls": {
+    "web": {
+      "project": "http://localhost:8099/projects/10"
+    },
+    "api": {
+      "project": "http://localhost:8099/projects/10?signature=1427292197.abcd"
+    }
+  },
+  "video": {
+    "id": 1,
+    "base": "http://localhost:8099/KickMaterial.mp4",
+    "webm": "http://localhost:8099/KickMaterial.webm",
+    "width": 1280,
+    "height": 720
+  },
+  "comments_count": 15,
+  "updates_count": 4,
+  "rewards": [
+    {
+      "minimum": 1,
+      "reward": "No Reward"
+    },
+    {
+      "id": 4187306,
+      "minimum": 15,
+      "reward": " I'll send you set of samples that will allow you to understand what makes \"kiss beauty\" and what makes it incredible.",
+      "urls": {
+        "api": {
+          "reward": "http://localhost:8099/rewards/10a?signature=1427292197.abcd"
+        }
+      }
+    },
+    {
+      "id": 4187318,
+      "minimum": 30,
+      "reward": "Bundle - gift of 10 mini creams. They are small but efficient. You skin can enjoy great effects of \"kiss beauty\" for half a year.",
+      "urls": {
+        "api": {
+          "reward": "http://localhost:8099/rewards/10b?signature=1427292197.abcd"
+        }
+      }
+    }
+  ]
+}
+            

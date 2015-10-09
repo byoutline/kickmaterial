@@ -1,0 +1,13 @@
+apply plugin: 'me.tatarka.retrolambda'
+
+retrolambda {
+    def jdkHome = 'JAVA7_HOME'
+    def oldJdkHome = 'JAVA8_HOME'
+    if (System.getenv(jdkHome) == null || System.getenv(oldJdkHome) == null) {
+        logger.warn("$jdkHome or $oldJdkHome enviromental variable not found. " +
+                'Please set them. Retrolambda may fail without them.')
+    }
+    jdk System.getenv("JAVA8_HOME")
+    oldJdk System.getenv("JAVA7_HOME")
+    javaVersion JavaVersion.VERSION_1_7
+}
