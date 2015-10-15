@@ -7,10 +7,9 @@ notifications:
     - sebastian.kacprzak@byoutline.com
 
 env:
-  - JAVA6_HOME=/usr/lib/jvm/java-6-openjdk-amd64 JAVA7_HOME=/usr/lib/jvm/java-7-openjdk-amd64 TERM=dumb
   matrix:
-    - ANDROID_TARGET=android-18  ANDROID_ABI=armeabi-v7a
-    - ANDROID_TARGET=android-22  ANDROID_ABI=armeabi-v7a
+    - ANDROID_TARGET=android-18  ANDROID_ABI=armeabi-v7a JAVA6_HOME=/usr/lib/jvm/java-6-openjdk-amd64 JAVA7_HOME=/usr/lib/jvm/java-7-openjdk-amd64 TERM=dumb
+    - ANDROID_TARGET=android-22  ANDROID_ABI=armeabi-v7a JAVA6_HOME=/usr/lib/jvm/java-6-openjdk-amd64 JAVA7_HOME=/usr/lib/jvm/java-7-openjdk-amd64 TERM=dumb
 
 android:
   components:
