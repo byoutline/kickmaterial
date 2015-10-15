@@ -8,8 +8,8 @@ notifications:
 
 env:
   matrix:
-    - ANDROID_TARGET=android-18  ANDROID_ABI=armeabi-v7a JAVA6_HOME=/usr/lib/jvm/java-6-openjdk-amd64 JAVA7_HOME=/usr/lib/jvm/java-7-openjdk-amd64 JAVA8_HOME=/usr/lib/jvm/java-8-openjdk-amd64 TERM=dumb
-    - ANDROID_TARGET=android-22  ANDROID_ABI=armeabi-v7a JAVA6_HOME=/usr/lib/jvm/java-6-openjdk-amd64 JAVA7_HOME=/usr/lib/jvm/java-7-openjdk-amd64 JAVA8_HOME=/usr/lib/jvm/java-8-openjdk-amd64 TERM=dumb
+    - ANDROID_TARGET=android-18  ANDROID_ABI=armeabi-v7a JAVA6_HOME=/usr/lib/jvm/java-6-openjdk-amd64 JAVA7_HOME=/usr/lib/jvm/java-7-openjdk-amd64 JAVA8_HOME=/usr/lib/jvm/java-8-oraclejdk-amd64 TERM=dumb
+    - ANDROID_TARGET=android-22  ANDROID_ABI=armeabi-v7a JAVA6_HOME=/usr/lib/jvm/java-6-openjdk-amd64 JAVA7_HOME=/usr/lib/jvm/java-7-openjdk-amd64 JAVA8_HOME=/usr/lib/jvm/java-8-oraclejdk-amd64 TERM=dumb
 
 android:
   components:
@@ -17,4 +17,4 @@ android:
     - build-tools-23.0.1
     - extra-android-m2repository
 
-script: ./gradlew build check
+script: ./gradlew check
