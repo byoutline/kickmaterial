@@ -34,7 +34,7 @@ import com.byoutline.kickmaterial.utils.LUtils;
 import com.byoutline.kickmaterial.utils.LruCacheWithPlaceholders;
 import com.byoutline.kickmaterial.utils.PaletteAndAplaTransformation;
 import com.byoutline.kickmaterial.views.ObservableScrollView;
-import com.byoutline.observablecachedfield.ObservableCachedFieldWithArg;
+import com.byoutline.ottocachedfield.ObservableCachedFieldWithArg;
 import com.byoutline.secretsauce.activities.WebViewActivityV7;
 import com.byoutline.secretsauce.activities.WebViewFlickrActivity;
 import com.byoutline.secretsauce.fragments.MenuOption;

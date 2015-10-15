@@ -17,7 +17,7 @@ import com.byoutline.kickmaterial.managers.AccessTokenProvider;
 import com.byoutline.kickmaterial.managers.LoginManager;
 import com.byoutline.kickmaterial.model.*;
 import com.byoutline.kickmaterial.utils.LruCacheWithPlaceholders;
-import com.byoutline.observablecachedfield.ObservableCachedFieldWithArg;
+import com.byoutline.ottocachedfield.ObservableCachedFieldWithArg;
 import com.byoutline.ottocachedfield.OttoCachedField;
 import com.byoutline.ottocachedfield.OttoCachedFieldBuilder;
 import com.byoutline.ottocachedfield.OttoCachedFieldWithArgBuilder;
@@ -138,18 +138,10 @@ public class GlobalModule {
     @Provides
     @GlobalScope
     public ObservableCachedFieldWithArg<ProjectDetails, ProjectIdAndSignature> provideProjectDetails(KickMaterialService service, Bus bus) {
-//        return new OttoCachedFieldWithArgBuilder<ProjectDetails, ProjectIdAndSignature>()
-//                .withValueProvider(input -> service.getProjectDetails(input.id(), input.queryParams()))
-//                .withSuccessEvent(new ProjectDetailsFetchedEvent())
-//                .build();
-        IBus iBus = new OttoIBus(bus);
-        return new ObservableCachedFieldWithArg<>(
-                OttoCachedField.defaultSessionIdProvider,
-                input -> service.getProjectDetails(input.id(), input.queryParams()),
-                new IBusSuccessListenerWithArg<>(iBus, new ProjectDetailsFetchedEvent()),
-                new IBusErrorListenerWithArg<>(iBus, new ProjectDetailsFetchingFailedEvent()),
-                DefaultExecutors.createDefaultValueGetterExecutor(),
-                DefaultExecutors.createDefaultStateListenerExecutor()
-        );
+        return (ObservableCachedFieldWithArg<ProjectDetails, ProjectIdAndSignature>) ObservableCachedFieldWithArg.<ProjectDetails, ProjectIdAndSignature>builder()
+                .withValueProvider(input -> service.getProjectDetails(input.id(), input.queryParams()))
+                .withSuccessEvent(new ProjectDetailsFetchedEvent())
+                .withResponseErrorEvent(new ProjectDetailsFetchingFailedEvent())
+                .build();
     }
 }

@@ -8,7 +8,7 @@
 
         <variable
             name="project"
-            type="com.byoutline.observablecachedfield.ObservableField&lt;com.byoutline.kickmaterial.model.ProjectDetails>"/>
+            type="com.byoutline.shadow.android.databinding.ObservableField&lt;com.byoutline.kickmaterial.model.ProjectDetails>"/>
     </data>
 
     <FrameLayout
