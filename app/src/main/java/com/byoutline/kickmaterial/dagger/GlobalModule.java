@@ -137,8 +137,10 @@ public class GlobalModule {
 
     @Provides
     @GlobalScope
-    public ObservableCachedFieldWithArg<ProjectDetails, ProjectIdAndSignature> provideProjectDetails(KickMaterialService service, Bus bus) {
-        return (ObservableCachedFieldWithArg<ProjectDetails, ProjectIdAndSignature>) ObservableCachedFieldWithArg.<ProjectDetails, ProjectIdAndSignature>builder()
+    public ObservableCachedFieldWithArg<ProjectDetails, ProjectIdAndSignature>
+    provideProjectDetails(KickMaterialService service) {
+        return (ObservableCachedFieldWithArg<ProjectDetails, ProjectIdAndSignature>)
+                ObservableCachedFieldWithArg.<ProjectDetails, ProjectIdAndSignature>builder()
                 .withValueProvider(input -> service.getProjectDetails(input.id(), input.queryParams()))
                 .withSuccessEvent(new ProjectDetailsFetchedEvent())
                 .withResponseErrorEvent(new ProjectDetailsFetchingFailedEvent())
