@@ -11,3 +11,9 @@ Contains examples of:
 * [BindingCollectionAdapter](https://github.com/evant/binding-collection-adapter/)
 
 
+To build please set JAVA7_HOME and JAVA8_HOME enviroment variables
+for example on linux you can add those lines `/etc/enviroment/`:
+```
+JAVA7_HOME=/usr/lib/jvm/java-7-openjdk-amd64
+JAVA8_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+```
