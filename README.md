@@ -9,6 +9,7 @@ Contains examples of:
 * [AndroidStubServer](https://github.com/byoutline/AndroidStubServer)
 * [Spock tests](http://spockframework.org/)
 * [BindingCollectionAdapter](https://github.com/evant/binding-collection-adapter/)
+* EndlessRecyclerView
 
 
 To build please set JAVA7_HOME and JAVA8_HOME enviroment variables
