@@ -63,7 +63,10 @@ public class Project {
     }
 
     public ProjectTime getTimeLeft() {
-        DateTime now = DateTime.now();
+        return getTimeLeft(DateTime.now());
+    }
+
+    ProjectTime getTimeLeft(DateTime now) {
         if (now.isAfter(deadline)) {
             // TODO: add successful.
             return new ProjectTime("ENDED", deadline.toString());
