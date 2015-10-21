@@ -12,5 +12,12 @@ Contains examples of:
 * [AndroidStubServer](https://github.com/byoutline/AndroidStubServer)
 * [Spock tests](http://spockframework.org/)
 * [BindingCollectionAdapter](https://github.com/evant/binding-collection-adapter/)
+* EndlessRecyclerView
 
 
+To build please set JAVA7_HOME and JAVA8_HOME enviroment variables
+for example on linux you can add those lines `/etc/enviroment/`:
+```
+JAVA7_HOME=/usr/lib/jvm/java-7-openjdk-amd64
+JAVA8_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+```
