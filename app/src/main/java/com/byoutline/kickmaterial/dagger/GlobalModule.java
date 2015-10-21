@@ -3,10 +3,7 @@ package com.byoutline.kickmaterial.dagger;
 import android.content.SharedPreferences;
 import com.byoutline.cachedfield.CachedField;
 import com.byoutline.cachedfield.CachedFieldWithArg;
-import com.byoutline.cachedfield.internal.DefaultExecutors;
 import com.byoutline.eventcallback.IBus;
-import com.byoutline.ibuscachedfield.internal.IBusErrorListenerWithArg;
-import com.byoutline.ibuscachedfield.internal.IBusSuccessListenerWithArg;
 import com.byoutline.kickmaterial.BuildConfig;
 import com.byoutline.kickmaterial.KickMaterialApp;
 import com.byoutline.kickmaterial.api.ApiErrorHandler;
@@ -15,13 +12,11 @@ import com.byoutline.kickmaterial.api.KickMaterialService;
 import com.byoutline.kickmaterial.events.*;
 import com.byoutline.kickmaterial.managers.AccessTokenProvider;
 import com.byoutline.kickmaterial.managers.LoginManager;
-import com.byoutline.kickmaterial.model.*;
+import com.byoutline.kickmaterial.model.DiscoverQuery;
 import com.byoutline.kickmaterial.utils.LruCacheWithPlaceholders;
 import com.byoutline.ottocachedfield.ObservableCachedFieldWithArg;
-import com.byoutline.ottocachedfield.OttoCachedField;
 import com.byoutline.ottocachedfield.OttoCachedFieldBuilder;
 import com.byoutline.ottocachedfield.OttoCachedFieldWithArgBuilder;
-import com.byoutline.ottoeventcallback.OttoIBus;
 import com.byoutline.ottoeventcallback.PostFromAnyThreadBus;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
@@ -139,8 +134,7 @@ public class GlobalModule {
     @GlobalScope
     public ObservableCachedFieldWithArg<ProjectDetails, ProjectIdAndSignature>
     provideProjectDetails(KickMaterialService service) {
-        return (ObservableCachedFieldWithArg<ProjectDetails, ProjectIdAndSignature>)
-                ObservableCachedFieldWithArg.<ProjectDetails, ProjectIdAndSignature>builder()
+        return ObservableCachedFieldWithArg.<ProjectDetails, ProjectIdAndSignature>builder()
                 .withValueProvider(input -> service.getProjectDetails(input.id(), input.queryParams()))
                 .withSuccessEvent(new ProjectDetailsFetchedEvent())
                 .withResponseErrorEvent(new ProjectDetailsFetchingFailedEvent())
