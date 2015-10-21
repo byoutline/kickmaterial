@@ -1,4 +1,7 @@
 # KickMaterial
+ master:  [![Build Status](https://travis-ci.org/byoutline/kickmaterial.svg?branch=master)](https://travis-ci.org/byoutline/kickmaterial)
+ develop: [![Build Status](https://travis-ci.org/byoutline/kickmaterial.svg?branch=develop)](https://travis-ci.org/byoutline/kickmaterial)
+ 
 Crowdfunding app design concept and implementation.
 Contains examples of:
 * [Android data bindign](https://developer.android.com/tools/data-binding/guide.html)
