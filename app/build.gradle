@@ -117,7 +117,6 @@ dependencies {
     compile 'commons-collections:commons-collections:3.2.1'
     compile 'me.tatarka:bindingcollectionadapter:0.14'
     compile 'me.tatarka:bindingcollectionadapter-recyclerview:0.14'
-    retrolambdaConfig 'net.orfjackal.retrolambda:retrolambda:2.0.6'
 
     androidTestCompile 'com.android.support.test.espresso:espresso-core:2.0'
     androidTestCompile 'com.android.support.test:testing-support-lib:0.1'
@@ -130,11 +129,8 @@ dependencies {
     testCompile 'com.google.code.findbugs:jsr305:3.0.0'
 }
 
-
-retrolambda {
-    jdk System.getenv("JAVA8_HOME")
-    oldJdk System.getenv("JAVA7_HOME")
-    javaVersion JavaVersion.VERSION_1_7
+configurations.all {
+    resolutionStrategy.force 'com.android.support:support-annotations:23.0.1'
 }
 
 // code coverage

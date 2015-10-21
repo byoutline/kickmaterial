@@ -1,0 +1,20 @@
+language: android
+
+jdk: oraclejdk8
+
+notifications:
+  email:
+    - sebastian.kacprzak@byoutline.com
+
+env:
+  matrix:
+    - ANDROID_TARGET=android-18  ANDROID_ABI=armeabi-v7a JAVA6_HOME=/usr/lib/jvm/java-6-openjdk-amd64 JAVA7_HOME=/usr/lib/jvm/java-7-openjdk-amd64 JAVA8_HOME=/usr/lib/jvm/java-8-oracle TERM=dumb
+    - ANDROID_TARGET=android-22  ANDROID_ABI=armeabi-v7a JAVA6_HOME=/usr/lib/jvm/java-6-openjdk-amd64 JAVA7_HOME=/usr/lib/jvm/java-7-openjdk-amd64 JAVA8_HOME=/usr/lib/jvm/java-8-oracle TERM=dumb
+
+android:
+  components:
+    - android-23
+    - build-tools-23.0.1
+    - extra-android-m2repository
+
+script: ./gradlew check

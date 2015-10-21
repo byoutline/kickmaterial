@@ -1,4 +1,4 @@
-apply plugin: 'me.tatarka.retrolambda'
+apply plugin: RetrolambdaDeps
 
 retrolambda {
     def jdkHome = 'JAVA7_HOME'
@@ -10,4 +10,26 @@ retrolambda {
     jdk System.getenv("JAVA8_HOME")
     oldJdk System.getenv("JAVA7_HOME")
     javaVersion JavaVersion.VERSION_1_7
+}
+
+public final class RetrolambdaDeps implements Plugin<Project>{
+
+    @Override
+    void apply(Project project) {
+        addDependencies(project)
+        applyPlugins(project)
+    }
+
+    private void addDependencies(Project project) {
+        project.afterEvaluate {
+            def pd = project.dependencies
+            pd.add('retrolambdaConfig', 'net.orfjackal.retrolambda:retrolambda:2.0.6')
+        }
+    }
+
+    private void applyPlugins(Project project) {
+        project.configure(project) {
+            apply plugin: 'me.tatarka.retrolambda'
+        }
+    }
 }

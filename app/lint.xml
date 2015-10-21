@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lint>
+    <issue id="InvalidPackage">
+        <ignore regexp="com.google.repacked.antlr.*" />
+        <ignore regexp="android.databinding.annotationprocessor.ProcessExpressions.*"/>
+        <ignore regexp="android.databinding.tool.util.GenerationalClassUtil.*"/>
+        <ignore regexp="okio.Okio.*"/>
+    </issue>
+</lint>
