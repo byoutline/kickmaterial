@@ -1,4 +1,4 @@
-# kickmaterial
+# KickMaterial
 Crowdfunding app design concept and implementation.
 Contains examples of:
 * [Android data bindign](https://developer.android.com/tools/data-binding/guide.html)
