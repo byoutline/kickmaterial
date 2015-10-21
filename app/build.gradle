@@ -13,14 +13,13 @@ buildscript {
 
     dependencies {
         classpath 'com.android.databinding:dataBinder:1.0-rc2'
+        classpath 'net.saliman:gradle-cobertura-plugin:2.0.0' // cobertura plugin
+        classpath 'org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.3.1'
     }
 }
 
 repositories {
     jcenter()
-    flatDir {
-        dirs 'libs'
-    }
 
 //    maven { url "http://oss.sonatype.org/content/repositories/snapshots/" }
     maven { url 'http://clinker.47deg.com/nexus/content/groups/public' }
@@ -131,44 +130,6 @@ dependencies {
 
 configurations.all {
     resolutionStrategy.force 'com.android.support:support-annotations:23.0.1'
-}
-
-// code coverage
-jacoco {
-    toolVersion "0.7.1.201405082137"
-}
-
-// Define coverage source.
-// If you have rs/aidl etc... add them here.
-def coverageSourceDirs = [
-        'src/main/java',
-]
-
-task jacocoTestReport(type: JacocoReport, dependsOn: "testDebug") {
-    group = "Reporting"
-    description = "Generate Jacoco coverage reports after running tests."
-    reports {
-        xml.enabled = true
-        html.enabled = true
-    }
-    classDirectories = fileTree(
-            dir: './build/intermediates/classes/debug',
-            excludes: ['**/R*.class',
-                       '**/*$InjectAdapter.class',
-                       '**/*$ModuleAdapter.class',
-                       '**/*$ViewInjector*.class'
-            ])
-    sourceDirectories = files(coverageSourceDirs)
-    executionData = files("$buildDir/jacoco/testDebug.exec")
-    // Bit hacky but fixes https://code.google.com/p/android/issues/detail?id=69174.
-    // We iterate through the compiled .class tree and rename $$ to $.
-    doFirst {
-        new File("$buildDir/intermediates/classes/").eachFileRecurse { file ->
-            if (file.name.contains('$$')) {
-                file.renameTo(file.path.replace('$$', '$'))
-            }
-        }
-    }
 }
 
 //configurations.all {

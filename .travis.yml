@@ -17,4 +17,4 @@ android:
     - build-tools-23.0.1
     - extra-android-m2repository
 
-script: ./gradlew check
+script: ./gradlew jacocoTestReport coveralls

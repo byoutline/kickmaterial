@@ -1,0 +1,6 @@
+def scriptPath = '../gradle/byoutline/'
+apply from: scriptPath + 'forceJava7.gradle'
+apply from: scriptPath + 'codeCoverage.gradle'
+apply from: scriptPath + 'checkGenerics.gradle'
+apply from: scriptPath + 'spockTests.gradle'
+

@@ -1,7 +1,4 @@
 apply plugin: 'java'
-apply plugin: 'groovy'
-apply plugin: "jacoco"
-apply plugin: 'com.github.kt3k.coveralls'
 apply plugin: 'propdeps'
 //apply plugin: 'com.android.databinding'
 
@@ -29,8 +26,10 @@ buildscript {
 repositories {
     mavenCentral()
     // For snapshots of event callback and spock testing
-    maven { url "http://oss.sonatype.org/content/repositories/snapshots/" }
+//    maven { url "http://oss.sonatype.org/content/repositories/snapshots/" }
 }
+
+apply from: '../gradle/byoutline/javaLib.gradle'
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
@@ -48,24 +47,5 @@ dependencies {
     provided 'com.google.code.findbugs:findbugs:3.0.0'
     provided 'com.android.databinding:baseLibrary:1.0-rc2'
     compile 'com.byoutline.cachedfield:cachedfield:1.5.0'
-
-
-    testCompile 'junit:junit:4.12'
-    // For spock testing:
-    testCompile 'org.codehaus.groovy:groovy-all:2.4.1'
-    testCompile group: 'junit', name: 'junit', version: '4.10'
-    testCompile 'org.spockframework:spock-core:1.0-groovy-2.4'
-    testRuntime "cglib:cglib-nodep:2.2.2"
-    // allows mocking of classes (in addition to interfaces)
-    testRuntime "org.objenesis:objenesis:1.2"
-    // allows mocking of classes without default constructor (together with CGLIB)
 }
 
-jacocoTestReport {
-    reports {
-        xml.enabled true // coveralls plugin depends on xml format report
-        html.enabled = true
-        csv.enabled false
-        html.destination "${buildDir}/jacocoHtml"
-    }
-}
