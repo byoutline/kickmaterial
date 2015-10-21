@@ -12,7 +12,7 @@ import com.byoutline.kickmaterial.api.KickMaterialService;
 import com.byoutline.kickmaterial.events.*;
 import com.byoutline.kickmaterial.managers.AccessTokenProvider;
 import com.byoutline.kickmaterial.managers.LoginManager;
-import com.byoutline.kickmaterial.model.DiscoverQuery;
+import com.byoutline.kickmaterial.model.*;
 import com.byoutline.kickmaterial.utils.LruCacheWithPlaceholders;
 import com.byoutline.ottocachedfield.ObservableCachedFieldWithArg;
 import com.byoutline.ottocachedfield.OttoCachedFieldBuilder;
