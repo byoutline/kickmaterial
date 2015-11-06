@@ -7,6 +7,9 @@ apply plugin: 'jacoco'
 apply plugin: 'com.neenbedankt.android-apt'
 
 buildscript {
+    ext.support_version = '23.0.1'
+    ext.dagger_version = '2.0.1'
+
     repositories {
         jcenter()
     }
@@ -28,7 +31,7 @@ repositories {
 
 android {
     compileSdkVersion 23
-    buildToolsVersion "23.0.1"
+    buildToolsVersion "23.0.2"
 
     defaultConfig {
         applicationId "com.byoutline.kickmaterial"
@@ -87,14 +90,14 @@ android {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile project(':appjava')
-    compile 'com.android.support:support-v4:23.0.1'
-    compile 'com.android.support:appcompat-v7:23.0.1'
-    compile 'com.android.support:cardview-v7:23.0.1'
-    compile 'com.android.support:recyclerview-v7:23.0.1'
-    compile 'com.android.support:support-annotations:23.0.1'
-    compile 'com.android.support:palette-v7:23.0.1'
+    compile "com.android.support:support-v4:$support_version"
+    compile "com.android.support:appcompat-v7:$support_version"
+    compile "com.android.support:cardview-v7:$support_version"
+    compile "com.android.support:recyclerview-v7:$support_version"
+    compile "com.android.support:support-annotations:$support_version"
+    compile "com.android.support:palette-v7:$support_version"
     compile 'com.jakewharton:butterknife:7.0.1'
-    compile('com.byoutline.secretsauce:secretsauce:0.4.6') { transitive = true }
+    compile 'com.byoutline.secretsauce:secretsauce:0.4.8'
     compile 'com.byoutline.ottocachedfield:ottocachedfield:1.6.0-beta3'
     compile 'com.byoutline.androidstubserver:stubserver:1.4.1'
     compile 'com.byoutline.mockserver:mockserver:1.4.2'
@@ -104,8 +107,8 @@ dependencies {
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'javax.inject:javax.inject:1'
     // For dagger 2
-    compile 'com.google.dagger:dagger:2.0.1'
-    apt 'com.google.dagger:dagger-compiler:2.0.1'
+    compile "com.google.dagger:dagger:$dagger_version"
+    apt "com.google.dagger:dagger-compiler:$dagger_version"
     provided 'javax.annotation:jsr250-api:1.0'
 
     apt 'com.android.databinding:compiler:1.0-rc2'
@@ -117,10 +120,6 @@ dependencies {
     compile 'me.tatarka:bindingcollectionadapter:0.14'
     compile 'me.tatarka:bindingcollectionadapter-recyclerview:0.14'
 
-    androidTestCompile 'com.android.support.test.espresso:espresso-core:2.0'
-    androidTestCompile 'com.android.support.test:testing-support-lib:0.1'
-    androidTestCompile 'com.google.code.findbugs:jsr305:3.0.0'
-    androidTestCompile 'com.android.support:support-annotations:23.0.1'
     testCompile 'junit:junit:4.12'
     testCompile 'org.mockito:mockito-core:1.9.5'
     testCompile 'com.squareup.assertj:assertj-android:1.0.0'
@@ -129,7 +128,7 @@ dependencies {
 }
 
 configurations.all {
-    resolutionStrategy.force 'com.android.support:support-annotations:23.0.1'
+    resolutionStrategy.force "com.android.support:support-annotations:$support_version"
 }
 
 //configurations.all {
