@@ -10,7 +10,6 @@ import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.SharedElementCallback;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.graphics.Palette;
@@ -37,7 +36,6 @@ import com.byoutline.kickmaterial.views.ObservableScrollView;
 import com.byoutline.ottocachedfield.ObservableCachedFieldWithArg;
 import com.byoutline.secretsauce.activities.WebViewActivityV7;
 import com.byoutline.secretsauce.activities.WebViewFlickrActivity;
-import com.byoutline.secretsauce.fragments.MenuOption;
 import com.byoutline.secretsauce.utils.ViewUtils;
 import com.software.shell.fab.ActionButton;
 import com.squareup.otto.Bus;
@@ -210,12 +208,6 @@ public class ProjectDetailsActivity extends KickMaterialBaseActivity implements 
                 ActivityCompat.setEnterSharedElementCallback(ProjectDetailsActivity.this, null);
             }
         });
-    }
-
-    @Override
-    public Class<? extends Fragment> onNavigationDrawerItemSelected(MenuOption menuOption) {
-        // TODO: decide if drawer should be reachable from this activity.
-        return null;
     }
 
     @Override

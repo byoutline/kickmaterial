@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 import android.view.Window;
 import android.view.WindowManager;
@@ -15,7 +14,6 @@ import butterknife.ButterKnife;
 import com.byoutline.kickmaterial.R;
 import com.byoutline.kickmaterial.model.ProjectDetails;
 import com.byoutline.kickmaterial.views.VideoController;
-import com.byoutline.secretsauce.fragments.MenuOption;
 import com.byoutline.secretsauce.utils.LogUtils;
 
 /**
@@ -105,10 +103,5 @@ public class VideoActivity extends KickMaterialBaseActivity {
     @Override
     public void setToolbarAlpha(float alpha) {
 
-    }
-
-    @Override
-    public Class<? extends Fragment> onNavigationDrawerItemSelected(MenuOption menuOption) {
-        return null;
     }
 }

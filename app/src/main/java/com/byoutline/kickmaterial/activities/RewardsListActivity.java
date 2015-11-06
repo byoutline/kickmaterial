@@ -11,7 +11,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -29,7 +28,6 @@ import com.byoutline.kickmaterial.managers.LoginManager;
 import com.byoutline.kickmaterial.model.ProjectDetails;
 import com.byoutline.kickmaterial.utils.LUtils;
 import com.byoutline.kickmaterial.views.CategoriesListSeparator;
-import com.byoutline.secretsauce.fragments.MenuOption;
 import com.byoutline.secretsauce.utils.ViewUtils;
 import com.byoutline.secretsauce.views.RoundedImageView;
 import com.squareup.otto.Bus;
@@ -177,12 +175,6 @@ public class RewardsListActivity extends KickMaterialBaseActivity implements Rew
     public void setToolbarAlpha(float alpha) {
 
     }
-
-    @Override
-    public Class<? extends Fragment> onNavigationDrawerItemSelected(MenuOption menuOption) {
-        return null;
-    }
-
 
     @OnClick(R.id.close_categories_iv)
     public void onCloseCategories() {

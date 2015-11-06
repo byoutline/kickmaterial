@@ -9,9 +9,7 @@ import com.byoutline.kickmaterial.R;
 import com.byoutline.kickmaterial.fragments.ProjectsListFragment;
 import com.byoutline.kickmaterial.managers.DataManager;
 import com.byoutline.kickmaterial.model.Category;
-import com.byoutline.secretsauce.fragments.MenuOption;
 import org.parceler.Parcels;
-import timber.log.Timber;
 
 /**
  * @author Pawel Karczewski <pawel.karczewski at byoutline.com> on 2015-01-03
@@ -47,26 +45,6 @@ public class MainActivity extends KickMaterialBaseActivity {
 //        });
 
     }
-
-    @Override
-    public Class<? extends android.support.v4.app.Fragment> onNavigationDrawerItemSelected(MenuOption menuOption) {
-        Class<? extends android.support.v4.app.Fragment> fragmentClass = null;
-        try {
-            if (menuOption.mFragmentClass != null) {
-                fragmentClass = menuOption.mFragmentClass;
-                android.support.v4.app.Fragment fragment = (android.support.v4.app.Fragment) menuOption.mFragmentClass.newInstance();
-
-                showFragment(fragment, false);
-            }
-        } catch (InstantiationException e) {
-            Timber.e("Failed to create fragment from drawer", e);
-        } catch (IllegalAccessException e) {
-            Timber.e("Failed to create fragment from drawer", e);
-        }
-
-        return fragmentClass;
-    }
-
 
     @Override
     public void setToolbarAlpha(float alpha) {
