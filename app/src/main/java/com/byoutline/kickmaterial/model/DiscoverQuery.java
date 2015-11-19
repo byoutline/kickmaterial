@@ -22,6 +22,13 @@ public class DiscoverQuery extends BaseObservable {
         this.discoverType = discoverType;
     }
 
+    public Integer getPageFromQuery() {
+        if(queryMap != null && queryMap.containsKey("page")) {
+            return Integer.valueOf(queryMap.get("page"));
+        }
+        return null;
+    }
+
     public static DiscoverQuery getDiscover(@Nullable Integer page) {
         boolean firstPage = page == null || page == 1;
         Map<String, String> params = firstPage ? null : getDiscoverCategoryMap(null, page, PER_PAGE, null);

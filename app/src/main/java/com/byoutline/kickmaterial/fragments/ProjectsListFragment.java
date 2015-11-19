@@ -37,6 +37,8 @@ import com.software.shell.fab.ActionButton;
 import com.squareup.otto.Bus;
 import com.squareup.otto.Subscribe;
 import org.parceler.Parcels;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 import timber.log.Timber;
 
 import javax.annotation.Nullable;
@@ -78,13 +80,12 @@ public class ProjectsListFragment extends KickMaterialFragment implements Projec
     private float actionbarScrollPoint;
     private float maxScroll;
     private int page = 1;
+    private int lastAvailablePage = Integer.MAX_VALUE;
     private Category category;
     /**
      * Endless scroll variables *
      */
     private GridLayoutManager layoutManager;
-    private boolean loading;
-    private boolean hasMore = true;
 
     public static ProjectsListFragment newInstance(@Nullable Category category) {
         ProjectsListFragment instance = new ProjectsListFragment();
@@ -209,7 +210,6 @@ public class ProjectsListFragment extends KickMaterialFragment implements Projec
     }
 
     private void loadCurrentPage() {
-        loading = true;
         final DiscoverQuery query = DiscoverQuery.getDiscoverQuery(category, page);
         discoverField.postValue(query);
 //        loginManager.logIn(EmailAndPass.create("g774092@trbvm.com", "g774092@trbvm.com"));
@@ -276,6 +276,16 @@ public class ProjectsListFragment extends KickMaterialFragment implements Projec
         ProjectDetailsActivity.launch(getActivity(), project, views.asArray());
     }
 
+    private boolean isDiscoverFetchErrorCausedByLastPage(DiscoverProjectsFetchedErrorEvent event) {
+        if (event.getResponse() instanceof RetrofitError) {
+            Response response = ((RetrofitError) event.getResponse()).getResponse();
+            if (response != null && response.getStatus() == 404) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     @Subscribe
     public void onCategoriesFetched(CategoriesFetchedEvent event) {
         ViewUtils.showDebugToast(event.getResponse().toString());
@@ -283,16 +293,21 @@ public class ProjectsListFragment extends KickMaterialFragment implements Projec
 
     @Subscribe
     public void onDiscoverProjectsFail(DiscoverProjectsFetchedErrorEvent event) {
-        loading = false;
+        if (isDiscoverFetchErrorCausedByLastPage(event)) {
+            Integer failedPage = event.getArgValue().getPageFromQuery();
+            if (failedPage != null) {
+                page = failedPage - 1;
+                lastAvailablePage = page;
+            }
+        }
     }
 
     @Subscribe
     public void onDiscoverProjects(DiscoverProjectsFetchedEvent event) {
         // ignore search result.
-        loading = false;
         if (event.getArgValue().discoverType != DiscoverType.SEARCH) {
             if (event.getResponse().projects != null && event.getResponse().projects.size() > 0) {
-                hasMore = true;
+                lastAvailablePage = Integer.MAX_VALUE;
             }
 
             List<Project> projects = event.getResponse().projects;
@@ -331,8 +346,12 @@ public class ProjectsListFragment extends KickMaterialFragment implements Projec
         loadCurrentPage();
     }
 
+    private boolean hasMore() {
+        return page < lastAvailablePage;
+    }
+
     @Override
     public synchronized boolean hasMoreDataAndNotLoading() {
-        return (!loading && hasMore);
+        return (!(discoverField.getState() == FieldState.CURRENTLY_LOADING) && hasMore());
     }
 }
