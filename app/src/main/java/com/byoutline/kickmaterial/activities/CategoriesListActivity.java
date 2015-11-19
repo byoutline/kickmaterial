@@ -189,7 +189,7 @@ public class CategoriesListActivity extends KickMaterialBaseActivity implements 
     public void categoryClicked(Category category) {
         animateCategoryColor(category);
         // start loading data from API during animation
-        discoverField.postValue(DiscoverQuery.getDiscoverQuery(category, 0));
+        discoverField.postValue(DiscoverQuery.getDiscoverQuery(category, 1));
     }
 
 
