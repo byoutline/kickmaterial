@@ -2,11 +2,10 @@ package com.byoutline.kickmaterial.dagger;
 
 
 import com.byoutline.kickmaterial.managers.AccessTokenProvider;
-import com.byoutline.secretsauce.BaseApp;
+import com.byoutline.secretsauce.di.SessionId;
+
 import dagger.Module;
 import dagger.Provides;
-
-import javax.inject.Named;
 
 
 @Module
@@ -19,7 +18,7 @@ public class AppModule {
     }
 
     @Provides
-    @Named(BaseApp.INJECT_NAME_SESSION_ID)
+    @SessionId
     String providesSessionId() {
         return accessTokenProvider.get();
     }

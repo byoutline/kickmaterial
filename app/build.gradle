@@ -99,7 +99,7 @@ dependencies {
     compile "com.android.support:support-annotations:$support_version"
     compile "com.android.support:palette-v7:$support_version"
     compile 'com.jakewharton:butterknife:7.0.1'
-    compile 'com.byoutline.secretsauce:secretsauce:0.4.8'
+    compile 'com.byoutline.secretsauce:secretsauce:0.4.9-SNAPSHOT'
     compile 'com.byoutline.ottocachedfield:ottocachedfield:1.6.0-beta3'
     compile 'com.byoutline.androidstubserver:stubserver:2.0.0-SNAPSHOT'
     compile 'com.byoutline.mockserver:mockserver:2.0.0-SNAPSHOT'
