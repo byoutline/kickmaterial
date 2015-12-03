@@ -1,6 +1,12 @@
 compileJava {
     sourceCompatibility = 1.7
     targetCompatibility = 1.7
-    def jdkHome = System.getenv()['JAVA7_HOME']
-    options.bootClasspath = (new File(jdkHome, "/jre/lib/rt.jar")).canonicalPath
+
+    def jdk7Home = System.getenv()['JAVA&_HOME']
+    if (jdk7Home == null) {
+        logger.warn("JAVA7_HOME enviromental variable not found. " +
+                'Please set it so compatibility can be checked')
+    }
+    options.bootClasspath = (new File(jdk7Home, "/jre/lib/rt.jar")).canonicalPath
 }
+
