@@ -240,7 +240,6 @@ public class ProjectDetailsActivity extends KickMaterialBaseActivity implements 
         setTitle(" ");
         bus.register(this);
         toolbar.setBackgroundColor(Color.TRANSPARENT);
-        LUtils.colorizeToolbar(toolbar, Color.WHITE, this);
 
         postProjectDetails();
     }

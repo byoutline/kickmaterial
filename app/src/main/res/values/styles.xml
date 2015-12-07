@@ -205,4 +205,10 @@
     </style>
 
     <color name="black_33">#55000000</color>
+
+    <style name="ActionBarThemeOverlay" parent="">
+        <item name="android:textColorPrimary">#fff</item>
+        <item name="colorControlNormal">#fff</item>
+        <item name="colorControlHighlight">#3fff</item>
+    </style>
 </resources>
