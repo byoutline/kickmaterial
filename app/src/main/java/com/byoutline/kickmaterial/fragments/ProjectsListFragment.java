@@ -31,14 +31,13 @@ import com.byoutline.kickmaterial.managers.LoginManager;
 import com.byoutline.kickmaterial.model.*;
 import com.byoutline.kickmaterial.utils.LUtils;
 import com.byoutline.kickmaterial.views.EndlessRecyclerView;
+import com.byoutline.observablecachedfield.RetrofitHelper;
 import com.byoutline.ottoeventcallback.PostFromAnyThreadBus;
 import com.byoutline.secretsauce.utils.ViewUtils;
 import com.software.shell.fab.ActionButton;
 import com.squareup.otto.Bus;
 import com.squareup.otto.Subscribe;
 import org.parceler.Parcels;
-import retrofit.RetrofitError;
-import retrofit.client.Response;
 import timber.log.Timber;
 
 import javax.annotation.Nullable;
@@ -277,9 +276,10 @@ public class ProjectsListFragment extends KickMaterialFragment implements Projec
     }
 
     private boolean isDiscoverFetchErrorCausedByLastPage(DiscoverProjectsFetchedErrorEvent event) {
-        if (event.getResponse() instanceof RetrofitError) {
-            Response response = ((RetrofitError) event.getResponse()).getResponse();
-            if (response != null && response.getStatus() == 404) {
+        Exception exception = event.getResponse();
+        if (exception instanceof RetrofitHelper.ApiException) {
+            RetrofitHelper.ApiException ex = (RetrofitHelper.ApiException) exception;
+            if (ex.errorResponse != null && ex.errorResponse.code() == 404) {
                 return true;
             }
         }

@@ -12,6 +12,8 @@ import com.squareup.otto.Subscribe;
 
 import javax.inject.Inject;
 
+import static com.byoutline.observablecachedfield.RetrofitHelper.apiValueProv;
+
 /**
  * Created by Sebastian Kacprzak <sebastian.kacprzak at byoutline.com> on 31.03.15.
  */
@@ -24,7 +26,7 @@ public class LoginManager {
     public LoginManager(KickMaterialService service, AccessTokenProvider accessTokenProvider) {
         this.accessTokenProvider = accessTokenProvider;
         accessToken = new OttoCachedFieldWithArgBuilder<AccessToken, EmailAndPass>()
-                .withValueProvider(service::postGetAccessToken)
+                .withValueProvider(apiValueProv(service::postGetAccessToken))
                 .withSuccessEvent(new AccessTokenFetchedEvent())
                 .withResponseErrorEvent(new AccessTokenFetchingFailedEvent())
                 .withCustomSessionIdProvider(() -> "") // should be valid between sessions
