@@ -19,6 +19,7 @@ import com.byoutline.kickmaterial.R;
 import com.byoutline.kickmaterial.fragments.KickMaterialFragment;
 import com.byoutline.kickmaterial.utils.LUtils;
 import com.byoutline.secretsauce.activities.BaseAppCompatActivity;
+import com.byoutline.secretsauce.fragments.MenuOption;
 import com.byoutline.secretsauce.fragments.NavigationDrawerFragment;
 import com.byoutline.secretsauce.utils.ViewUtils;
 
@@ -214,5 +215,11 @@ public abstract class KickMaterialBaseActivity extends BaseAppCompatActivity imp
     @Override
     public void onPause() {
         super.onPause();
+    }
+
+    @Override
+    public Class<? extends android.support.v4.app.Fragment> onNavigationDrawerItemSelected(MenuOption menuOption) {
+        // Currently there is no drawer
+        return null;
     }
 }

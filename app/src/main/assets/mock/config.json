@@ -4,6 +4,7 @@
       "method": "GET",
       "path": {
         "base": "/v1/discover",
+        "queries matching method": "EXACT",
         "queries":
         {
           "client_id": ".*"
@@ -15,6 +16,7 @@
       "method": "GET",
       "path": {
         "base": "/v1/discover",
+        "queries matching method": "EXACT",
         "queries":
         {
           "client_id": ".*",
@@ -28,6 +30,7 @@
       "method": "GET",
       "path": {
         "base": "/v1/discover",
+        "queries matching method": "EXACT",
         "queries":
         {
           "sort": ".*",
@@ -43,6 +46,7 @@
       "method": "GET",
       "path": {
         "base": "/v1/discover",
+        "queries matching method": "EXACT",
         "queries":
         {
           "sort": ".*",
@@ -58,6 +62,7 @@
       "method": "GET",
       "path": {
         "base": "/v1/discover",
+        "queries matching method": "EXACT",
         "queries":
         {
           "sort": ".*",
@@ -73,6 +78,7 @@
       "method": "GET",
       "path": {
         "base": "/v1/discover",
+        "queries matching method": "EXACT",
         "queries":
         {
           "term": ".{1}",
@@ -88,6 +94,7 @@
       "method": "GET",
       "path": {
         "base": "/v1/discover",
+        "queries matching method": "EXACT",
         "queries":
         {
           "term": ".{2}",
@@ -103,6 +110,7 @@
       "method": "GET",
       "path": {
         "base": "/v1/discover",
+        "queries matching method": "EXACT",
         "queries":
         {
           "term": ".{3}",
@@ -118,6 +126,7 @@
       "method": "GET",
       "path": {
         "base": "/v1/discover",
+        "queries matching method": "EXACT",
         "queries":
         {
           "term": ".{4}",
@@ -133,6 +142,7 @@
       "method": "GET",
       "path": {
         "base": "/v1/discover",
+        "queries matching method": "EXACT",
         "queries":
         {
           "term": ".*",
@@ -148,11 +158,8 @@
       "method": "GET",
       "path": {
         "base": "/v1/projects/1",
-        "queries":
-        {
-          "signature": ".*abcd",
-          "client_id": ".*"
-        }
+        "queries matching method": "EXACT",
+        "queries file": "project_queries.json"
       },
       "response file": "1smart_thermos.json"
     },
@@ -160,11 +167,8 @@
       "method": "GET",
       "path": {
         "base": "/v1/projects/2",
-        "queries":
-        {
-          "signature": ".*abcd",
-          "client_id": ".*"
-        }
+        "queries matching method": "EXACT",
+        "queries file": "project_queries.json"
       },
       "response file": "2windows_wizard.json"
     },
@@ -172,11 +176,8 @@
       "method": "GET",
       "path": {
         "base": "/v1/projects/3",
-        "queries":
-        {
-          "signature": ".*abcd",
-          "client_id": ".*"
-        }
+        "queries matching method": "EXACT",
+        "queries file": "project_queries.json"
       },
       "response file": "3weather.json"
     },
@@ -184,11 +185,8 @@
       "method": "GET",
       "path": {
         "base": "/v1/projects/4",
-        "queries":
-        {
-          "signature": ".*abcd",
-          "client_id": ".*"
-        }
+        "queries matching method": "EXACT",
+        "queries file": "project_queries.json"
       },
       "response file": "4shopping_list.json"
     },
@@ -196,11 +194,8 @@
       "method": "GET",
       "path": {
         "base": "/v1/projects/5",
-        "queries":
-        {
-          "signature": ".*abcd",
-          "client_id": ".*"
-        }
+        "queries matching method": "EXACT",
+        "queries file": "project_queries.json"
       },
       "response file": "5bicycle_GPS.json"
     },
@@ -208,11 +203,8 @@
       "method": "GET",
       "path": {
         "base": "/v1/projects/6",
-        "queries":
-        {
-          "signature": ".*abcd",
-          "client_id": ".*"
-        }
+        "queries matching method": "EXACT",
+        "queries file": "project_queries.json"
       },
       "response file": "6artist.json"
     },
@@ -220,11 +212,8 @@
       "method": "GET",
       "path": {
         "base": "/v1/projects/7",
-        "queries":
-        {
-          "signature": ".*abcd",
-          "client_id": ".*"
-        }
+        "queries matching method": "EXACT",
+        "queries file": "project_queries.json"
       },
       "response file": "7without_a_ticket.json"
     },
@@ -232,11 +221,8 @@
       "method": "GET",
       "path": {
         "base": "/v1/projects/8",
-        "queries":
-        {
-          "signature": ".*abcd",
-          "client_id": ".*"
-        }
+        "queries matching method": "EXACT",
+        "queries file": "project_queries.json"
       },
       "response file": "8shoes.json"
     },
@@ -244,11 +230,8 @@
       "method": "GET",
       "path": {
         "base": "/v1/projects/9",
-        "queries":
-        {
-          "signature": ".*abcd",
-          "client_id": ".*"
-        }
+        "queries matching method": "EXACT",
+        "queries file": "project_queries.json"
       },
       "response file": "9strong_hand.json"
     },
@@ -256,11 +239,8 @@
       "method": "GET",
       "path": {
         "base": "/v1/projects/10",
-        "queries":
-        {
-          "signature": ".*abcd",
-          "client_id": ".*"
-        }
+        "queries matching method": "EXACT",
+        "queries file": "project_queries.json"
       },
       "response file": "10kiss_beauty.json"
     },
@@ -268,11 +248,8 @@
       "method": "GET",
       "path": {
         "base": "/v1/projects/12",
-        "queries":
-        {
-          "signature": ".*abcd",
-          "client_id": ".*"
-        }
+        "queries matching method": "EXACT",
+        "queries file": "project_queries.json"
       },
       "response file": "12bat_stop.json"
     },
@@ -280,11 +257,8 @@
       "method": "GET",
       "path": {
         "base": "/v1/projects/13",
-        "queries":
-        {
-          "signature": ".*abcd",
-          "client_id": ".*"
-        }
+        "queries matching method": "EXACT",
+        "queries file": "project_queries.json"
       },
       "response file": "13hat.json"
     }

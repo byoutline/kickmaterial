@@ -1,6 +1,6 @@
 package com.byoutline.kickmaterial.managers;
 
-import com.byoutline.kickmaterial.dagger.GlobalScope;
+import com.byoutline.kickmaterial.dagger.AppScope;
 
 import javax.annotation.Nonnull;
 import javax.inject.Inject;
@@ -9,7 +9,7 @@ import javax.inject.Provider;
 /**
  * Created by Sebastian Kacprzak <sebastian.kacprzak at byoutline.com> on 31.03.15.
  */
-@GlobalScope
+@AppScope
 public class AccessTokenProvider implements Provider<String> {
 
     @Nonnull

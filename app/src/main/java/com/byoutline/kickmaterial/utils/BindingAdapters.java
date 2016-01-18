@@ -23,7 +23,7 @@ import me.tatarka.bindingcollectionadapter.factories.BindingRecyclerViewAdapterF
  */
 public class BindingAdapters {
 
-    @BindingAdapter({"bind:imageUrl", "bind:error"})
+    @BindingAdapter({"imageUrl", "error"})
     public static void loadImage(ImageView view, String imageUrl, Drawable error) {
         Picasso.with(view.getContext())
                 .load(imageUrl)
@@ -31,14 +31,14 @@ public class BindingAdapters {
                 .into(view);
     }
 
-    @BindingAdapter({"bind:imageUrl"})
+    @BindingAdapter({"imageUrl"})
     public static void loadImage(ImageView view, String imageUrl) {
         Picasso.with(view.getContext())
                 .load(imageUrl)
                 .into(view);
     }
 
-    @BindingAdapter({"bind:colorFilterRes"})
+    @BindingAdapter({"colorFilterRes"})
     public static void setColorFilter(ImageView view, @ColorRes int colorResId) {
         int color = ContextCompat.getColor(view.getContext(), colorResId);
         view.setColorFilter(color);
@@ -52,7 +52,7 @@ public class BindingAdapters {
      * @param categoryClickListener listener to be informed about clicks
      * @param category              value passed to click listener
      */
-    @BindingAdapter({"bind:onClick", "bind:category"})
+    @BindingAdapter({"onClick", "category"})
     public static void bindOnCategoryClicked(View view, final CategoryClickListener categoryClickListener,
                                              final Category category) {
         view.setOnClickListener(v -> categoryClickListener.categoryClicked(v, category));

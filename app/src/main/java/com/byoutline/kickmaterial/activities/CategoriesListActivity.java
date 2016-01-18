@@ -12,7 +12,6 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.SharedElementCallback;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.animation.FastOutSlowInInterpolator;
@@ -34,7 +33,6 @@ import com.byoutline.kickmaterial.model.DiscoverResponse;
 import com.byoutline.kickmaterial.utils.AnimatorUtils;
 import com.byoutline.kickmaterial.utils.LUtils;
 import com.byoutline.kickmaterial.views.CategoriesListSeparator;
-import com.byoutline.secretsauce.fragments.MenuOption;
 import com.byoutline.secretsauce.utils.ViewUtils;
 import org.parceler.Parcels;
 import timber.log.Timber;
@@ -191,7 +189,7 @@ public class CategoriesListActivity extends KickMaterialBaseActivity implements 
     public void categoryClicked(Category category) {
         animateCategoryColor(category);
         // start loading data from API during animation
-        discoverField.postValue(DiscoverQuery.getDiscoverQuery(category, 0));
+        discoverField.postValue(DiscoverQuery.getDiscoverQuery(category, 1));
     }
 
 
@@ -309,11 +307,5 @@ public class CategoriesListActivity extends KickMaterialBaseActivity implements 
 
     @Override
     public void setToolbarAlpha(float alpha) {
-    }
-
-    @Override
-    public Class<? extends Fragment> onNavigationDrawerItemSelected(MenuOption menuOption) {
-        // TODO: decide if drawer should be reachable from this activity.
-        return null;
     }
 }

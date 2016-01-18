@@ -13,8 +13,9 @@ env:
 
 android:
   components:
+    - tools
     - android-23
-    - build-tools-23.0.1
+    - build-tools-23.0.2
     - extra-android-m2repository
 
 script: ./gradlew check jacocoTestReport coveralls

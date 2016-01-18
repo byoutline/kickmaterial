@@ -3,9 +3,13 @@ package com.byoutline.kickmaterial.api;
 import android.text.TextUtils;
 import com.byoutline.kickmaterial.dagger.GlobalScope;
 import com.byoutline.kickmaterial.managers.AccessTokenProvider;
-import retrofit.RequestInterceptor;
+import okhttp3.HttpUrl;
+import okhttp3.Interceptor;
+import okhttp3.Request;
+import okhttp3.Response;
 
 import javax.inject.Inject;
+import java.io.IOException;
 import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +19,7 @@ import java.util.Map;
  * @author Sebastian Kacprzak <sebastian.kacprzak at byoutline.com> on 05.05.14.
  */
 @GlobalScope
-public class KickMaterialRequestInterceptor implements RequestInterceptor {
+public class KickMaterialRequestInterceptor implements Interceptor {
 
     private final AccessTokenProvider accessTokenProvider;
 
@@ -25,17 +29,22 @@ public class KickMaterialRequestInterceptor implements RequestInterceptor {
     }
 
     @Override
-    public void intercept(RequestFacade request) {
-        addBasicHeaders(request);
+    public Response intercept(Chain chain) throws IOException {
+        Request original = chain.request();
+        HttpUrl.Builder urlBuilder = original.url().newBuilder();
+        addBasicHeaders(urlBuilder);
         String accessToken = accessTokenProvider.get();
         if (!TextUtils.isEmpty(accessToken)) {
-            request.addQueryParam("oauth_token", accessToken);
+            urlBuilder.addQueryParameter("oauth_token", accessToken);
         }
+        HttpUrl newUrl = urlBuilder.build();
+        Request newRequest = original.newBuilder().url(newUrl).build();
+        return chain.proceed(newRequest);
     }
 
-    private static void addBasicHeaders(RequestFacade request) {
+    private static void addBasicHeaders(HttpUrl.Builder builder) {
         for (Map.Entry<String, String> query : getBasicQueries()) {
-            request.addQueryParam(query.getKey(), query.getValue());
+            builder.addQueryParameter(query.getKey(), query.getValue());
         }
     }
 

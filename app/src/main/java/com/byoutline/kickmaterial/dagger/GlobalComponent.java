@@ -6,7 +6,6 @@ import com.byoutline.kickmaterial.activities.ProjectDetailsActivity;
 import com.byoutline.kickmaterial.activities.RewardsListActivity;
 import com.byoutline.kickmaterial.fragments.ProjectsListFragment;
 import com.byoutline.kickmaterial.fragments.SearchListFragment;
-import com.byoutline.kickmaterial.managers.AccessTokenProvider;
 import com.squareup.otto.Bus;
 import dagger.Component;
 
@@ -29,6 +28,4 @@ public interface GlobalComponent {
     Bus getBus();
 
     KickMaterialApp getApp();
-
-    AccessTokenProvider getAccessTokenProvider();
 }

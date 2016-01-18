@@ -1,6 +1,5 @@
 apply plugin: 'java'
 apply plugin: 'propdeps'
-//apply plugin: 'com.android.databinding'
 
 compileJava {
     sourceCompatibility = 1.7
@@ -44,7 +43,6 @@ dependencies {
     provided 'com.google.auto.value:auto-value:1.1'
 
     provided 'com.google.code.findbugs:findbugs:3.0.0'
-    provided 'com.android.databinding:baseLibrary:1.0-rc2'
     compile 'com.byoutline.cachedfield:cachedfield:1.5.0'
 }
 
