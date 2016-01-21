@@ -5,5 +5,6 @@
         <ignore regexp="android.databinding.annotationprocessor.ProcessExpressions.*"/>
         <ignore regexp="android.databinding.tool.util.GenerationalClassUtil.*"/>
         <ignore regexp="okio.Okio.*"/>
+        <ignore regexp="retrofit2.Platform.Java8.*"/>
     </issue>
 </lint>
