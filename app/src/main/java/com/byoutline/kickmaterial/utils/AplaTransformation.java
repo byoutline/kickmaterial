@@ -17,7 +17,7 @@ public class AplaTransformation implements Transformation {
 
         Canvas canvas = new Canvas(bitmap);
         int colors[] = {Color.parseColor("#05000000"), Color.parseColor("#22000000"), Color.parseColor("#95000000")};
-        LinearGradient gradient = new LinearGradient(0, 0, width, height, colors, null, Shader.TileMode.CLAMP);
+        LinearGradient gradient = new LinearGradient(0, 0, 0, height, colors, null, Shader.TileMode.CLAMP);
         Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
         paint.setShader(new ComposeShader(new BitmapShader(source, Shader.TileMode.CLAMP,
                 Shader.TileMode.CLAMP), gradient, PorterDuff.Mode.SRC_OVER));
