@@ -1,13 +1,12 @@
 machine:
   java:
-    version: openjdk7
     version: oraclejdk8
   environment:
     GRADLE_OPTS: "-Xmx2g"
     _JAVA_OPTIONS: "-Xms256m -Xmx1536m"
     CIRCLE_JDK_VERSION: oraclejdk8
     JAVA7_HOME: "/usr/lib/jvm/java-7-openjdk-amd64"
-    JAVA8_HOME: "/usr/lib/jvm/java-8-oracle"
+    JAVA8_HOME: "/usr/lib/jvm/jdk1.8.0"
     TERM: "dumb"
     ADB_INSTALL_TIMEOUT: "10"
   post:
@@ -24,9 +23,6 @@ dependencies:
 
 test:
   override:
-    ls /usr/lib/jvm
-    ls /usr/lib/jvm/java-7-openjdk-amd64
-    ls /usr/lib/jvm/java-8-oracle
     # Test building of all debug flavours and run unit tests.
     - ./gradlew assembleDebug check -PdisablePreDex
 
