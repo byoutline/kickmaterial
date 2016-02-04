@@ -24,6 +24,9 @@ dependencies:
 
 test:
   override:
+    ls /usr/lib/jvm
+    ls /usr/lib/jvm/java-7-openjdk-amd64
+    ls /usr/lib/jvm/java-8-oracle
     # Test building of all debug flavours and run unit tests.
     - ./gradlew assembleDebug check -PdisablePreDex
 
