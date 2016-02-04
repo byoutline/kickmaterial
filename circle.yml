@@ -1,11 +1,11 @@
 machine:
   java:
+    version: openjdk7
     version: oraclejdk8
   environment:
     GRADLE_OPTS: "-Xmx2g"
     _JAVA_OPTIONS: "-Xms256m -Xmx1536m"
     CIRCLE_JDK_VERSION: oraclejdk8
-    JAVA6_HOME: "/usr/lib/jvm/java-6-openjdk-amd64"
     JAVA7_HOME: "/usr/lib/jvm/java-7-openjdk-amd64"
     JAVA8_HOME: "/usr/lib/jvm/java-8-oracle"
     TERM: "dumb"
