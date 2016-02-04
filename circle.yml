@@ -1,12 +1,13 @@
 machine:
   java:
-    # Use JDK 8 because it has perm inside of normal heap, making setting memory limits easier.
-    # Oracle version, since OpenJdk is currently not avalabile in version 8 on CircleCi.
     version: oraclejdk8
   environment:
     GRADLE_OPTS: "-Xmx2g"
     _JAVA_OPTIONS: "-Xms256m -Xmx1536m"
     CIRCLE_JDK_VERSION: oraclejdk8
+    JAVA6_HOME: "/usr/lib/jvm/java-6-openjdk-amd64"
+    JAVA7_HOME: "/usr/lib/jvm/java-7-openjdk-amd64"
+    JAVA8_HOME: "/usr/lib/jvm/java-8-oracle"
     TERM: "dumb"
     ADB_INSTALL_TIMEOUT: "10"
   post:
@@ -16,8 +17,7 @@ machine:
 
 dependencies:
   pre:
-    - echo y | android update sdk --no-ui --all --filter tool,extra-android-m2repository,extra-android-support,android-23
-    - echo y | android update sdk --no-ui --all --filter build-tools-23.0.2
+    - echo y | android update sdk --no-ui --all --filter tools,android-23,platform-tools,build-tools-23.0.2,extra-android-m2repository,extra-android-support
   override:
     - ./gradlew dependencies
 
