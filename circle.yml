@@ -25,7 +25,7 @@ test:
   override:
     # Test building of all debug flavours and run unit tests.
     - ./gradlew assembleDebug check -PdisablePreDex
-
+  post:
     # copy the build outputs to artifacts
     - cp -r app/build/outputs $CIRCLE_ARTIFACTS
     # copy the test results to the test results directory.
