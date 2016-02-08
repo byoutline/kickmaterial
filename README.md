@@ -14,7 +14,7 @@ Designed and implemented by [Outline](http://byoutline.com).
 
 ## Used libs and technologies
 * [Material design](https://design.google.com/) - with custom activity transitions, FAB, pallete, etc
-* [Android data bindign](https://developer.android.com/tools/data-binding/guide.html)
+* [Android data binding](https://developer.android.com/tools/data-binding/guide.html)
 * [Dagger 2](https://google.github.io/dagger/) - with multiple modules
 * [OttoCachedField](https://github.com/byoutline/OttoCachedField)
 * [Retrofit](https://square.github.io/retrofit/)
