@@ -1,0 +1,32 @@
+machine:
+  java:
+    version: oraclejdk8
+  environment:
+    GRADLE_OPTS: "-Xmx2g"
+    _JAVA_OPTIONS: "-Xms256m -Xmx1536m"
+    CIRCLE_JDK_VERSION: oraclejdk8
+    JAVA7_HOME: "/usr/lib/jvm/java-7-openjdk-amd64"
+    JAVA8_HOME: "/usr/lib/jvm/jdk1.8.0"
+    TERM: "dumb"
+    ADB_INSTALL_TIMEOUT: "10"
+  post:
+    # Turn off unneded services to free memory.
+    - for service in {"apache2","beanstalkd","cassandra","couchbase-server","couchdb","docker","elasticsearch","memcached","mongodb","mysql","neo4j-service","postgresql","puppet","redis-server","riak","solr","sphinxsearch","zookeeper"}; do sudo service $service stop; done
+
+
+dependencies:
+  pre:
+    - echo y | android update sdk --no-ui --all --filter tools,android-23,platform-tools,extra-android-m2repository,extra-android-support
+    - echo y | android update sdk --no-ui --all --filter build-tools-23.0.2
+  override:
+    - ./gradlew dependencies
+
+test:
+  override:
+    # Test building of all debug flavours and run unit tests.
+    - ./gradlew assembleDebug check -PdisablePreDex
+  post:
+    # copy the build outputs to artifacts
+    - cp -r app/build/outputs $CIRCLE_ARTIFACTS
+    # copy the test results to the test results directory.
+    - cp -r app/build/reports $CIRCLE_TEST_REPORTS

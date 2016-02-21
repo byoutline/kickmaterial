@@ -1,15 +1,16 @@
 apply plugin: RetrolambdaDeps
 
 retrolambda {
-    def jdkHome = 'JAVA7_HOME'
-    def oldJdkHome = 'JAVA8_HOME'
+    def jdkHome = 'JAVA8_HOME'
+    def oldJdkHome = 'JAVA7_HOME'
     if (System.getenv(jdkHome) == null || System.getenv(oldJdkHome) == null) {
         logger.warn("$jdkHome or $oldJdkHome enviromental variable not found. " +
                 'Please set them. Retrolambda may fail without them.')
+    } else {
+        jdk System.getenv(jdkHome)
+        oldJdk System.getenv(oldJdkHome)
+        javaVersion JavaVersion.VERSION_1_7
     }
-    jdk System.getenv("JAVA8_HOME")
-    oldJdk System.getenv("JAVA7_HOME")
-    javaVersion JavaVersion.VERSION_1_7
 }
 
 public final class RetrolambdaDeps implements Plugin<Project>{
@@ -23,7 +24,7 @@ public final class RetrolambdaDeps implements Plugin<Project>{
     private void addDependencies(Project project) {
         project.afterEvaluate {
             def pd = project.dependencies
-            pd.add('retrolambdaConfig', 'net.orfjackal.retrolambda:retrolambda:2.0.6')
+            pd.add('retrolambdaConfig', 'net.orfjackal.retrolambda:retrolambda:2.1.0')
         }
     }
 

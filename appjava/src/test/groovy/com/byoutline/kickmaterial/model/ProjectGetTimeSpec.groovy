@@ -2,13 +2,14 @@ package com.byoutline.kickmaterial.model
 
 import org.joda.time.DateTime
 import spock.lang.Shared
+import spock.lang.Specification
 import spock.lang.Unroll
 
 /**
  *
  * @author Sebastian Kacprzak <sebastian.kacprzak at byoutline.com>.
  */
-class ProjectGetTimeSpec extends spock.lang.Specification {
+class ProjectGetTimeSpec extends Specification {
 
     @Shared
     DateTime now = DateTime.now();
