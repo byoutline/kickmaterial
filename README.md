@@ -1,6 +1,7 @@
 # KickMaterial
  master:  [![Build Status](https://travis-ci.org/byoutline/kickmaterial.svg?branch=master)](https://travis-ci.org/byoutline/kickmaterial)
  develop: [![Build Status](https://travis-ci.org/byoutline/kickmaterial.svg?branch=develop)](https://travis-ci.org/byoutline/kickmaterial)
+ [![Android Weekly](https://img.shields.io/badge/Android%20Weekly-%23193-brightgreen.svg)](http://androidweekly.net/issues/issue-193)
 
 Crowdfunding app concept for Android. Created to showcase new trends in Android development with strong focus on Material Design.
 For newest versions of libs check the *develop* branch.
