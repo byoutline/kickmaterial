@@ -28,7 +28,11 @@ Application shows data from Mocked API. This is a simple HTTP server started wit
 All data are being served by AndroidStubServer library based on configuration files placed in assets/mock/ directory. If you want to see configuration of API go to config.json file.
 
 ## Project setup
-To build please set JAVA7_HOME and JAVA8_HOME enviroment variables
+This project uses [Retrolambda](https://github.com/orfjackal/retrolambda).
+If your build fails on `compileRetrolambdaDebug` or `compileDebugJavaWithJavac`
+please ensure that you have Java 7 and Java 8 installed in your system. To be
+sure that they are found you may want to set set JAVA7_HOME and JAVA8_HOME
+environment variables
 for example on linux you can add those lines `/etc/enviroment/`:
 ```
 JAVA7_HOME=/usr/lib/jvm/java-7-openjdk-amd64
