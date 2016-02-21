@@ -33,8 +33,9 @@ This project uses [Retrolambda](https://github.com/orfjackal/retrolambda).
 If your build fails on `compileRetrolambdaDebug` or `compileDebugJavaWithJavac`
 please ensure that you have Java 7 and Java 8 installed in your system. To be
 sure that they are found you may want to set set JAVA7_HOME and JAVA8_HOME
-environment variables
-for example on linux you can add those lines `/etc/enviroment/`:
+environment variables.
+
+For example on linux you can add those lines `/etc/enviroment/`:
 ```
 JAVA7_HOME=/usr/lib/jvm/java-7-openjdk-amd64
 JAVA8_HOME=/usr/lib/jvm/java-8-openjdk-amd64
