@@ -31,7 +31,7 @@ All data are being served by AndroidStubServer library based on configuration fi
 ## Project setup
 This project uses [Retrolambda](https://github.com/orfjackal/retrolambda).
 If your build fails on `compileRetrolambdaDebug` or `compileDebugJavaWithJavac`
-please ensure that you have Java 7 and Java 8 installed in your system. To be
+please ensure that you have both Java 7 and Java 8 installed in your system. To be
 sure that they are found you may want to set set JAVA7_HOME and JAVA8_HOME
 environment variables.
 
