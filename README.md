@@ -52,8 +52,8 @@ We were able to implement most of screens and animations. Here are some examples
 ![Search](screenshots/5_small.png)
 ![Categories](screenshots/2_small.png)
 
-![Project Animation](screenshots/project_anim.gif)
-![Categories Animation](screenshots/categories_anim.gif)
+<img src="screenshots/project_anim.gif" width="680">
+<img src="screenshots/categories_anim.gif" width="680">
 
 
 ## Images Licence
