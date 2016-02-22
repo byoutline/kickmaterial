@@ -52,6 +52,9 @@ We were able to implement most of screens and animations. Here are some examples
 ![Search](screenshots/5_small.png)
 ![Categories](screenshots/2_small.png)
 
+![Project Animation](screenshots/project_anim.gif)
+![Categories Animation](screenshots/categories_anim.gif)
+
 
 ## Images Licence
 All images used in this app as demo content are licensed as Creative Commons with attribution shown in app and config files for every author.
