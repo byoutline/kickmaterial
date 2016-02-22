@@ -1,14 +1,6 @@
 apply plugin: 'java'
 apply plugin: 'propdeps'
 
-compileJava {
-    sourceCompatibility = 1.7
-    targetCompatibility = 1.7
-    def jdkHome = System.getenv()['JAVA7_HOME']
-    options.bootClasspath = (new File(jdkHome, "/jre/lib/rt.jar")).canonicalPath
-}
-
-
 buildscript {
     repositories {
         jcenter()

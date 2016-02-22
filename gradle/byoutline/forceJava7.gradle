@@ -6,7 +6,8 @@ compileJava {
     if (jdk7Home == null) {
         logger.warn("JAVA7_HOME enviromental variable not found. " +
                 'Please set it so compatibility can be checked')
+    } else {
+        options.bootClasspath = (new File(jdk7Home, "/jre/lib/rt.jar")).canonicalPath
     }
-    options.bootClasspath = (new File(jdk7Home, "/jre/lib/rt.jar")).canonicalPath
 }
 
