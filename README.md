@@ -1,6 +1,7 @@
 # KickMaterial
  master:  [![Build Status](https://travis-ci.org/byoutline/kickmaterial.svg?branch=master)](https://travis-ci.org/byoutline/kickmaterial)
  develop: [![Build Status](https://travis-ci.org/byoutline/kickmaterial.svg?branch=develop)](https://travis-ci.org/byoutline/kickmaterial)
+ [![Android Weekly](https://img.shields.io/badge/Android%20Weekly-%23193-brightgreen.svg)](http://androidweekly.net/issues/issue-193)
 
 Crowdfunding app concept for Android. Created to showcase new trends in Android development with strong focus on Material Design.
 For newest versions of libs check the *develop* branch.
@@ -28,8 +29,13 @@ Application shows data from Mocked API. This is a simple HTTP server started wit
 All data are being served by AndroidStubServer library based on configuration files placed in assets/mock/ directory. If you want to see configuration of API go to config.json file.
 
 ## Project setup
-To build please set JAVA7_HOME and JAVA8_HOME enviroment variables
-for example on linux you can add those lines `/etc/enviroment/`:
+This project uses [Retrolambda](https://github.com/orfjackal/retrolambda).
+If your build fails on `compileRetrolambdaDebug` or `compileDebugJavaWithJavac`
+please ensure that you have both Java 7 and Java 8 installed in your system. To be
+sure that they are found you may want to set set JAVA7_HOME and JAVA8_HOME
+environment variables.
+
+For example on linux you can add those lines `/etc/enviroment/`:
 ```
 JAVA7_HOME=/usr/lib/jvm/java-7-openjdk-amd64
 JAVA8_HOME=/usr/lib/jvm/java-8-openjdk-amd64
