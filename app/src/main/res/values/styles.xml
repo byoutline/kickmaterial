@@ -12,6 +12,8 @@
         <item name="colorControlNormal">@color/ab_text_color</item>
         <item name="colorControlActivated">@color/green_primary</item>
         <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
+        <item name="android:actionMenuTextColor">#999999</item>
+        <item name="actionMenuTextColor">#999999</item>
         <item name="android:windowBackground">@color/main_bg</item>
     </style>
 
