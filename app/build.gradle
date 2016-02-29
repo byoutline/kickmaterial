@@ -6,7 +6,7 @@ apply plugin: 'jacoco'
 apply plugin: 'com.neenbedankt.android-apt'
 
 buildscript {
-    ext.support_version = '23.0.1'
+    ext.support_version = '23.1.1'
     ext.dagger_version = '2.0.1'
 
     repositories {
