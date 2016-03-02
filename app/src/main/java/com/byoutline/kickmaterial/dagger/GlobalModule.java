@@ -47,7 +47,11 @@ public class GlobalModule {
         this.bus = bus;
         this.accessTokenProvider = accessTokenProvider;
         picassoCache = new LruCacheWithPlaceholders(app);
-        Picasso.setSingletonInstance(new Picasso.Builder(app).memoryCache(picassoCache).build());
+        try {
+            Picasso.setSingletonInstance(new Picasso.Builder(app).memoryCache(picassoCache).build());
+        } catch (IllegalStateException ex) {
+            // singleton was already set
+        }
     }
 
     @GlobalScope
