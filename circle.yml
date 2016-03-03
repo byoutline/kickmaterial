@@ -25,6 +25,10 @@ test:
   override:
     # Test building of all debug flavours and run unit tests.
     - ./gradlew assembleDebug check -PdisablePreDex
+    # Run instrumented tests.
+    - gradle/connectedCheck.sh:
+        parallel: true
+        timeout: 1800
   post:
     # copy the build outputs to artifacts
     - cp -r app/build/outputs $CIRCLE_ARTIFACTS
