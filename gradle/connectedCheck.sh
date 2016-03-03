@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 echo "starting emulator"
 mksdcard -l e 512M sdcard.img
-emulator -avd circleci-android22 -no-audio -no-window -sdcard sdcard.img
+emulator -avd circleci-android22 -no-audio -no-window -sdcard sdcard.img &
 # Ensure that emulator booted
 circle-android wait-for-boot
 # sleep 30
