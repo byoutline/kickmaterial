@@ -41,6 +41,18 @@ JAVA7_HOME=/usr/lib/jvm/java-7-openjdk-amd64
 JAVA8_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 ```
 
+## Alternative Project setup for OSX
+If setting environment variables `JAVA7_HOME` and `JAVA8_HOME` didn't work for you, try this alternative method:
+
+1. Create `gradle.properties` file.
+2. Add this two lines:
+```
+JAVA7_HOME=/Library/Java/JavaVirtualMachines/jdk[YOURJAVA7VERSION].jdk/Contents/Home
+JAVA8_HOME=/Library/Java/JavaVirtualMachines/jdk[YOURJAVA8VERSION].jdk/Contents/Home
+```
+
+If you don't know where your jdk is installed, run `/usr/libexec/java_home` in the terminal. For specific version, you can add `-v 1.x`.
+
 ## Eye candy
 
 This app with was based on design concept by Grzegorz Oksiuta. Check this YouTube showcase:
