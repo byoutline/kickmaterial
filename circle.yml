@@ -38,7 +38,7 @@ test:
     - adb shell input keyevent 82
     - adb logcat -d
     # Run instrumented tests.
-    - ./gradlew spoon -x lint --no-daemon -PdisablePreDex --stacktrace
+    - ./gradlew spoon -x lint --no-daemon -PdisablePreDex --stacktrace:
         parallel: true
         timeout: 1800
   post:
