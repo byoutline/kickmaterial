@@ -2,10 +2,14 @@ compileJava {
     sourceCompatibility = 1.7
     targetCompatibility = 1.7
 
-    def jdk7Home = JAVA7_HOME
+    def jdk7Home = System.getenv()['JAVA7_HOME']
     if (jdk7Home == null) {
-        logger.warn("JAVA7_HOME enviromental variable not found. " +
-                'Please set it so compatibility can be checked')
+        try {
+            options.bootClasspath = (new File(JAVA7_HOME, "/jre/lib/rt.jar")).canonicalPath
+        } catch (ex) {
+            throw new InvalidUserDataException(
+                "You should define JAVA7_HOME in gradle.properties.")
+        }
     } else {
         options.bootClasspath = (new File(jdk7Home, "/jre/lib/rt.jar")).canonicalPath
     }
