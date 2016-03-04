@@ -4,6 +4,10 @@ retrolambda {
     if (JAVA7_HOME == null || JAVA8_HOME == null) {
         logger.warn("JAVA7_HOME or JAVA8_HOME not found in gradle.properties file. " +
                 'Please set them. Retrolambda may fail without them.')
+    } else {
+        jdk System.getenv('JAVA7_HOME')
+        oldJdk System.getenv('JAVA8_HOME')
+        javaVersion JavaVersion.VERSION_1_7
     }
     jdk JAVA8_HOME
     oldJdk JAVA7_HOME

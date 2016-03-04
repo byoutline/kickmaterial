@@ -13,7 +13,7 @@
         android:paddingTop="@dimen/status_bar_height_half"
         android:title=""
         android:transitionName="toolbar"
-        app:theme="@style/ActionBarThemeOverlay"
+        app:theme="@style/AppTheme.Base"
         tools:ignore="UnusedAttribute">
 
         <com.byoutline.secretsauce.views.CustomFontTextView
