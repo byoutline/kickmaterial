@@ -2,7 +2,7 @@ compileJava {
     sourceCompatibility = 1.7
     targetCompatibility = 1.7
 
-    def jdk7Home = System.getenv()['JAVA7_HOME']
+    def jdk7Home = JAVA7_HOME
     if (jdk7Home == null) {
         logger.warn("JAVA7_HOME enviromental variable not found. " +
                 'Please set it so compatibility can be checked')

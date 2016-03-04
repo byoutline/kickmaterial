@@ -1,14 +1,12 @@
 apply plugin: RetrolambdaDeps
 
 retrolambda {
-    def jdkHome = 'JAVA7_HOME'
-    def oldJdkHome = 'JAVA8_HOME'
-    if (System.getenv(jdkHome) == null || System.getenv(oldJdkHome) == null) {
-        logger.warn("$jdkHome or $oldJdkHome enviromental variable not found. " +
+    if (JAVA7_HOME == null || JAVA8_HOME == null) {
+        logger.warn("JAVA7_HOME or JAVA8_HOME not found in gradle.properties file. " +
                 'Please set them. Retrolambda may fail without them.')
     }
-    jdk System.getenv("JAVA8_HOME")
-    oldJdk System.getenv("JAVA7_HOME")
+    jdk JAVA8_HOME
+    oldJdk JAVA7_HOME
     javaVersion JavaVersion.VERSION_1_7
 }
 
