@@ -1,17 +1,22 @@
 apply plugin: RetrolambdaDeps
 
 retrolambda {
-    if (JAVA7_HOME == null || JAVA8_HOME == null) {
-        logger.warn("JAVA7_HOME or JAVA8_HOME not found in gradle.properties file. " +
-                'Please set them. Retrolambda may fail without them.')
+    def jdkHome = 'JAVA8_HOME'
+    def oldJdkHome = 'JAVA7_HOME'
+    if (System.getenv(jdkHome) == null || System.getenv(oldJdkHome) == null) {
+        try {
+            jdk JAVA8_HOME
+            oldJdk JAVA7_HOME
+            javaVersion JavaVersion.VERSION_1_7
+        } catch (ex) {
+            throw new InvalidUserDataException(
+                "You should define JAVA8_HOME and JAVA7_HOME in gradle.properties.")
+        }
     } else {
-        jdk System.getenv('JAVA7_HOME')
-        oldJdk System.getenv('JAVA8_HOME')
+        jdk System.getenv(jdkHome)
+        oldJdk System.getenv(oldJdkHome)
         javaVersion JavaVersion.VERSION_1_7
     }
-    jdk JAVA8_HOME
-    oldJdk JAVA7_HOME
-    javaVersion JavaVersion.VERSION_1_7
 }
 
 public final class RetrolambdaDeps implements Plugin<Project>{
