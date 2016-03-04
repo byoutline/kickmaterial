@@ -25,7 +25,8 @@ dependencies:
 
 test:
   pre:
-    - mksdcard -l e 512M sdcard.img
+    - mksdcard -l e 512M sdcard.img:
+        parallel: true
     - emulator -avd circleci-android22 -no-audio -no-window  -no-boot-anim -sdcard sdcard.img:
         parallel: true
         background: true
@@ -34,12 +35,15 @@ test:
     - ./gradlew :app:assembleDebugAndroidTest check -PdisablePreDex:
         parallel: true
     # Ensure that emulator booted
-    - circle-android wait-for-boot
+    - circle-android wait-for-boot:
+        parallel: true
+        background: true
     - sleep 30
     # unlocking the emulator screen
     - adb shell input keyevent 82:
         parallel: true
-    - adb logcat -d
+    - adb logcat -d:
+        parallel: true
     # Run instrumented tests.
     - ./gradlew spoon -x lint --no-daemon -PdisablePreDex --stacktrace:
         parallel: true
@@ -49,5 +53,7 @@ test:
     - cp -r app/build/outputs $CIRCLE_ARTIFACTS
     # copy the test results to the test results directory.
     - cp -r app/build/reports $CIRCLE_TEST_REPORTS
-    - cp -r app/build/spoon/* $CIRCLE_TEST_REPORTS/ # instrumented tests
-    - adb logcat -d > $CIRCLE_ARTIFACTS/logcat_emulator.txt
+    - cp -r app/build/spoon/* $CIRCLE_TEST_REPORTS/:
+        parallel: true
+    - adb logcat -d > $CIRCLE_ARTIFACTS/logcat_emulator.txt:
+        parallel: true
