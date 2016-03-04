@@ -20,7 +20,6 @@ dependencies:
     - echo y | android update sdk --no-ui --all --filter build-tools-23.0.2
   cache_directories:
     - ~/.android
-    - ~/android
   override:
     - ./gradlew dependencies
 
@@ -31,13 +30,15 @@ test:
         parallel: true
         background: true
   override:
-    # Test building of all debug flavours and run unit tests.
-    - ./gradlew assembleDebug check -PdisablePreDex
+    # Build tests classess in the background and run unit tests(since they are very quick).
+    - ./gradlew :app:assembleDebugAndroidTest check -PdisablePreDex:
+        parallel: true
     # Ensure that emulator booted
     - circle-android wait-for-boot
     - sleep 30
     # unlocking the emulator screen
-    - adb shell input keyevent 82
+    - adb shell input keyevent 82:
+        parallel: true
     - adb logcat -d
     # Run instrumented tests.
     - ./gradlew spoon -x lint --no-daemon -PdisablePreDex --stacktrace:
