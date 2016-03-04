@@ -27,7 +27,9 @@ dependencies:
 test:
   pre:
     - mksdcard -l e 512M sdcard.img
-    - emulator -avd circleci-android22 -no-audio -no-window  -no-boot-anim -sdcard sdcard.img > /dev/null &
+    - emulator -avd circleci-android22 -no-audio -no-window  -no-boot-anim -sdcard sdcard.img:
+        parallel: true
+        background: true
   override:
     # Test building of all debug flavours and run unit tests.
     - ./gradlew assembleDebug check -PdisablePreDex
