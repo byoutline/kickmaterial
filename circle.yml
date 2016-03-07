@@ -24,8 +24,8 @@ dependencies:
     - ./gradlew dependencies
   post:
     - |
-       case $CIRCLE_NODE_INDEX in
-       0) echo n | android create avd -n testing22 -f -t android-22 ;;
+       case $CIRCLE_NODE_INDEX in \
+       0) echo n | android create avd -n testing22 -f -t android-22 ;; \
        1) echo n | android create avd -n testing18 -f -t android-18 ;; esac:
          parallel: true
 
@@ -34,8 +34,8 @@ test:
     - mksdcard -l e 512M sdcard.img:
         parallel: true
     - |
-       case $CIRCLE_NODE_INDEX in
-       0) emulator -avd testing22 -no-audio -no-window  -no-boot-anim -sdcard sdcard.img ;;
+       case $CIRCLE_NODE_INDEX in \
+       0) emulator -avd testing22 -no-audio -no-window  -no-boot-anim -sdcard sdcard.img ;; \
        1) emulator -avd testing18 -no-audio -no-window  -no-boot-anim -sdcard sdcard.img ;; esac:
          parallel: true
          background: true
