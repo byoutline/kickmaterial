@@ -23,7 +23,8 @@ dependencies:
   override:
     - ./gradlew dependencies
   post:
-    - echo n | android create avd -n testing18 -f -t android-18
+  - case $CIRCLE_NODE_INDEX in 0) echo "nothing to do" ;; 1) echo n | android create avd -n testing18 -f -t android-18 ;; esac:
+          parallel: true
 
 test:
   pre:
