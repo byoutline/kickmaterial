@@ -154,14 +154,6 @@ spoon {
     noAnimations = true
     adbTimeout = 60 * 10
     debug = true
-    def total = System.getenv('CIRCLE_NODE_TOTAL')
-    def idx = System.getenv('CIRCLE_NODE_INDEX')
-    println "Total number of containers: " + total
-    println "Current container: " + idx
-    if (total != null && idx != null) {
-        numShards = Integer.parseInt(total)
-        shardIndex = Integer.parseInt(idx)
-    }
 }
 
 //configurations.all {
