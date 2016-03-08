@@ -39,6 +39,7 @@ test:
     - circle-android wait-for-boot:
         parallel: true
         background: true
+    - sleep 30 # without it devices still are shown as offline
     # debug print
     - adb devices:
         parallel: true
