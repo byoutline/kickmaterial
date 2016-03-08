@@ -41,7 +41,6 @@ test:
     - circle-android wait-for-boot:
         parallel: true
         background: true
-    - sleep 30
     # unlocking the emulator screen
     - adb shell input keyevent 82:
         parallel: true

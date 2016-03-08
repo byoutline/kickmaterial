@@ -5,6 +5,7 @@
     package="com.byoutline.kickmaterial">
 
 
+    <uses-permission android:name="android.permission.DISABLE_KEYGUARD"/>
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
