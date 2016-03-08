@@ -23,24 +23,25 @@ dependencies:
   override:
     - ./gradlew dependencies
   post:
-    - case $CIRCLE_NODE_INDEX in 0) echo n | android create avd -n testing22 -f -t android-22 ;; 1) echo n | android create avd -n testing18 -f -t android-18 ;; esac:
+    - case $CIRCLE_NODE_INDEX in 0) echo n | echo "circleci-android22 will be used" ;; 1) echo n | android create avd -n testing18 -f -t android-18 ;; esac:
          parallel: true
 
 test:
   pre:
-    - mksdcard -l e 512M sdcard.img:
-        parallel: true
-    - case $CIRCLE_NODE_INDEX in 0) emulator -avd testing22 -no-audio -no-window  -no-boot-anim -sdcard sdcard.img ;; 1) emulator -avd testing18 -no-audio -no-window  -no-boot-anim -sdcard sdcard.img ;; esac:
+    - case $CIRCLE_NODE_INDEX in 0) emulator -avd circleci-android22 -no-audio -no-window ;; 1) emulator -avd testing18 -no-audio -no-window  -no-boot-anim ;; esac:
          parallel: true
          background: true
   override:
-    # Build tests classess in the background and run unit tests(since they are very quick).
+    # Build tests classes in the background and run unit tests(since they are very quick).
     - ./gradlew :app:assembleDebugAndroidTest check -PdisablePreDex:
         parallel: true
     # Ensure that emulator booted
     - circle-android wait-for-boot:
         parallel: true
         background: true
+    # debug print
+    - adb devices:
+        parallel: true
     # unlocking the emulator screen
     - adb shell input keyevent 82:
         parallel: true
