@@ -42,7 +42,7 @@ JAVA8_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 ```
 
 Alternatively you may set them in `gradle.properties` file.
-Examples are provided as comments in `gradle.properties` in project build dir [see more](https://docs.gradle.org/current/userguide/build_environment.html).
+Examples are provided as comments in `gradle.properties` in [project build dir](gradle.properties) [[see more]](https://docs.gradle.org/current/userguide/build_environment.html).
 
 ## Eye candy
 
