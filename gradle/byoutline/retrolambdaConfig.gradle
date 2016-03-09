@@ -4,8 +4,14 @@ retrolambda {
     def jdkHome = 'JAVA8_HOME'
     def oldJdkHome = 'JAVA7_HOME'
     if (System.getenv(jdkHome) == null || System.getenv(oldJdkHome) == null) {
-        logger.warn("$jdkHome or $oldJdkHome enviromental variable not found. " +
-                'Please set them. Retrolambda may fail without them.')
+        try {
+            jdk JAVA8_HOME
+            oldJdk JAVA7_HOME
+            javaVersion JavaVersion.VERSION_1_7
+        } catch (ex) {
+            throw new InvalidUserDataException(
+                "You should define JAVA8_HOME and JAVA7_HOME in gradle.properties.")
+        }
     } else {
         jdk System.getenv(jdkHome)
         oldJdk System.getenv(oldJdkHome)
