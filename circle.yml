@@ -23,12 +23,13 @@ dependencies:
   override:
     - ./gradlew dependencies
   post:
+    - mksdcard -l e 512M mysdcard.img
     - echo n | android create avd -n testing18 -f -t android-18
 
 
 test:
   pre:
-    - case $CIRCLE_NODE_INDEX in 0) echo "launching 22" && emulator -avd circleci-android22 -no-audio -no-window ;; 1) echo "launching 18" && emulator -avd testing18 -no-audio -no-window -no-boot-anim ;; esac:
+    - case $CIRCLE_NODE_INDEX in 0) echo "launching 22" && emulator -avd circleci-android22 -no-audio -no-window -sdcard mysdcard.img ;; 1) echo "launching 18" && emulator -avd testing18 -no-audio -no-window -no-boot-anim -sdcard mysdcard.img ;; esac:
          parallel: true
          background: true
   override:
