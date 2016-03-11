@@ -16,7 +16,7 @@ machine:
 
 dependencies:
   pre:
-    - echo y | android update sdk --no-ui --all --filter tools,platform-tools,extra-android-m2repository,extra-android-support
+    - echo y | android update sdk --no-ui --all --filter tools,platform-tools,extra-android-support
     - echo y | android update sdk --no-ui --all --filter build-tools-23.0.2
   cache_directories:
     - ~/.android
@@ -36,13 +36,12 @@ test:
          background: true
   override:
     # Build tests classes in the background and run unit tests(since they are very quick).
-    - ./gradlew :app:assembleDebugAndroidTest check -PdisablePreDex:
+    - ./gradlew :app:assembleDebugAndroidTest check:
         parallel: true
     # Ensure that emulator booted
     - circle-android wait-for-boot:
         parallel: true
         background: true
-    - sleep 30 # without it devices still are shown as offline
     # debug print
     - adb devices:
         parallel: true
