@@ -16,7 +16,7 @@ machine:
 
 dependencies:
   pre:
-    - echo y | android update sdk --no-ui --all --filter tools,android-23,platform-tools,extra-android-m2repository,extra-android-support
+    - echo y | android update sdk --no-ui --all --filter tools,platform-tools,extra-android-m2repository,extra-android-support
     - echo y | android update sdk --no-ui --all --filter build-tools-23.0.2
   cache_directories:
     - ~/.android
