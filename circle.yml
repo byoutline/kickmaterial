@@ -29,10 +29,11 @@ dependencies:
 
 test:
   pre:
-    #- case $CIRCLE_NODE_INDEX in 0) emulator -avd circleci-android22 -no-audio -no-window ;; 1) emulator -avd testing18 -no-audio -no-window  -no-boot-anim ;; esac:
+    #- case $CIRCLE_NODE_INDEX in 0) emulator -avd circleci-android22 -no-audio -no-window ;; 1) emulator -avd testing18 -no-audio -no-window -no-boot-anim ;; esac:
     #     parallel: true
     #     background: true
-    - emulator -avd circleci-android22 -no-audio -no-window
+    - emulator -avd circleci-android22 -no-audio -no-window:
+           background: true
   override:
     # Build tests classes in the background and run unit tests(since they are very quick).
     #- ./gradlew :app:assembleDebugAndroidTest check -PdisablePreDex:
