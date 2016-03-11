@@ -50,7 +50,7 @@ test:
         parallel: true
     # Run instrumented tests.
     - ./gradlew spoon -x lint --no-daemon -PdisablePreDex --stacktrace:
-        #parallel: true
+        parallel: true
         timeout: 1800
   post:
     # copy the build outputs to artifacts
