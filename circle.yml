@@ -31,7 +31,7 @@ test:
   pre:
     # Add permision to write to SD card, so we can save screenshots.
     - sed -i.bak 's/<!-- CIRCLE-SD -->/<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" \/>/' app/src/main/AndroidManifest.xml
-    - case $CIRCLE_NODE_INDEX in 0) echo "launching 21" && emulator -avd circleci-android21 -no-audio -no-window -sdcard mysdcard.img ;; 1) echo "launching 18" && emulator -avd testing18 -no-audio -no-window -no-boot-anim -sdcard mysdcard.img ;; esac:
+    - case $CIRCLE_NODE_INDEX in 0) emulator -avd circleci-android22 -no-audio -no-window -no-boot-anim -sdcard mysdcard.img ;; 1) echo "launching 18" && emulator -avd testing18 -no-audio -no-window -no-boot-anim -sdcard mysdcard.img ;; esac:
          parallel: true
          background: true
     # Only build project, travis is supposed to run checks.
@@ -43,7 +43,7 @@ test:
         parallel: true
         background: true
     # Wait for boot seems not good enough.
-    - sleep 20
+    - sleep 30
     # debug print
     - adb devices:
         parallel: true
