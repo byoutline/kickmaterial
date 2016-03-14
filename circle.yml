@@ -34,14 +34,16 @@ test:
     - case $CIRCLE_NODE_INDEX in 0) echo "launching 22" && emulator -avd circleci-android22 -no-audio -no-window -sdcard mysdcard.img ;; 1) echo "launching 18" && emulator -avd testing18 -no-audio -no-window -no-boot-anim -sdcard mysdcard.img ;; esac:
          parallel: true
          background: true
-  override:
-    # Build tests classes in the background and run unit tests(since they are very quick).
-    - ./gradlew :app:assembleDebugAndroidTest check:
+    # Only build project, travis is supposed to run checks.
+    # Although spock tests are very quick, downloading some test dependencies add some times to execution.
+    - ./gradlew :app:assembleDebugAndroidTest -x lint:
         parallel: true
     # Ensure that emulator booted
     - circle-android wait-for-boot:
         parallel: true
         background: true
+    # Wait for boot seems not good enough.
+    - sleep 20
     # debug print
     - adb devices:
         parallel: true
@@ -50,6 +52,7 @@ test:
         parallel: true
     - adb logcat -d:
         parallel: true
+  override:
     # Run instrumented tests.
     - ./gradlew spoon -x lint --no-daemon -PdisablePreDex --stacktrace:
         parallel: true
