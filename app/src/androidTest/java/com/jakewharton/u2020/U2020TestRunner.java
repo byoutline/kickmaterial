@@ -1,5 +1,6 @@
 package com.jakewharton.u2020;
 
+import android.annotation.SuppressLint;
 import android.app.KeyguardManager;
 import android.content.Context;
 import android.os.PowerManager;
@@ -12,7 +13,9 @@ import static android.os.PowerManager.*;
 public final class U2020TestRunner extends AndroidJUnitRunner {
     private PowerManager.WakeLock wakeLock;
 
+    // Permissions added in debug only manifest.
     @Override
+    @SuppressLint("MissingPermission")
     public void onStart() {
         Context app = getTargetContext().getApplicationContext();
 
@@ -29,6 +32,7 @@ public final class U2020TestRunner extends AndroidJUnitRunner {
     }
 
     @Override
+    @SuppressLint("MissingPermission")
     public void onDestroy() {
         super.onDestroy();
         wakeLock.release();
