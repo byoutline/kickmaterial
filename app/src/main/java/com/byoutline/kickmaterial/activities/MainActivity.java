@@ -31,13 +31,6 @@ public class MainActivity extends KickMaterialBaseActivity {
                     .add(R.id.container, ProjectsListFragment.newInstance(DataManager.getCategoryAll()))
                     .commit();
         }
-        try {
-            KeyguardManager mKeyGuardManager = (KeyguardManager)      getSystemService(Context.KEYGUARD_SERVICE);
-            KeyguardManager.KeyguardLock mLock = mKeyGuardManager.newKeyguardLock("TEMP_CIRCLE_CI_ESPRESSO_TEST");
-            mLock.disableKeyguard();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
 //        setExitSharedElementCallback(new SharedElementCallback() {
 //            @Override

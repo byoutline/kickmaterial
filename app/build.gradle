@@ -44,7 +44,7 @@ android {
         versionName "1.0.1"
 
         multiDexEnabled false
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "com.jakewharton.u2020.U2020TestRunner"
     }
 
     buildTypes {

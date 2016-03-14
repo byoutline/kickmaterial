@@ -1,0 +1,36 @@
+package com.jakewharton.u2020;
+
+import android.app.KeyguardManager;
+import android.content.Context;
+import android.os.PowerManager;
+import android.support.test.runner.AndroidJUnitRunner;
+
+import static android.content.Context.KEYGUARD_SERVICE;
+import static android.content.Context.POWER_SERVICE;
+import static android.os.PowerManager.*;
+
+public final class U2020TestRunner extends AndroidJUnitRunner {
+    private PowerManager.WakeLock wakeLock;
+
+    @Override
+    public void onStart() {
+        Context app = getTargetContext().getApplicationContext();
+
+        String name = U2020TestRunner.class.getSimpleName();
+        // Unlock the device so that the tests can input keystrokes.
+        KeyguardManager keyguard = (KeyguardManager) app.getSystemService(KEYGUARD_SERVICE);
+        keyguard.newKeyguardLock(name).disableKeyguard();
+        // Wake up the screen.
+        PowerManager power = (PowerManager) app.getSystemService(POWER_SERVICE);
+        wakeLock = power.newWakeLock(FULL_WAKE_LOCK | ACQUIRE_CAUSES_WAKEUP | ON_AFTER_RELEASE, name);
+        wakeLock.acquire();
+
+        super.onStart();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        wakeLock.release();
+    }
+}

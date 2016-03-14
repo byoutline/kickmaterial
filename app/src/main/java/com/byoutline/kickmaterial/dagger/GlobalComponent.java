@@ -1,11 +1,14 @@
 package com.byoutline.kickmaterial.dagger;
 
+import com.byoutline.cachedfield.CachedFieldWithArg;
 import com.byoutline.kickmaterial.KickMaterialApp;
 import com.byoutline.kickmaterial.activities.CategoriesListActivity;
 import com.byoutline.kickmaterial.activities.ProjectDetailsActivity;
 import com.byoutline.kickmaterial.activities.RewardsListActivity;
 import com.byoutline.kickmaterial.fragments.ProjectsListFragment;
 import com.byoutline.kickmaterial.fragments.SearchListFragment;
+import com.byoutline.kickmaterial.model.DiscoverQuery;
+import com.byoutline.kickmaterial.model.DiscoverResponse;
 import com.squareup.otto.Bus;
 import dagger.Component;
 
@@ -25,7 +28,11 @@ public interface GlobalComponent {
 
     void inject(RewardsListActivity rewardsListActivity);
 
+
+
     Bus getBus();
 
     KickMaterialApp getApp();
+
+    CachedFieldWithArg<DiscoverResponse, DiscoverQuery> getDiscoverField();
 }

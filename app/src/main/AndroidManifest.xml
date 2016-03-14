@@ -5,8 +5,6 @@
     package="com.byoutline.kickmaterial">
 
 
-    <uses-permission android:name="android.permission.DISABLE_KEYGUARD"/>
-    <!-- CIRCLE-SD -->
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
