@@ -16,9 +16,11 @@ machine:
 
 dependencies:
   pre:
-    - echo y | android update sdk --no-ui --all --filter tools,platform-tools,extra-android-support
-    - echo y | android update sdk --no-ui --all --filter build-tools-23.0.2
+    - if ! $(grep -q "Revision=24.4.1" $ANDROID_HOME/tools/source.properties); then echo y | android update sdk -u -a -t "tools"; fi
+    - if [ ! -e $ANDROID_HOME/build-tools/23.0.3 ]; then echo y | android update sdk -u -a -t "build-tools-23.0.3"; fi
   cache_directories:
+    - /usr/local/android-sdk-linux/tools
+    - /usr/local/android-sdk-linux/build-tools/23.0.3
     - ~/.android
   override:
     - ./gradlew dependencies
