@@ -22,6 +22,7 @@ public final class U2020TestRunner extends AndroidJUnitRunner {
         String name = U2020TestRunner.class.getSimpleName();
         // Unlock the device so that the tests can input keystrokes.
         KeyguardManager keyguard = (KeyguardManager) app.getSystemService(KEYGUARD_SERVICE);
+        //noinspection ResourceType
         keyguard.newKeyguardLock(name).disableKeyguard();
         // Wake up the screen.
         PowerManager power = (PowerManager) app.getSystemService(POWER_SERVICE);
