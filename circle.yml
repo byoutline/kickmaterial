@@ -61,11 +61,12 @@ test:
     - adb devices:
         parallel: true
   post:
-    # copy the build outputs to artifacts
+    # Copy the build outputs to artifacts.
     - cp -r app/build/outputs $CIRCLE_ARTIFACTS
-    # copy the test results to the test results directory.
-    - cp -r app/build/reports $CIRCLE_TEST_REPORTS/:
+    # Copy the test results to the test results directory from container it was executed on.
+    - if [ "$CIRCLE_NODE_INDEX" = "1" ] ; then cp -r app/build/reports $CIRCLE_TEST_REPORTS/ ; fi:
         parallel: true
+    # Copy logcat and spoon result from both containers.
     - cp -r app/build/spoon/* $CIRCLE_TEST_REPORTS/:
         parallel: true
     - adb logcat -d > $CIRCLE_ARTIFACTS/logcat_emulator.txt:
