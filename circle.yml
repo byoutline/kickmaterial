@@ -31,12 +31,10 @@ dependencies:
 
 test:
   pre:
-    - case $CIRCLE_NODE_INDEX in 0) emulator -avd circleci-android22 -no-audio -no-window -no-boot-anim -sdcard mysdcard.img ;; 1) echo "launching 18" && emulator -avd testing18 -no-audio -no-window -no-boot-anim -sdcard mysdcard.img ;; esac:
-         parallel: true
-         background: true
-    # Only build project, travis is supposed to run checks.
-    # Although spock tests are very quick, downloading some test dependencies add some times to execution.
-    - ./gradlew :app:assembleDebugAndroidTest -x lint:
+    - ./ci/launchEmu.sh $CIRCLE_NODE_INDEX:
+        parallel: true
+        background: true
+    - case $CIRCLE_NODE_INDEX in 0) ./gradlew assembleDebug ;; 1) ./gradlew check lint ;; esac:
         parallel: true
     # Ensure that emulator booted
     - circle-android wait-for-boot:
@@ -46,6 +44,8 @@ test:
     - sleep 30
     # debug print
     - adb devices:
+        parallel: true
+    - ci/disableAnimations.sh:
         parallel: true
     # unlocking the emulator screen
     - adb shell input keyevent 82:
@@ -64,7 +64,8 @@ test:
     # copy the build outputs to artifacts
     - cp -r app/build/outputs $CIRCLE_ARTIFACTS
     # copy the test results to the test results directory.
-    # - cp -r app/build/reports $CIRCLE_TEST_REPORTS
+    - cp -r app/build/reports $CIRCLE_TEST_REPORTS/:
+        parallel: true
     - cp -r app/build/spoon/* $CIRCLE_TEST_REPORTS/:
         parallel: true
     - adb logcat -d > $CIRCLE_ARTIFACTS/logcat_emulator.txt:
