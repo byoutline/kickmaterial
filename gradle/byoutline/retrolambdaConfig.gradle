@@ -25,7 +25,7 @@ public final class RetrolambdaDeps implements Plugin<Project>{
     private void addDependencies(Project project) {
         project.afterEvaluate {
             def pd = project.dependencies
-            pd.add('retrolambdaConfig', 'net.orfjackal.retrolambda:retrolambda:2.1.0')
+            pd.add('retrolambdaConfig', 'net.orfjackal.retrolambda:retrolambda:2.3.0')
         }
     }
 
