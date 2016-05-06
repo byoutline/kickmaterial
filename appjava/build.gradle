@@ -9,7 +9,7 @@ buildscript {
 
     dependencies {
         classpath 'org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.4.0x'
-        classpath 'org.springframework.build.gradle:propdeps-plugin:0.0.6'
+        classpath 'org.springframework.build.gradle:propdeps-plugin:0.0.7'
     }
 }
 
@@ -24,17 +24,16 @@ apply from: '../gradle/byoutline/javaLib.gradle'
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     provided 'com.google.android:android:4.1.1.4'
-    provided 'com.google.code.gson:gson:2.3.1'
+    provided 'com.google.code.gson:gson:2.4'
     compile 'com.google.code.findbugs:jsr305:3.0.0'
 
-    compile 'joda-time:joda-time:2.7'
+    compile 'joda-time:joda-time:2.9.3'
     compile 'org.joda:joda-convert:1.4'
-    compile 'org.parceler:parceler-api:0.2.16'
-    provided 'org.parceler:parceler:0.2.16'
-    compile 'com.jakewharton.timber:timber:2.7.1'
-    provided 'com.google.auto.value:auto-value:1.1'
+    compile 'org.parceler:parceler-api:1.1.2'
+    provided 'org.parceler:parceler:1.1.2'
+    compile 'com.jakewharton.timber:timber:3.1.0'
+    provided 'com.google.auto.value:auto-value:1.2'
 
     provided 'com.google.code.findbugs:findbugs:3.0.0'
-    compile 'com.byoutline.cachedfield:cachedfield:1.5.0'
+    compile 'com.byoutline.cachedfield:cachedfield:1.5.3'
 }
-

@@ -25,13 +25,13 @@ import dagger.Module;
 import dagger.Provides;
 import okhttp3.OkHttpClient;
 import org.joda.time.DateTime;
-import retrofit2.GsonConverterFactory;
 import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 import javax.annotation.Nullable;
 import java.util.List;
 
-import static com.byoutline.observablecachedfield.RetrofitHelper.apiValueProv;
+import static com.byoutline.ibuscachedfield.util.RetrofitHelper.apiValueProv;
 
 
 @Module
@@ -60,7 +60,6 @@ public class GlobalModule {
         return bus;
     }
 
-
     @Provides
     KickMaterialApp providesApp() {
         return app;
@@ -70,7 +69,6 @@ public class GlobalModule {
     LruCacheWithPlaceholders providesPicassoCache() {
         return picassoCache;
     }
-
 
     @Provides
     Gson providesGson() {
