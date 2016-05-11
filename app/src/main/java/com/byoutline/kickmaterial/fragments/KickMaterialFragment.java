@@ -6,7 +6,6 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
-import butterknife.ButterKnife;
 import com.byoutline.kickmaterial.activities.KickMaterialBaseActivity;
 import com.byoutline.secretsauce.utils.LogUtils;
 
@@ -81,7 +80,6 @@ public abstract class KickMaterialFragment extends Fragment {
             hostActivity.hideKeyboard();
         }
         super.onDestroyView();
-        ButterKnife.unbind(this);
     }
 
     public String getScreenName() {

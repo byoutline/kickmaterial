@@ -9,7 +9,7 @@ import android.text.TextUtils;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.VideoView;
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.byoutline.kickmaterial.R;
 import com.byoutline.kickmaterial.model.ProjectDetails;
@@ -25,7 +25,7 @@ public class VideoActivity extends KickMaterialBaseActivity {
     public static final String BUNDLE_WEBVIEW_URL = "bundle_web_view_url";
     private static final String TAG = LogUtils.makeLogTag(VideoActivity.class);
 
-    @Bind(R.id.video_view)
+    @BindView(R.id.video_view)
     VideoView videoView;
 
 

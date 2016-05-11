@@ -12,7 +12,7 @@ import com.squareup.otto.Subscribe;
 
 import javax.inject.Inject;
 
-import static com.byoutline.observablecachedfield.RetrofitHelper.apiValueProv;
+import static com.byoutline.ibuscachedfield.util.RetrofitHelper.apiValueProv;
 
 /**
  * Created by Sebastian Kacprzak <sebastian.kacprzak at byoutline.com> on 31.03.15.

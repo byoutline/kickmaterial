@@ -32,7 +32,7 @@ All data are being served by AndroidStubServer library based on configuration fi
 This project uses [Retrolambda](https://github.com/orfjackal/retrolambda).
 If your build fails on `compileRetrolambdaDebug` or `compileDebugJavaWithJavac`
 please ensure that you have both Java 7 and Java 8 installed in your system. To be
-sure that they are found you may want to set set JAVA7_HOME and JAVA8_HOME
+sure that they are found you may want to set `JAVA7_HOME` and `JAVA8_HOME`
 environment variables.
 
 For example on linux you can add those lines `/etc/enviroment/`:
@@ -40,6 +40,9 @@ For example on linux you can add those lines `/etc/enviroment/`:
 JAVA7_HOME=/usr/lib/jvm/java-7-openjdk-amd64
 JAVA8_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 ```
+
+Alternatively you may set them in `gradle.properties` file.
+Examples are provided as comments in `gradle.properties` in [project build dir](gradle.properties) [[see more]](https://docs.gradle.org/current/userguide/build_environment.html).
 
 ## Eye candy
 

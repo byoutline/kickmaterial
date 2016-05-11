@@ -17,7 +17,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.byoutline.kickmaterial.KickMaterialApp;
@@ -53,20 +53,20 @@ public class RewardsListActivity extends KickMaterialBaseActivity implements Rew
     LoginManager loginManager;
 
 
-    @Bind(R.id.category_circle_iv)
+    @BindView(R.id.category_circle_iv)
     ImageView categoryCircleIv;
-    @Bind(R.id.categories_header_ll)
+    @BindView(R.id.categories_header_ll)
     View headerContainer;
-    @Bind(R.id.rewards_list_image_container)
+    @BindView(R.id.rewards_list_image_container)
     View imageContainer;
-    @Bind(R.id.category_circle_reveal_iv)
+    @BindView(R.id.category_circle_reveal_iv)
     ImageView categoryCircleRevealIv;
-    @Bind(R.id.selected_category_iv)
+    @BindView(R.id.selected_category_iv)
     RoundedImageView selectedCategoryIv;
 
-    @Bind(R.id.select_category_tv)
+    @BindView(R.id.select_category_tv)
     TextView selectCategoryTv;
-    @Bind(R.id.categories_rv)
+    @BindView(R.id.categories_rv)
     RecyclerView rewardsListRv;
 
     private RewardAdapter adapter;

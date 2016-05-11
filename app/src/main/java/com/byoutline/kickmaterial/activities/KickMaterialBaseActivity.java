@@ -14,7 +14,6 @@ import android.util.Pair;
 import android.view.View;
 import android.view.Window;
 import android.view.animation.DecelerateInterpolator;
-import butterknife.ButterKnife;
 import com.byoutline.kickmaterial.R;
 import com.byoutline.kickmaterial.fragments.KickMaterialFragment;
 import com.byoutline.kickmaterial.utils.LUtils;
@@ -80,12 +79,6 @@ public abstract class KickMaterialBaseActivity extends BaseAppCompatActivity imp
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         blockOrientationOnBuggedAndroidVersions();
-    }
-
-    @Override
-    protected void onDestroy() {
-        ButterKnife.unbind(this);
-        super.onDestroy();
     }
 
     protected boolean shouldBlockOrientationOnBuggedAndroidVersions() {

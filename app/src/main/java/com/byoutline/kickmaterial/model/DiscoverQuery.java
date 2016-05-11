@@ -4,6 +4,7 @@ import android.databinding.BaseObservable;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,13 +12,13 @@ import java.util.Map;
  * @author Sebastian Kacprzak <sebastian.kacprzak at byoutline.com>
  */
 public class DiscoverQuery extends BaseObservable {
-    @Nullable
+    @Nonnull
     public final Map<String, String> queryMap;
     @Nonnull
     public final DiscoverType discoverType;
     private static final int PER_PAGE = 12;
 
-    public DiscoverQuery(Map<String, String> queryMap, @Nonnull DiscoverType discoverType) {
+    public DiscoverQuery(@Nonnull Map<String, String> queryMap, @Nonnull DiscoverType discoverType) {
         this.queryMap = queryMap;
         this.discoverType = discoverType;
     }
@@ -31,7 +32,7 @@ public class DiscoverQuery extends BaseObservable {
 
     public static DiscoverQuery getDiscover(@Nullable Integer page) {
         boolean firstPage = page == null || page == 1;
-        Map<String, String> params = firstPage ? null : getDiscoverCategoryMap(null, page, PER_PAGE, null);
+        Map<String, String> params = firstPage ? Collections.emptyMap() : getDiscoverCategoryMap(null, page, PER_PAGE, null);
         return new DiscoverQuery(params, DiscoverType.DISCOVER);
     }
 
