@@ -11,7 +11,7 @@ machine:
     ADB_INSTALL_TIMEOUT: "10"
   post:
     # Turn off unneded services to free memory.
-    - for service in "apache2" "beanstalkd" "cassandra" "couchbase-server" "couchdb" "docker" "elasticsearch" "memcached" "mongodb" "mysql" "neo4j-service" "postgresql" "puppet" "redis-server" "riak" "solr" "sphinxsearch" "zookeeper"; do sudo service $service stop; done
+    - for service in "apache2" "beanstalkd" "cassandra" "couchbase-server" "couchdb" "docker" "elasticsearch" "memcached" "mongodb" "mysql" "neo4j-service" "postgresql" "puppet" "rabbitmq-server" "redis-server" "riak" "solr" "sphinxsearch" "zookeeper"; do sudo service $service stop; done
 
 
 dependencies:
