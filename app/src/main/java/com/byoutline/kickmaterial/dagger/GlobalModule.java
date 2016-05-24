@@ -12,9 +12,7 @@ import com.byoutline.kickmaterial.managers.LoginManager;
 import com.byoutline.kickmaterial.model.*;
 import com.byoutline.kickmaterial.utils.LruCacheWithPlaceholders;
 import com.byoutline.observablecachedfield.ObservableCachedFieldWithArg;
-import com.byoutline.ottocachedfield.OttoCachedFieldBuilder;
-import com.byoutline.ottocachedfield.OttoCachedFieldWithArgBuilder;
-import com.byoutline.ottocachedfield.OttoObservableCachedFieldWithArgBuilder;
+import com.byoutline.ottocachedfield.CachedFieldBuilder;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -126,7 +124,7 @@ public class GlobalModule {
     @Provides
     @GlobalScope
     public CachedField<List<Category>> provideCategories(KickMaterialService service) {
-        return new OttoCachedFieldBuilder<List<Category>>()
+        return new CachedFieldBuilder()
                 .withValueProvider(apiValueProv(service::getCategories))
                 .withSuccessEvent(new CategoriesFetchedEvent())
                 .build();
@@ -135,10 +133,10 @@ public class GlobalModule {
     @Provides
     @GlobalScope
     public CachedFieldWithArg<DiscoverResponse, DiscoverQuery> provideDiscover(KickMaterialService service) {
-        return new OttoCachedFieldWithArgBuilder<DiscoverResponse, DiscoverQuery>()
-                .withValueProvider(apiValueProv(query -> service.getDiscover(query.queryMap)))
+        return new CachedFieldBuilder()
+                .<DiscoverResponse, DiscoverQuery>withValueProviderWithArg(apiValueProv(query -> service.getDiscover(query.queryMap)))
                 .withSuccessEvent(new DiscoverProjectsFetchedEvent())
-                .withResponseErrorEvent(new DiscoverProjectsFetchedErrorEvent())
+                .withErrorEvent(new DiscoverProjectsFetchedErrorEvent())
                 .build();
     }
 
@@ -146,10 +144,11 @@ public class GlobalModule {
     @GlobalScope
     public ObservableCachedFieldWithArg<ProjectDetails, ProjectIdAndSignature>
     provideProjectDetails(KickMaterialService service) {
-        return new OttoObservableCachedFieldWithArgBuilder<ProjectDetails, ProjectIdAndSignature>()
-                .withValueProvider(apiValueProv(input -> service.getProjectDetails(input.id(), input.queryParams())))
+        return new CachedFieldBuilder()
+                .<ProjectDetails, ProjectIdAndSignature>withValueProviderWithArg(apiValueProv(input -> service.getProjectDetails(input.id(), input.queryParams())))
+                .asObservable()
                 .withSuccessEvent(new ProjectDetailsFetchedEvent())
-                .withResponseErrorEvent(new ProjectDetailsFetchingFailedEvent())
+                .withErrorEvent(new ProjectDetailsFetchingFailedEvent())
                 .build();
     }
 }
