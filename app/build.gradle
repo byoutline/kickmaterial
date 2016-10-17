@@ -6,16 +6,15 @@ apply plugin: 'com.neenbedankt.android-apt'
 apply plugin: 'jacoco' /// used only by tests
 
 buildscript {
-    ext.support_version = '23.1.1'
-    ext.dagger_version = '2.0.1'
+    ext.support_version = '23.3.0'
+    ext.dagger_version = '2.4'
 
     repositories {
         jcenter()
     }
 
     dependencies {
-        // used only by tests
-        classpath 'net.saliman:gradle-cobertura-plugin:2.0.0' // cobertura plugin
+        classpath 'net.saliman:gradle-cobertura-plugin:2.0.0'
         classpath 'org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.3.1'
         classpath 'com.stanfy.spoon:spoon-gradle-plugin:1.0.4'
     }
@@ -37,14 +36,14 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.byoutline.kickmaterial"
+        applicationId 'com.byoutline.kickmaterial'
         minSdkVersion 18
         targetSdkVersion 23
         versionCode 2
-        versionName "1.0.1"
+        versionName '1.0.1'
 
         multiDexEnabled false
-        testInstrumentationRunner "com.jakewharton.u2020.U2020TestRunner"
+        testInstrumentationRunner 'com.jakewharton.u2020.U2020TestRunner'
     }
 
     buildTypes {
@@ -58,7 +57,7 @@ android {
 //    applicationVariants.all { variant ->
 //        variant.outputs.each { output ->
 //            def file = output.outputFile
-//            output.outputFile = new File(file.parent, "kickmaterial-" + defaultConfig.versionName + ".apk")
+//            output.outputFile = new File(file.parent, 'kickmaterial-' + defaultConfig.versionName + '.apk')
 //        }
 //    }
 
@@ -67,7 +66,9 @@ android {
     }
 
     lintOptions {
-        lintConfig file("lint.xml")
+        lintConfig file('lint.xml')
+        textOutput 'stdout'
+        textReport true
     }
 
     packagingOptions {
@@ -99,30 +100,31 @@ dependencies {
     compile "com.android.support:recyclerview-v7:$support_version"
     compile "com.android.support:support-annotations:$support_version"
     compile "com.android.support:palette-v7:$support_version"
-    compile 'com.jakewharton:butterknife:7.0.1'
+    compile 'com.jakewharton:butterknife:8.0.1'
+    apt 'com.jakewharton:butterknife-compiler:8.0.1'
     compile 'com.byoutline.secretsauce:secretsauce:0.5.2'
-    compile 'com.byoutline.ottocachedfield:observablecachedfield:1.0.0'
-    compile 'com.byoutline.cachedfield:cachedfield:1.5.2'
-    compile 'com.byoutline.androidstubserver:stubserver:2.0.0-SNAPSHOT'
-    compile 'com.byoutline.ottoeventcallback:ottoeventcallback:1.3.1'
-    compile 'com.byoutline.mockserver:mockserver:2.0.0-SNAPSHOT'
-    compile 'com.squareup.retrofit2:retrofit:2.0.0-beta3'
-    compile 'com.squareup.retrofit2:converter-gson:2.0.0-beta3'
-    compile 'com.squareup.okhttp3:okhttp:3.0.1'
-    compile 'com.squareup.okhttp3:okhttp-urlconnection:3.0.1'
+    compile 'com.byoutline.ottocachedfield:observablecachedfield:1.1.0-SNAPSHOT'
+    compile 'com.byoutline.androidstubserver:stubserver:2.0.0-beta1'
+    compile 'com.byoutline.eventcallback:eventcallback-api:1.0.1'
+    compile 'com.byoutline.ottoeventcallback:anythreadbus:1.0.0'
+    compile 'com.squareup.retrofit2:retrofit:2.0.2'
+    compile 'com.squareup.retrofit2:converter-gson:2.0.2'
+    compile 'com.squareup.okhttp3:okhttp:3.2.0'
+    compile 'com.squareup.okhttp3:okhttp-urlconnection:3.2.0'
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'javax.inject:javax.inject:1'
     // For dagger 2
     compile "com.google.dagger:dagger:$dagger_version"
     apt "com.google.dagger:dagger-compiler:$dagger_version"
+    apt 'com.google.guava:guava:19.0' // For some reason currently required for dagger
     provided 'javax.annotation:jsr250-api:1.0'
 
     compile 'com.kenai.nbpwr:edu-umd-cs-findbugs-annotations:1.3.2-201002241900'
-    compile 'com.jakewharton.timber:timber:2.7.1'
+    compile 'com.jakewharton.timber:timber:3.1.0'
     compile 'com.github.shell-software:fab:1.0.5'
     compile 'commons-collections:commons-collections:3.2.1'
-    compile 'me.tatarka.bindingcollectionadapter:bindingcollectionadapter:1.0.0'
-    compile 'me.tatarka.bindingcollectionadapter:bindingcollectionadapter-recyclerview:1.0.0'
+    compile 'me.tatarka.bindingcollectionadapter:bindingcollectionadapter:1.1.0'
+    compile 'me.tatarka.bindingcollectionadapter:bindingcollectionadapter-recyclerview:1.1.0'
 
     testCompile 'junit:junit:4.12'
     testCompile 'org.mockito:mockito-core:1.9.5'
@@ -136,8 +138,8 @@ dependencies {
     androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.1'
     androidTestCompile 'com.android.support.test.espresso:espresso-contrib:2.2.1'
     androidTestCompile 'com.android.support.test.espresso:espresso-intents:2.2.1'
-    androidTestCompile 'com.android.support.test:rules:0.4'
-    androidTestCompile 'com.android.support.test:runner:0.4'
+    androidTestCompile 'com.android.support.test:rules:0.5'
+    androidTestCompile 'com.android.support.test:runner:0.5'
     androidTestCompile 'com.google.code.findbugs:jsr305:3.0.0'
     androidTestCompile 'com.squareup.spoon:spoon-client:1.3.1'
     androidTestCompile 'com.byoutline.cachedfield:idlingresource:1.0.0'

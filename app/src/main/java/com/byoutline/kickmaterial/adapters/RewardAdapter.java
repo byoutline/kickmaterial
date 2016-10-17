@@ -9,7 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.byoutline.kickmaterial.R;
 import com.byoutline.kickmaterial.model.Reward;
@@ -153,16 +153,16 @@ public class RewardAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
 
         public RewardClickListener listener;
-        @Bind(R.id.reward_item_amount_tv)
+        @BindView(R.id.reward_item_amount_tv)
         TextView rewardItemAmountTv;
-        @Bind(R.id.reward_item_currency_tv)
+        @BindView(R.id.reward_item_currency_tv)
         TextView rewardItemCurrencyTv;
-        @Bind(R.id.reward_item_type_tv)
+        @BindView(R.id.reward_item_type_tv)
         TextView rewardItemTitleTv;
-        @Bind(R.id.reward_item_desc_tv)
+        @BindView(R.id.reward_item_desc_tv)
         TextView rewardItemDescTv;
 
-        @Bind(R.id.reward_container_cv)
+        @BindView(R.id.reward_container_cv)
         CardView rewardItemContainerCv;
 
 
@@ -202,7 +202,7 @@ public class RewardAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     }
 
     class RewardHeaderViewHolder extends RecyclerView.ViewHolder {
-        @Bind(R.id.reward_header_tv)
+        @BindView(R.id.reward_header_tv)
         TextView rewardHeaderTv;
 
         RewardHeaderViewHolder(View view) {

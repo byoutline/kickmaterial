@@ -12,12 +12,13 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.view.*;
 import android.widget.ImageView;
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.byoutline.cachedfield.CachedFieldWithArg;
 import com.byoutline.cachedfield.FieldState;
 import com.byoutline.cachedfield.FieldStateListener;
+import com.byoutline.ibuscachedfield.util.RetrofitHelper;
 import com.byoutline.kickmaterial.KickMaterialApp;
 import com.byoutline.kickmaterial.R;
 import com.byoutline.kickmaterial.activities.ProjectDetailsActivity;
@@ -31,7 +32,6 @@ import com.byoutline.kickmaterial.managers.LoginManager;
 import com.byoutline.kickmaterial.model.*;
 import com.byoutline.kickmaterial.utils.LUtils;
 import com.byoutline.kickmaterial.views.EndlessRecyclerView;
-import com.byoutline.observablecachedfield.RetrofitHelper;
 import com.byoutline.ottoeventcallback.PostFromAnyThreadBus;
 import com.byoutline.secretsauce.utils.ViewUtils;
 import com.software.shell.fab.ActionButton;
@@ -56,15 +56,15 @@ public class ProjectsListFragment extends KickMaterialFragment implements Projec
     private static final int BG_COLOR_MIN = 232;
     private static final String INSTANCE_STATE_SUMMARY_SCROLLED = "INSTANCE_STATE_SUMMARY_SCROLLED";
     public float summaryScrolled;
-    @Bind(R.id.project_recycler_view)
+    @BindView(R.id.project_recycler_view)
     EndlessRecyclerView projectListRv;
-    @Bind(R.id.swipe_refresh_projects_srl)
+    @BindView(R.id.swipe_refresh_projects_srl)
     SwipeRefreshLayout swipeRefreshLayout;
-    @Bind(R.id.bubbles_iv)
+    @BindView(R.id.bubbles_iv)
     ImageView bubblesIv;
-    @Bind(R.id.show_categories_fab)
+    @BindView(R.id.show_categories_fab)
     ActionButton showCategoriesFab;
-    @Bind(R.id.main_parent_rl)
+    @BindView(R.id.main_parent_rl)
     View mainParent;
     @Inject
     Bus bus;
