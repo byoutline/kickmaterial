@@ -16,7 +16,7 @@ machine:
 
 dependencies:
   pre:
-    - if ! $(grep -q "Revision=25.2.2" $ANDROID_HOME/tools/source.properties); then echo y | android update sdk -u -a -t "tools" "extra-android-m2repository" "extra-google-m2repository" "extra-android-support" "android-24"; fi
+    - if ! $(grep -q "Revision=25.2.2" $ANDROID_HOME/tools/source.properties); then for pack in  "tools" "extra-android-m2repository" "extra-google-m2repository" "extra-android-support" "android-25"; do echo y | android update sdk -u -a -t $pack ; done ; fi
     - if [ ! -e $ANDROID_HOME/build-tools/25.0.0 ]; then echo y | android update sdk -u -a -t "build-tools-25.0.0"; fi
   cache_directories:
     - /usr/local/android-sdk-linux/tools
