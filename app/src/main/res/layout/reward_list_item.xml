@@ -29,9 +29,9 @@
                     style="@style/LightFontStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:singleLine="true"
                     android:textColor="@color/green_primary"
                     android:textSize="@dimen/font_20"
+                    android:maxLines="1"
                     tools:text="1+"/>
 
 
@@ -39,7 +39,7 @@
                     android:id="@+id/reward_item_currency_tv"
                     style="@style/RewardItemCurrencyStyle"
                     android:textSize="@dimen/font_11"
-                    android:singleLine="true"
+                    android:maxLines="1"
                     android:text="@string/currency_usd"/>
 
 
@@ -60,9 +60,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="2dp"
                     android:layout_marginTop="2dp"
-                    android:singleLine="true"
                     android:textColor="@color/category_name"
                     android:textSize="@dimen/font_16"
+                    android:maxLines="1"
                     tools:text="No reward"/>
 
 

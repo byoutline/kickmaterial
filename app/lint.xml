@@ -7,4 +7,7 @@
         <ignore regexp="okio.Okio.*"/>
         <ignore regexp="retrofit2.Platform.Java8.*"/>
     </issue>
+    <issue id="MissingSuperCall">
+           <ignore regexp="com.byoutline.kickmaterial.KickMaterialApp" />
+    </issue>
 </lint>
