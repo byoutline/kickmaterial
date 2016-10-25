@@ -44,4 +44,8 @@
 
     </application>
 
+    <instrumentation
+        android:name="com.jakewharton.u2020.U2020TestRunner"
+        android:targetPackage="com.byoutline.kickmaterial"
+        />
 </manifest>
