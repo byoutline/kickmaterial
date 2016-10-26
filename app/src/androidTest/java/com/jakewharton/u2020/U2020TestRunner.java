@@ -1,4 +1,4 @@
-package com.byoutline.kickmaterial.espressohelpers;
+package com.jakewharton.u2020;
 
 import android.annotation.SuppressLint;
 import android.app.KeyguardManager;
