@@ -10,6 +10,7 @@ import com.byoutline.kickmaterial.fragments.SearchListFragment;
 import com.byoutline.kickmaterial.model.DiscoverQuery;
 import com.byoutline.kickmaterial.model.DiscoverResponse;
 import com.squareup.otto.Bus;
+
 import dagger.Component;
 
 /**
@@ -27,7 +28,6 @@ public interface GlobalComponent {
     void inject(ProjectDetailsActivity activity);
 
     void inject(RewardsListActivity rewardsListActivity);
-
 
 
     Bus getBus();

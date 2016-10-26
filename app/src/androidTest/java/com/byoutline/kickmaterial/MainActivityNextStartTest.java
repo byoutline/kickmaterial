@@ -3,9 +3,11 @@ package com.byoutline.kickmaterial;
 import android.support.test.espresso.Espresso;
 import android.support.test.espresso.NoMatchingViewException;
 import android.support.test.rule.ActivityTestRule;
+
 import com.byoutline.cachedfield.utils.CachedFieldIdlingResource;
 import com.byoutline.kickmaterial.activities.MainActivity;
 import com.byoutline.kickmaterial.espressohelpers.DaggerRules;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
@@ -34,6 +36,7 @@ public class MainActivityNextStartTest {
     public void unregisterIdlingResources() {
         Espresso.unregisterIdlingResources(cachedFieldIdlingResource);
     }
+
     @Test(expected=NoMatchingViewException.class)
     public void testHeaderShouldNotBeVisible() {
         onView(withText(R.string.explore))
