@@ -1,6 +1,8 @@
 package com.byoutline.kickmaterial.activities;
 
 import android.annotation.TargetApi;
+import android.app.KeyguardManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -29,7 +31,6 @@ public class MainActivity extends KickMaterialBaseActivity {
                     .add(R.id.container, ProjectsListFragment.newInstance(DataManager.getCategoryAll()))
                     .commit();
         }
-
 
 //        setExitSharedElementCallback(new SharedElementCallback() {
 //            @Override

@@ -6,7 +6,7 @@
 -dontskipnonpubliclibraryclasses
 -dontskipnonpubliclibraryclassmembers
 
--keepattributes Signature,*Annotation*,EnclosingMethod,SourceFile,LineNumberTable
+-keepattributes Signature,*Annotation*,EnclosingMethod,SourceFile,LineNumberTable,InnerClasses
 -dontnote
 
 -keepclassmembers enum * { *; }

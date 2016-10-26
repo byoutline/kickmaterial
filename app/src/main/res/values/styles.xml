@@ -17,6 +17,10 @@
         <item name="android:windowBackground">@color/main_bg</item>
     </style>
 
+    <style name="ToolbarStyle">
+        <item name="colorControlNormal">@color/white</item>
+    </style>
+
     <style name="AppTheme.BaseTranslucentStatus" parent="AppTheme.Base">
     </style>
 

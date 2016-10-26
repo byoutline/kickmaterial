@@ -147,11 +147,6 @@ public class CategoriesListActivity extends KickMaterialBaseActivity implements 
     }
 
     @Override
-    public void onPause() {
-        super.onPause();
-    }
-
-    @Override
     public void onSaveInstanceState(Bundle outState) {
         outState.putInt(INSTANCE_STATE_SUMMARY_SCROLLED, summaryScrolledValue);
         super.onSaveInstanceState(outState);
