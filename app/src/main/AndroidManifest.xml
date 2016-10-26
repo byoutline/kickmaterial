@@ -44,4 +44,8 @@
 
     </application>
 
+    <instrumentation
+        android:name="com.byoutline.kickmaterial.espressohelpers.U2020TestRunner"
+        android:targetPackage="com.byoutline.kickmaterial"
+        />
 </manifest>
