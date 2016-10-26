@@ -1,4 +1,4 @@
-package com.jakewharton.u2020;
+package com.byoutline.kickmaterial.espressohelpers;
 
 import android.annotation.SuppressLint;
 import android.app.KeyguardManager;
@@ -8,7 +8,9 @@ import android.support.test.runner.AndroidJUnitRunner;
 
 import static android.content.Context.KEYGUARD_SERVICE;
 import static android.content.Context.POWER_SERVICE;
-import static android.os.PowerManager.*;
+import static android.os.PowerManager.ACQUIRE_CAUSES_WAKEUP;
+import static android.os.PowerManager.FULL_WAKE_LOCK;
+import static android.os.PowerManager.ON_AFTER_RELEASE;
 
 public final class U2020TestRunner extends AndroidJUnitRunner {
     private PowerManager.WakeLock wakeLock;
