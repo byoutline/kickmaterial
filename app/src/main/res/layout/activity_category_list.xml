@@ -6,7 +6,7 @@
         xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <import type="me.tatarka.bindingcollectionadapter.LayoutManagers" />
+        <import type="me.tatarka.bindingcollectionadapter2.LayoutManagers" />
 
         <variable name="viewModel" type="com.byoutline.kickmaterial.managers.CategoriesListViewModel"/>
 
@@ -64,11 +64,11 @@
             android:id="@+id/categories_rv"
             style="@style/RecylerViewCategories"
             android:paddingTop="165dp"
-            app:layoutManager="@{LayoutManagers.linear()}"
+            app:itemBinding="@{viewModel.itemBinding}"
             app:items="@{viewModel.items}"
-            app:itemView="@{viewModel.itemView}"
-            app:adapter='@{categoryClickListener}'
+            app:layoutManager="@{LayoutManagers.linear()}"
         />
+            <!--app:adapter='@{categoryClickListener}'-->
 
 
         <LinearLayout

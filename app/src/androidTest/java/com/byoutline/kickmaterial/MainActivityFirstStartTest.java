@@ -20,7 +20,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
  */
 public class MainActivityFirstStartTest {
     @Rule
-    public ActivityTestRule<MainActivity> activityRule = DaggerRules.userFirstLaunchRule();
+    public ActivityTestRule<MainActivity> activityRule = DaggerRules.INSTANCE.userFirstLaunchRule();
     private CachedFieldIdlingResource cachedFieldIdlingResource;
 
     @Before

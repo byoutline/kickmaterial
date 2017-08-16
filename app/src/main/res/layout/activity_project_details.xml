@@ -57,7 +57,7 @@
                         android:layout_marginTop="5dp"
                         android:ellipsize="end"
                         android:maxLines="2"
-                        android:text="@{project.get().desc}"
+                        android:text="@{project.desc}"
                         tools:text="@string/description"
                     />
 
@@ -89,7 +89,7 @@
                             android:layout_height="@dimen/project_auth_photo_size"
                             app:all_rounded_corners="true"
                             app:corner_radius="200dp"
-                            app:imageUrl="@{project.get().getProjectCreatorAvatar()}"
+                            app:imageUrl="@{project.getProjectCreatorAvatar()}"
                             app:error="@{@drawable/avatar_placeholder}"
                         />
 
@@ -110,7 +110,7 @@
                             <com.byoutline.secretsauce.views.CustomFontTextView
                                 android:id="@+id/project_author_name_tv"
                                 style="@style/ProjectAuthorDetails"
-                                android:text="@{project.get().getAuthorName()}"
+                                android:text="@{project.getAuthorName()}"
                                 android:textColor="@color/project_author_name"
                                 android:textSize="@dimen/font_16"
                                 tools:text="The Last Tuesday Society"/>
@@ -139,7 +139,7 @@
                                 <com.byoutline.secretsauce.views.CustomFontTextView
                                     android:id="@+id/comments_count_value_tv"
                                     style="@style/ProjectAuthorValueStyle"
-                                    android:text="@{String.valueOf(project.get().commentsCount)}"
+                                    android:text="@{String.valueOf(project.commentsCount)}"
                                     tools:text="458"/>
 
 
@@ -165,7 +165,7 @@
                                 <com.byoutline.secretsauce.views.CustomFontTextView
                                     android:id="@+id/updates_count_value_tv"
                                     style="@style/ProjectAuthorValueStyle"
-                                    android:text="@{String.valueOf(project.get().updatesCount)}"
+                                    android:text="@{String.valueOf(project.updatesCount)}"
                                     tools:text="178"/>
 
                             </LinearLayout>
@@ -233,7 +233,7 @@
                     android:gravity="center_vertical"
                     android:lines="2"
                     android:maxLines="2"
-                    android:text="@{project.get().getProjectName()}"
+                    android:text="@{project.getProjectName()}"
                     android:textColor="@color/white"
                     android:textSize="@dimen/font_22"
                     android:transitionName="@string/transition_project_title"
@@ -294,7 +294,7 @@
                     <com.byoutline.secretsauce.views.CustomFontTextView
                         android:id="@+id/project_item_big_backers_tv"
                         style="@style/ProjectItemLightWhite"
-                        android:text="@{Integer.toString(project.get().backers)}"
+                        android:text="@{Integer.toString(project.backers)}"
                         android:transitionName="@string/transition_backers_count"
                         tools:ignore="UnusedAttribute"
                         tools:text="4 026"/>
