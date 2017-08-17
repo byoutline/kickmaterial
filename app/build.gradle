@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 apply from: "$rootDir/gradle/checkstyle.gradle"
 apply from: "$rootDir/gradle/pmd.gradle"
-apply plugin: 'jacoco' /// used only by tests
+apply from: "$rootDir/gradle/coverage.gradle"
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'groovyx.grooid.groovy-android'
@@ -15,6 +15,13 @@ buildscript {
         classpath 'net.saliman:gradle-cobertura-plugin:2.0.0'
         classpath 'org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.3.1'
         classpath 'com.stanfy.spoon:spoon-gradle-plugin:1.0.4'
+    }
+
+    configurations.all {
+        resolutionStrategy {
+            force 'org.jacoco:org.jacoco.report:0.7.4.201502262128'
+            force 'org.jacoco:org.jacoco.core:0.7.4.201502262128'
+        }
     }
 }
 

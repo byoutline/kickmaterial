@@ -1,0 +1,42 @@
+// Adds PMD, Checkstyle and Findbugs tasks.
+apply plugin: 'findbugs'
+apply plugin: 'org.stoyicker.android-check'
+
+
+check {
+    abortOnError false
+}
+
+// Overwrite findbugs tasks, because default one from noveogroup fails with
+// error=7, Argument list too long
+// https://github.com/noveogroup/android-check/issues/14
+task androidFindbugs(type: FindBugs, overwrite: true) {
+    group 'verification'
+
+    // For some reason selecting smaller source tree causes gradle
+    // to always assume that this task is UP-TO-DATE and not run it.
+    source = fileTree(project.rootDir.absolutePath).include("**/*.java")
+    // Currently hardcoded to regular debug.
+    classes = files("$project.buildDir.absolutePath/intermediates/classes/regular/debug/")
+    classpath = files()
+
+    // https://docs.gradle.org/4.0/dsl/org.gradle.api.plugins.quality.FindBugsExtension.html
+    findbugs {
+        toolVersion = "3.0.1"
+        sourceSets = [android.sourceSets]
+        ignoreFailures = true
+        reportsDir = file("$project.buildDir/findbugsReports")
+        effort = "max"
+
+        excludeFilter = file("../config/findbugs-exclude.xml")
+        includeFilter = file("../config/findbugs-include.xml")
+        reports {
+            xml.enabled = false
+            html.enabled = true
+            html.destination new File(project.buildDir, 'reports/findbugs.html')
+        }
+    }
+}
+
+androidFindbugs.dependsOn(['assembleRegularDebug']) //'assembleRegularLccOldDebug'
+

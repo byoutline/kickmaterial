@@ -1,3 +1,8 @@
+general:
+  artifacts:
+    - "app/build/spoon"   # instrumented tests
+    - "app/build/outputs" # APKs, lint, pmd,...
+
 machine:
   java:
     version: oraclejdk8
@@ -10,7 +15,7 @@ machine:
     TERM: "dumb"
     ADB_INSTALL_TIMEOUT: "10"
   post:
-    # Turn off unneded services to free memory.
+    # Turn off unneeded services to free memory.
     - for service in "apache2" "beanstalkd" "cassandra" "couchbase-server" "couchdb" "docker" "elasticsearch" "memcached" "mongodb" "mysql" "neo4j-service" "postgresql" "puppet" "rabbitmq-server" "redis-server" "riak" "solr" "sphinxsearch" "zookeeper"; do sudo service $service stop; done
 
 
@@ -20,10 +25,11 @@ dependencies:
     - if [ ! -e $ANDROID_HOME/build-tools/25.0.3 ]; then echo y | android update sdk -u -a -t "build-tools-25.0.3"; fi
   cache_directories:
     - /usr/local/android-sdk-linux/tools
+    - /usr/local/android-sdk-linux/extras
     - /usr/local/android-sdk-linux/build-tools/25.0.3
     - ~/.android
   override:
-    - ./gradlew dependencies
+    - ./gradlew dependencies --no-daemon
   post:
     - mksdcard -l e 512M mysdcard.img
     - echo n | android create avd -n testing18 -f -t android-18
@@ -65,9 +71,6 @@ test:
     - cp -r app/build/outputs $CIRCLE_ARTIFACTS
     # Copy the test results to the test results directory from container it was executed on.
     - if [ "$CIRCLE_NODE_INDEX" = "1" ] ; then cp -r app/build/reports $CIRCLE_TEST_REPORTS/ ; fi:
-        parallel: true
-    # Copy logcat and spoon result from both containers.
-    - cp -r app/build/spoon/* $CIRCLE_TEST_REPORTS/:
         parallel: true
     - adb logcat -d > $CIRCLE_ARTIFACTS/logcat_emulator.txt:
         parallel: true

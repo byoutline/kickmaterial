@@ -1,0 +1,113 @@
+// Based on https://github.com/mgouline/android-samples/
+// The MIT License (MIT)
+apply plugin: 'jacoco'
+apply plugin: 'com.github.kt3k.coveralls'
+
+jacoco {
+    // Workaround for error `Incompatible version 1006`
+    toolVersion = '0.7.4.201502262128' // '0.7.7.201606060606'
+}
+
+android.testOptions.unitTests.all {
+    jacoco {
+        includeNoLocationClasses = true
+    }
+}
+
+/**
+ * Add code coverage tasks for unit and instrumented tests (with our exclusion rules)
+ */
+project.afterEvaluate {
+    // Add coverage tasks only for debug builds
+    def buildTypes = ['debug']
+    // Grab all product flavors
+    def productFlavors = android.productFlavors.collect { flavor ->
+        flavor.name
+    }
+
+    // When no product flavors defined, use empty
+    if (!productFlavors) productFlavors.add('')
+
+    def classDirExcludes = [
+            // The usual suspects
+            '**/R.class',
+            '**/R$*.class',
+            '**/*$ViewInjector*.*',
+            '**/*$ViewBinder*.*',
+            '**/BuildConfig.*',
+            '**/Manifest*.*',
+            'android/**/*.*',
+
+            // AutoValue
+            '**/*AutoValue*.class',
+            '**/*_ViewBinding*.*',
+            '**/*PaperParcel*.*',
+
+            // Icepick
+//            '**/*$Icepick.class',
+
+            'com/android/**',
+            'me/tatarka/**',
+    ]
+
+    def genFilesClasses = getGeneratedClasses()
+    classDirExcludes.addAll(genFilesClasses)
+
+    // Unit tests for all flavours
+    productFlavors.each { productFlavorName ->
+        buildTypes.each { buildTypeName ->
+            def sourceName, sourcePath
+            if (!productFlavorName) {
+                sourceName = sourcePath = "${buildTypeName}"
+            } else {
+                sourceName = "${productFlavorName}${buildTypeName.capitalize()}"
+                sourcePath = "${productFlavorName}/${buildTypeName}"
+            }
+            def srcDirs = "${project.projectDir}/src/main/java"
+
+            def testTaskName = "test${sourceName.capitalize()}UnitTest"
+            def unitTestExecData = "${project.buildDir}/jacoco/${testTaskName}.exec"
+            def unitTestReportTaskName = "${testTaskName}Coverage"
+
+            task "$unitTestReportTaskName"(type: JacocoReport, dependsOn: "${testTaskName}") {
+                group = "Reporting"
+                description = "Generate Jacoco coverage reports on the ${sourceName.capitalize()} build."
+
+                sourceDirectories = files(srcDirs)
+                classDirectories = getClassDirs(sourcePath, classDirExcludes)
+                executionData = files(unitTestExecData)
+
+                reports {
+                    xml.enabled = false
+                    html.enabled = true
+                }
+            }
+        }
+    }
+}
+
+private def getClassDirs(String sourcePath, classDirExcludes) {
+    fileTree(
+            dir: "${project.buildDir}/intermediates/classes/${sourcePath}",
+            excludes: classDirExcludes
+    )
+}
+
+
+private List<String> getGeneratedClasses() {
+// Get all generated files as a flat set
+    def generatedFiles = fileTree("${project.buildDir}/generated/source")
+            .filter { it.isFile() }.files
+
+    def genFilesClasses = generatedFiles
+    // map to get relative paths
+            .collect { it.absolutePath.find('com/byoutline/.*') }
+    // ignore(filter) files from different packages
+            .findAll { it != null }
+    // replace suffix
+            .collect { it - '.java' + '.class' }
+    // convert to filetree regex (ignore path prefix)
+            .collect { "**/$it" }
+    return genFilesClasses
+}
+
