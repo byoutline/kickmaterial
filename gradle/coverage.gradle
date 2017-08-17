@@ -78,8 +78,8 @@ project.afterEvaluate {
                 executionData = files(unitTestExecData)
 
                 reports {
-                    xml.enabled = false
-                    html.enabled = true
+                    xml.enabled = true // For coveralls
+                    html.enabled = true // For humans :)
                 }
             }
         }
