@@ -49,7 +49,7 @@ android {
 
         multiDexEnabled false
 
-        // CircleCi needs custom runner to turn off animations.
+        // We use custom runner to turn off animations.
         testInstrumentationRunner 'com.jakewharton.u2020.U2020TestRunner'
     }
 
