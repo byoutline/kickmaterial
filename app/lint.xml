@@ -6,6 +6,7 @@
         <ignore regexp="android.databinding.tool.util.GenerationalClassUtil.*"/>
         <ignore regexp="okio.Okio.*"/>
         <ignore regexp="retrofit2.Platform.Java8.*"/>
+        <ignore regexp="org.joda.convert.JDKStringConverter.*"/>
     </issue>
     <issue id="MissingSuperCall">
            <ignore regexp="com.byoutline.kickmaterial.KickMaterialApp" />
