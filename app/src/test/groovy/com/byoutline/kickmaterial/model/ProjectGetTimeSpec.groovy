@@ -17,11 +17,11 @@ class ProjectGetTimeSpec extends Specification {
     @Unroll
     def "getTime should return value: #val and desc: #desc for launchedAt: #start and deadline: #deadline"() {
         given:
-        Project instance = new Project();
-        instance.launchedAt = start;
-        instance.deadline = deadline;
+        Project instance = new Project()
+        instance.launchedAt = start
+        instance.deadline = deadline
         when:
-        ProjectTime result = instance.getTimeLeft(now);
+        ProjectTime result = instance.getTimeLeft(now)
 
         then:
         val == result.value

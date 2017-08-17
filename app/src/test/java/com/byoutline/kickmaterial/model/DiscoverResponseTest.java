@@ -26,5 +26,4 @@ public class DiscoverResponseTest extends TestCase {
         // then
         assertEquals(result, exp);
     }
-
 }
