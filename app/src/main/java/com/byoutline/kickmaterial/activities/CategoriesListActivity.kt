@@ -145,7 +145,7 @@ class CategoriesListActivity : KickMaterialBaseActivity(), CategoryClickListener
             itemColor = category!!.colorResId
         }
         val bgColor = ContextCompat.getColor(this, itemColor)
-        viewModel!!.setAllCategoriesBgColor(bgColor)
+        viewModel.setAllCategoriesBgColor(bgColor)
         binding.categoryClickListener = this
         binding.viewModel = viewModel
     }
@@ -160,7 +160,7 @@ class CategoriesListActivity : KickMaterialBaseActivity(), CategoryClickListener
     fun categoryClicked(category: Category) {
         animateCategoryColor(category)
         // start loading data from API during animation
-        discoverField!!.postValue(DiscoverQuery.getDiscoverQuery(category, 1))
+        discoverField.postValue(DiscoverQuery.getDiscoverQuery(category, 1))
     }
 
 

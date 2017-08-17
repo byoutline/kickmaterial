@@ -133,14 +133,10 @@ class ProjectDetailsActivity : KickMaterialBaseActivity(), ObservableScrollView.
     }
 
     private fun loadProjectPhoto() {
-        var bitmap = picassoCache.getPlaceholder(project!!.bigPhotoUrl)
-        val bigPhotoMustBeFetched = bitmap == null
-        if (bigPhotoMustBeFetched) {
-            bitmap = picassoCache.getPlaceholder(project!!.photoUrl)
-            val placeholderAlreadyFetched = bitmap != null
-            if (placeholderAlreadyFetched) {
-                binding!!.projectPhotoIv.setImageBitmap(bitmap)
-            }
+        val bitmap = picassoCache.getPlaceholder(project!!.bigPhotoUrl) ?: picassoCache.getPlaceholder(project!!.photoUrl)
+        val placeholderAlreadyFetched = bitmap != null
+        if (placeholderAlreadyFetched) {
+            binding!!.projectPhotoIv.setImageBitmap(bitmap)
         }
         // Make sure that transition starts soon even if image is not ready.
         binding!!.projectPhotoIv.postDelayed({ this.supportStartPostponedEnterTransition() }, MAX_TRANSITION_DELAY.toLong())

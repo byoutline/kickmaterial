@@ -60,7 +60,7 @@ abstract class KickMaterialBaseActivity : BaseAppCompatActivity(), KickMaterialF
 
     override fun enableActionBarAutoHide(listView: RecyclerView) {
         initActionBarAutoHide()
-        listView.setOnScrollListener(object : RecyclerView.OnScrollListener() {
+        listView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             internal val ITEMS_THRESHOLD = 1
             internal var lastFvi = 0
 
