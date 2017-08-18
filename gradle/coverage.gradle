@@ -14,6 +14,12 @@ android.testOptions.unitTests.all {
     }
 }
 
+
+
+coveralls {
+    jacocoReportPath = "${buildDir}/reports/jacoco/testDebugUnitTestCoverage/testDebugUnitTestCoverage.xml"
+}
+
 /**
  * Add code coverage tasks for unit and instrumented tests (with our exclusion rules)
  */
