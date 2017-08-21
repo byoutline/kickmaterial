@@ -23,9 +23,8 @@
         card_view:cardBackgroundColor="@{categoryItem.getBgColor()}"
         card_view:cardCornerRadius="4dp"
         card_view:cardPreventCornerOverlap="false"
-        app:onClick="@{categoryClickListener}"
-        app:category="@{categoryItem}"
-    >
+        android:onClick="@{(view) -> categoryClickListener.categoryClicked(view, categoryItem)}"
+        >
 
 
         <LinearLayout
@@ -35,7 +34,8 @@
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:paddingLeft="@dimen/category_spacing"
-            android:paddingRight="@dimen/category_spacing">
+            android:paddingRight="@dimen/category_spacing"
+            >
 
             <FrameLayout
                 android:layout_width="@dimen/category_checked_size"

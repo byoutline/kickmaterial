@@ -6,6 +6,9 @@ import android.app.ActivityOptions
 import android.content.pm.ActivityInfo
 import android.os.Build
 import android.os.Bundle
+import android.support.annotation.CallSuper
+import android.support.annotation.CheckResult
+import android.support.annotation.NonNull
 import android.support.annotation.StringRes
 import android.support.v4.view.ViewCompat
 import android.support.v7.widget.GridLayoutManager
@@ -21,20 +24,31 @@ import com.byoutline.secretsauce.activities.BaseAppCompatActivity
 import com.byoutline.secretsauce.fragments.MenuOption
 import com.byoutline.secretsauce.fragments.NavigationDrawerFragment
 import com.byoutline.secretsauce.utils.ViewUtils
+import com.trello.rxlifecycle2.LifecycleProvider
+import com.trello.rxlifecycle2.LifecycleTransformer
+import com.trello.rxlifecycle2.RxLifecycle
+import com.trello.rxlifecycle2.android.ActivityEvent
+import com.trello.rxlifecycle2.android.RxLifecycleAndroid
+import io.reactivex.Observable
+import io.reactivex.subjects.BehaviorSubject
 import java.util.*
+
 
 /**
  * @author Pawel Karczewski <pawel.karczewski at byoutline.com> on 2015-01-03
  */
-abstract class KickMaterialBaseActivity : BaseAppCompatActivity(), KickMaterialFragment.HostActivity, NavigationDrawerFragment.NavigationDrawerCallbacks {
+abstract class KickMaterialBaseActivity : BaseAppCompatActivity(), KickMaterialFragment.HostActivity,
+        NavigationDrawerFragment.NavigationDrawerCallbacks, LifecycleProvider<ActivityEvent> {
     private var actionBarAutoHideSensitivity = 0
     private var actionBarAutoHideMinY = 0
     private var actionBarAutoHideSignal = 0
     private var actionBarShown = true
 
+    @CallSuper
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         blockOrientationOnBuggedAndroidVersions()
+        lifecycleSubject.onNext(ActivityEvent.CREATE)
     }
 
     protected open fun shouldBlockOrientationOnBuggedAndroidVersions(): Boolean {
@@ -69,9 +83,11 @@ abstract class KickMaterialBaseActivity : BaseAppCompatActivity(), KickMaterialF
 
                 val firstVisibleItem = (recyclerView!!.layoutManager as GridLayoutManager).findFirstVisibleItemPosition()
                 onMainContentScrolled(if (firstVisibleItem <= ITEMS_THRESHOLD) 0 else Integer.MAX_VALUE,
-                        if (lastFvi - firstVisibleItem > 0)
-                            Integer.MIN_VALUE
-                        else if (lastFvi == firstVisibleItem) 0 else Integer.MAX_VALUE
+                        when {
+                            lastFvi - firstVisibleItem > 0 -> Integer.MIN_VALUE
+                            lastFvi == firstVisibleItem -> 0
+                            else -> Integer.MAX_VALUE
+                        }
                 )
                 lastFvi = firstVisibleItem
             }
@@ -157,10 +173,6 @@ abstract class KickMaterialBaseActivity : BaseAppCompatActivity(), KickMaterialF
         setToolbarText(getString(textId))
     }
 
-    public override fun onPause() {
-        super.onPause()
-    }
-
     override fun onNavigationDrawerItemSelected(menuOption: MenuOption): Class<out android.support.v4.app.Fragment>? {
         // Currently there is no drawer
         return null
@@ -171,18 +183,16 @@ abstract class KickMaterialBaseActivity : BaseAppCompatActivity(), KickMaterialF
         private const val HEADER_HIDE_ANIM_DURATION = 300
 
         fun getSharedElementsBundle(activity: Activity, vararg sharedViews: View): Bundle {
-            val options: Bundle
-            if (LUtils.hasL()) {
-                options = getSharedElementsBundleL(activity, *sharedViews)
+            return if (LUtils.hasL()) {
+                getSharedElementsBundleL(activity, *sharedViews)
             } else {
-                options = Bundle()
+                Bundle()
             }
-            return options
         }
 
 
         @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-        private fun getSharedElementsBundleL(activity: Activity, vararg sharedViews: View): Bundle {
+        private fun getSharedElementsBundleL(activity: Activity, vararg sharedViews: View?): Bundle {
             val options: Bundle
             val decor = activity.window.decorView
 
@@ -204,5 +214,49 @@ abstract class KickMaterialBaseActivity : BaseAppCompatActivity(), KickMaterialF
             options = ActivityOptions.makeSceneTransitionAnimation(activity, *arr).toBundle()
             return options
         }
+    }
+
+    // RxActivity:
+    private val lifecycleSubject = BehaviorSubject.create<ActivityEvent>()
+
+    @CheckResult
+    override fun lifecycle(): Observable<ActivityEvent> = lifecycleSubject.hide()
+
+    @CheckResult
+    override fun <T> bindUntilEvent(event: ActivityEvent): LifecycleTransformer<T>
+        = RxLifecycle.bindUntilEvent(lifecycleSubject, event)
+
+    @NonNull
+    @CheckResult
+    override fun <T> bindToLifecycle(): LifecycleTransformer<T> = RxLifecycleAndroid.bindActivity(lifecycleSubject)
+
+    @CallSuper
+    override fun onStart() {
+        super.onStart()
+        lifecycleSubject.onNext(ActivityEvent.START)
+    }
+
+    @CallSuper
+    override fun onResume() {
+        super.onResume()
+        lifecycleSubject.onNext(ActivityEvent.RESUME)
+    }
+
+    @CallSuper
+    override fun onPause() {
+        lifecycleSubject.onNext(ActivityEvent.PAUSE)
+        super.onPause()
+    }
+
+    @CallSuper
+    override fun onStop() {
+        lifecycleSubject.onNext(ActivityEvent.STOP)
+        super.onStop()
+    }
+
+    @CallSuper
+    override fun onDestroy() {
+        lifecycleSubject.onNext(ActivityEvent.DESTROY)
+        super.onDestroy()
     }
 }

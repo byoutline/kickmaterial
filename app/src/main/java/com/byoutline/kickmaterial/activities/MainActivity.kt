@@ -56,11 +56,11 @@ class MainActivity : KickMaterialBaseActivity() {
         //        return super.onCreateOptionsMenu(menu);
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         val categorySelection = requestCode == CategoriesListActivity.DEFAULT_REQUEST_CODE
         if (categorySelection && resultCode == CategoriesListActivity.RESULT_CATEGORY_SELECTED) {
-            val category = data.getParcelableExtra<Category>(CategoriesListActivity.ARG_CATEGORY)
+            val category = data?.getParcelableExtra<Category>(CategoriesListActivity.ARG_CATEGORY) ?: return
             showFragment(ProjectsListFragment.newInstance(category), true)
             setToolbarText(getString(category.nameResId))
         }

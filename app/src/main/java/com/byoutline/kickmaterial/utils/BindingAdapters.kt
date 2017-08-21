@@ -4,10 +4,7 @@ import android.databinding.BindingAdapter
 import android.graphics.drawable.Drawable
 import android.support.annotation.ColorRes
 import android.support.v4.content.ContextCompat
-import android.view.View
 import android.widget.ImageView
-import com.byoutline.kickmaterial.adapters.CategoryClickListener
-import com.byoutline.kickmaterial.model.Category
 import com.squareup.picasso.Picasso
 
 /**
@@ -34,20 +31,4 @@ fun loadImage(view: ImageView, imageUrl: String) {
 fun setColorFilter(view: ImageView, @ColorRes colorResId: Int) {
     val color = ContextCompat.getColor(view.context, colorResId)
     view.setColorFilter(color)
-}
-
-
-/**
- * Allows to pass category to click listener.
-
- * @param view                  passed automatically by data binding
- * *
- * @param categoryClickListener listener to be informed about clicks
- * *
- * @param category              value passed to click listener
- */
-@BindingAdapter("onClick", "category")
-fun bindOnCategoryClicked(view: View, categoryClickListener: CategoryClickListener,
-                          category: Category) {
-    view.setOnClickListener { v -> categoryClickListener.categoryClicked(v, category) }
 }

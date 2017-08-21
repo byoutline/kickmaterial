@@ -3,6 +3,7 @@ ext {
     dagger_version = '2.11'
     retrofit_ver = '2.2.0'
     okhttp_ver = '3.7.0'
+    rxlifecycle_ver = '2.1.0'
     binding_collection_adapter_ver = '2.1.0'
 }
 
@@ -31,6 +32,11 @@ dependencies {
     compile 'javax.inject:javax.inject:1'
     compile 'nz.bradcampbell:paperparcel:2.0.1'
     compile 'nz.bradcampbell:paperparcel-kotlin:2.0.1'
+    compile 'io.reactivex.rxjava2:rxjava:2.1.2'
+    compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
+    compile "com.trello.rxlifecycle2:rxlifecycle:$rxlifecycle_ver"
+    compile "com.trello.rxlifecycle2:rxlifecycle-components:$rxlifecycle_ver"
+    compile "com.trello.rxlifecycle2:rxlifecycle-kotlin:$rxlifecycle_ver"
     kapt 'nz.bradcampbell:paperparcel-compiler:2.0.1'
     kapt 'com.android.databinding:compiler:2.3.3'
     // For dagger 2

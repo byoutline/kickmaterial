@@ -114,7 +114,7 @@ class CategoriesListActivity : KickMaterialBaseActivity(), CategoryClickListener
     private fun handleArguments() {
         val args = intent.extras
         if (args != null && args.containsKey(ARG_CATEGORY)) {
-            category = args.getParcelable<Category>(ARG_CATEGORY)
+            category = args.getParcelable(ARG_CATEGORY)
         } else {
             Timber.e("Category not passed")
         }
@@ -122,6 +122,7 @@ class CategoriesListActivity : KickMaterialBaseActivity(), CategoryClickListener
 
     public override fun onResume() {
         super.onResume()
+        viewModel.attachViewUntilPause(this)
         showActionbar(false, false)
     }
 
@@ -157,7 +158,7 @@ class CategoriesListActivity : KickMaterialBaseActivity(), CategoryClickListener
         categoryClicked(category)
     }
 
-    fun categoryClicked(category: Category) {
+    private fun categoryClicked(category: Category) {
         animateCategoryColor(category)
         // start loading data from API during animation
         discoverField.postValue(DiscoverQuery.getDiscoverQuery(category, 1))
