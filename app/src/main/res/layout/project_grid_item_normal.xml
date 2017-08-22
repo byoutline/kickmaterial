@@ -23,7 +23,7 @@
                 android:layout_gravity="bottom"
                 android:orientation="vertical">
 
-                <com.byoutline.secretsauce.views.CustomFontTextView
+                <TextView
                     android:id="@+id/project_item_big_title_tv"
                     style="@style/ProjectItemNameStyle"
                     android:textSize="18sp"

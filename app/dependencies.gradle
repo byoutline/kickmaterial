@@ -1,5 +1,5 @@
 ext {
-    support_version = '25.4.0'
+    support_version = '26.0.1'
     dagger_version = '2.11'
     retrofit_ver = '2.2.0'
     okhttp_ver = '3.7.0'

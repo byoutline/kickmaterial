@@ -177,16 +177,16 @@ class ProjectsAdapter// Adapter's Constructor
      */
     (v: View, var mListener: ProjectClickListener?) : RecyclerView.ViewHolder(v), View.OnClickListener {
 
-        internal var projectItemBigPhotoIv = v.findViewById(R.id.project_item_big_photo_iv) as ImageView?
-        internal var projectItemBigTitleTv = v.findViewById(R.id.project_item_big_title_tv) as TextView?
-        internal var projectItemBigDescTv = v.findViewById(R.id.project_item_big_desc_tv) as TextView?
-        internal var projectItemBigProgressSb = v.findViewById(R.id.project_item_big_progress_sb) as SeekBar?
-        internal var projectItemBigGatheredMoneyTv = v.findViewById(R.id.project_item_big_gathered_money_tv) as TextView?
-        internal var projectItemBigBackersTv = v.findViewById(R.id.project_item_big_backers_tv) as TextView?
-        internal var projectItemBigTimeLeft = v.findViewById(R.id.project_item_big_days_left) as TextView?
-        internal var projectItemBigPledgedOfTv = v.findViewById(R.id.project_item_big_pledged_of_tv) as TextView?
-        internal var projectItemBigTimeLeftType = v.findViewById(R.id.project_item_time_left_type_tv) as TextView?
-        internal var projectItemBigBackersLabel = v.findViewById(R.id.project_item_big_backers_label_tv)
+        internal var projectItemBigPhotoIv = v.findViewById<ImageView>(R.id.project_item_big_photo_iv)
+        internal var projectItemBigTitleTv = v.findViewById<TextView>(R.id.project_item_big_title_tv)
+        internal var projectItemBigDescTv = v.findViewById<TextView>(R.id.project_item_big_desc_tv)
+        internal var projectItemBigProgressSb = v.findViewById<SeekBar>(R.id.project_item_big_progress_sb)
+        internal var projectItemBigGatheredMoneyTv = v.findViewById<TextView>(R.id.project_item_big_gathered_money_tv)
+        internal var projectItemBigBackersTv = v.findViewById<TextView>(R.id.project_item_big_backers_tv)
+        internal var projectItemBigTimeLeft = v.findViewById<TextView>(R.id.project_item_big_days_left)
+        internal var projectItemBigPledgedOfTv = v.findViewById<TextView>(R.id.project_item_big_pledged_of_tv)
+        internal var projectItemBigTimeLeftType = v.findViewById<TextView>(R.id.project_item_time_left_type_tv)
+        internal var projectItemBigBackersLabel = v.findViewById<View>(R.id.project_item_big_backers_label_tv)
         internal var projectId: Int = 0
 
         init {

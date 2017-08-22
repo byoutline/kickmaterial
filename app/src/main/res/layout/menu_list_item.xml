@@ -3,7 +3,7 @@
                                                        android:layout_width="match_parent"
                                                        android:layout_height="wrap_content">
 
-    <com.byoutline.secretsauce.views.CheckableCustomFontTextView
+    <TextView
         android:id="@+id/menu_item_name_tv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

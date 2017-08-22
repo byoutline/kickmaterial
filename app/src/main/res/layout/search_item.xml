@@ -34,7 +34,7 @@
                 android:orientation="vertical"
                 android:padding="15dp">
 
-                <com.byoutline.secretsauce.views.CustomFontTextView
+                <TextView
                     android:id="@+id/search_item_title_tv"
                     style="@style/RegularFontStyle"
                     android:layout_width="match_parent"
@@ -48,7 +48,7 @@
                     tools:ignore="UnusedAttribute"
                     tools:text="3d Doodler 2.0. World's first 3d printing pen reinvented. 3d Doodler 2.0. World's first 3d printing pen reinvented."/>
 
-                <com.byoutline.secretsauce.views.CustomFontTextView
+                <TextView
                     android:id="@+id/search_item_desc_tv"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"

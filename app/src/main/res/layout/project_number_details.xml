@@ -11,7 +11,7 @@
             android:paddingRight="@dimen/project_item_big_padding">
 
 
-            <com.byoutline.secretsauce.views.CustomFontTextView
+            <TextView
                 android:id="@+id/project_item_big_gathered_money_tv"
                 style="@style/ProjectItemLightWhite"
                 android:layout_width="0dp"
@@ -20,14 +20,14 @@
                 tools:ignore="UnusedAttribute"
                 tools:text="$132 999"/>
 
-            <com.byoutline.secretsauce.views.CustomFontTextView
+            <TextView
                 android:id="@+id/project_item_big_backers_tv"
                 style="@style/ProjectItemLightWhite"
                 android:transitionName="@string/transition_backers_count"
                 tools:ignore="UnusedAttribute"
                 tools:text="4 026"/>
 
-            <com.byoutline.secretsauce.views.CustomFontTextView
+            <TextView
                 android:id="@+id/project_item_big_days_left"
                 style="@style/ProjectItemLightWhite"
                 android:transitionName="@string/transition_days_left"
@@ -43,7 +43,7 @@
             android:paddingRight="@dimen/project_item_big_padding">
 
 
-            <com.byoutline.secretsauce.views.CustomFontTextView
+            <TextView
                 android:id="@+id/project_item_big_pledged_of_tv"
                 style="@style/ProjectItemBoldValue.Normal.Light"
                 android:layout_weight="2"
@@ -51,14 +51,14 @@
                 android:transitionName="@string/transition_gathered_money_amount_label"
                 tools:ignore="UnusedAttribute"/>
 
-            <com.byoutline.secretsauce.views.CustomFontTextView
+            <TextView
                 android:id="@+id/project_item_big_backers_label_tv"
                 style="@style/ProjectItemBoldValue.Normal.Light"
                 android:text="@string/backers"
                 android:transitionName="@string/transition_backers_count_label"
                 tools:ignore="UnusedAttribute"/>
 
-            <com.byoutline.secretsauce.views.CustomFontTextView
+            <TextView
                 android:id="@+id/project_item_time_left_type_tv"
                 style="@style/ProjectItemBoldValue.Normal.Light"
                 android:text="@string/days_left"

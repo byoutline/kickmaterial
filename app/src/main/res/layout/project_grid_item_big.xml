@@ -25,14 +25,14 @@
                 android:orientation="vertical"
                 android:paddingBottom="20dp">
 
-                <com.byoutline.secretsauce.views.CustomFontTextView
+                <TextView
                     android:id="@+id/project_item_big_title_tv"
                     style="@style/ProjectItemNameStyle"
                     android:transitionName="@string/transition_project_title"
                     tools:ignore="UnusedAttribute"
                     tools:text="Project Title"/>
 
-                <com.byoutline.secretsauce.views.CustomFontTextView
+                <TextView
                     android:id="@+id/project_item_big_desc_tv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

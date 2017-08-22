@@ -43,13 +43,13 @@
                     android:paddingTop="@dimen/project_number_details_padding">
 
 
-                    <com.byoutline.secretsauce.views.CustomFontTextView
+                    <TextView
                         style="@style/ProjectDescription"
                         android:layout_marginLeft="@dimen/project_number_details_padding"
                         android:layout_marginRight="@dimen/project_number_details_padding"
                         android:text="@string/description"/>
 
-                    <com.byoutline.secretsauce.views.CustomFontTextView
+                    <TextView
                         android:id="@+id/project_description_tv"
                         style="@style/ProjectDescription"
                         android:layout_marginLeft="@dimen/project_number_details_padding"
@@ -61,7 +61,7 @@
                         tools:text="@string/description"
                     />
 
-                    <com.byoutline.secretsauce.views.CustomFontTextView
+                    <TextView
                         android:id="@+id/read_more_btn"
                         android:layout_width="match_parent"
                         android:layout_height="30dp"
@@ -101,13 +101,13 @@
                             android:paddingLeft="15dp">
 
 
-                            <com.byoutline.secretsauce.views.CustomFontTextView
+                            <TextView
                                 android:id="@+id/project_author_name_label_tv"
                                 style="@style/ProjectAuthorDetails"
                                 android:layout_marginTop="5dp"
                                 android:text="@string/created_by"/>
 
-                            <com.byoutline.secretsauce.views.CustomFontTextView
+                            <TextView
                                 android:id="@+id/project_author_name_tv"
                                 style="@style/ProjectAuthorDetails"
                                 android:text="@{project.getAuthorName()}"
@@ -127,7 +127,7 @@
                                 style="@style/ProjectAuthorDescContainer">
 
 
-                                <com.byoutline.secretsauce.views.CustomFontTextView
+                                <TextView
                                     style="@style/ProjectAuthorDescStyle"
                                     android:text="@string/comments"/>
 
@@ -136,7 +136,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"/>
 
-                                <com.byoutline.secretsauce.views.CustomFontTextView
+                                <TextView
                                     android:id="@+id/comments_count_value_tv"
                                     style="@style/ProjectAuthorValueStyle"
                                     android:text="@{String.valueOf(project.commentsCount)}"
@@ -153,7 +153,7 @@
                                 android:id="@+id/project_updates_ll"
                                 style="@style/ProjectAuthorDescContainer">
 
-                                <com.byoutline.secretsauce.views.CustomFontTextView
+                                <TextView
                                     style="@style/ProjectAuthorDescStyle"
                                     android:text="@string/updates"/>
 
@@ -162,7 +162,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"/>
 
-                                <com.byoutline.secretsauce.views.CustomFontTextView
+                                <TextView
                                     android:id="@+id/updates_count_value_tv"
                                     style="@style/ProjectAuthorValueStyle"
                                     android:text="@{String.valueOf(project.updatesCount)}"
@@ -224,7 +224,7 @@
                 android:orientation="vertical"
                 android:paddingBottom="5dp">
 
-                <com.byoutline.secretsauce.views.CustomFontTextView
+                <TextView
                     android:id="@+id/project_title_tv"
                     style="@style/LightFontStyle"
                     android:layout_width="match_parent"
@@ -241,7 +241,7 @@
                     tools:text="Rossies place show"/>
 
                 <!-- Session subtitle -->
-                <com.byoutline.secretsauce.views.CustomFontTextView
+                <TextView
                     android:id="@+id/project_subtitle_tv"
                     style="@style/LightFontStyle"
                     android:layout_width="match_parent"
@@ -268,7 +268,7 @@
                 android:paddingTop="0dp">
 
 
-                <com.byoutline.secretsauce.views.CustomFontTextView
+                <TextView
                     android:id="@+id/project_backing_progress"
                     style="@style/ProjectItemBoldValue.Normal.Light"
                     android:layout_width="match_parent"
@@ -282,7 +282,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                    <com.byoutline.secretsauce.views.CustomFontTextView
+                    <TextView
                         android:id="@+id/project_item_big_gathered_money_tv"
                         style="@style/ProjectItemLightWhite"
                         android:layout_width="0dp"
@@ -291,7 +291,7 @@
                         tools:ignore="UnusedAttribute"
                         tools:text="$132 999"/>
 
-                    <com.byoutline.secretsauce.views.CustomFontTextView
+                    <TextView
                         android:id="@+id/project_item_big_backers_tv"
                         style="@style/ProjectItemLightWhite"
                         android:text="@{Integer.toString(project.backers)}"
@@ -299,7 +299,7 @@
                         tools:ignore="UnusedAttribute"
                         tools:text="4 026"/>
 
-                    <com.byoutline.secretsauce.views.CustomFontTextView
+                    <TextView
                         android:id="@+id/project_item_big_days_left"
                         style="@style/ProjectItemLightWhite"
                         android:transitionName="@string/transition_days_left"
@@ -313,7 +313,7 @@
                     android:layout_height="wrap_content"
                 >
 
-                    <com.byoutline.secretsauce.views.CustomFontTextView
+                    <TextView
                         android:id="@+id/project_item_big_pledged_of_tv"
                         style="@style/ProjectItemBoldValue.Normal.Light"
                         android:layout_weight="2"
@@ -321,13 +321,13 @@
                         android:transitionName="@string/transition_gathered_money_amount_label"
                         tools:ignore="UnusedAttribute"/>
 
-                    <com.byoutline.secretsauce.views.CustomFontTextView
+                    <TextView
                         style="@style/ProjectItemBoldValue.Normal.Light"
                         android:text="@string/backers"
                         android:transitionName="@string/transition_backers_count_label"
                         tools:ignore="UnusedAttribute"/>
 
-                    <com.byoutline.secretsauce.views.CustomFontTextView
+                    <TextView
                         android:id="@+id/project_item_time_left_type_tv"
                         style="@style/ProjectItemBoldValue.Normal.Light"
                         android:text="@string/days_left"

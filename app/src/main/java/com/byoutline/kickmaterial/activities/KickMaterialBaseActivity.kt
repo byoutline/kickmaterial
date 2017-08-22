@@ -196,8 +196,8 @@ abstract class KickMaterialBaseActivity : BaseAppCompatActivity(), KickMaterialF
             val options: Bundle
             val decor = activity.window.decorView
 
-            val navBar = decor.findViewById(android.R.id.navigationBarBackground)
-            val toolbar = decor.findViewById(R.id.toolbar)
+            val navBar = decor.findViewById<View>(android.R.id.navigationBarBackground)
+            val toolbar = decor.findViewById<View>(R.id.toolbar)
 
             val sharedElements = sharedViews
                     .filterNotNull()

@@ -74,7 +74,7 @@
             </FrameLayout>
 
 
-            <com.byoutline.secretsauce.views.CustomFontTextView
+            <TextView
                 android:id="@+id/category_name_tv"
                 style="@style/RegularFontStyle"
                 android:layout_width="0dp"

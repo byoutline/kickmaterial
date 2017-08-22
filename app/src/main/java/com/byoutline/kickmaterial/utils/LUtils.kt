@@ -24,14 +24,14 @@ import android.graphics.ColorMatrixColorFilter
 import android.os.Build
 import android.support.annotation.AnimRes
 import android.support.v4.view.animation.LinearOutSlowInInterpolator
-import android.support.v7.app.ActionBarActivity
+import android.support.v7.app.AppCompatActivity
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
 
 
 @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-class LUtils private constructor(protected var mActivity: ActionBarActivity) {
+class LUtils private constructor(protected var mActivity: AppCompatActivity) {
     companion object {
 
 

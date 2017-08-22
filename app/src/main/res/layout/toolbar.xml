@@ -16,7 +16,7 @@
         app:theme="@style/ToolbarStyle"
         tools:ignore="UnusedAttribute">
 
-        <com.byoutline.secretsauce.views.CustomFontTextView
+        <TextView
             android:id="@+id/toolbar_title_tv"
             style="@style/TitleTextStyle"
             android:layout_width="wrap_content"

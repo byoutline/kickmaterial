@@ -74,9 +74,9 @@ class SearchAdapter(private val context: Context, private val projectClickListen
         internal var descTv: TextView
 
         init {
-            photoIv = v.findViewById(R.id.search_item_photo_iv) as ImageView
-            titleTv = v.findViewById(R.id.search_item_title_tv) as TextView
-            descTv = v.findViewById(R.id.search_item_desc_tv) as TextView
+            photoIv = v.findViewById(R.id.search_item_photo_iv)
+            titleTv = v.findViewById(R.id.search_item_title_tv)
+            descTv = v.findViewById(R.id.search_item_desc_tv)
             itemView.setOnClickListener(this)
         }
 

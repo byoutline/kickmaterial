@@ -44,7 +44,7 @@
 				android:orientation="vertical"
 			>
 
-				<com.byoutline.secretsauce.views.CustomFontTextView
+				<TextView
 					android:id="@+id/reward_item_amount_tv"
 					style="@style/LightFontStyle"
 					android:layout_width="match_parent"
@@ -57,7 +57,7 @@
 				/>
 
 
-				<com.byoutline.secretsauce.views.CustomFontTextView
+				<TextView
 					android:id="@+id/reward_item_currency_tv"
 					style="@style/RewardItemCurrencyStyle"
 					android:textSize="@dimen/font_11"
@@ -77,7 +77,7 @@
 			>
 
 
-				<com.byoutline.secretsauce.views.CustomFontTextView
+				<TextView
 					android:id="@+id/reward_item_type_tv"
 					style="@style/RegularFontStyle"
 					android:layout_width="match_parent"
@@ -92,7 +92,7 @@
 				/>
 
 
-				<com.byoutline.secretsauce.views.CustomFontTextView
+				<TextView
 					android:id="@+id/reward_item_desc_tv"
 					style="@style/RewardItemCurrencyStyle"
 					android:ellipsize="end"

@@ -141,7 +141,7 @@ class CategoriesListActivity : KickMaterialBaseActivity(), CategoryClickListener
 
 
     override fun categoryClicked(view: View, category: Category) {
-        val checkedView = view.findViewById(R.id.checked_view)
+        val checkedView = view.findViewById<View>(R.id.checked_view)
         ViewUtils.showView(checkedView, true)
         categoryClicked(category)
     }

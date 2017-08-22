@@ -74,7 +74,7 @@
 				fab:image="@drawable/icon_plus"
 				tools:ignore="UnusedAttribute"/>
 
-			<com.byoutline.secretsauce.views.CustomFontTextView
+			<TextView
 				android:id="@+id/select_category_tv"
 				style="@style/LightFontStyle"
 				android:layout_width="match_parent"
