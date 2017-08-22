@@ -2,6 +2,7 @@ package com.byoutline.kickmaterial.activities
 
 import android.content.Context
 import android.content.Intent
+import android.databinding.DataBindingUtil
 import android.media.MediaPlayer
 import android.net.Uri
 import android.os.Bundle
@@ -9,9 +10,8 @@ import android.text.TextUtils
 import android.view.Window
 import android.view.WindowManager
 import android.widget.VideoView
-import butterknife.BindView
-import butterknife.ButterKnife
 import com.byoutline.kickmaterial.R
+import com.byoutline.kickmaterial.databinding.ActivityVideoBinding
 import com.byoutline.kickmaterial.model.ProjectDetails
 import com.byoutline.kickmaterial.views.VideoController
 import com.byoutline.secretsauce.utils.LogUtils
@@ -21,15 +21,14 @@ import com.byoutline.secretsauce.utils.LogUtils
  */
 class VideoActivity : KickMaterialBaseActivity() {
 
-     @JvmField @BindView(R.id.video_view)
-    var videoView: VideoView? = null
+    lateinit var videoView: VideoView
 
     public override fun onCreate(savedInstanceState: Bundle?) {
         requestWindowFeature(Window.FEATURE_NO_TITLE)
         window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_video)
-        ButterKnife.bind(this)
+        val binding = DataBindingUtil.setContentView<ActivityVideoBinding>(this, R.layout.activity_video)
+        videoView = binding.videoView
         if (savedInstanceState == null) {
             setDataFromArgs()
         }
@@ -55,28 +54,28 @@ class VideoActivity : KickMaterialBaseActivity() {
         val altVideoUrl = args.getString(BUNDLE_ALT_VIDEO_URL)
         val webviewUrl = args.getString(BUNDLE_WEBVIEW_URL)
         val uri = Uri.parse(videoUrl)
-        videoView!!.setMediaController(VideoController(this, webviewUrl))
-        videoView!!.setVideoURI(uri)
-        videoView!!.setOnErrorListener(object : MediaPlayer.OnErrorListener {
+        videoView.setMediaController(VideoController(this, webviewUrl))
+        videoView.setVideoURI(uri)
+        videoView.setOnErrorListener(object : MediaPlayer.OnErrorListener {
             internal var tryAltVideo = !TextUtils.isEmpty(altVideoUrl)
 
             override fun onError(mediaPlayer: MediaPlayer, i: Int, i1: Int): Boolean {
                 if (tryAltVideo) {
                     tryAltVideo = false
-                    videoView!!.setVideoURI(Uri.parse(altVideoUrl))
-                    videoView!!.start()
+                    videoView.setVideoURI(Uri.parse(altVideoUrl))
+                    videoView.start()
                     return true
                 }
                 return false
             }
         })
-        videoView!!.setOnCompletionListener { mediaPlayer -> finish() }
-        videoView!!.requestFocus()
+        videoView.setOnCompletionListener { finish() }
+        videoView.requestFocus()
     }
 
     override fun onStart() {
         super.onStart()
-        videoView!!.start()
+        videoView.start()
     }
 
     override fun setToolbarAlpha(alpha: Float) {

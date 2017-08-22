@@ -1,31 +1,25 @@
 package com.byoutline.kickmaterial.fragments
 
-import android.annotation.TargetApi
 import android.content.SharedPreferences
 import android.graphics.Color
-import android.os.Build
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
-import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.*
-import android.widget.ImageView
-import butterknife.BindView
-import butterknife.ButterKnife
-import butterknife.OnClick
 import com.byoutline.cachedfield.CachedFieldWithArg
 import com.byoutline.cachedfield.FieldState
 import com.byoutline.cachedfield.FieldStateListener
 import com.byoutline.ibuscachedfield.util.RetrofitHelper
 import com.byoutline.kickmaterial.KickMaterialApp
 import com.byoutline.kickmaterial.R
-import com.byoutline.kickmaterial.activities.CategoriesListActivity.Companion.ARG_CATEGORY
-import com.byoutline.kickmaterial.activities.CategoriesListActivity.Companion.launch
-import com.byoutline.kickmaterial.activities.ProjectDetailsActivity
+import com.byoutline.kickmaterial.activities.ARG_CATEGORY
+import com.byoutline.kickmaterial.activities.CategoriesListActivity
+import com.byoutline.kickmaterial.activities.startProjectDetailsActivity
 import com.byoutline.kickmaterial.adapters.ProjectClickListener
 import com.byoutline.kickmaterial.adapters.ProjectsAdapter
 import com.byoutline.kickmaterial.adapters.SharedViews
+import com.byoutline.kickmaterial.databinding.FragmentProjectsBinding
 import com.byoutline.kickmaterial.events.CategoriesFetchedEvent
 import com.byoutline.kickmaterial.events.DiscoverProjectsFetchedErrorEvent
 import com.byoutline.kickmaterial.events.DiscoverProjectsFetchedEvent
@@ -38,7 +32,6 @@ import com.byoutline.kickmaterial.utils.LUtils
 import com.byoutline.kickmaterial.views.EndlessRecyclerView
 import com.byoutline.ottoeventcallback.PostFromAnyThreadBus
 import com.byoutline.secretsauce.utils.ViewUtils
-import com.software.shell.fab.ActionButton
 import com.squareup.otto.Bus
 import com.squareup.otto.Subscribe
 import timber.log.Timber
@@ -48,17 +41,8 @@ import javax.inject.Inject
  * @author Pawel Karczewski <pawel.karczewski at byoutline.com> on 2015-01-03
  */
 class ProjectsListFragment : KickMaterialFragment(), ProjectClickListener, FieldStateListener, EndlessRecyclerView.EndlessScrollListener {
-    var summaryScrolled: Float = 0.toFloat()
-    @JvmField @BindView(R.id.project_recycler_view)
-    var projectListRv: EndlessRecyclerView? = null
-    @JvmField @BindView(R.id.swipe_refresh_projects_srl)
-    var swipeRefreshLayout: SwipeRefreshLayout? = null
-    @JvmField @BindView(R.id.bubbles_iv)
-    var bubblesIv: ImageView? = null
-    @JvmField @BindView(R.id.show_categories_fab)
-    var showCategoriesFab: ActionButton? = null
-    @JvmField @BindView(R.id.main_parent_rl)
-    var mainParent: View? = null
+    var summaryScrolled: Float = 0f
+
     @Inject
     lateinit var bus: Bus
     @Inject
@@ -74,27 +58,29 @@ class ProjectsListFragment : KickMaterialFragment(), ProjectClickListener, Field
     private var page = 1
     private var lastAvailablePage = Integer.MAX_VALUE
     private var category: Category? = null
+    private lateinit var binding: FragmentProjectsBinding
     /**
      * Endless scroll variables *
      */
     private var layoutManager: GridLayoutManager? = null
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        rootView = inflater!!.inflate(R.layout.fragment_projects, container, false)
+        val binding = FragmentProjectsBinding.inflate(inflater, container, false)
+        this.binding = binding
+
         KickMaterialApp.component.inject(this)
-        ButterKnife.bind(this, rootView!!)
-        hostActivity?.enableActionBarAutoHide(projectListRv!!)
+        hostActivity?.enableActionBarAutoHide(binding.projectRecyclerView)
         maxScroll = (2 * resources.getDimensionPixelSize(R.dimen.project_header_padding_top) + ViewUtils.dpToPx(48f, activity)).toFloat()
         actionbarScrollPoint = ViewUtils.dpToPx(24f, activity).toFloat()
         getArgs()
         setHasOptionsMenu(true)
-        return rootView
+        return binding.root
     }
 
     private fun getArgs() {
         val args = arguments
         if (args != null && args.containsKey(ARG_CATEGORY)) {
-            category = args.getParcelable<Category>(ARG_CATEGORY)
+            category = args.getParcelable(ARG_CATEGORY)
         } else {
             Timber.e("Category not passed")
         }
@@ -109,8 +95,8 @@ class ProjectsListFragment : KickMaterialFragment(), ProjectClickListener, Field
 
     fun configureSwipeRefresh() {
         val altColor = if (category == null) R.color.green_dark else category!!.colorResId
-        swipeRefreshLayout!!.setColorSchemeResources(altColor, R.color.green_primary)
-        swipeRefreshLayout!!.setOnRefreshListener {
+        binding.swipeRefreshProjectsSrl.setColorSchemeResources(altColor, R.color.green_primary)
+        binding.swipeRefreshProjectsSrl.setOnRefreshListener {
             // Throw away all loaded categories and start over.
             val pageToRefresh = 1
             discoverField.refresh(DiscoverQuery.getDiscoverQuery(category, pageToRefresh))
@@ -119,28 +105,31 @@ class ProjectsListFragment : KickMaterialFragment(), ProjectClickListener, Field
 
     override fun setUpListeners() {
         super.setUpListeners()
-        projectListRv!!.setOnScrollListener(object : RecyclerView.OnScrollListener() {
+        binding.showCategoriesFab.setOnClickListener {
+            CategoriesListActivity.launch(activity, category!!, binding.showCategoriesFab)
+        }
+        binding.projectRecyclerView.setOnScrollListener(object : RecyclerView.OnScrollListener() {
 
             override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
 
                 if (dy > actionbarScrollPoint) {
                     hostActivity?.showActionbar(false, true)
-                    if (!showCategoriesFab!!.isHidden) {
-                        showCategoriesFab!!.hide()
+                    if (!binding.showCategoriesFab.isHidden) {
+                        binding.showCategoriesFab.hide()
                     }
                 }
 
                 if (dy < actionbarScrollPoint * -1) {
                     hostActivity?.showActionbar(true, true)
 
-                    if (showCategoriesFab!!.isHidden) {
-                        showCategoriesFab!!.show()
+                    if (binding.showCategoriesFab.isHidden) {
+                        binding.showCategoriesFab.show()
                     }
                 }
 
                 summaryScrolled += dy.toFloat()
-                bubblesIv!!.translationY = -0.5f * summaryScrolled
+                binding.bubblesIv.translationY = -0.5f * summaryScrolled
 
                 var alpha = summaryScrolled / maxScroll
                 alpha = Math.min(1.0f, alpha)
@@ -149,8 +138,7 @@ class ProjectsListFragment : KickMaterialFragment(), ProjectClickListener, Field
 
                 //change background color on scroll
                 val color = Math.max(BG_COLOR_MIN.toDouble(), BG_COLOR_MAX - summaryScrolled * 0.05).toInt()
-                mainParent!!.setBackgroundColor(Color.argb(255, color, color, color))
-
+                binding.mainParentRl.setBackgroundColor(Color.argb(255, color, color, color))
             }
         })
     }
@@ -175,7 +163,7 @@ class ProjectsListFragment : KickMaterialFragment(), ProjectClickListener, Field
         loadCurrentPage()
 
         if (category != null) {
-            showCategoriesFab!!.buttonColor = ContextCompat.getColor(context, category!!.colorResId)
+            binding.showCategoriesFab.buttonColor = ContextCompat.getColor(context, category!!.colorResId)
         }
     }
 
@@ -210,12 +198,12 @@ class ProjectsListFragment : KickMaterialFragment(), ProjectClickListener, Field
             }
         }
 
-        projectListRv!!.setEndlessScrollListener(this)
-        projectListRv!!.layoutManager = layoutManager
+        binding.projectRecyclerView.setEndlessScrollListener(this)
+        binding.projectRecyclerView.layoutManager = layoutManager
 
 
         adapter = ProjectsAdapter(activity, this, showHeader, itemViewTypeProvider)
-        projectListRv!!.adapter = adapter
+        binding.projectRecyclerView.adapter = adapter
     }
 
     private fun restoreDefaultScreenLook() {
@@ -223,30 +211,15 @@ class ProjectsListFragment : KickMaterialFragment(), ProjectClickListener, Field
         LUtils.setStatusBarColor(activity, ContextCompat.getColor(context, R.color.status_bar_color))
     }
 
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    @OnClick(R.id.show_categories_fab)
-    fun showCategories() {
-        //        projectListRv.startAnimation(AnimationUtils.loadAnimation(getActivity(), R.anim.projects_list_hide_anim));
-        launch(activity, category!!, showCategoriesFab!!)
-    }
-
     override val fragmentActionbarName: String
-        get() {
-            if (category != null) {
-                return getString(category!!.nameResId)
-            } else {
-                return "Projects"
-            }
-        }
+        get() = category?.let { getString(it.nameResId) } ?: "Projects"
 
-    override fun showBackButtonInActionbar(): Boolean {
-        return false
-    }
+    override fun showBackButtonInActionbar() = false
 
     override fun projectClicked(position: Int, views: SharedViews) {
         val project = adapter!!.getItem(position)
-        views.add(showCategoriesFab!!)
-        ProjectDetailsActivity.launch(activity, project!!, *views.asArray())
+        views.add(binding.showCategoriesFab)
+        activity.startProjectDetailsActivity(project!!, views)
     }
 
     private fun isDiscoverFetchErrorCausedByLastPage(event: DiscoverProjectsFetchedErrorEvent): Boolean {
@@ -280,7 +253,7 @@ class ProjectsListFragment : KickMaterialFragment(), ProjectClickListener, Field
     fun onDiscoverProjects(event: DiscoverProjectsFetchedEvent) {
         // ignore search result.
         if (event.argValue.discoverType != DiscoverType.SEARCH) {
-            if (event.response.projects != null && event.response.projects!!.size > 0) {
+            if (event.response.projects != null && event.response.projects!!.isNotEmpty()) {
                 lastAvailablePage = Integer.MAX_VALUE
             }
 
@@ -301,9 +274,7 @@ class ProjectsListFragment : KickMaterialFragment(), ProjectClickListener, Field
 
     override fun fieldStateChanged(newState: FieldState) {
         PostFromAnyThreadBus.runInMainThread {
-            if (swipeRefreshLayout != null) {
-                swipeRefreshLayout!!.isRefreshing = newState == FieldState.CURRENTLY_LOADING
-            }
+            binding.swipeRefreshProjectsSrl.isRefreshing = newState == FieldState.CURRENTLY_LOADING
         }
     }
 

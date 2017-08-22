@@ -2,6 +2,9 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <variable name="header" type="com.byoutline.kickmaterial.managers.RewardHeader"/>
+    </data>
     <TextView
         android:id="@+id/reward_header_tv"
         style="@style/LightFontStyle"
@@ -14,6 +17,7 @@
         android:paddingTop="12dp"
         android:textColor="@color/text_grey"
         android:textSize="@dimen/font_15"
+        android:text="@{@string/reward_more_than(header.minimum)}"
         tools:text="More than 100"/>
 </layout>
 

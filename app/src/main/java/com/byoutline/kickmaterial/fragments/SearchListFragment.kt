@@ -10,7 +10,7 @@ import android.view.*
 import com.byoutline.cachedfield.CachedFieldWithArg
 import com.byoutline.kickmaterial.KickMaterialApp
 import com.byoutline.kickmaterial.R
-import com.byoutline.kickmaterial.activities.ProjectDetailsActivity
+import com.byoutline.kickmaterial.activities.startProjectDetailsActivity
 import com.byoutline.kickmaterial.adapters.ProjectClickListener
 import com.byoutline.kickmaterial.adapters.SearchAdapter
 import com.byoutline.kickmaterial.adapters.SharedViews
@@ -150,16 +150,14 @@ class SearchListFragment : KickMaterialFragment(), ProjectClickListener, Endless
 
     override fun projectClicked(position: Int, views: SharedViews) {
         val project = adapter!!.getItem(position)!!
-        ProjectDetailsActivity.launch(activity, project, *views.asArray())
+        activity.startProjectDetailsActivity(project, views)
     }
 
     @Subscribe
     fun onSearchResultFetched(event: DiscoverProjectsFetchedEvent) {
         loading = false
 
-        if (event.response.projects?.isNotEmpty() ?: false) {
-            hasMore = true
-        }
+        hasMore = event.response.projects?.isNotEmpty() == true
 
         if (event.argValue.discoverType == DiscoverType.SEARCH) {
             currentProjects.addAll(event.response.projects!!)

@@ -60,7 +60,7 @@ class MainActivity : KickMaterialBaseActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         val categorySelection = requestCode == CategoriesListActivity.DEFAULT_REQUEST_CODE
         if (categorySelection && resultCode == CategoriesListActivity.RESULT_CATEGORY_SELECTED) {
-            val category = data?.getParcelableExtra<Category>(CategoriesListActivity.ARG_CATEGORY) ?: return
+            val category = data?.getParcelableExtra<Category>(ARG_CATEGORY) ?: return
             showFragment(ProjectsListFragment.newInstance(category), true)
             setToolbarText(getString(category.nameResId))
         }

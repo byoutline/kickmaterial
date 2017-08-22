@@ -17,8 +17,6 @@ dependencies {
     compile "com.android.support:cardview-v7:$support_version"
     compile "com.android.support:recyclerview-v7:$support_version"
     compile "com.android.support:palette-v7:$support_version"
-    compile 'com.jakewharton:butterknife:8.7.0'
-    kapt 'com.jakewharton:butterknife-compiler:8.7.0'
     compile 'com.byoutline.secretsauce:secretsauce:0.5.3'
     compile 'com.byoutline.ottocachedfield:observablecachedfield:1.1.0'
     compile 'com.byoutline.androidstubserver:stubserver:2.0.0-beta2-SNAPSHOT'
@@ -45,8 +43,9 @@ dependencies {
 
     compile 'joda-time:joda-time:2.9.9'
     compile 'org.joda:joda-convert:1.7'
-    provided 'com.google.auto.value:auto-value:1.4.1'
 
+    compile 'com.hannesdorfmann.fragmentargs:annotation:3.0.2'
+    kapt 'com.hannesdorfmann.fragmentargs:processor:3.0.2'
 
     compile 'com.kenai.nbpwr:edu-umd-cs-findbugs-annotations:1.3.2-201002241900'
     compile 'com.jakewharton.timber:timber:4.5.1'

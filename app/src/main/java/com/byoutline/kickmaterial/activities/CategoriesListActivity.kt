@@ -19,8 +19,6 @@ import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewAnimationUtils
 import android.view.animation.OvershootInterpolator
-import butterknife.ButterKnife
-import butterknife.OnClick
 import com.byoutline.cachedfield.CachedFieldWithArg
 import com.byoutline.kickmaterial.KickMaterialApp
 import com.byoutline.kickmaterial.R
@@ -34,8 +32,6 @@ import com.byoutline.kickmaterial.utils.AnimatorUtils
 import com.byoutline.kickmaterial.utils.LUtils
 import com.byoutline.kickmaterial.views.CategoriesListSeparator
 import com.byoutline.secretsauce.utils.ViewUtils
-
-import timber.log.Timber
 import javax.inject.Inject
 
 
@@ -52,72 +48,67 @@ class CategoriesListActivity : KickMaterialBaseActivity(), CategoryClickListener
     private var revealAnimation: Animator? = null
     private var category: Category? = null
     private var summaryScrolledValue: Int = 0
-    private var binding: ActivityCategoryListBinding? = null
+    private lateinit var binding: ActivityCategoryListBinding
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val bind = DataBindingUtil.setContentView<ActivityCategoryListBinding>(this, R.layout.activity_category_list)
-        binding = bind
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_category_list)
+        category = intent.extras.getParcelable(ARG_CATEGORY)
 
         injectViewsAndSetUpToolbar()
         KickMaterialApp.component.inject(this)
-        ButterKnife.bind(this)
-        handleArguments()
-        setUpAdapters(bind)
+        setUpAdapters()
         setUpListeners()
         launchPostTransitionAnimations()
     }
 
     private fun setUpListeners() {
-        binding!!.categoriesRv.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
-                super.onScrolled(recyclerView, dx, dy)
-                summaryScrolledValue += dy
-                binding!!.circleImageContainer.translationY = -0.5f * summaryScrolledValue
-                binding!!.categoriesHeaderLl.translationY = (-summaryScrolledValue).toFloat()
-            }
-        })
+        with(binding) {
+            categoriesRv.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+                override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
+                    super.onScrolled(recyclerView, dx, dy)
+                    summaryScrolledValue += dy
+                    circleImageContainer.translationY = -0.5f * summaryScrolledValue
+                    categoriesHeaderLl.translationY = (-summaryScrolledValue).toFloat()
+                }
+            })
+            closeCategoriesIv.setOnClickListener { finishWithoutResult() }
+        }
     }
 
     private fun launchPostTransitionAnimations() {
+        val category = this.category
         if (category != null) {
-            val color = ContextCompat.getColor(this, category!!.colorResId)
-            binding!!.categoryCircleIv.setColorFilter(color)
-            binding!!.selectedCategoryIv.setImageResource(category!!.drawableResId)
-            binding!!.selectCategoryTv.setBackgroundColor(color)
-            binding!!.selectCategoryTv.background.alpha = 85
+            val color = ContextCompat.getColor(this, category.colorResId)
+            with(binding) {
+                categoryCircleIv.setColorFilter(color)
+                selectedCategoryIv.setImageResource(category.drawableResId)
+                selectCategoryTv.setBackgroundColor(color)
+                selectCategoryTv.background.alpha = 85
+            }
         }
         if (LUtils.hasL()) {
-            binding!!.closeCategoriesIv.scaleX = 0f
-            binding!!.closeCategoriesIv.scaleY = 0f
+            binding.closeCategoriesIv.scaleX = 0f
+            binding.closeCategoriesIv.scaleY = 0f
             ActivityCompat.setEnterSharedElementCallback(this, object : SharedElementCallback() {
                 override fun onSharedElementEnd(sharedElementNames: List<String>?, sharedElements: List<View>?, sharedElementSnapshots: List<View>?) {
-                    binding!!.closeCategoriesIv.postDelayed({
+                    binding.closeCategoriesIv.postDelayed({
                         // remove listener, we do not want to trigger this animation on exit
                         ActivityCompat.setEnterSharedElementCallback(this@CategoriesListActivity, null)
                         if (isFinishing) {
                             return@postDelayed
                         }
 
-                        val closeCategoryAnim = AnimatorUtils.getScaleAnimator(binding!!.closeCategoriesIv, 0f, 1f)
+                        val closeCategoryAnim = AnimatorUtils.getScaleAnimator(binding.closeCategoriesIv, 0f, 1f)
                         closeCategoryAnim.interpolator = OvershootInterpolator()
                         closeCategoryAnim.start()
                     }, 160)
                 }
             })
         }
-        binding!!.categoriesRv.post { binding!!.categoriesRv.startAnimation(LUtils.loadAnimationWithLInterpolator(applicationContext, R.anim.slide_from_bottom)) }
-    }
-
-    private fun handleArguments() {
-        val args = intent.extras
-        if (args != null && args.containsKey(ARG_CATEGORY)) {
-            category = args.getParcelable(ARG_CATEGORY)
-        } else {
-            Timber.e("Category not passed")
-        }
+        binding.categoriesRv.post { binding.categoriesRv.startAnimation(LUtils.loadAnimationWithLInterpolator(applicationContext, R.anim.slide_from_bottom)) }
     }
 
     public override fun onResume() {
@@ -138,13 +129,10 @@ class CategoriesListActivity : KickMaterialBaseActivity(), CategoryClickListener
         super.onRestoreInstanceState(savedInstanceState)
     }
 
-    private fun setUpAdapters(binding: ActivityCategoryListBinding) {
+    private fun setUpAdapters() {
         binding.categoriesRv.addItemDecoration(CategoriesListSeparator(this.applicationContext))
 
-        var itemColor = R.color.green_primary
-        if (category != null) {
-            itemColor = category!!.colorResId
-        }
+        val itemColor = category?.colorResId ?: R.color.green_primary
         val bgColor = ContextCompat.getColor(this, itemColor)
         viewModel.setAllCategoriesBgColor(bgColor)
         binding.categoryClickListener = this
@@ -168,8 +156,8 @@ class CategoriesListActivity : KickMaterialBaseActivity(), CategoryClickListener
     private fun animateCategoryColor(clickedCategory: Category): Category {
         val color = ContextCompat.getColor(this, clickedCategory.colorResId)
 
-        binding!!.selectedCategoryIv.setImageResource(clickedCategory.drawableResId)
-        binding!!.categoryCircleRevealIv.setColorFilter(color)
+        binding.selectedCategoryIv.setImageResource(clickedCategory.drawableResId)
+        binding.categoryCircleRevealIv.setColorFilter(color)
 
         animateCircleReveal(color, clickedCategory)
         return clickedCategory
@@ -179,41 +167,42 @@ class CategoriesListActivity : KickMaterialBaseActivity(), CategoryClickListener
     private fun animateCircleReveal(color: Int, category: Category?) {
         // get the center for the clipping circle
 
-        val cx = (binding!!.categoryCircleRevealIv.left + binding!!.categoryCircleRevealIv.right) / 2
-        val cy = binding!!.categoryCircleRevealIv.top + binding!!.categoryCircleRevealIv.bottom
+        val cx = (binding.categoryCircleRevealIv.left + binding.categoryCircleRevealIv.right) / 2
+        val cy = binding.categoryCircleRevealIv.top + binding.categoryCircleRevealIv.bottom
 
 
-        val finalRadius = Math.max(binding!!.categoryCircleRevealIv.width, binding!!.categoryCircleRevealIv.height)
+        val finalRadius = Math.max(binding.categoryCircleRevealIv.width, binding.categoryCircleRevealIv.height)
 
 
         if (LUtils.hasL()) {
-            if (revealAnimation != null && revealAnimation!!.isRunning) {
-                revealAnimation!!.end()
-            }
-            revealAnimation = ViewAnimationUtils.createCircularReveal(binding!!.categoryCircleRevealIv, cx, cy, 0.4f * finalRadius, finalRadius.toFloat())
-            revealAnimation!!.addListener(object : AnimatorListenerAdapter() {
+            revealAnimation?.end()
+            val anim = ViewAnimationUtils.createCircularReveal(binding.categoryCircleRevealIv, cx, cy, 0.4f * finalRadius, finalRadius.toFloat())
+            revealAnimation = anim
+            anim.addListener(object : AnimatorListenerAdapter() {
                 override fun onAnimationStart(animation: Animator) {
                     super.onAnimationStart(animation)
-                    ViewUtils.showView(binding!!.categoryCircleRevealIv, true)
-                    binding!!.selectCategoryTv.setBackgroundColor(Color.TRANSPARENT)
+                    ViewUtils.showView(binding.categoryCircleRevealIv, true)
+                    binding.selectCategoryTv.setBackgroundColor(Color.TRANSPARENT)
                     LUtils.setStatusBarColor(this@CategoriesListActivity, color)
                 }
 
                 override fun onAnimationEnd(animation: Animator) {
                     super.onAnimationEnd(animation)
-                    if (binding!!.categoryCircleIv != null) {
-                        binding!!.categoryCircleIv.setColorFilter(color)
-                        binding!!.selectCategoryTv.setBackgroundColor(color)
-                        binding!!.selectCategoryTv.background.alpha = 85
-                        binding!!.categoryCircleRevealIv.visibility = View.INVISIBLE
+                    with(binding) {
+                        if (categoryCircleIv != null) {
+                            categoryCircleIv.setColorFilter(color)
+                            selectCategoryTv.setBackgroundColor(color)
+                            selectCategoryTv.background.alpha = 85
+                            categoryCircleRevealIv.visibility = View.INVISIBLE
+                        }
                     }
                 }
             })
-            revealAnimation!!.duration = REVEAL_ANIM_DURATION.toLong()
-            revealAnimation!!.interpolator = FastOutSlowInInterpolator()
-            revealAnimation!!.start()
+            anim.duration = REVEAL_ANIM_DURATION.toLong()
+            anim.interpolator = FastOutSlowInInterpolator()
+            anim.start()
         } else {
-            binding!!.categoryCircleIv.setColorFilter(color)
+            binding.categoryCircleIv.setColorFilter(color)
         }
         if (category != null) {
             finishWithResult(category)
@@ -238,28 +227,26 @@ class CategoriesListActivity : KickMaterialBaseActivity(), CategoryClickListener
 
     private fun runFinishAnimation(finishAction: Runnable) {
         if (summaryScrolledValue > 0) {
-            binding!!.categoriesRv.smoothScrollToPosition(0)
+            binding.categoriesRv.smoothScrollToPosition(0)
         }
 
-        ViewUtils.showView(binding!!.selectCategoryTv, false)
-        val imageFade = ObjectAnimator.ofFloat<View>(binding!!.selectedCategoryIv, View.ALPHA, 1f, 0f)
+        ViewUtils.showView(binding.selectCategoryTv, false)
+        val imageFade = ObjectAnimator.ofFloat<View>(binding.selectedCategoryIv, View.ALPHA, 1f, 0f)
         val set = AnimatorSet()
-        val closeButtonScale = AnimatorUtils.getScaleAnimator(binding!!.closeCategoriesIv, 1f, 0.1f)
+        val closeButtonScale = AnimatorUtils.getScaleAnimator(binding.closeCategoriesIv, 1f, 0.1f)
         set.playTogether(closeButtonScale, imageFade)
         set.duration = FINISH_ANIMATION_DURATION.toLong()
         set.addListener(object : AnimatorListenerAdapter() {
             override fun onAnimationEnd(animation: Animator) {
-                if (revealAnimation != null) {
-                    revealAnimation!!.cancel()
-                }
-                ViewUtils.showView(binding!!.categoryCircleRevealIv, false)
+                revealAnimation?.cancel()
+                ViewUtils.showView(binding.categoryCircleRevealIv, false)
 
-                binding!!.closeCategoriesIv.scaleX = 0f
-                binding!!.closeCategoriesIv.scaleY = 0f
+                binding.closeCategoriesIv.scaleX = 0f
+                binding.closeCategoriesIv.scaleY = 0f
                 finishAction.run()
             }
         })
-        binding!!.categoriesRv.startAnimation(LUtils.loadAnimationWithLInterpolator(applicationContext, R.anim.slide_to_bottom))
+        binding.categoriesRv.startAnimation(LUtils.loadAnimationWithLInterpolator(applicationContext, R.anim.slide_to_bottom))
         set.start()
     }
 
@@ -268,16 +255,10 @@ class CategoriesListActivity : KickMaterialBaseActivity(), CategoryClickListener
         finishWithoutResult()
     }
 
-    @OnClick(R.id.close_categories_iv)
-    fun onCloseCategories() {
-        finishWithoutResult()
-    }
-
     override fun setToolbarAlpha(alpha: Float) {}
 
     companion object {
 
-        const val ARG_CATEGORY = "ARG_CATEGORY"
         const val REVEAL_ANIM_DURATION = 400
         const val FINISH_ANIMATION_DURATION = REVEAL_ANIM_DURATION + 100
         const val RESULT_CATEGORY_SELECTED = 13
@@ -288,8 +269,10 @@ class CategoriesListActivity : KickMaterialBaseActivity(), CategoryClickListener
         fun launch(context: Activity, category: Category, sharedElement: View) {
             val options = KickMaterialBaseActivity.getSharedElementsBundle(context, sharedElement)
             val intent = Intent(context, CategoriesListActivity::class.java)
-            intent.putExtra(ARG_CATEGORY, category)
+                    .apply { putExtra(ARG_CATEGORY, category) }
             ActivityCompat.startActivityForResult(context, intent, DEFAULT_REQUEST_CODE, options)
         }
     }
 }
+
+const val ARG_CATEGORY = "ARG_CATEGORY"

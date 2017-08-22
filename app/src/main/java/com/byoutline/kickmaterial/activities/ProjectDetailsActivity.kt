@@ -14,11 +14,10 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.view.animation.AnimationUtils
-import butterknife.ButterKnife
-import butterknife.OnClick
 import com.byoutline.kickmaterial.KickMaterialApp
 import com.byoutline.kickmaterial.R
 import com.byoutline.kickmaterial.adapters.ProjectsAdapter
+import com.byoutline.kickmaterial.adapters.SharedViews
 import com.byoutline.kickmaterial.databinding.ActivityProjectDetailsBinding
 import com.byoutline.kickmaterial.events.ProjectDetailsFetchedEvent
 import com.byoutline.kickmaterial.model.Project
@@ -54,7 +53,6 @@ class ProjectDetailsActivity : KickMaterialBaseActivity(), ObservableScrollView.
 
     private var minTitlesMarginTop: Int = 0
 
-    private var project: Project? = null
     private var projectDetails: ProjectDetails? = null
     private var maxTitlesMarginTop: Int = 0
     private var maxTitlesMarginLeft: Int = 0
@@ -64,21 +62,22 @@ class ProjectDetailsActivity : KickMaterialBaseActivity(), ObservableScrollView.
     private var maxTitlePaddingRight: Int = 0
     private var imageWidth: Int = 0
     private var imageHeight: Int = 0
-    private var binding: ActivityProjectDetailsBinding? = null
+    private lateinit var project: Project
+    private lateinit var binding: ActivityProjectDetailsBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView<ActivityProjectDetailsBinding>(this, R.layout.activity_project_details)
-        ButterKnife.bind(this)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_project_details)
         KickMaterialApp.component.inject(this)
-        binding!!.project = projectDetailsField.observable()
+        binding.project = projectDetailsField.observable()
         supportPostponeEnterTransition()
-        handleArguments()
+        project = intent.extras.getParcelable(EXTRA_PROJECT)
+        setUpListeners()
 
         injectViewsAndSetUpToolbar()
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.setDisplayShowTitleEnabled(false) // Hide default toolbar title
-        binding!!.scrollView.addCallbacks(this)
+        binding.scrollView.addCallbacks(this)
         minTitlesMarginTop = ViewUtils.dpToPx(32f, applicationContext)
         maxTitlesMarginTop = resources.getDimensionPixelSize(R.dimen.titles_container_margin_top) - resources.getDimensionPixelSize(R.dimen.status_bar_height)
 
@@ -90,7 +89,7 @@ class ProjectDetailsActivity : KickMaterialBaseActivity(), ObservableScrollView.
         titleFontMinSize = resources.getDimensionPixelSize(R.dimen.font_16)
         imageHeight = resources.getDimensionPixelSize(R.dimen.project_details_photo_height)
         imageWidth = (imageHeight * ProjectsAdapter.IMAGE_RATIO).toInt()
-        binding!!.detailsContainer.startAnimation(AnimationUtils.loadAnimation(this@ProjectDetailsActivity, R.anim.slide_from_bottom))
+        binding.detailsContainer.startAnimation(AnimationUtils.loadAnimation(this@ProjectDetailsActivity, R.anim.slide_from_bottom))
         loadProjectData()
         launchPostTransitionAnimations()
     }
@@ -99,9 +98,9 @@ class ProjectDetailsActivity : KickMaterialBaseActivity(), ObservableScrollView.
         if (LUtils.hasL()) {
             ActivityCompat.setEnterSharedElementCallback(this, object : SharedElementCallback() {
                 override fun onSharedElementEnd(sharedElementNames: List<String>?, sharedElements: List<View>?, sharedElementSnapshots: List<View>?) {
-                    binding!!.detailsContainer.postDelayed({
-                        binding!!.detailsContainer.startAnimation(LUtils.loadAnimationWithLInterpolator(this@ProjectDetailsActivity, R.anim.slide_from_top))
-                        binding!!.scrollView.startAnimation(LUtils.loadAnimationWithLInterpolator(this@ProjectDetailsActivity, R.anim.slide_from_top_long))
+                    binding.detailsContainer.postDelayed({
+                        binding.detailsContainer.startAnimation(LUtils.loadAnimationWithLInterpolator(this@ProjectDetailsActivity, R.anim.slide_from_top))
+                        binding.scrollView.startAnimation(LUtils.loadAnimationWithLInterpolator(this@ProjectDetailsActivity, R.anim.slide_from_top_long))
                     }, 0)
                 }
             })
@@ -115,42 +114,44 @@ class ProjectDetailsActivity : KickMaterialBaseActivity(), ObservableScrollView.
     }
 
     private fun loadProjectData() {
-        ViewUtils.setTextOrClear(binding!!.projectSubtitleTv, getString(R.string.project_details_made_by, project!!.authorName))
-        if (LUtils.hasL()) {
-            animateAlphaAfterTransition(binding!!.projectSubtitleTv)
+        ViewUtils.setTextOrClear(binding.projectSubtitleTv, getString(R.string.project_details_made_by, project.authorName))
+        val project = this.project
+        with(binding) {
+            if (LUtils.hasL()) {
+                animateAlphaAfterTransition(binding.projectSubtitleTv)
+            }
+
+            projectBackingProgress.setText(if (project.isFunded) R.string.funded else R.string.backing_in_progress)
+
+            projectItemBigProgressSb.progress = project.percentProgress.toInt()
+            ProjectsAdapter.setProjectDetailsInfo(projectItemBigGatheredMoneyTv, projectItemBigPledgedOfTv,
+                    projectItemBigDaysLeft, projectItemTimeLeftTypeTv, project)
+
+            // TODO: animate elevation on scroll.
+            ViewCompat.setElevation(detailsContainer, ViewUtils.convertDpToPixel(4f, this@ProjectDetailsActivity))
         }
-
-        binding!!.projectBackingProgress.setText(if (project!!.isFunded) R.string.funded else R.string.backing_in_progress)
-
-        binding!!.projectItemBigProgressSb.progress = project!!.percentProgress.toInt()
-        ProjectsAdapter.setProjectDetailsInfo(binding!!.projectItemBigGatheredMoneyTv, binding!!.projectItemBigPledgedOfTv,
-                binding!!.projectItemBigDaysLeft, binding!!.projectItemTimeLeftTypeTv, project!!)
-
-        // TODO: animate elevation on scroll.
-        ViewCompat.setElevation(binding!!.detailsContainer, ViewUtils.convertDpToPixel(4f, this@ProjectDetailsActivity))
-
         loadProjectPhoto()
     }
 
     private fun loadProjectPhoto() {
-        val bitmap = picassoCache.getPlaceholder(project!!.bigPhotoUrl) ?: picassoCache.getPlaceholder(project!!.photoUrl)
+        val bitmap = picassoCache.getPlaceholder(project.bigPhotoUrl) ?: picassoCache.getPlaceholder(project.photoUrl)
         val placeholderAlreadyFetched = bitmap != null
         if (placeholderAlreadyFetched) {
-            binding!!.projectPhotoIv.setImageBitmap(bitmap)
+            binding.projectPhotoIv.setImageBitmap(bitmap)
         }
         // Make sure that transition starts soon even if image is not ready.
-        binding!!.projectPhotoIv.postDelayed({ this.supportStartPostponedEnterTransition() }, MAX_TRANSITION_DELAY.toLong())
+        binding.projectPhotoIv.postDelayed({ this.supportStartPostponedEnterTransition() }, MAX_TRANSITION_DELAY.toLong())
         Picasso.with(this)
-                .load(project!!.bigPhotoUrl)
+                .load(project.bigPhotoUrl)
                 .resize(imageWidth, imageHeight)
                 .onlyScaleDown()
                 .centerCrop()
                 .transform(PaletteAndAplaTransformation.instance())
-                .into(binding!!.projectPhotoIv, object : Callback {
+                .into(binding.projectPhotoIv, object : Callback {
                     override fun onSuccess() {
-                        val bitmap = (binding!!.projectPhotoIv.drawable as BitmapDrawable).bitmap // Ew!
+                        val bitmap = (binding.projectPhotoIv.drawable as BitmapDrawable).bitmap // Ew!
                         val palette = PaletteAndAplaTransformation.getPalette(bitmap)
-                        binding!!.detailsContainer.setBackgroundColor(palette!!.getDarkVibrantColor(Color.BLACK))
+                        binding.detailsContainer.setBackgroundColor(palette!!.getDarkVibrantColor(Color.BLACK))
                         supportStartPostponedEnterTransition()
                     }
 
@@ -192,7 +193,7 @@ class ProjectDetailsActivity : KickMaterialBaseActivity(), ObservableScrollView.
             ViewUtils.showToast("Getting rewards failed. Retrying")
             postProjectDetails()
         } else {
-            RewardsListActivity.launch(this, projectDetails!!, binding!!.playVideoBtn)
+            RewardsListActivity.launch(this, projectDetails!!, binding.playVideoBtn)
             //            showWebView(project.getPledgeUrl());
         }
     }
@@ -207,7 +208,7 @@ class ProjectDetailsActivity : KickMaterialBaseActivity(), ObservableScrollView.
     }
 
     private fun postProjectDetails() {
-        val params = ProjectIdAndSignature.create(project!!.id, project!!.detailsQueryMap)
+        val params = ProjectIdAndSignature(project.id, project.detailsQueryMap)
         projectDetailsField.postValue(params)
     }
 
@@ -217,88 +218,67 @@ class ProjectDetailsActivity : KickMaterialBaseActivity(), ObservableScrollView.
     }
 
     override fun onDestroy() {
-        Picasso.with(this).cancelRequest(binding!!.projectPhotoIv)
+        Picasso.with(this).cancelRequest(binding.projectPhotoIv)
         super.onDestroy()
-    }
-
-    private fun handleArguments() {
-        val args = intent.extras
-        if (args != null) {
-            project = args.getParcelable<Project>(EXTRA_PROJECT)
-        }
     }
 
     override fun setToolbarAlpha(alpha: Float) {}
 
-    @OnClick(R.id.project_comments_ll)
-    fun onCommentsClicked() {
-        showWebView(project!!.commentsUrl)
-    }
-
-    @OnClick(R.id.project_updates_ll)
-    fun onUpdatesClicked() {
-        showWebView(project!!.updatesUrl)
-    }
-
-    @OnClick(R.id.read_more_btn)
-    fun readMorePressed(view: View) {
-        val MAX_DESCRIPTION_LINES = 1000
-        binding!!.projectDescriptionTv.maxLines = MAX_DESCRIPTION_LINES
-
-        ViewUtils.showView(view, false)
-        //        showWebView(project.getProjectUrl());
-    }
-
-    @OnClick(R.id.play_video_btn)
-    fun playVideo() {
-        if (projectDetails == null) {
-            ViewUtils.showToast("Getting project details failed. Retrying")
-            postProjectDetails()
-        } else {
-            VideoActivity.showActivity(this, projectDetails!!)
+    private fun setUpListeners() {
+        val project = this.project
+        with(binding) {
+            projectCommentsLl.setOnClickListener { showWebView(project.commentsUrl) }
+            projectUpdatesLl.setOnClickListener { showWebView(project.updatesUrl) }
+            readMoreBtn.setOnClickListener{
+                val MAX_DESCRIPTION_LINES = 1000
+                binding.projectDescriptionTv.maxLines = MAX_DESCRIPTION_LINES
+                ViewUtils.showView(readMoreBtn, false)
+            }
+            playVideoBtn.setOnClickListener {
+                val details = projectDetails
+                if (details == null) {
+                    ViewUtils.showToast("Getting project details failed. Retrying")
+                    postProjectDetails()
+                } else {
+                    VideoActivity.showActivity(this@ProjectDetailsActivity, details)
+                }
+            }
+            listOf(projectAuthorNameLabelTv as View, authorPhotoIv, projectAuthorNameTv).forEach {
+                it.setOnClickListener { showWebView(project.authorUrl, Intent(this@ProjectDetailsActivity, WebViewFlickrActivity::class.java)) }
+            }
         }
     }
 
-    @OnClick(R.id.project_author_name_label_tv, R.id.author_photo_iv, R.id.project_author_name_tv)
-    fun authorClicked() {
-        showWebView(project!!.authorUrl, Intent(this, WebViewFlickrActivity::class.java))
-    }
-
-    private fun showWebView(url: String) {
-        val intent = Intent(this, WebViewActivityV7::class.java)
-        showWebView(url, intent)
-    }
-
-    private fun showWebView(url: String, intent: Intent) {
+    private fun showWebView(url: String, intent: Intent = Intent(this, WebViewActivityV7::class.java)) {
         intent.putExtra(WebViewActivityV7.BUNDLE_URL, url)
         startActivity(intent)
     }
 
     override fun onScrollChanged(deltaX: Int, deltaY: Int) {
-        val scrollY = (binding!!.scrollView.scrollY * 0.6f).toInt()
+        val scrollY = (binding.scrollView.scrollY * 0.6f).toInt()
         val newTitleLeft = Math.min(maxTitlesMarginLeft.toFloat(), scrollY * 0.5f)
         val newTitleTop = Math.min(maxTitlesMarginTop, scrollY).toFloat()
         val newTitlePaddingRight = Math.min(maxTitlePaddingRight, scrollY)
 
-        binding!!.projectTitleTv.setTextSize(TypedValue.COMPLEX_UNIT_PX, Math.max(titleFontMaxSize - scrollY * 0.05f, titleFontMinSize.toFloat()))
+        binding.projectTitleTv.setTextSize(TypedValue.COMPLEX_UNIT_PX, Math.max(titleFontMaxSize - scrollY * 0.05f, titleFontMinSize.toFloat()))
         //        binding.projectTitleTv.setTextSize(TypedValue.COMPLEX_UNIT_PX,moveBase(minTitlesMarginTop,maxTitlesMarginTop,titleFontMaxSize,titleFontMinSize,scrollY));
 
-        binding!!.projectTitleTv.setPadding(0, 0, newTitlePaddingRight, 0)
+        binding.projectTitleTv.setPadding(0, 0, newTitlePaddingRight, 0)
 
-        binding!!.projectDetailsTitleContainer.translationX = newTitleLeft
-        binding!!.projectDetailsTitleContainer.translationY = -newTitleTop
-        binding!!.detailsContainer.translationY = -newTitleTop
-        binding!!.playVideoBtn.translationY = -newTitleTop
+        binding.projectDetailsTitleContainer.translationX = newTitleLeft
+        binding.projectDetailsTitleContainer.translationY = -newTitleTop
+        binding.detailsContainer.translationY = -newTitleTop
+        binding.playVideoBtn.translationY = -newTitleTop
 
         /** Content of scroll view is hiding to early during scroll so we move it also by
          * changing to padding  */
-        binding!!.scrollView.setPadding(0, (newTitleTop * 0.6f).toInt(), 0, 0)
+        binding.scrollView.setPadding(0, (newTitleTop * 0.6f).toInt(), 0, 0)
 
 
         // Move background photo (parallax effect)
         val parallax = (scrollY * .3f).toInt()
         if (maxParallaxValue > parallax) {
-            binding!!.projectPhotoContainer.translationY = (-parallax).toFloat()
+            binding.projectPhotoContainer.translationY = (-parallax).toFloat()
         }
     }
 
@@ -307,7 +287,7 @@ class ProjectDetailsActivity : KickMaterialBaseActivity(), ObservableScrollView.
     }
 
     private fun animateActionButtonVisibility(videoExist: Boolean) {
-        val videoBtn = binding!!.playVideoBtn
+        val videoBtn = binding.playVideoBtn
         videoBtn.isEnabled = videoExist
         val r = Runnable {
             // Button alpha may change during transition, we may have to wait until its end
@@ -334,24 +314,19 @@ class ProjectDetailsActivity : KickMaterialBaseActivity(), ObservableScrollView.
     }
 
     companion object {
-
-        private const val EXTRA_PROJECT = "DetailActivity:project"
         private const val MAX_TRANSITION_DELAY = 800
         private const val ACTION_BUTTON_VISIBILITY_ANIM_DELAY = MAX_TRANSITION_DELAY + 200
-
-        fun launch(context: Activity, project: Project, vararg sharedViews: View) {
-            val options: Bundle
-            if (LUtils.hasL()) {
-                options = KickMaterialBaseActivity.getSharedElementsBundle(context, *sharedViews)
-            } else {
-                options = Bundle()
-            }
-            val intent = Intent(context, ProjectDetailsActivity::class.java)
-
-            intent.putExtra(EXTRA_PROJECT, project)
-            // Preload big photo
-            Picasso.with(context).load(project.bigPhotoUrl)
-            ActivityCompat.startActivity(context, intent, options)
-        }
     }
 }
+
+private const val EXTRA_PROJECT = "DetailActivity:project"
+
+fun Activity.startProjectDetailsActivity(project: Project, sharedViews: SharedViews)
+        = Intent(this, ProjectDetailsActivity::class.java)
+        .apply { putExtra(EXTRA_PROJECT, project) }
+        .let {
+            // Preload big photo
+            Picasso.with(this).load(project.bigPhotoUrl)
+            val options = KickMaterialBaseActivity.getSharedElementsBundle(this, *sharedViews.asArray())
+            ActivityCompat.startActivity(this, it, options)
+        }

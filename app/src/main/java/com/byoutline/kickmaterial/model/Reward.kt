@@ -19,7 +19,12 @@ class Reward : RewardItem, PaperParcelable {
     override val itemType: Int
         get() = RewardItem.ITEM
 
+    override fun toString(): String {
+        return "Reward(minimum=$minimum, reward=$reward, description=$description)"
+    }
+
     companion object {
-        @JvmField val CREATOR = PaperParcelReward.CREATOR
+        @JvmField
+        val CREATOR = PaperParcelReward.CREATOR
     }
 }

@@ -14,14 +14,16 @@ class AccessToken(var accessToken: String? = null)
 @PaperParcel
 class CreatorUrls(var web: CreatorUrlsWeb?) : PaperParcelable {
     companion object {
-        @JvmField val CREATOR = PaperParcelCreatorUrls.CREATOR
+        @JvmField
+        val CREATOR = PaperParcelCreatorUrls.CREATOR
     }
 }
 
 @PaperParcel
 class CreatorUrlsWeb(var user: String?) : PaperParcelable {
     companion object {
-        @JvmField val CREATOR = PaperParcelCreatorUrlsWeb.CREATOR
+        @JvmField
+        val CREATOR = PaperParcelCreatorUrlsWeb.CREATOR
     }
 }
 
@@ -46,7 +48,8 @@ class ProjectUrls : PaperParcelable {
     var web: WebUrlsApi? = null
 
     companion object {
-        @JvmField val CREATOR = PaperParcelProjectUrls.CREATOR
+        @JvmField
+        val CREATOR = PaperParcelProjectUrls.CREATOR
     }
 }
 
@@ -55,7 +58,8 @@ class ProjectUrlsApi : PaperParcelable {
     var project: String? = null
 
     companion object {
-        @JvmField val CREATOR = PaperParcelProjectUrlsApi.CREATOR
+        @JvmField
+        val CREATOR = PaperParcelProjectUrlsApi.CREATOR
     }
 }
 
@@ -67,6 +71,9 @@ class WebUrlsApi : PaperParcelable {
     var projectShort: String? = null
 
     companion object {
-        @JvmField val CREATOR = PaperParcelWebUrlsApi.CREATOR
+        @JvmField
+        val CREATOR = PaperParcelWebUrlsApi.CREATOR
     }
 }
+
+data class ProjectIdAndSignature(val id: Int, val queryParams: Map<String, String>)

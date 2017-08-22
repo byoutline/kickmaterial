@@ -24,10 +24,8 @@ import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
 import org.joda.time.DateTime
-import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import javax.inject.Provider
 
 
 @Module
@@ -107,7 +105,7 @@ class GlobalModule(private val app: KickMaterialApp, private val bus: Bus, priva
     @GlobalScope
     fun provideCategories(service: KickMaterialService): CachedField<List<Category>>
             = CachedFieldBuilder()
-            .withValueProvider(apiValueProv<List<Category>>(Provider<Call<List<Category>>> { service.categories }))
+            .withValueProvider(apiValueProv<List<Category>>{ service.categories })
             .withSuccessEvent(CategoriesFetchedEvent())
             .build()
 
@@ -124,7 +122,7 @@ class GlobalModule(private val app: KickMaterialApp, private val bus: Bus, priva
     @GlobalScope
     fun provideProjectDetails(service: KickMaterialService): ObservableCachedFieldWithArg<ProjectDetails, ProjectIdAndSignature>
             = CachedFieldBuilder()
-            .withValueProviderWithArg(apiValueProv<ProjectDetails, ProjectIdAndSignature> { input -> service.getProjectDetails(input.id(), input.queryParams()) })
+            .withValueProviderWithArg(apiValueProv<ProjectDetails, ProjectIdAndSignature> { (id, queryParams) -> service.getProjectDetails(id, queryParams) })
             .asObservable()
             .withSuccessEvent(ProjectDetailsFetchedEvent())
             .withErrorEvent(ProjectDetailsFetchingFailedEvent())
