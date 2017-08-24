@@ -1,8 +1,8 @@
 package com.byoutline.kickmaterial.model
 
 import android.text.TextUtils
-import com.byoutline.kickmaterial.utils.PeriodToStringConverter
-import com.byoutline.kickmaterial.utils.QueryParamsExtractor
+import com.byoutline.kickmaterial.model.utils.PeriodToStringConverter
+import com.byoutline.kickmaterial.model.utils.QueryParamsExtractor
 import com.google.gson.annotations.SerializedName
 import org.joda.time.DateTime
 import org.joda.time.Period

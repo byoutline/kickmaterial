@@ -1,6 +1,6 @@
 package com.byoutline.kickmaterial.model
 
-import com.byoutline.kickmaterial.utils.QueryParamsExtractor
+import com.byoutline.kickmaterial.model.utils.QueryParamsExtractor
 import com.google.gson.annotations.SerializedName
 import paperparcel.PaperParcel
 import paperparcel.PaperParcelable

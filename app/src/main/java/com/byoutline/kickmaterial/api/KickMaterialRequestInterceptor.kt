@@ -2,7 +2,7 @@ package com.byoutline.kickmaterial.api
 
 import android.text.TextUtils
 import com.byoutline.kickmaterial.dagger.GlobalScope
-import com.byoutline.kickmaterial.managers.AccessTokenProvider
+import com.byoutline.kickmaterial.login.AccessTokenProvider
 import okhttp3.HttpUrl
 import okhttp3.Interceptor
 import okhttp3.Response

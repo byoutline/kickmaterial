@@ -2,15 +2,14 @@ package com.byoutline.kickmaterial.dagger
 
 import com.byoutline.cachedfield.CachedFieldWithArg
 import com.byoutline.kickmaterial.KickMaterialApp
-import com.byoutline.kickmaterial.activities.CategoriesListActivity
-import com.byoutline.kickmaterial.activities.ProjectDetailsActivity
-import com.byoutline.kickmaterial.activities.RewardsListActivity
-import com.byoutline.kickmaterial.fragments.ProjectsListFragment
-import com.byoutline.kickmaterial.fragments.SearchListFragment
 import com.byoutline.kickmaterial.model.DiscoverQuery
 import com.byoutline.kickmaterial.model.DiscoverResponse
+import com.byoutline.kickmaterial.projectdetails.ProjectDetailsActivity
+import com.byoutline.kickmaterial.projectlist.ProjectsListFragment
+import com.byoutline.kickmaterial.rewardlist.RewardsListActivity
+import com.byoutline.kickmaterial.search.SearchListFragment
+import com.byoutline.kickmaterial.selectcategory.CategoriesListActivity
 import com.squareup.otto.Bus
-
 import dagger.Component
 
 /**

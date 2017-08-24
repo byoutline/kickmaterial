@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <transition xmlns:android="http://schemas.android.com/apk/res/android"
-            class="com.byoutline.kickmaterial.utils.SharedElementTransition"
+            class="com.byoutline.kickmaterial.transitions.SharedElementTransition"
             android:interpolator="@android:interpolator/fast_out_slow_in"
     />

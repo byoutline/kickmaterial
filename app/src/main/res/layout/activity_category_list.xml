@@ -8,11 +8,11 @@
     <data>
         <import type="me.tatarka.bindingcollectionadapter2.LayoutManagers" />
 
-        <variable name="viewModel" type="com.byoutline.kickmaterial.managers.CategoriesListViewModel"/>
+        <variable name="viewModel" type="com.byoutline.kickmaterial.selectcategory.CategoriesListViewModel"/>
 
         <variable
             name="categoryClickListener"
-            type="com.byoutline.kickmaterial.adapters.CategoryClickListener"/>
+            type="com.byoutline.kickmaterial.selectcategory.CategoryClickListener"/>
     </data>
 
     <FrameLayout

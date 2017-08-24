@@ -2,7 +2,7 @@ package com.byoutline.kickmaterial.model
 
 import android.support.annotation.StringRes
 import com.byoutline.kickmaterial.R
-import com.byoutline.kickmaterial.utils.EnumDtoHelper
+import com.byoutline.kickmaterial.model.utils.EnumDtoHelper
 import java.util.*
 
 /**

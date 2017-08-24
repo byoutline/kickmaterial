@@ -14,7 +14,7 @@
 		<variable name="bgColor" type="int"/>
 		<variable
 			name="rewardClickListener"
-			type="com.byoutline.kickmaterial.adapters.RewardClickListener"
+			type="com.byoutline.kickmaterial.rewardlist.RewardClickListener"
 		/>
 	</data>
 

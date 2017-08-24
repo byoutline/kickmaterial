@@ -5,7 +5,7 @@
 	<data>
 		<variable
 			name="viewModel"
-			type="com.byoutline.kickmaterial.managers.ProjectItemViewModel"/>
+			type="com.byoutline.kickmaterial.projectlist.ProjectItemViewModel"/>
 	</data>
 
 	<com.byoutline.secretsauce.views.RoundedImageView

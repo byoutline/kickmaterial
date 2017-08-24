@@ -4,7 +4,7 @@ package com.byoutline.kickmaterial.dagger
 import android.content.SharedPreferences
 import android.support.annotation.IdRes
 import com.byoutline.kickmaterial.R
-import com.byoutline.kickmaterial.managers.AccessTokenProvider
+import com.byoutline.kickmaterial.login.AccessTokenProvider
 import com.byoutline.ottoeventcallback.PostFromAnyThreadBus
 import com.byoutline.secretsauce.BaseApp
 import com.byoutline.secretsauce.di.ContainerId

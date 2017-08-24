@@ -7,7 +7,7 @@
 
 		<variable
 			name="viewModel"
-			type="com.byoutline.kickmaterial.adapters.SearchViewModel"
+			type="com.byoutline.kickmaterial.search.SearchViewModel"
 			/>
 	</data>
 

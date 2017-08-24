@@ -6,7 +6,7 @@
 		xmlns:tools="http://schemas.android.com/tools">
 	<data>
 		<import type="me.tatarka.bindingcollectionadapter2.LayoutManagers"/>
-		<variable name="model" type="com.byoutline.kickmaterial.managers.RewardListViewModel"/>
+		<variable name="model" type="com.byoutline.kickmaterial.rewardlist.RewardListViewModel"/>
 	</data>
 
 	<RelativeLayout

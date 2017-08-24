@@ -4,7 +4,7 @@ import android.content.SharedPreferences;
 import com.byoutline.kickmaterial.dagger.AppComponent;
 import com.byoutline.kickmaterial.dagger.AppModule;
 import com.byoutline.kickmaterial.dagger.DaggerAppComponent;
-import com.byoutline.kickmaterial.fragments.ProjectsListFragment;
+import com.byoutline.kickmaterial.projectlist.ProjectsListFragment;
 import com.byoutline.secretsauce.BaseApp;
 
 /**

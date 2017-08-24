@@ -4,7 +4,7 @@ import android.support.annotation.VisibleForTesting
 import com.byoutline.androidstubserver.AndroidStubServer
 import com.byoutline.ibuscachedfield.util.RetrofitHelper
 import com.byoutline.kickmaterial.dagger.*
-import com.byoutline.kickmaterial.managers.AccessTokenProvider
+import com.byoutline.kickmaterial.login.AccessTokenProvider
 import com.byoutline.mockserver.NetworkType
 import com.byoutline.secretsauce.BaseApp
 import com.byoutline.secretsauce.utils.ViewUtils

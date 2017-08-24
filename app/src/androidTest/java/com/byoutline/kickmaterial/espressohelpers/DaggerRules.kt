@@ -9,10 +9,10 @@ import android.support.test.espresso.Espresso
 import android.support.test.espresso.base.DefaultFailureHandler
 import android.support.test.rule.ActivityTestRule
 import com.byoutline.kickmaterial.KickMaterialApp
-import com.byoutline.kickmaterial.activities.MainActivity
 import com.byoutline.kickmaterial.dagger.AppComponent
 import com.byoutline.kickmaterial.dagger.DaggerGlobalComponent
 import com.byoutline.kickmaterial.dagger.GlobalModule
+import com.byoutline.kickmaterial.projectlist.MainActivity
 import com.squareup.spoon.Spoon
 import org.junit.runner.Description
 import org.junit.runners.model.Statement
