@@ -16,10 +16,10 @@ import android.view.View
 import android.view.animation.AnimationUtils
 import com.byoutline.kickmaterial.KickMaterialApp
 import com.byoutline.kickmaterial.R
-import com.byoutline.kickmaterial.adapters.ProjectsAdapter
 import com.byoutline.kickmaterial.adapters.SharedViews
 import com.byoutline.kickmaterial.databinding.ActivityProjectDetailsBinding
 import com.byoutline.kickmaterial.events.ProjectDetailsFetchedEvent
+import com.byoutline.kickmaterial.managers.ProjectsAdapter
 import com.byoutline.kickmaterial.model.Project
 import com.byoutline.kickmaterial.model.ProjectDetails
 import com.byoutline.kickmaterial.model.ProjectIdAndSignature

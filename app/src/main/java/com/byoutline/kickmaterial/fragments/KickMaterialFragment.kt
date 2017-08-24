@@ -2,15 +2,15 @@ package com.byoutline.kickmaterial.fragments
 
 import android.app.Activity
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.support.v7.widget.RecyclerView
 import android.text.TextUtils
 import android.view.View
 import com.byoutline.kickmaterial.activities.KickMaterialBaseActivity
 import com.byoutline.secretsauce.utils.LogUtils
+import com.trello.rxlifecycle2.components.support.RxFragment
 
 
-abstract class KickMaterialFragment : Fragment() {
+abstract class KickMaterialFragment : RxFragment() {
 
     protected var hostActivity: HostActivity? = null
 

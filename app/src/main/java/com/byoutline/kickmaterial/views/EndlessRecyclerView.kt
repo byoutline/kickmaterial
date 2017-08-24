@@ -38,34 +38,27 @@ class EndlessRecyclerView : RecyclerView {
         super.setOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
-                if (scrollListener != null) {
-                    scrollListener!!.onScrolled(recyclerView, dx, dy)
-                }
+                scrollListener?.onScrolled(recyclerView, dx, dy)
 
-                if (endlessScrollListener != null && dy > SCROLL_THRESHOLD) {
-                    visibleItemCount = childCount
-                    totalItemCount = layoutManager.itemCount
-                    lastVisibleItem = endlessScrollListener!!.lastVisibleItemPosition
-                    val shouldLoadMoreData = lastVisibleItem + visibleItemsThreshold > totalItemCount
+                if (dy > SCROLL_THRESHOLD) {
+                    endlessScrollListener?.let { eSListener ->
+                        visibleItemCount = childCount
+                        totalItemCount = layoutManager.itemCount
+                        lastVisibleItem = eSListener.lastVisibleItemPosition
+                        val shouldLoadMoreData = lastVisibleItem + visibleItemsThreshold > totalItemCount
 
-                    if (endlessScrollListener!!.hasMoreDataAndNotLoading() && shouldLoadMoreData) {
-                        endlessScrollListener!!.loadMoreData()
+                        if (eSListener.hasMoreDataAndNotLoading() && shouldLoadMoreData) {
+                            eSListener.loadMoreData()
+                        }
                     }
                 }
             }
 
             override fun onScrollStateChanged(recyclerView: RecyclerView?, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
-
-                if (scrollListener != null) {
-                    scrollListener!!.onScrollStateChanged(recyclerView, newState)
-                }
+                scrollListener?.onScrollStateChanged(recyclerView, newState)
             }
         })
-    }
-
-    override fun onScrollChanged(l: Int, t: Int, oldl: Int, oldt: Int) {
-        super.onScrollChanged(l, t, oldl, oldt)
     }
 
     override fun setOnScrollListener(listener: RecyclerView.OnScrollListener) {

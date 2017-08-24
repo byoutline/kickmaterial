@@ -36,7 +36,7 @@ dependencies {
     compile "com.trello.rxlifecycle2:rxlifecycle-components:$rxlifecycle_ver"
     compile "com.trello.rxlifecycle2:rxlifecycle-kotlin:$rxlifecycle_ver"
     kapt 'nz.bradcampbell:paperparcel-compiler:2.0.1'
-    kapt 'com.android.databinding:compiler:2.3.3'
+    kapt 'com.android.databinding:compiler:3.0.0-beta2'
     // For dagger 2
     compile "com.google.dagger:dagger:$dagger_version"
     kapt "com.google.dagger:dagger-compiler:$dagger_version"

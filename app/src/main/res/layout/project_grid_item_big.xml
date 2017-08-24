@@ -1,62 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:card_view="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools">
+		xmlns:card_view="http://schemas.android.com/apk/res-auto"
+		xmlns:bind="http://schemas.android.com/apk/res-auto"
+		xmlns:tools="http://schemas.android.com/tools">
 
-    <android.support.v7.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/project_item_big_height"
-        android:layout_margin="6dp"
-        card_view:cardBackgroundColor="@android:color/transparent"
-        card_view:cardCornerRadius="@dimen/project_item_corner_radius"
-        card_view:cardPreventCornerOverlap="false">
+	<data>
 
+		<import type="com.byoutline.kickmaterial.managers.ProjectsAdapter"/>
 
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+		<variable
+			name="viewModel"
+			type="com.byoutline.kickmaterial.managers.ProjectItemViewModel"/>
 
-            <include layout="@layout/project_grid_item_photo"/>
+	</data>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:orientation="vertical"
-                android:paddingBottom="20dp">
-
-                <TextView
-                    android:id="@+id/project_item_big_title_tv"
-                    style="@style/ProjectItemNameStyle"
-                    android:transitionName="@string/transition_project_title"
-                    tools:ignore="UnusedAttribute"
-                    tools:text="Project Title"/>
-
-                <TextView
-                    android:id="@+id/project_item_big_desc_tv"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:ellipsize="end"
-                    android:lines="2"
-                    android:padding="@dimen/project_item_big_padding"
-                    android:textColor="@color/text_dark"
-                    android:textSize="16sp"
-                    android:visibility="gone"
-                    tools:text="This is fragment which is telling about project. In the Greg's project it hast two lines. Maybe it can be more?"/>
+	<android.support.v7.widget.CardView
+		android:layout_width="match_parent"
+		android:layout_height="@dimen/project_item_big_height"
+		android:layout_margin="6dp"
+		android:onClick="@{viewModel::onClick}"
+		card_view:cardBackgroundColor="@android:color/transparent"
+		card_view:cardCornerRadius="@dimen/project_item_corner_radius"
+		card_view:cardPreventCornerOverlap="false">
 
 
-                <com.byoutline.kickmaterial.views.DisabledSeekBar
-                    android:id="@+id/project_item_big_progress_sb"
-                    style="@style/SeekBarStyle"
-                    android:layout_marginLeft="@dimen/project_item_big_padding"
-                    android:layout_marginRight="@dimen/project_item_big_padding"
-                    android:transitionName="@string/transition_project_progress"
-                    tools:ignore="UnusedAttribute"/>
+		<FrameLayout
+			android:layout_width="match_parent"
+			android:layout_height="match_parent">
 
-                <include layout="@layout/project_number_details"/>
-            </LinearLayout>
+			<include
+				layout="@layout/project_grid_item_photo"
+				bind:viewModel="@{viewModel}"
+				android:id="@+id/photo_layout"/>
 
-        </FrameLayout>
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_gravity="bottom"
+				android:orientation="vertical"
+				android:paddingBottom="20dp">
 
-    </android.support.v7.widget.CardView>
+				<TextView
+					android:id="@+id/project_item_big_title_tv"
+					style="@style/ProjectItemNameStyle"
+					android:transitionName="@string/transition_project_title"
+					android:text="@{viewModel.project.projectName}"
+					tools:ignore="UnusedAttribute"
+					tools:text="Project Title"/>
+
+				<TextView
+					android:id="@+id/project_item_big_desc_tv"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:ellipsize="end"
+					android:lines="2"
+					android:padding="@dimen/project_item_big_padding"
+					android:textColor="@color/text_dark"
+					android:textSize="16sp"
+					android:visibility="gone"
+					android:text="@{viewModel.project.desc}"
+					tools:text="This is fragment which is telling about project. In the Greg's project it hast two lines. Maybe it can be more?"/>
+
+
+				<com.byoutline.kickmaterial.views.DisabledSeekBar
+					android:id="@+id/project_item_big_progress_sb"
+					style="@style/SeekBarStyle"
+					android:layout_marginLeft="@dimen/project_item_big_padding"
+					android:layout_marginRight="@dimen/project_item_big_padding"
+					android:transitionName="@string/transition_project_progress"
+					bind:progress="@{viewModel.percentProgress}"
+					tools:ignore="UnusedAttribute"/>
+
+				<include
+					layout="@layout/project_number_details"
+					bind:viewModel="@{viewModel}"
+					android:id="@+id/number_details_layout"/>
+			</LinearLayout>
+
+		</FrameLayout>
+
+	</android.support.v7.widget.CardView>
 </layout>

@@ -189,12 +189,10 @@ class CategoriesListActivity : KickMaterialBaseActivity(), CategoryClickListener
                 override fun onAnimationEnd(animation: Animator) {
                     super.onAnimationEnd(animation)
                     with(binding) {
-                        if (categoryCircleIv != null) {
-                            categoryCircleIv.setColorFilter(color)
-                            selectCategoryTv.setBackgroundColor(color)
-                            selectCategoryTv.background.alpha = 85
-                            categoryCircleRevealIv.visibility = View.INVISIBLE
-                        }
+                        categoryCircleIv.setColorFilter(color)
+                        selectCategoryTv.setBackgroundColor(color)
+                        selectCategoryTv.background.alpha = 85
+                        categoryCircleRevealIv.visibility = View.INVISIBLE
                     }
                 }
             })

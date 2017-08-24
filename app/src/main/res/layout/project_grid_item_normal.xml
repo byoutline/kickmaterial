@@ -1,12 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        xmlns:bind="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="com.byoutline.kickmaterial.managers.ProjectsAdapter"/>
+
+        <variable
+            name="viewModel"
+            type="com.byoutline.kickmaterial.managers.ProjectItemViewModel"/>
+
+    </data>
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="6dp"
+        android:onClick="@{viewModel::onClick}"
         card_view:cardBackgroundColor="@android:color/transparent"
         card_view:cardCornerRadius="@dimen/project_item_corner_radius"
         card_view:cardPreventCornerOverlap="false">
@@ -15,7 +27,9 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/project_item_big_photo_height">
 
-            <include layout="@layout/project_grid_item_photo"/>
+            <include layout="@layout/project_grid_item_photo"
+                     bind:viewModel="@{viewModel}"
+                     android:id="@+id/photo_layout"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -28,6 +42,7 @@
                     style="@style/ProjectItemNameStyle"
                     android:textSize="18sp"
                     android:transitionName="@string/transition_project_title"
+                    android:text="@{viewModel.project.projectName}"
                     tools:ignore="UnusedAttribute"
                     tools:text="Project Title"/>
 
@@ -41,6 +56,7 @@
                     android:maxHeight="6dp"
                     android:minHeight="6dp"
                     android:transitionName="@string/transition_project_progress"
+                    bind:progress="@{viewModel.percentProgress}"
                     tools:ignore="UnusedAttribute"/>
 
             </LinearLayout>

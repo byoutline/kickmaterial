@@ -1,7 +1,15 @@
-<layout>
+<layout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:fab="http://schemas.android.com/apk/res-auto"
+	xmlns:app="http://schemas.android.com/apk/res-auto">
+	<data>
+
+		<variable
+			name="viewModel"
+			type="com.byoutline.kickmaterial.managers.ProjectListViewModel" />
+	</data>
 	<RelativeLayout
-		xmlns:android="http://schemas.android.com/apk/res/android"
-		xmlns:fab="http://schemas.android.com/apk/res-auto"
+
 		android:id="@+id/main_parent_rl"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
@@ -28,7 +36,10 @@
 				android:paddingBottom="4dp"
 				android:paddingLeft="4dp"
 				android:paddingRight="4dp"
-				android:paddingTop="89dp"/>
+				android:paddingTop="89dp"
+				app:items="@{viewModel.items}"
+				app:itemBinding="@{viewModel.itemBinding}"
+				app:adapter="@{viewModel.adapter}"/>
 
 		</android.support.v4.widget.SwipeRefreshLayout>
 

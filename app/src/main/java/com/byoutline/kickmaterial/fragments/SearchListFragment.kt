@@ -11,43 +11,45 @@ import com.byoutline.cachedfield.CachedFieldWithArg
 import com.byoutline.kickmaterial.KickMaterialApp
 import com.byoutline.kickmaterial.R
 import com.byoutline.kickmaterial.activities.startProjectDetailsActivity
-import com.byoutline.kickmaterial.adapters.ProjectClickListener
-import com.byoutline.kickmaterial.adapters.SearchAdapter
+import com.byoutline.kickmaterial.adapters.SearchViewModel
 import com.byoutline.kickmaterial.adapters.SharedViews
+import com.byoutline.kickmaterial.databinding.FragmentSearchResultsBinding
 import com.byoutline.kickmaterial.events.DiscoverProjectsFetchedEvent
+import com.byoutline.kickmaterial.managers.ProjectClickListener
 import com.byoutline.kickmaterial.model.*
 import com.byoutline.kickmaterial.utils.LUtils
 import com.byoutline.kickmaterial.views.EndlessRecyclerView
 import com.byoutline.kickmaterial.views.SearchListSeparator
 import com.squareup.otto.Bus
 import com.squareup.otto.Subscribe
-import java.util.*
 import javax.inject.Inject
 
 class SearchListFragment : KickMaterialFragment(), ProjectClickListener, EndlessRecyclerView.EndlessScrollListener {
 
-    lateinit var projectListRv: EndlessRecyclerView
+    private lateinit var projectListRv: EndlessRecyclerView
 
     @Inject
     lateinit var bus: Bus
     @Inject
     lateinit var discoverField: CachedFieldWithArg<DiscoverResponse, DiscoverQuery>
-
-    private var adapter: SearchAdapter? = null
+    @Inject
+    lateinit var viewModel: SearchViewModel
 
     private var layoutManager: LinearLayoutManager? = null
     internal var page = DEFAULT_PAGE
     private var loading: Boolean = false
     private var hasMore = true
-    private val currentProjects = ArrayList<Project>()
+    private val currentProjects = HashSet<Project>()
     private var currentSearchTerm: String? = null
     private var searchView: SearchView? = null
     private var restoredSearchQuery: CharSequence = ""
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        projectListRv = inflater!!.inflate(R.layout.fragment_search_results, container, false) as EndlessRecyclerView
-
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        val binding = FragmentSearchResultsBinding.inflate(inflater, container, false)
         KickMaterialApp.component.inject(this)
+        binding.viewModel = viewModel
+        projectListRv = binding.searchRecyclerView
+
         setHasOptionsMenu(true)
         return projectListRv
     }
@@ -71,11 +73,7 @@ class SearchListFragment : KickMaterialFragment(), ProjectClickListener, Endless
 
     private fun setUpAdapters() {
         projectListRv.setEndlessScrollListener(this)
-        layoutManager = LinearLayoutManager(activity)
-        projectListRv.layoutManager = layoutManager
         projectListRv.addItemDecoration(SearchListSeparator(activity.applicationContext))
-        adapter = SearchAdapter(activity, this)
-        projectListRv.adapter = adapter
     }
 
     private fun restoreDefaultScreenLook() {
@@ -131,7 +129,7 @@ class SearchListFragment : KickMaterialFragment(), ProjectClickListener, Endless
         if (!TextUtils.isEmpty(searchTerm)) {
             refreshSearchResult()
         } else {
-            adapter!!.clear()
+            viewModel.items.clear()
         }
     }
 
@@ -148,8 +146,7 @@ class SearchListFragment : KickMaterialFragment(), ProjectClickListener, Endless
         return false
     }
 
-    override fun projectClicked(position: Int, views: SharedViews) {
-        val project = adapter!!.getItem(position)!!
+    override fun projectClicked(project: Project, views: SharedViews) {
         activity.startProjectDetailsActivity(project, views)
     }
 
@@ -161,12 +158,12 @@ class SearchListFragment : KickMaterialFragment(), ProjectClickListener, Endless
 
         if (event.argValue.discoverType == DiscoverType.SEARCH) {
             currentProjects.addAll(event.response.projects!!)
-            adapter!!.setItems(currentProjects)
+            viewModel.setItems(currentProjects)
         }
     }
 
     override val lastVisibleItemPosition: Int
-        get() = layoutManager!!.findLastVisibleItemPosition()
+        get() = (projectListRv.layoutManager as LinearLayoutManager).findLastVisibleItemPosition()
 
     override fun loadMoreData() {
         page++

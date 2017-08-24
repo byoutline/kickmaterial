@@ -16,18 +16,16 @@ import com.byoutline.kickmaterial.R
 import com.byoutline.kickmaterial.activities.ARG_CATEGORY
 import com.byoutline.kickmaterial.activities.CategoriesListActivity
 import com.byoutline.kickmaterial.activities.startProjectDetailsActivity
-import com.byoutline.kickmaterial.adapters.ProjectClickListener
-import com.byoutline.kickmaterial.adapters.ProjectsAdapter
 import com.byoutline.kickmaterial.adapters.SharedViews
 import com.byoutline.kickmaterial.databinding.FragmentProjectsBinding
 import com.byoutline.kickmaterial.events.CategoriesFetchedEvent
 import com.byoutline.kickmaterial.events.DiscoverProjectsFetchedErrorEvent
 import com.byoutline.kickmaterial.events.DiscoverProjectsFetchedEvent
 import com.byoutline.kickmaterial.managers.LoginManager
-import com.byoutline.kickmaterial.model.Category
-import com.byoutline.kickmaterial.model.DiscoverQuery
-import com.byoutline.kickmaterial.model.DiscoverResponse
-import com.byoutline.kickmaterial.model.DiscoverType
+import com.byoutline.kickmaterial.managers.ProjectClickListener
+import com.byoutline.kickmaterial.managers.ProjectListViewModel
+import com.byoutline.kickmaterial.managers.ProjectsAdapter
+import com.byoutline.kickmaterial.model.*
 import com.byoutline.kickmaterial.utils.LUtils
 import com.byoutline.kickmaterial.views.EndlessRecyclerView
 import com.byoutline.ottoeventcallback.PostFromAnyThreadBus
@@ -51,8 +49,8 @@ class ProjectsListFragment : KickMaterialFragment(), ProjectClickListener, Field
     lateinit var loginManager: LoginManager
     @Inject
     lateinit var sharedPreferences: SharedPreferences
-    private var rootView: View? = null
-    private var adapter: ProjectsAdapter? = null
+    @Inject
+    lateinit var viewModel: ProjectListViewModel
     private var actionbarScrollPoint: Float = 0.toFloat()
     private var maxScroll: Float = 0.toFloat()
     private var page = 1
@@ -62,13 +60,14 @@ class ProjectsListFragment : KickMaterialFragment(), ProjectClickListener, Field
     /**
      * Endless scroll variables *
      */
-    private var layoutManager: GridLayoutManager? = null
+    private lateinit var layoutManager: GridLayoutManager
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val binding = FragmentProjectsBinding.inflate(inflater, container, false)
         this.binding = binding
-
         KickMaterialApp.component.inject(this)
+        binding.viewModel = viewModel
+
         hostActivity?.enableActionBarAutoHide(binding.projectRecyclerView)
         maxScroll = (2 * resources.getDimensionPixelSize(R.dimen.project_header_padding_top) + ViewUtils.dpToPx(48f, activity)).toFloat()
         actionbarScrollPoint = ViewUtils.dpToPx(24f, activity).toFloat()
@@ -158,6 +157,7 @@ class ProjectsListFragment : KickMaterialFragment(), ProjectClickListener, Field
     override fun onResume() {
         super.onResume()
         restoreDefaultScreenLook()
+        viewModel.attachViewUntilPause(this)
         bus.register(this)
         discoverField.addStateListener(this)
         loadCurrentPage()
@@ -184,26 +184,14 @@ class ProjectsListFragment : KickMaterialFragment(), ProjectClickListener, Field
         /** NEW ADAPTER  */
         layoutManager = GridLayoutManager(activity, 2)
 
-        val showHeader = sharedPreferences.getBoolean(PREFS_SHOW_HEADER, true)
-        // TODO: decide when to hide it.
-        sharedPreferences.edit().putBoolean(PREFS_SHOW_HEADER, false).apply()
-        val itemViewTypeProvider = ProjectsAdapter.ItemViewTypeProvider(showHeader)
 
-        layoutManager!!.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
-            override fun getSpanSize(position: Int): Int {
-                if (itemViewTypeProvider.getViewType(position) == ProjectsAdapter.NORMAL_ITEM) {
-                    return 1
-                }
-                return 2
-            }
+        layoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+            override fun getSpanSize(position: Int): Int
+                    = if (viewModel.items[position].type == ProjectsAdapter.NORMAL_ITEM) 1 else 2
         }
 
         binding.projectRecyclerView.setEndlessScrollListener(this)
         binding.projectRecyclerView.layoutManager = layoutManager
-
-
-        adapter = ProjectsAdapter(activity, this, showHeader, itemViewTypeProvider)
-        binding.projectRecyclerView.adapter = adapter
     }
 
     private fun restoreDefaultScreenLook() {
@@ -216,19 +204,15 @@ class ProjectsListFragment : KickMaterialFragment(), ProjectClickListener, Field
 
     override fun showBackButtonInActionbar() = false
 
-    override fun projectClicked(position: Int, views: SharedViews) {
-        val project = adapter!!.getItem(position)
+    override fun projectClicked(project: Project, views: SharedViews) {
         views.add(binding.showCategoriesFab)
-        activity.startProjectDetailsActivity(project!!, views)
+        activity.startProjectDetailsActivity(project, views)
     }
 
     private fun isDiscoverFetchErrorCausedByLastPage(event: DiscoverProjectsFetchedErrorEvent): Boolean {
         val exception = event.response
         if (exception is RetrofitHelper.ApiException) {
-            val ex = exception
-            if (ex.errorResponse != null && ex.errorResponse!!.code() == 404) {
-                return true
-            }
+            return exception.errorResponse?.code() == 404
         }
         return false
     }
@@ -259,9 +243,9 @@ class ProjectsListFragment : KickMaterialFragment(), ProjectClickListener, Field
 
             val projects = ArrayList(event.response.projects!!)
             if (page == 1) {
-                adapter!!.setItems(projects)
+                viewModel.setItems(projects)
             } else {
-                adapter!!.addItems(projects)
+                viewModel.addItems(projects)
             }
         }
     }
@@ -279,7 +263,7 @@ class ProjectsListFragment : KickMaterialFragment(), ProjectClickListener, Field
     }
 
     override val lastVisibleItemPosition: Int
-        get() = layoutManager!!.findLastVisibleItemPosition()
+        get() = layoutManager.findLastVisibleItemPosition()
 
     override fun loadMoreData() {
         page++

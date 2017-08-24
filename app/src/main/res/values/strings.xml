@@ -61,5 +61,6 @@
     <string name="back_project">Back project</string>
     <string name="content_description_project_photo">project photo</string>
     <string name="search">Search</string>
+    <string name="gathered_format">$ %1$.0f</string>
 
 </resources>

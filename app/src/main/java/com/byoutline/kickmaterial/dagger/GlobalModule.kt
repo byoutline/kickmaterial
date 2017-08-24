@@ -5,11 +5,14 @@ import com.byoutline.cachedfield.CachedField
 import com.byoutline.cachedfield.CachedFieldWithArg
 import com.byoutline.ibuscachedfield.util.RetrofitHelper.apiValueProv
 import com.byoutline.kickmaterial.KickMaterialApp
+import com.byoutline.kickmaterial.adapters.SearchViewModel
 import com.byoutline.kickmaterial.api.KickMaterialRequestInterceptor
 import com.byoutline.kickmaterial.api.KickMaterialService
 import com.byoutline.kickmaterial.events.*
+import com.byoutline.kickmaterial.fragments.ProjectsListFragment
 import com.byoutline.kickmaterial.managers.AccessTokenProvider
 import com.byoutline.kickmaterial.managers.LoginManager
+import com.byoutline.kickmaterial.managers.ProjectListViewModel
 import com.byoutline.kickmaterial.model.*
 import com.byoutline.kickmaterial.utils.LruCacheWithPlaceholders
 import com.byoutline.observablecachedfield.ObservableCachedFieldWithArg
@@ -22,6 +25,7 @@ import com.squareup.otto.Bus
 import com.squareup.picasso.Picasso
 import dagger.Module
 import dagger.Provides
+import dagger.Reusable
 import okhttp3.OkHttpClient
 import org.joda.time.DateTime
 import retrofit2.Retrofit
@@ -100,6 +104,19 @@ class GlobalModule(private val app: KickMaterialApp, private val bus: Bus, priva
     @Provides
     @GlobalScope
     fun providesSharedPreferences(): SharedPreferences = app.sharedPrefs
+
+    @Provides
+    @Reusable
+    fun provideProjectListViewModel(sharedPrefs: SharedPreferences): ProjectListViewModel {
+        // show header on first launch
+        val showHeader = sharedPrefs.getBoolean(ProjectsListFragment.PREFS_SHOW_HEADER, true)
+        sharedPrefs.edit().putBoolean(ProjectsListFragment.PREFS_SHOW_HEADER, false).apply()
+        return ProjectListViewModel(showHeader)
+    }
+
+    @Provides
+    @Reusable
+    fun provideSearchViewModel() = SearchViewModel()
 
     @Provides
     @GlobalScope
