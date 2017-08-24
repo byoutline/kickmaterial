@@ -194,7 +194,6 @@ class ProjectDetailsActivity : KickMaterialBaseActivity(), ObservableScrollView.
             postProjectDetails()
         } else {
             RewardsListActivity.launch(this, projectDetails!!, binding.playVideoBtn)
-            //            showWebView(project.getPledgeUrl());
         }
     }
 
@@ -261,7 +260,6 @@ class ProjectDetailsActivity : KickMaterialBaseActivity(), ObservableScrollView.
         val newTitlePaddingRight = Math.min(maxTitlePaddingRight, scrollY)
 
         binding.projectTitleTv.setTextSize(TypedValue.COMPLEX_UNIT_PX, Math.max(titleFontMaxSize - scrollY * 0.05f, titleFontMinSize.toFloat()))
-        //        binding.projectTitleTv.setTextSize(TypedValue.COMPLEX_UNIT_PX,moveBase(minTitlesMarginTop,maxTitlesMarginTop,titleFontMaxSize,titleFontMinSize,scrollY));
 
         binding.projectTitleTv.setPadding(0, 0, newTitlePaddingRight, 0)
 
@@ -280,10 +278,6 @@ class ProjectDetailsActivity : KickMaterialBaseActivity(), ObservableScrollView.
         if (maxParallaxValue > parallax) {
             binding.projectPhotoContainer.translationY = (-parallax).toFloat()
         }
-    }
-
-    fun moveBase(xmin: Int, xmax: Int, ymin: Int, ymax: Int, value: Int): Int {
-        return ymin + (value - xmin) * (ymax - ymin) / (xmax - xmin)
     }
 
     private fun animateActionButtonVisibility(videoExist: Boolean) {

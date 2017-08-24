@@ -24,29 +24,22 @@ import android.graphics.ColorMatrixColorFilter
 import android.os.Build
 import android.support.annotation.AnimRes
 import android.support.v4.view.animation.LinearOutSlowInInterpolator
-import android.support.v7.app.AppCompatActivity
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
 
 
 @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-class LUtils private constructor(protected var mActivity: AppCompatActivity) {
+class LUtils private constructor() {
     companion object {
 
+        fun hasL() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP
 
-        fun hasL(): Boolean {
-            return Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP
-        }
-
-        fun setStatusBarColor(activity: Activity?, color: Int) {
-            if (!hasL() || activity == null) {
-                return
-            }
+        fun setStatusBarColor(activity: Activity, color: Int) {
+            if (!hasL()) return
 
             activity.window.statusBarColor = color
         }
-
 
         fun toGrayscale(iv: ImageView) {
             val matrix = ColorMatrix()

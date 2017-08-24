@@ -34,7 +34,6 @@ class SearchListFragment : KickMaterialFragment(), ProjectClickListener, Endless
     @Inject
     lateinit var viewModel: SearchViewModel
 
-    private var layoutManager: LinearLayoutManager? = null
     internal var page = DEFAULT_PAGE
     private var loading: Boolean = false
     private var hasMore = true

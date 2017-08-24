@@ -18,32 +18,16 @@ import com.byoutline.kickmaterial.utils.KickMaterialBaseActivity
  */
 class MainActivity : KickMaterialBaseActivity() {
 
-
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         injectViewsAndSetUpToolbar()
-        //        setUpDrawer(true);
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
                     .add(R.id.container, ProjectsListFragment.newInstance(DataManager.categoryAll))
                     .commit()
         }
-
-        //        setExitSharedElementCallback(new SharedElementCallback() {
-        //            @Override
-        //            public void onSharedElementEnd(List<String> sharedElementNames, List<View> sharedElements, List<View> sharedElementSnapshots) {
-        //                String fabName = getString(R.string.transition_fab);
-        //                int fabIdx = sharedElementNames.indexOf(fabName);
-        //                if (fabIdx >= 0) {
-        //                    View fab = sharedElements.get(fabIdx);
-        //                    fab.setTranslationZ(0);
-        //                    fab.setTranslationX(0);
-        //                }
-        //            }
-        //        });
-
     }
 
     override fun setToolbarAlpha(alpha: Float) {
@@ -51,11 +35,8 @@ class MainActivity : KickMaterialBaseActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        //        if (!navigationDrawerFragment.isDrawerOpen()) {
         menuInflater.inflate(R.menu.main, menu)
         return true
-        //        }
-        //        return super.onCreateOptionsMenu(menu);
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
