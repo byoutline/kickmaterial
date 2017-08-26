@@ -14,13 +14,13 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.view.animation.AnimationUtils
+import android.widget.TextView
 import com.byoutline.kickmaterial.KickMaterialApp
 import com.byoutline.kickmaterial.R
 import com.byoutline.kickmaterial.databinding.ActivityProjectDetailsBinding
 import com.byoutline.kickmaterial.model.Project
 import com.byoutline.kickmaterial.model.ProjectDetails
 import com.byoutline.kickmaterial.model.ProjectIdAndSignature
-import com.byoutline.kickmaterial.projectlist.ProjectsAdapter
 import com.byoutline.kickmaterial.rewardlist.RewardsListActivity
 import com.byoutline.kickmaterial.transitions.AnimatorUtils
 import com.byoutline.kickmaterial.transitions.PaletteAndAplaTransformation
@@ -88,7 +88,7 @@ class ProjectDetailsActivity : KickMaterialBaseActivity(), ObservableScrollView.
         titleFontMaxSize = resources.getDimensionPixelSize(R.dimen.font_21)
         titleFontMinSize = resources.getDimensionPixelSize(R.dimen.font_16)
         imageHeight = resources.getDimensionPixelSize(R.dimen.project_details_photo_height)
-        imageWidth = (imageHeight * ProjectsAdapter.IMAGE_RATIO).toInt()
+        imageWidth = (imageHeight * IMAGE_RATIO).toInt()
         binding.detailsContainer.startAnimation(AnimationUtils.loadAnimation(this@ProjectDetailsActivity, R.anim.slide_from_bottom))
         loadProjectData()
         launchPostTransitionAnimations()
@@ -124,7 +124,7 @@ class ProjectDetailsActivity : KickMaterialBaseActivity(), ObservableScrollView.
             projectBackingProgress.setText(if (project.isFunded) R.string.funded else R.string.backing_in_progress)
 
             projectItemBigProgressSb.progress = project.percentProgress.toInt()
-            ProjectsAdapter.setProjectDetailsInfo(projectItemBigGatheredMoneyTv, projectItemBigPledgedOfTv,
+            setProjectDetailsInfo(projectItemBigGatheredMoneyTv, projectItemBigPledgedOfTv,
                     projectItemBigDaysLeft, projectItemTimeLeftTypeTv, project)
 
             // TODO: animate elevation on scroll.
@@ -308,8 +308,19 @@ class ProjectDetailsActivity : KickMaterialBaseActivity(), ObservableScrollView.
     }
 
     companion object {
+        private const val IMAGE_RATIO = (4 / 3).toDouble()
+        private const val CURRENCY = "$"
+
         private const val MAX_TRANSITION_DELAY = 800
         private const val ACTION_BUTTON_VISIBILITY_ANIM_DELAY = MAX_TRANSITION_DELAY + 200
+
+        fun setProjectDetailsInfo(gatheredMoneyTv: TextView, totalAmountTv: TextView, timeLeftValueTv: TextView, timeLeftTypeTv: TextView, project: Project) {
+            gatheredMoneyTv.text = CURRENCY + project.getGatheredAmount()
+            totalAmountTv.text = gatheredMoneyTv.context.getString(R.string.pledged_of, project.getTotalAmount())
+            val timeLeft = project.getTimeLeft()
+            timeLeftValueTv.text = timeLeft.value
+            timeLeftTypeTv.text = timeLeft.description
+        }
     }
 }
 

@@ -6,11 +6,11 @@
 
     <data>
 
-        <import type="com.byoutline.kickmaterial.projectlist.ProjectsAdapter"/>
+        <import type="com.byoutline.kickmaterial.projectlist.ProjectItemViewModel"/>
 
         <variable
             name="viewModel"
-            type="com.byoutline.kickmaterial.projectlist.ProjectItemViewModel"/>
+            type="ProjectItemViewModel"/>
 
     </data>
 

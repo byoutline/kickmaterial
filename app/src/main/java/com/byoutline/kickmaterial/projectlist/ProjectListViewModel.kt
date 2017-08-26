@@ -31,16 +31,16 @@ class ProjectListViewModel(showHeader: Boolean) {
     //    val itemBinding = ItemBinding.of<ProjectItemViewModel>(BR.categoryItem, R.layout.category_list_item)
     val itemBinding: ItemBinding<ProjectItemViewModel> = ItemBinding.of { itemBinding, _, item ->
         val layoutId = when (item.type) {
-            ProjectsAdapter.HEADER_ITEM -> R.layout.projects_list_header
-            ProjectsAdapter.BIG_ITEM -> R.layout.project_grid_item_big
-            ProjectsAdapter.NORMAL_ITEM -> R.layout.project_grid_item_normal
+            ProjectItemViewModel.HEADER_ITEM -> R.layout.projects_list_header
+            ProjectItemViewModel.BIG_ITEM -> R.layout.project_grid_item_big
+            ProjectItemViewModel.NORMAL_ITEM -> R.layout.project_grid_item_normal
             else -> throw IllegalArgumentException("Unknown project item type: ${item.type}")
         }
         itemBinding.set(BR.viewModel, layoutId)
     }
 
     val adapter = ProjectListAdapter<ProjectItemViewModel>()
-    private val header = ProjectItemViewModel(Project(), ProjectsAdapter.HEADER_ITEM, Provider { null })
+    private val header = ProjectItemViewModel(Project(), ProjectItemViewModel.HEADER_ITEM, Provider { null })
     private var projectClickListener: ProjectClickListener? = null
     private val projectClickListenerProv = Provider { projectClickListener }
 
@@ -66,9 +66,9 @@ class ProjectListViewModel(showHeader: Boolean) {
 
     private fun getViewType(position: Int): Int {
         return if ((position + 2) % 5 == 4) {
-            ProjectsAdapter.BIG_ITEM
+            ProjectItemViewModel.BIG_ITEM
         } else {
-            ProjectsAdapter.NORMAL_ITEM
+            ProjectItemViewModel.NORMAL_ITEM
         }
     }
 }
@@ -88,11 +88,11 @@ class ProjectItemViewModel(project: Project, val type: Int, listenerProv: Provid
     fun onClick(view: View) {
         val listener = listenerProv.get() ?: return
         val views = when (type) {
-            ProjectsAdapter.BIG_ITEM -> {
+            ProjectItemViewModel.BIG_ITEM -> {
                 val bind = binding as? ProjectGridItemBigBinding ?: return
                 SharedViews(bind.photoLayout!!.projectItemBigPhotoIv)
             }
-            ProjectsAdapter.NORMAL_ITEM -> {
+            ProjectItemViewModel.NORMAL_ITEM -> {
                 val bind = binding as?  ProjectGridItemNormalBinding ?: return
                 SharedViews(bind.photoLayout!!.projectItemBigPhotoIv)
             }
@@ -100,6 +100,12 @@ class ProjectItemViewModel(project: Project, val type: Int, listenerProv: Provid
         } ?: return
 
         listener.projectClicked(project, views)
+    }
+
+    companion object {
+        const val BIG_ITEM = 0
+        const val NORMAL_ITEM = 1
+        const val HEADER_ITEM = 2
     }
 }
 
@@ -111,7 +117,7 @@ fun setProjectImage(view: ImageView, projectVM: ProjectItemViewModel?) {
     if (projectVM == null) return
     val ctx = view.context
     val picasso = Picasso.with(ctx)
-    val picassoBuilder = if (projectVM.type == ProjectsAdapter.BIG_ITEM) {
+    val picassoBuilder = if (projectVM.type == ProjectItemViewModel.BIG_ITEM) {
         val bigItemHeight: Int = ctx.resources.getDimensionPixelSize(R.dimen.project_item_big_height)
         val bigItemWidth: Int = (bigItemHeight * IMAGE_RATIO).toInt()
         picasso.load(projectVM.project.bigPhotoUrl)
@@ -135,30 +141,6 @@ class ProjectListAdapter<T : BaseProjectItemViewModel> : BindingRecyclerViewAdap
     override fun onBindBinding(binding: ViewDataBinding?, variableId: Int, layoutRes: Int, position: Int, item: T?) {
         super.onBindBinding(binding, variableId, layoutRes, position, item)
         item?.binding = binding
-    }
-}
-
-/**
- * @author Pawel Karczewski <pawel.karczewski at byoutline.com> on 2015-01-03
- */
-class ProjectsAdapter {
-
-    companion object {
-
-        const val CURRENCY = "$"
-
-        const val BIG_ITEM = 0
-        const val NORMAL_ITEM = 1
-        const val HEADER_ITEM = 2
-        const val IMAGE_RATIO = (4 / 3).toDouble()
-
-        fun setProjectDetailsInfo(gatheredMoneyTv: TextView, totalAmountTv: TextView, timeLeftValueTv: TextView, timeLeftTypeTv: TextView, project: Project) {
-            gatheredMoneyTv.text = CURRENCY + project.getGatheredAmount()
-            totalAmountTv.text = gatheredMoneyTv.context.getString(R.string.pledged_of, project.getTotalAmount())
-            val timeLeft = project.getTimeLeft()
-            timeLeftValueTv.text = timeLeft.value
-            timeLeftTypeTv.text = timeLeft.description
-        }
     }
 }
 

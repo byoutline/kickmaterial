@@ -182,7 +182,7 @@ class ProjectsListFragment : KickMaterialFragment(), ProjectClickListener, Field
 
         layoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
             override fun getSpanSize(position: Int): Int
-                    = if (viewModel.items[position].type == ProjectsAdapter.NORMAL_ITEM) 1 else 2
+                    = if (viewModel.items[position].type == ProjectItemViewModel.NORMAL_ITEM) 1 else 2
         }
 
         binding.projectRecyclerView.setEndlessScrollListener(this)
