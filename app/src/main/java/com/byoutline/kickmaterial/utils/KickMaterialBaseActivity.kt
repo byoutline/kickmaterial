@@ -49,9 +49,7 @@ abstract class KickMaterialBaseActivity : BaseAppCompatActivity(), KickMaterialF
         lifecycleSubject.onNext(ActivityEvent.CREATE)
     }
 
-    protected open fun shouldBlockOrientationOnBuggedAndroidVersions(): Boolean {
-        return true
-    }
+    protected open fun shouldBlockOrientationOnBuggedAndroidVersions() = true
 
     private fun blockOrientationOnBuggedAndroidVersions() {
         if (!shouldBlockOrientationOnBuggedAndroidVersions()) {
@@ -98,7 +96,7 @@ abstract class KickMaterialBaseActivity : BaseAppCompatActivity(), KickMaterialF
     private fun initActionBarAutoHide() {
         actionBarAutoHideMinY = resources.getDimensionPixelSize(R.dimen.action_bar_auto_hide_min_y)
         actionBarAutoHideSensitivity = resources.getDimensionPixelSize(
-                R.dimen.action_bar_auto_hide_sensivity)
+                R.dimen.action_bar_auto_hide_sensitivity)
     }
 
     /**

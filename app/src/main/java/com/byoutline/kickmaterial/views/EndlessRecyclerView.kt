@@ -7,7 +7,6 @@ import android.util.AttributeSet
 /**
  * @author Pawel Karczewski <pawel.karczewski at byoutline.com> on 2015-04-14
  */
-
 class EndlessRecyclerView : RecyclerView {
 
     var visibleItemsThreshold = DEFAULT_ITEMS_THRESHOLD
@@ -20,7 +19,6 @@ class EndlessRecyclerView : RecyclerView {
     constructor(context: Context) : super(context) {
         init()
     }
-
 
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
         init()
@@ -35,7 +33,7 @@ class EndlessRecyclerView : RecyclerView {
     }
 
     private fun init() {
-        super.setOnScrollListener(object : RecyclerView.OnScrollListener() {
+        super.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
                 scrollListener?.onScrolled(recyclerView, dx, dy)
@@ -53,16 +51,7 @@ class EndlessRecyclerView : RecyclerView {
                     }
                 }
             }
-
-            override fun onScrollStateChanged(recyclerView: RecyclerView?, newState: Int) {
-                super.onScrollStateChanged(recyclerView, newState)
-                scrollListener?.onScrollStateChanged(recyclerView, newState)
-            }
         })
-    }
-
-    override fun setOnScrollListener(listener: RecyclerView.OnScrollListener) {
-        scrollListener = listener
     }
 
     interface EndlessScrollListener {

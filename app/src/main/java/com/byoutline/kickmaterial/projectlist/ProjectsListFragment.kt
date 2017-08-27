@@ -1,6 +1,5 @@
 package com.byoutline.kickmaterial.projectlist
 
-import android.content.SharedPreferences
 import android.graphics.Color
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
@@ -14,7 +13,6 @@ import com.byoutline.ibuscachedfield.util.RetrofitHelper
 import com.byoutline.kickmaterial.KickMaterialApp
 import com.byoutline.kickmaterial.R
 import com.byoutline.kickmaterial.databinding.FragmentProjectsBinding
-import com.byoutline.kickmaterial.login.LoginManager
 import com.byoutline.kickmaterial.model.*
 import com.byoutline.kickmaterial.projectdetails.startProjectDetailsActivity
 import com.byoutline.kickmaterial.search.SearchListFragment
@@ -27,30 +25,25 @@ import com.byoutline.ottoeventcallback.PostFromAnyThreadBus
 import com.byoutline.secretsauce.utils.ViewUtils
 import com.squareup.otto.Bus
 import com.squareup.otto.Subscribe
-import timber.log.Timber
 import javax.inject.Inject
 
 /**
  * @author Pawel Karczewski <pawel.karczewski at byoutline.com> on 2015-01-03
  */
 class ProjectsListFragment : KickMaterialFragment(), ProjectClickListener, FieldStateListener, EndlessRecyclerView.EndlessScrollListener {
-    var summaryScrolled: Float = 0f
+    private var summaryScrolled: Float = 0f
 
     @Inject
     lateinit var bus: Bus
     @Inject
     lateinit var discoverField: CachedFieldWithArg<DiscoverResponse, DiscoverQuery>
     @Inject
-    lateinit var loginManager: LoginManager
-    @Inject
-    lateinit var sharedPreferences: SharedPreferences
-    @Inject
     lateinit var viewModel: ProjectListViewModel
     private var actionbarScrollPoint: Float = 0.toFloat()
     private var maxScroll: Float = 0.toFloat()
     private var page = 1
     private var lastAvailablePage = Integer.MAX_VALUE
-    private var category: Category? = null
+    private lateinit var category: Category
     private lateinit var binding: FragmentProjectsBinding
     /**
      * Endless scroll variables *
@@ -66,18 +59,9 @@ class ProjectsListFragment : KickMaterialFragment(), ProjectClickListener, Field
         hostActivity?.enableActionBarAutoHide(binding.projectRecyclerView)
         maxScroll = (2 * resources.getDimensionPixelSize(R.dimen.project_header_padding_top) + ViewUtils.dpToPx(48f, activity)).toFloat()
         actionbarScrollPoint = ViewUtils.dpToPx(24f, activity).toFloat()
-        getArgs()
+        category = arguments.getParcelable(ARG_CATEGORY)
         setHasOptionsMenu(true)
         return binding.root
-    }
-
-    private fun getArgs() {
-        val args = arguments
-        if (args != null && args.containsKey(ARG_CATEGORY)) {
-            category = args.getParcelable(ARG_CATEGORY)
-        } else {
-            Timber.e("Category not passed")
-        }
     }
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
@@ -88,7 +72,7 @@ class ProjectsListFragment : KickMaterialFragment(), ProjectClickListener, Field
     }
 
     fun configureSwipeRefresh() {
-        val altColor = if (category == null) R.color.green_dark else category!!.colorResId
+        val altColor = category.colorResId
         binding.swipeRefreshProjectsSrl.setColorSchemeResources(altColor, R.color.green_primary)
         binding.swipeRefreshProjectsSrl.setOnRefreshListener {
             // Throw away all loaded categories and start over.
@@ -100,9 +84,9 @@ class ProjectsListFragment : KickMaterialFragment(), ProjectClickListener, Field
     override fun setUpListeners() {
         super.setUpListeners()
         binding.showCategoriesFab.setOnClickListener {
-            CategoriesListActivity.launch(activity, category!!, binding.showCategoriesFab)
+            CategoriesListActivity.launch(activity, category, binding.showCategoriesFab)
         }
-        binding.projectRecyclerView.setOnScrollListener(object : RecyclerView.OnScrollListener() {
+        binding.projectRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
 
             override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
@@ -143,9 +127,7 @@ class ProjectsListFragment : KickMaterialFragment(), ProjectClickListener, Field
     }
 
     override fun onViewStateRestored(savedInstanceState: Bundle?) {
-        if (savedInstanceState != null) {
-            summaryScrolled = savedInstanceState.getFloat(INSTANCE_STATE_SUMMARY_SCROLLED)
-        }
+        summaryScrolled = savedInstanceState?.getFloat(INSTANCE_STATE_SUMMARY_SCROLLED) ?: 0f
         super.onViewStateRestored(savedInstanceState)
     }
 
@@ -157,9 +139,7 @@ class ProjectsListFragment : KickMaterialFragment(), ProjectClickListener, Field
         discoverField.addStateListener(this)
         loadCurrentPage()
 
-        if (category != null) {
-            binding.showCategoriesFab.buttonColor = ContextCompat.getColor(context, category!!.colorResId)
-        }
+        binding.showCategoriesFab.buttonColor = ContextCompat.getColor(context, category!!.colorResId)
     }
 
     override fun onPause() {
@@ -176,9 +156,7 @@ class ProjectsListFragment : KickMaterialFragment(), ProjectClickListener, Field
 
 
     private fun setUpAdapters() {
-        /** NEW ADAPTER  */
         layoutManager = GridLayoutManager(activity, 2)
-
 
         layoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
             override fun getSpanSize(position: Int): Int
@@ -195,7 +173,7 @@ class ProjectsListFragment : KickMaterialFragment(), ProjectClickListener, Field
     }
 
     override val fragmentActionbarName: String
-        get() = category?.let { getString(it.nameResId) } ?: "Projects"
+        get() = getString(category.nameResId)
 
     override fun showBackButtonInActionbar() = false
 
@@ -265,9 +243,7 @@ class ProjectsListFragment : KickMaterialFragment(), ProjectClickListener, Field
         loadCurrentPage()
     }
 
-    private fun hasMore(): Boolean {
-        return page < lastAvailablePage
-    }
+    private fun hasMore(): Boolean = page < lastAvailablePage
 
     @Synchronized override fun hasMoreDataAndNotLoading(): Boolean {
         return discoverField.state != FieldState.CURRENTLY_LOADING && hasMore()

@@ -34,10 +34,8 @@ class VideoActivity : KickMaterialBaseActivity() {
         }
     }
 
-    override fun shouldBlockOrientationOnBuggedAndroidVersions(): Boolean {
-        // This activity is locked in landscape on all devices.
-        return false
-    }
+    // This activity is locked in landscape on all devices.
+    override fun shouldBlockOrientationOnBuggedAndroidVersions() = false
 
     private fun setDataFromArgs() {
         val intent = intent
