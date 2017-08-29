@@ -9,6 +9,9 @@
         <variable
             name="project"
             type="android.databinding.ObservableField&lt;com.byoutline.kickmaterial.model.ProjectDetails>"/>
+        <variable
+            name="model"
+            type="com.byoutline.kickmaterial.projectdetails.ProjectDetailsViewModel"/>
     </data>
 
     <FrameLayout
@@ -251,6 +254,7 @@
                     android:paddingRight="30dp"
                     android:textColor="@color/white_73"
                     android:textSize="@dimen/font_14"
+                    android:text="@{@string/project_details_made_by(project.authorName)}"
                     tools:text="@string/project_details_made_by"/>
 
             </LinearLayout>
@@ -274,7 +278,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingTop="14dp"
-                    android:text="@string/backing_in_progress"
+                    android:text="@{model.projectBackingProgressTxtId}"
                     android:textSize="@dimen/font_14"/>
 
 
@@ -288,6 +292,7 @@
                         android:layout_width="0dp"
                         android:layout_weight="2"
                         android:transitionName="@string/transition_gathered_money_amount"
+                        android:text="@{project.getGatheredAmountWithCurrency()}"
                         tools:ignore="UnusedAttribute"
                         tools:text="$132 999"/>
 
@@ -303,6 +308,7 @@
                         android:id="@+id/project_item_big_days_left"
                         style="@style/ProjectItemLightWhite"
                         android:transitionName="@string/transition_days_left"
+                        android:text="@{project.getTimeLeftValue()}"
                         tools:ignore="UnusedAttribute"
                         tools:text="9"/>
 
@@ -317,7 +323,7 @@
                         android:id="@+id/project_item_big_pledged_of_tv"
                         style="@style/ProjectItemBoldValue.Normal.Light"
                         android:layout_weight="2"
-                        android:text="@string/pledged_of"
+                        android:text="@{@string/pledged_of(project.getTotalAmount())}"
                         android:transitionName="@string/transition_gathered_money_amount_label"
                         tools:ignore="UnusedAttribute"/>
 
@@ -330,7 +336,7 @@
                     <TextView
                         android:id="@+id/project_item_time_left_type_tv"
                         style="@style/ProjectItemBoldValue.Normal.Light"
-                        android:text="@string/days_left"
+                        android:text="@{project.getTimeLeftDescription()}"
                         android:transitionName="@string/transition_days_left_label"
                         tools:ignore="UnusedAttribute"/>
 
@@ -342,6 +348,7 @@
                     android:layout_gravity="bottom"
                     android:layout_marginBottom="0dp"
                     android:transitionName="@string/transition_project_progress"
+                    android:progress="@{project.percentProgressInt}"
                     tools:ignore="UnusedAttribute"/>
 
             </LinearLayout>
@@ -356,6 +363,8 @@
                 android:clipToPadding="false"
                 android:elevation="8dp"
                 android:visibility="visible"
+                app:projectVideo="@{project.video}"
+                app:viewModel="@{model}"
                 fab:button_color="@color/green_primary"
                 fab:button_colorPressed="@color/green_dark"
                 fab:image="@drawable/play_ico"

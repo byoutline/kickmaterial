@@ -1,8 +1,8 @@
 package com.byoutline.kickmaterial.model
 
 import android.support.annotation.StringRes
+import com.byoutline.kickmaterial.KickMaterialApp
 import com.byoutline.kickmaterial.R
-import com.byoutline.kickmaterial.model.utils.EnumDtoHelper
 import java.util.*
 
 /**
@@ -16,7 +16,7 @@ enum class SortTypes(@StringRes nameResId: Int) {
     MOST_FUNDED(R.string.sort_most_funded);
 
     val apiName: String = name.toLowerCase(Locale.ENGLISH)
-    val displayName: String  = EnumDtoHelper.getDisplayName(nameResId, apiName)
+    private val displayName: String by lazy { KickMaterialApp.component.app.getString(nameResId) }
 
     override fun toString(): String {
         return displayName

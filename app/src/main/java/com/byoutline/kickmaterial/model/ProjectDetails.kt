@@ -3,12 +3,11 @@ package com.byoutline.kickmaterial.model
 import paperparcel.PaperParcel
 
 @PaperParcel
-class ProjectDetails : Project() {
-
-    var rewards: List<Reward>? = null
-    var commentsCount: Int = 0
-    var updatesCount: Int = 0
-    var video: ProjectVideo? = null
+class ProjectDetails(
+        val rewards: List<Reward>?,
+        val commentsCount: Int,
+        val updatesCount: Int,
+        val video: ProjectVideo?) : Project() {
 
     val videoUrl: String
         get() = video?.base ?: ""
@@ -18,6 +17,7 @@ class ProjectDetails : Project() {
         get() = video?.webm ?: ""
 
     companion object {
-        @JvmField val CREATOR = PaperParcelProjectDetails.CREATOR
+        @JvmField
+        val CREATOR = PaperParcelProjectDetails.CREATOR
     }
 }

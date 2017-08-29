@@ -14,21 +14,21 @@ import java.util.*
 object QueryParamsExtractor {
 
     fun getQueryParams(url: String): Map<String, String> {
-        try {
+        return try {
             val u = URL(url)
-            return splitQuery(u)
+            splitQuery(u)
         } catch (e: MalformedURLException) {
             Timber.e("Failed to get query params from url: " + url, e)
-            return emptyMap()
+            emptyMap()
         } catch (e: UnsupportedEncodingException) {
             Timber.e("Failed to get query params from url: " + url, e)
-            return emptyMap()
+            emptyMap()
         }
 
     }
 
     @Throws(UnsupportedEncodingException::class)
-    fun splitQuery(url: URL): Map<String, String> {
+    private fun splitQuery(url: URL): Map<String, String> {
         val queryPairs = LinkedHashMap<String, String>()
         val query = url.query
         val pairs = query.split("&".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
@@ -41,5 +41,4 @@ object QueryParamsExtractor {
         }
         return queryPairs
     }
-
 }

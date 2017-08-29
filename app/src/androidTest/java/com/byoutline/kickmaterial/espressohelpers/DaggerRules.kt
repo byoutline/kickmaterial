@@ -21,7 +21,7 @@ import org.junit.runners.model.Statement
  * Methods returning custom [ActivityTestRule]s that set test [AppComponent].
 
  * @author Sebastian Kacprzak <sebastian.kacprzak at byoutline.com>
-</sebastian.kacprzak> */
+ */
 object DaggerRules {
 
     fun userFirstLaunchRule(): ActivityTestRule<MainActivity>
@@ -30,14 +30,14 @@ object DaggerRules {
     fun userNextLaunchRule(): ActivityTestRule<MainActivity>
             = getActivityRule({ TestComponents.getNextRunAppComponent(it) }, MainActivity::class.java)
 
-    fun <ACTIVITY : Activity> getActivityRule(mainComponentProv: (KickMaterialApp) -> AppComponent,
-                                              clazz: Class<ACTIVITY>): ActivityTestRule<ACTIVITY> {
+    private fun <ACTIVITY : Activity> getActivityRule(mainComponentProv: (KickMaterialApp) -> AppComponent,
+                                                      clazz: Class<ACTIVITY>): ActivityTestRule<ACTIVITY> {
         val mainHandler = Handler(Looper.getMainLooper())
         return DaggerActivityTestRule(clazz, beforeActivityLaunchedAction = { application ->
             val app = application as KickMaterialApp
             val appComponent = mainComponentProv(app)
             val globalComponent = DaggerGlobalComponent.builder()
-                    .globalModule(GlobalModule(app, appComponent.bus, appComponent.accessTokenProvider))
+                    .globalModule(GlobalModule(app, appComponent.bus))
                     .build()
             mainHandler.post { app.setComponents(globalComponent, appComponent) }
         })
@@ -46,7 +46,7 @@ object DaggerRules {
 
 class DaggerActivityTestRule<T : Activity>(activityClass: Class<T>, initialTouchMode: Boolean = false,
                                            launchActivity: Boolean = true,
-                                           private val beforeActivityLaunchedAction: (Application)->Unit = {}) : ActivityTestRule<T>(activityClass, initialTouchMode, launchActivity) {
+                                           private val beforeActivityLaunchedAction: (Application) -> Unit = {}) : ActivityTestRule<T>(activityClass, initialTouchMode, launchActivity) {
 
     override fun beforeActivityLaunched() {
         super.beforeActivityLaunched()

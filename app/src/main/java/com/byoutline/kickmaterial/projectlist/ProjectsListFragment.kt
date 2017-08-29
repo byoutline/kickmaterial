@@ -139,7 +139,7 @@ class ProjectsListFragment : KickMaterialFragment(), ProjectClickListener, Field
         discoverField.addStateListener(this)
         loadCurrentPage()
 
-        binding.showCategoriesFab.buttonColor = ContextCompat.getColor(context, category!!.colorResId)
+        binding.showCategoriesFab.buttonColor = ContextCompat.getColor(context, category.colorResId)
     }
 
     override fun onPause() {

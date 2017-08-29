@@ -26,7 +26,6 @@ import com.byoutline.kickmaterial.databinding.ActivityCategoryListBinding
 import com.byoutline.kickmaterial.model.Category
 import com.byoutline.kickmaterial.model.DiscoverQuery
 import com.byoutline.kickmaterial.model.DiscoverResponse
-import com.byoutline.kickmaterial.transitions.AnimatorUtils
 import com.byoutline.kickmaterial.utils.KickMaterialBaseActivity
 import com.byoutline.kickmaterial.utils.LUtils
 import com.byoutline.secretsauce.utils.ViewUtils

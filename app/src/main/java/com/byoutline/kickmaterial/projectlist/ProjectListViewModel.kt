@@ -4,7 +4,6 @@ import android.databinding.BindingAdapter
 import android.databinding.ViewDataBinding
 import android.view.View
 import android.widget.ImageView
-import android.widget.TextView
 import com.byoutline.kickmaterial.BR
 import com.byoutline.kickmaterial.R
 import com.byoutline.kickmaterial.databinding.ProjectGridItemBigBinding
@@ -90,11 +89,21 @@ class ProjectItemViewModel(project: Project, val type: Int, listenerProv: Provid
         val views = when (type) {
             ProjectItemViewModel.BIG_ITEM -> {
                 val bind = binding as? ProjectGridItemBigBinding ?: return
-                SharedViews(bind.photoLayout!!.projectItemBigPhotoIv)
+                with(bind) {
+                    SharedViews(photoLayout!!.projectItemBigPhotoIv, projectItemBigTitleTv,
+                            projectItemBigProgressSb, numberDetailsLayout!!.projectItemBigGatheredMoneyTv,
+                            numberDetailsLayout.projectItemBigBackersTv, numberDetailsLayout.projectItemBigBackersLabelTv,
+                            numberDetailsLayout.projectItemTimeLeftTypeTv, numberDetailsLayout.projectItemBigDaysLeft,
+                            numberDetailsLayout.projectItemBigPledgedOfTv)
+                }
+
             }
             ProjectItemViewModel.NORMAL_ITEM -> {
                 val bind = binding as?  ProjectGridItemNormalBinding ?: return
-                SharedViews(bind.photoLayout!!.projectItemBigPhotoIv)
+                with(bind) {
+                    SharedViews(photoLayout!!.projectItemBigPhotoIv, projectItemBigTitleTv,
+                            projectItemBigProgressSb)
+                }
             }
             else -> null
         } ?: return

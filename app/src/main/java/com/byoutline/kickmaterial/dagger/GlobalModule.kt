@@ -14,7 +14,9 @@ import com.byoutline.kickmaterial.projectdetails.LruCacheWithPlaceholders
 import com.byoutline.kickmaterial.projectlist.ProjectListViewModel
 import com.byoutline.kickmaterial.projectlist.ProjectsListFragment
 import com.byoutline.kickmaterial.search.SearchViewModel
-import com.byoutline.kickmaterial.utils.*
+import com.byoutline.kickmaterial.utils.CategoriesFetchedEvent
+import com.byoutline.kickmaterial.utils.DiscoverProjectsFetchedErrorEvent
+import com.byoutline.kickmaterial.utils.DiscoverProjectsFetchedEvent
 import com.byoutline.observablecachedfield.ObservableCachedFieldWithArg
 import com.byoutline.ottocachedfield.CachedFieldBuilder
 import com.google.gson.FieldNamingPolicy
@@ -33,7 +35,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 
 @Module
-class GlobalModule(private val app: KickMaterialApp, private val bus: Bus, private val accessTokenProvider: AccessTokenProvider) {
+class GlobalModule(private val app: KickMaterialApp, private val bus: Bus) {
     private val picassoCache: LruCacheWithPlaceholders = LruCacheWithPlaceholders(app)
 
     init {
@@ -42,7 +44,6 @@ class GlobalModule(private val app: KickMaterialApp, private val bus: Bus, priva
         } catch (ex: IllegalStateException) {
             // singleton was already set
         }
-
     }
 
     @GlobalScope
@@ -141,7 +142,5 @@ class GlobalModule(private val app: KickMaterialApp, private val bus: Bus, priva
             = CachedFieldBuilder()
             .withValueProviderWithArg(apiValueProv<ProjectDetails, ProjectIdAndSignature> { (id, queryParams) -> service.getProjectDetails(id, queryParams) })
             .asObservable()
-            .withSuccessEvent(ProjectDetailsFetchedEvent())
-            .withErrorEvent(ProjectDetailsFetchingFailedEvent())
             .build()
 }

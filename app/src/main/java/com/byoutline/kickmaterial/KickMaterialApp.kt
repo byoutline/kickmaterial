@@ -4,7 +4,6 @@ import android.support.annotation.VisibleForTesting
 import com.byoutline.androidstubserver.AndroidStubServer
 import com.byoutline.ibuscachedfield.util.RetrofitHelper
 import com.byoutline.kickmaterial.dagger.*
-import com.byoutline.kickmaterial.login.AccessTokenProvider
 import com.byoutline.mockserver.NetworkType
 import com.byoutline.secretsauce.BaseApp
 import com.byoutline.secretsauce.utils.ViewUtils
@@ -27,27 +26,23 @@ class KickMaterialApp : BaseApp() {
         resetComponents()
     }
 
-
-    override fun isDebug(): Boolean {
-        return BuildConfig.DEBUG
-    }
+    override fun isDebug(): Boolean = BuildConfig.DEBUG
 
     @VisibleForTesting
     @Synchronized fun setComponents(mainComponent: GlobalComponent, appComponent: AppComponent) {
         component = mainComponent
         init(appComponent)
-        //        component.inject(this);
     }
 
-    fun resetComponents() {
+    private fun resetComponents() {
         val appComponent = createAppComponent()
-        val mainComponent = createGlobalComponent(appComponent.bus, appComponent.accessTokenProvider)
+        val mainComponent = createGlobalComponent(appComponent.bus)
         setComponents(mainComponent, appComponent)
     }
 
-    private fun createGlobalComponent(bus: Bus, accessTokenProvider: AccessTokenProvider): GlobalComponent {
+    private fun createGlobalComponent(bus: Bus): GlobalComponent {
         return DaggerGlobalComponent.builder()
-                .globalModule(GlobalModule(this, bus, accessTokenProvider))
+                .globalModule(GlobalModule(this, bus))
                 .build()
     }
 

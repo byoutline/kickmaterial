@@ -20,10 +20,10 @@ class Category(val categoryId: Int, @StringRes val nameResId: Int,
     fun getBgColor() = bgColor
 
     fun setBgColor(color: Int?) {
-        if (color == null) {
-            bgColor = Color.WHITE
+        bgColor = if (color == null) {
+            Color.WHITE
         } else {
-            bgColor = ColorMixer.mixTwoColors(color, Color.WHITE, 0.20f)
+            ColorMixer.mixTwoColors(color, Color.WHITE, 0.20f)
         }
     }
 

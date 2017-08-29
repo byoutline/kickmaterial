@@ -4,17 +4,21 @@ import org.joda.time.DateTime
 import paperparcel.PaperParcel
 import paperparcel.PaperParcelable
 
-@PaperParcel
-class Reward : RewardItem, PaperParcelable {
 
-    var minimum: Double = 0.toDouble()
-    var reward: String? = null
-    // optional fields
-    var description: String? = null
-    var shippingEnabled: Boolean = false
-    var estimatedDeliveryOn: DateTime? = null
-    var updatedAt: DateTime? = null
-    var backersCount: Int = 0
+/**
+ * @author Pawel Karczewski <pawel.karczewski at byoutline.com> on 2015-03-30
+ */
+@PaperParcel
+class Reward(
+        val minimum: Double,
+        val reward: String?,
+        val description: String? = null,
+        val shippingEnabled: Boolean = false,
+        val estimatedDeliveryOn: DateTime? = null,
+        val updatedAt: DateTime? = null,
+        val backersCount: Int = 0
+) : RewardItem, PaperParcelable {
+
 
     override val itemType: Int
         get() = RewardItem.ITEM
@@ -26,5 +30,15 @@ class Reward : RewardItem, PaperParcelable {
     companion object {
         @JvmField
         val CREATOR = PaperParcelReward.CREATOR
+    }
+}
+
+interface RewardItem {
+
+    val itemType: Int
+
+    companion object {
+        const val ITEM = 0
+        const val HEADER = 1
     }
 }

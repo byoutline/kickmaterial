@@ -22,7 +22,7 @@ class DiscoverQuery(val queryMap: Map<String, String>, val discoverType: Discove
 
         val that = o as DiscoverQuery?
 
-        if (queryMap != that!!.queryMap ) return false
+        if (queryMap != that!!.queryMap) return false
         return discoverType == that.discoverType
 
     }
@@ -37,7 +37,7 @@ class DiscoverQuery(val queryMap: Map<String, String>, val discoverType: Discove
         private const val PER_PAGE = 12
 
         fun getDiscover(page: Int?): DiscoverQuery {
-            val firstPage = page == null || page === 1
+            val firstPage = page == null || page == 1
             val params = if (firstPage) emptyMap<String, String>() else getDiscoverCategoryMap(null, page, PER_PAGE, null)
             return DiscoverQuery(params, DiscoverType.DISCOVER)
         }
@@ -75,10 +75,10 @@ class DiscoverQuery(val queryMap: Map<String, String>, val discoverType: Discove
         }
 
         fun getDiscoverQuery(category: Category?, page: Int): DiscoverQuery {
-            if (category == null || category.categoryId == Category.ALL_CATEGORIES_ID) {
-                return getDiscover(page)
+            return if (category == null || category.categoryId == Category.ALL_CATEGORIES_ID) {
+                getDiscover(page)
             } else {
-                return getDiscoverCategory(category.categoryId, page, SortTypes.MAGIC)
+                getDiscoverCategory(category.categoryId, page, SortTypes.MAGIC)
             }
         }
     }

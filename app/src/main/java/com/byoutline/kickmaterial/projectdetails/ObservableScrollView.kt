@@ -34,10 +34,6 @@ class ObservableScrollView(context: Context, attrs: AttributeSet) : ScrollView(c
         }
     }
 
-    public override fun computeVerticalScrollRange(): Int {
-        return super.computeVerticalScrollRange()
-    }
-
     fun addCallbacks(listener: Callbacks) {
         if (!callbacks.contains(listener)) {
             callbacks.add(listener)

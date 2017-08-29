@@ -38,43 +38,27 @@ object PeriodToStringConverter {
 
     /**
      * Best matching formatter of null if auction ended.
-
-     * @param daysPeriod
-     * *
-     * @return
      */
     private fun selectFormatter(daysPeriod: Period): PeriodFormatterAndValue? {
         val days = daysPeriod.days
         if (days > 0) {
-            return pav(DAY_FORMATTER, days)
+            return PAV(DAY_FORMATTER, days)
         }
         val hours = daysPeriod.hours
         if (hours > 0) {
-            return pav(HOUR_FORMATTER, hours)
+            return PAV(HOUR_FORMATTER, hours)
         }
         val minutes = daysPeriod.minutes
         if (minutes > 0) {
-            return pav(MINUTE_FORMATTER, minutes)
+            return PAV(MINUTE_FORMATTER, minutes)
         }
         val seconds = daysPeriod.seconds
         if (seconds > 0) {
-            return pav(SECOND_FORMATTER, seconds)
+            return PAV(SECOND_FORMATTER, seconds)
         }
         return null
     }
-
-    /**
-     * Shorter syntax for creating [PeriodFormatterAndValue]
-
-     * @param formatter
-     * *
-     * @param value
-     * *
-     * @return
-     */
-    private fun pav(formatter: PeriodFormatter, value: Int): PeriodFormatterAndValue {
-        return PeriodFormatterAndValue(formatter, value)
-    }
-}// static methods only
+}
+private typealias PAV = PeriodFormatterAndValue
 
 internal class PeriodFormatterAndValue(val formatter: PeriodFormatter, val value: Int)
