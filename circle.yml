@@ -1,6 +1,7 @@
 general:
   artifacts:
     - "app/build/outputs" # APKs, lint, pmd,...
+    - "app/build/reports"
 
 machine:
   java:
@@ -20,14 +21,11 @@ machine:
 
 dependencies:
   pre:
-    - mkdir "$ANDROID_HOME/licenses" || true
-    - echo "8933bad161af4178b1185d1a37fbf41ea5269c55" > "$ANDROID_HOME/licenses/android-sdk-license"
-    - for pack in  "platform-tools" "tools"; do echo y | android update sdk -u -a -t $pack ; done
-    - if [ ! -e $ANDROID_HOME/build-tools/25.0.3 ]; then echo y | android update sdk -u -a -t "build-tools-25.0.3"; fi
+    - ci/update_android_dependencies.sh
   cache_directories:
     - /usr/local/android-sdk-linux/tools
     - /usr/local/android-sdk-linux/extras
-    - /usr/local/android-sdk-linux/build-tools/25.0.3
+    - /usr/local/android-sdk-linux/build-tools/26.0.1
     - ~/.android
   override:
     - ./gradlew dependencies
@@ -37,8 +35,4 @@ test:
   pre:
     - case $CIRCLE_NODE_INDEX in 0) ./gradlew assembleDebug ;; 1) ./gradlew check lint ;; esac:
         parallel: true
-  override:
-  post:
-    # Copy the test results to the test results directory from container it was executed on.
-    - if [ "$CIRCLE_NODE_INDEX" = "1" ] ; then cp -r app/build/reports $CIRCLE_TEST_REPORTS/ ; fi:
-        parallel: true
+

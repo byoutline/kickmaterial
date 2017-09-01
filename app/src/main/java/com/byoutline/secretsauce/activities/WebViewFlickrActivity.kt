@@ -15,12 +15,12 @@ class WebViewFlickrActivity : WebViewActivityV7() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // Do not launch external browser for redirect.
-        webview.setWebViewClient(object : WebViewClient() {
+        webview.webViewClient = object : WebViewClient() {
             override fun shouldOverrideUrlLoading(view: WebView, url: String): Boolean {
                 view.loadUrl(url)
                 return false
             }
-        })
+        }
     }
 
     /**
