@@ -32,9 +32,8 @@ class ProjectSpec extends spock.lang.Specification {
     def "getSignature should returned signature only"() {
         given:
         Project instance = new Project()
-        instance.urls = new ProjectUrls()
-        instance.urls.api = new ProjectUrlsApi()
-        instance.urls.api.project = "https://api.byoutline.com/v1/projects/866180756?signature=1427292197.67ec163ed8dbd36529f591b18fe0f7c4c5867ee1"
+        def project = "https://api.byoutline.com/v1/projects/866180756?signature=1427292197.67ec163ed8dbd36529f591b18fe0f7c4c5867ee1"
+        instance.urls = new ProjectUrls(new ProjectUrlsApi(project), null)
         when:
         Map<String, String> result = instance.getDetailsQueryMap()
         then:
