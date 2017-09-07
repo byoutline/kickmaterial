@@ -16,7 +16,3 @@ class CategoriesFetchedEvent : ResponseEventImpl<List<Category>>()
 class DiscoverProjectsFetchedErrorEvent : ResponseEventWithArgImpl<Exception, DiscoverQuery>()
 
 class DiscoverProjectsFetchedEvent : ResponseEventWithArgImpl<DiscoverResponse, DiscoverQuery>()
-
-class ProjectDetailsFetchedEvent : ResponseEventWithArgImpl<ProjectDetails, ProjectIdAndSignature>()
-
-class ProjectDetailsFetchingFailedEvent : ResponseEventWithArgImpl<Exception, ProjectIdAndSignature>()
