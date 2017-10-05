@@ -1,5 +1,5 @@
 ext {
-    support_version = '26.0.2'
+    support_version = '26.1.0'
     dagger_version = '2.11'
     retrofit_ver = '2.2.0'
     okhttp_ver = '3.7.0'
@@ -36,7 +36,7 @@ dependencies {
     implementation "com.trello.rxlifecycle2:rxlifecycle-components:$rxlifecycle_ver"
     implementation "com.trello.rxlifecycle2:rxlifecycle-kotlin:$rxlifecycle_ver"
     kapt 'nz.bradcampbell:paperparcel-compiler:2.0.1'
-    kapt 'com.android.databinding:compiler:3.0.0-beta3'
+    kapt "com.android.databinding:compiler:$buildscript_tools_ver"
     // For dagger 2
     implementation "com.google.dagger:dagger:$dagger_version"
     kapt "com.google.dagger:dagger-compiler:$dagger_version"

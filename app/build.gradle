@@ -6,7 +6,7 @@ buildscript {
     dependencies {
         classpath 'net.saliman:gradle-cobertura-plugin:2.0.0'
         classpath 'org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.5.0-x'
-        classpath 'com.stanfy.spoon:spoon-gradle-plugin:1.0.4'
+        classpath 'com.stanfy.spoon:spoon-gradle-plugin:1.2.2'
     }
 
     configurations.all {
@@ -34,7 +34,7 @@ repositories {
 
 android {
     compileSdkVersion 26
-    buildToolsVersion '26.0.1'
+    buildToolsVersion '26.0.2'
 
     dataBinding {
         enabled = true
@@ -51,6 +51,11 @@ android {
 
         // We use custom runner to turn off animations.
         testInstrumentationRunner 'com.jakewharton.u2020.U2020TestRunner'
+    }
+
+    dexOptions {
+        javaMaxHeapSize "8g"
+        dexInProcess true
     }
 
     buildTypes {

@@ -84,7 +84,9 @@ class ProjectItemViewModel(project: Project, val type: Int, listenerProv: Provid
 
     fun getTimeLeft() = project.getTimeLeft()
 
-    fun onClick(view: View) {
+    fun onClick(view: View) = onClick()
+
+    fun onClick() {
         val listener = listenerProv.get() ?: return
         val views = when (type) {
             ProjectItemViewModel.BIG_ITEM -> {

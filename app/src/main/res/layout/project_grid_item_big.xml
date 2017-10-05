@@ -18,7 +18,7 @@
 		android:layout_width="match_parent"
 		android:layout_height="@dimen/project_item_big_height"
 		android:layout_margin="6dp"
-		android:onClick="@{viewModel::onClick}"
+		bind:onClick="@{viewModel::onClick}"
 		card_view:cardBackgroundColor="@android:color/transparent"
 		card_view:cardCornerRadius="@dimen/project_item_corner_radius"
 		card_view:cardPreventCornerOverlap="false">

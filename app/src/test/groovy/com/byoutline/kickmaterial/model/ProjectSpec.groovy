@@ -1,12 +1,13 @@
 package com.byoutline.kickmaterial.model
 
+import spock.lang.Specification
 import spock.lang.Unroll
 
 /**
  *
  * @author Sebastian Kacprzak <sebastian.kacprzak at byoutline.com>.
  */
-class ProjectSpec extends spock.lang.Specification {
+class ProjectSpec extends Specification {
 
 
     @Unroll
