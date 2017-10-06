@@ -15,6 +15,10 @@ import com.squareup.picasso.Picasso
  */
 @BindingAdapter("imageUrl", "error")
 fun loadImage(view: ImageView, imageUrl: String?, error: Drawable) {
+    if (imageUrl.isNullOrBlank()) {
+        view.setImageDrawable(error)
+        return
+    }
     Picasso.with(view.context)
             .load(imageUrl)
             .error(error)
