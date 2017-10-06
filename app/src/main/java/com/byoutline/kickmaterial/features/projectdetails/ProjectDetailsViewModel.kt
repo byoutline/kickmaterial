@@ -81,9 +81,6 @@ class ProjectDetailsViewModel(val projectDetailsField: ObservableCachedFieldWith
         projectDetailsField.postValue(params)
     }
 
-    fun animateVideoBtn(videoBtn: View, video: ProjectVideo?)
-            = videoBtnAnimator.animateVideoBtn(videoBtn, video)
-
     fun loadProjectPhoto(projectPhotoIv: ImageView) {
         val bitmap = picassoCache.getPlaceholder(project.bigPhotoUrl) ?: picassoCache.getPlaceholder(project.photoUrl)
         val placeholderAlreadyFetched = bitmap != null

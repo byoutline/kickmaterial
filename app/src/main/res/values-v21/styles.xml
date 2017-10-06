@@ -26,10 +26,12 @@
         <!--<item name="android:windowSharedElementReturnTransition">@transition/shared_element</item>-->
     </style>
 
-    <style name="ActionButtonStyle" parent="TextAppearance.AppCompat.Display1" >
+    <style name="ActionButtonStyle" parent="TextAppearance.AppCompat.Display1">
         <item name="android:transitionName">@string/transition_fab</item>
         <item name="android:elevation">8dp</item>
         <item name="android:layout_width">@dimen/button_size</item>
+        <item name="borderWidth">0dp</item>
+        <item name="fabSize">normal</item>
         <item name="android:layout_height">@dimen/button_size</item>
     </style>
 

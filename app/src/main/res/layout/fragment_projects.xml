@@ -1,59 +1,58 @@
-<layout
-	xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:fab="http://schemas.android.com/apk/res-auto"
-	xmlns:app="http://schemas.android.com/apk/res-auto">
-	<data>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-		<variable
-			name="viewModel"
-			type="com.byoutline.kickmaterial.features.projectlist.ProjectListViewModel" />
-	</data>
-	<RelativeLayout
+    <data>
 
-		android:id="@+id/main_parent_rl"
-		android:layout_width="match_parent"
-		android:layout_height="match_parent"
-		android:orientation="vertical">
+        <variable
+            name="viewModel"
+            type="com.byoutline.kickmaterial.features.projectlist.ProjectListViewModel" />
+    </data>
 
+    <RelativeLayout
 
-		<ImageView
-			android:id="@+id/bubbles_iv"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:scaleType="centerCrop"
-			android:src="@drawable/projects_bg"/>
-
-		<android.support.v4.widget.SwipeRefreshLayout
-			android:id="@+id/swipe_refresh_projects_srl"
-			android:layout_width="match_parent"
-			android:layout_height="match_parent">
-
-			<com.byoutline.kickmaterial.views.EndlessRecyclerView
-				android:id="@+id/project_recycler_view"
-				android:layout_width="match_parent"
-				android:layout_height="match_parent"
-				android:clipToPadding="false"
-				android:paddingBottom="4dp"
-				android:paddingLeft="4dp"
-				android:paddingRight="4dp"
-				android:paddingTop="89dp"
-				app:items="@{viewModel.items}"
-				app:itemBinding="@{viewModel.itemBinding}"
-				app:adapter="@{viewModel.adapter}"/>
-
-		</android.support.v4.widget.SwipeRefreshLayout>
-
-		<com.software.shell.fab.ActionButton
-			android:id="@+id/show_categories_fab"
-			style="@style/ActionButtonStyle"
-			android:layout_alignParentBottom="true"
-			android:layout_alignParentRight="true"
-			android:layout_marginBottom="@dimen/fab_margin"
-			android:layout_marginRight="@dimen/fab_margin"
-			fab:button_color="@color/green_primary"
-			fab:button_colorPressed="@color/green_dark"
-			fab:image="@drawable/categories_icon"/>
+        android:id="@+id/main_parent_rl"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
 
-	</RelativeLayout>
+        <ImageView
+            android:id="@+id/bubbles_iv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="centerCrop"
+            android:src="@drawable/projects_bg" />
+
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/swipe_refresh_projects_srl"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.byoutline.kickmaterial.views.EndlessRecyclerView
+                android:id="@+id/project_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                android:paddingBottom="4dp"
+                android:paddingLeft="4dp"
+                android:paddingRight="4dp"
+                android:paddingTop="89dp"
+                app:adapter="@{viewModel.adapter}"
+                app:itemBinding="@{viewModel.itemBinding}"
+                app:items="@{viewModel.items}" />
+
+        </android.support.v4.widget.SwipeRefreshLayout>
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/show_categories_fab"
+            style="@style/ActionButtonStyle"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="@dimen/fab_margin"
+            android:layout_marginRight="@dimen/fab_margin"
+            android:src="@drawable/categories_icon"
+            app:backgroundTint="@color/green_primary"
+            app:rippleColor="@color/green_dark" />
+
+    </RelativeLayout>
 </layout>

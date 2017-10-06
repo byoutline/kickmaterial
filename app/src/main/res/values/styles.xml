@@ -194,20 +194,14 @@
 		<item name="android:paddingBottom">21dp</item>
 	</style>
 
-	<style name="ActionButtonStyleBase">
-		<item name="image_size">20dp</item>
-		<item name="show_animation">@anim/fab_roll_from_down</item>
-		<item name="hide_animation">@anim/fab_roll_to_down</item>
-		<item name="button_colorPressed">@color/green_primary</item>
-		<item name="shadow_color">@color/black_50</item>
-		<item name="shadow_radius">3dp</item>
+	<style name="ActionButtonStyle">
+		<item name="elevation">8dp</item>
+		<item name="borderWidth">0dp</item>
+		<item name="fabSize">normal</item>
 		<item name="android:clickable">true</item>
 		<item name="android:layout_width">@dimen/button_size</item>
 		<item name="android:layout_height">@dimen/button_size</item>
 		<item name="android:layout_marginBottom">@dimen/fab_margin</item>
-	</style>
-
-	<style name="ActionButtonStyle" parent="ActionButtonStyleBase">
 	</style>
 
 	<color name="black_33">#55000000</color>

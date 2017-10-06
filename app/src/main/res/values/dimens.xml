@@ -60,6 +60,7 @@
     <dimen name="project_number_details_padding_double">40dp</dimen>
     <dimen name="status_bar_height_half">12.5dp</dimen>
     <dimen name="project_item_corner_radius">6dp</dimen>
+    <dimen name="fab_margin">16sp</dimen>
 
 
 </resources>

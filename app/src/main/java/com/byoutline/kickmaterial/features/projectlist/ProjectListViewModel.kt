@@ -1,6 +1,7 @@
 package com.byoutline.kickmaterial.features.projectlist
 
 import android.databinding.BindingAdapter
+import android.databinding.ObservableInt
 import android.databinding.ViewDataBinding
 import android.view.View
 import android.widget.ImageView
@@ -8,8 +9,8 @@ import com.byoutline.kickmaterial.BR
 import com.byoutline.kickmaterial.R
 import com.byoutline.kickmaterial.databinding.ProjectGridItemBigBinding
 import com.byoutline.kickmaterial.databinding.ProjectGridItemNormalBinding
-import com.byoutline.kickmaterial.model.Project
 import com.byoutline.kickmaterial.features.search.BaseProjectItemViewModel
+import com.byoutline.kickmaterial.model.Project
 import com.byoutline.kickmaterial.transitions.AplaTransformation
 import com.byoutline.kickmaterial.transitions.SharedViews
 import com.byoutline.rx.invokeOnFPause

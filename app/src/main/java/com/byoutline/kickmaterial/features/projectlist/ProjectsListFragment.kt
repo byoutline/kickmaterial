@@ -1,5 +1,6 @@
 package com.byoutline.kickmaterial.features.projectlist
 
+import android.content.res.ColorStateList
 import android.graphics.Color
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
@@ -13,11 +14,11 @@ import com.byoutline.ibuscachedfield.util.RetrofitHelper
 import com.byoutline.kickmaterial.KickMaterialApp
 import com.byoutline.kickmaterial.R
 import com.byoutline.kickmaterial.databinding.FragmentProjectsBinding
-import com.byoutline.kickmaterial.model.*
 import com.byoutline.kickmaterial.features.projectdetails.startProjectDetailsActivity
 import com.byoutline.kickmaterial.features.search.SearchListFragment
 import com.byoutline.kickmaterial.features.selectcategory.ARG_CATEGORY
 import com.byoutline.kickmaterial.features.selectcategory.CategoriesListActivity
+import com.byoutline.kickmaterial.model.*
 import com.byoutline.kickmaterial.transitions.SharedViews
 import com.byoutline.kickmaterial.utils.*
 import com.byoutline.kickmaterial.views.EndlessRecyclerView
@@ -93,15 +94,14 @@ class ProjectsListFragment : KickMaterialFragment(), ProjectClickListener, Field
 
                 if (dy > actionbarScrollPoint) {
                     hostActivity?.showActionbar(false, true)
-                    if (!binding.showCategoriesFab.isHidden) {
+                    if (binding.showCategoriesFab.visibility == View.VISIBLE) {
                         binding.showCategoriesFab.hide()
                     }
                 }
 
                 if (dy < actionbarScrollPoint * -1) {
                     hostActivity?.showActionbar(true, true)
-
-                    if (binding.showCategoriesFab.isHidden) {
+                    if (binding.showCategoriesFab.visibility == View.GONE) {
                         binding.showCategoriesFab.show()
                     }
                 }
@@ -138,8 +138,7 @@ class ProjectsListFragment : KickMaterialFragment(), ProjectClickListener, Field
         bus.register(this)
         discoverField.addStateListener(this)
         loadCurrentPage()
-
-        binding.showCategoriesFab.buttonColor = ContextCompat.getColor(context, category.colorResId)
+        binding.showCategoriesFab.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(context, category.colorResId)))
     }
 
     override fun onPause() {
@@ -151,7 +150,6 @@ class ProjectsListFragment : KickMaterialFragment(), ProjectClickListener, Field
     private fun loadCurrentPage() {
         val query = DiscoverQuery.getDiscoverQuery(category, page)
         discoverField.postValue(query)
-        //        loginManager.logIn(EmailAndPass.create("g774092@trbvm.com", "g774092@trbvm.com"));
     }
 
 

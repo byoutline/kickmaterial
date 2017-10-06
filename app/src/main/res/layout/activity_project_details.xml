@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:fab="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
         <variable
             name="project"
-            type="android.databinding.ObservableField&lt;com.byoutline.kickmaterial.model.ProjectDetails>"/>
+            type="android.databinding.ObservableField&lt;com.byoutline.kickmaterial.model.ProjectDetails>" />
+
         <variable
             name="model"
-            type="com.byoutline.kickmaterial.features.projectdetails.ProjectDetailsViewModel"/>
+            type="com.byoutline.kickmaterial.features.projectdetails.ProjectDetailsViewModel" />
     </data>
 
     <FrameLayout
@@ -50,7 +50,7 @@
                         style="@style/ProjectDescription"
                         android:layout_marginLeft="@dimen/project_number_details_padding"
                         android:layout_marginRight="@dimen/project_number_details_padding"
-                        android:text="@string/description"/>
+                        android:text="@string/description" />
 
                     <TextView
                         android:id="@+id/project_description_tv"
@@ -61,8 +61,7 @@
                         android:ellipsize="end"
                         android:maxLines="2"
                         android:text="@{project.desc}"
-                        tools:text="@string/description"
-                    />
+                        tools:text="@string/description" />
 
                     <TextView
                         android:id="@+id/read_more_btn"
@@ -72,12 +71,12 @@
                         android:layout_marginRight="@dimen/project_number_details_padding"
                         android:layout_marginTop="8dp"
                         android:text="@string/read_more"
-                        android:textColor="@color/green_primary"/>
+                        android:textColor="@color/green_primary" />
 
                     <View
                         style="@style/ProjectSeparator"
                         android:layout_height="2dp"
-                        android:layout_marginTop="20dp"/>
+                        android:layout_marginTop="20dp" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -92,9 +91,8 @@
                             android:layout_height="@dimen/project_auth_photo_size"
                             app:all_rounded_corners="true"
                             app:corner_radius="200dp"
-                            app:imageUrl="@{project.getProjectCreatorAvatar()}"
                             app:error="@{@drawable/avatar_placeholder}"
-                        />
+                            app:imageUrl="@{project.getProjectCreatorAvatar()}" />
 
                         <LinearLayout
                             android:layout_width="0dp"
@@ -108,7 +106,7 @@
                                 android:id="@+id/project_author_name_label_tv"
                                 style="@style/ProjectAuthorDetails"
                                 android:layout_marginTop="5dp"
-                                android:text="@string/created_by"/>
+                                android:text="@string/created_by" />
 
                             <TextView
                                 android:id="@+id/project_author_name_tv"
@@ -116,13 +114,13 @@
                                 android:text="@{project.getAuthorName()}"
                                 android:textColor="@color/project_author_name"
                                 android:textSize="@dimen/font_16"
-                                tools:text="The Last Tuesday Society"/>
+                                tools:text="The Last Tuesday Society" />
 
 
                             <View
                                 style="@style/ProjectSeparator"
                                 android:layout_height="1dp"
-                                android:layout_marginTop="15dp"/>
+                                android:layout_marginTop="15dp" />
 
 
                             <LinearLayout
@@ -132,25 +130,25 @@
 
                                 <TextView
                                     style="@style/ProjectAuthorDescStyle"
-                                    android:text="@string/comments"/>
+                                    android:text="@string/comments" />
 
                                 <View
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
-                                    android:layout_weight="1"/>
+                                    android:layout_weight="1" />
 
                                 <TextView
                                     android:id="@+id/comments_count_value_tv"
                                     style="@style/ProjectAuthorValueStyle"
                                     android:text="@{String.valueOf(project.commentsCount)}"
-                                    tools:text="458"/>
+                                    tools:text="458" />
 
 
                             </LinearLayout>
 
                             <View
                                 style="@style/ProjectSeparator"
-                                android:layout_height="1dp"/>
+                                android:layout_height="1dp" />
 
                             <LinearLayout
                                 android:id="@+id/project_updates_ll"
@@ -158,18 +156,18 @@
 
                                 <TextView
                                     style="@style/ProjectAuthorDescStyle"
-                                    android:text="@string/updates"/>
+                                    android:text="@string/updates" />
 
                                 <View
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
-                                    android:layout_weight="1"/>
+                                    android:layout_weight="1" />
 
                                 <TextView
                                     android:id="@+id/updates_count_value_tv"
                                     style="@style/ProjectAuthorValueStyle"
                                     android:text="@{String.valueOf(project.updatesCount)}"
-                                    tools:text="178"/>
+                                    tools:text="178" />
 
                             </LinearLayout>
                         </LinearLayout>
@@ -192,8 +190,7 @@
             android:clipToPadding="false"
             android:orientation="vertical"
             android:paddingBottom="@dimen/project_number_details_padding"
-            android:visibility="visible"
-        >
+            android:visibility="visible">
 
             <!-- Background photo -->
             <FrameLayout
@@ -210,12 +207,12 @@
                     android:scaleType="centerCrop"
                     android:transitionName="@string/transition_project_photo"
                     tools:ignore="UnusedAttribute"
-                    tools:src="@drawable/photo_big"/>
+                    tools:src="@drawable/photo_big" />
 
             </FrameLayout>
 
 
-            <include layout="@layout/toolbar"/>
+            <include layout="@layout/toolbar" />
 
             <LinearLayout
                 android:id="@+id/project_details_title_container"
@@ -241,7 +238,7 @@
                     android:textSize="@dimen/font_22"
                     android:transitionName="@string/transition_project_title"
                     tools:ignore="UnusedAttribute"
-                    tools:text="Rossies place show"/>
+                    tools:text="Rossies place show" />
 
                 <!-- Session subtitle -->
                 <TextView
@@ -252,10 +249,10 @@
                     android:gravity="top"
                     android:lines="2"
                     android:paddingRight="30dp"
+                    android:text="@{@string/project_details_made_by(project.authorName)}"
                     android:textColor="@color/white_73"
                     android:textSize="@dimen/font_14"
-                    android:text="@{@string/project_details_made_by(project.authorName)}"
-                    tools:text="@string/project_details_made_by"/>
+                    tools:text="@string/project_details_made_by" />
 
             </LinearLayout>
 
@@ -279,7 +276,7 @@
                     android:layout_height="wrap_content"
                     android:paddingTop="14dp"
                     android:text="@{model.projectBackingProgressTxtId}"
-                    android:textSize="@dimen/font_14"/>
+                    android:textSize="@dimen/font_14" />
 
 
                 <LinearLayout
@@ -291,10 +288,10 @@
                         style="@style/ProjectItemLightWhite"
                         android:layout_width="0dp"
                         android:layout_weight="2"
-                        android:transitionName="@string/transition_gathered_money_amount"
                         android:text="@{project.getGatheredAmountWithCurrency()}"
+                        android:transitionName="@string/transition_gathered_money_amount"
                         tools:ignore="UnusedAttribute"
-                        tools:text="$132 999"/>
+                        tools:text="$132 999" />
 
                     <TextView
                         android:id="@+id/project_item_big_backers_tv"
@@ -302,22 +299,21 @@
                         android:text="@{Integer.toString(project.backers)}"
                         android:transitionName="@string/transition_backers_count"
                         tools:ignore="UnusedAttribute"
-                        tools:text="4 026"/>
+                        tools:text="4 026" />
 
                     <TextView
                         android:id="@+id/project_item_big_days_left"
                         style="@style/ProjectItemLightWhite"
-                        android:transitionName="@string/transition_days_left"
                         android:text="@{project.getTimeLeftValue()}"
+                        android:transitionName="@string/transition_days_left"
                         tools:ignore="UnusedAttribute"
-                        tools:text="9"/>
+                        tools:text="9" />
 
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                >
+                    android:layout_height="wrap_content">
 
                     <TextView
                         android:id="@+id/project_item_big_pledged_of_tv"
@@ -325,20 +321,20 @@
                         android:layout_weight="2"
                         android:text="@{@string/pledged_of(project.getTotalAmount())}"
                         android:transitionName="@string/transition_gathered_money_amount_label"
-                        tools:ignore="UnusedAttribute"/>
+                        tools:ignore="UnusedAttribute" />
 
                     <TextView
                         style="@style/ProjectItemBoldValue.Normal.Light"
                         android:text="@string/backers"
                         android:transitionName="@string/transition_backers_count_label"
-                        tools:ignore="UnusedAttribute"/>
+                        tools:ignore="UnusedAttribute" />
 
                     <TextView
                         android:id="@+id/project_item_time_left_type_tv"
                         style="@style/ProjectItemBoldValue.Normal.Light"
                         android:text="@{project.getTimeLeftDescription()}"
                         android:transitionName="@string/transition_days_left_label"
-                        tools:ignore="UnusedAttribute"/>
+                        tools:ignore="UnusedAttribute" />
 
                 </LinearLayout>
 
@@ -347,29 +343,27 @@
                     style="@style/SeekBarStyle"
                     android:layout_gravity="bottom"
                     android:layout_marginBottom="0dp"
-                    android:transitionName="@string/transition_project_progress"
                     android:progress="@{project.percentProgressInt}"
-                    tools:ignore="UnusedAttribute"/>
+                    android:transitionName="@string/transition_project_progress"
+                    tools:ignore="UnusedAttribute" />
 
             </LinearLayout>
 
-            <com.software.shell.fab.ActionButton
+            <android.support.design.widget.FloatingActionButton
                 android:id="@+id/play_video_btn"
                 style="@style/ActionButtonStyle"
                 android:layout_above="@+id/details_container"
                 android:layout_alignParentRight="true"
                 android:layout_marginBottom="-28dp"
                 android:layout_marginRight="@dimen/project_number_details_padding"
+                android:backgroundTint="@color/green_primary"
                 android:clipToPadding="false"
-                android:elevation="8dp"
+                android:src="@drawable/play_ico"
                 android:visibility="visible"
                 app:projectVideo="@{project.video}"
+                app:rippleColor="@color/green_dark"
                 app:viewModel="@{model}"
-                fab:button_color="@color/green_primary"
-                fab:button_colorPressed="@color/green_dark"
-                fab:image="@drawable/play_ico"
-                fab:image_size="18dp"
-                tools:ignore="UnusedAttribute"/>
+                tools:ignore="UnusedAttribute" />
 
         </RelativeLayout>
 

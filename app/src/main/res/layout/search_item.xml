@@ -12,7 +12,6 @@
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:background="@color/fab_material_red_500"
         card_view:cardBackgroundColor="@color/white"
         card_view:cardCornerRadius="@dimen/global_list_card_view_radius">
 

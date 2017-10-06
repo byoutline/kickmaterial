@@ -1,93 +1,95 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- A DrawerLayout is intended to be used as the top-level content view using match_parent for both width and height to consume the full space available. -->
+<?xml version="1.0" encoding="utf-8"?><!-- A DrawerLayout is intended to be used as the top-level content view using match_parent for both width and height to consume the full space available. -->
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-		xmlns:app="http://schemas.android.com/apk/res-auto"
-		xmlns:fab="http://schemas.android.com/apk/res-auto"
-		xmlns:tools="http://schemas.android.com/tools">
-	<data>
-		<import type="me.tatarka.bindingcollectionadapter2.LayoutManagers"/>
-		<variable name="model" type="com.byoutline.kickmaterial.features.rewardlist.RewardListViewModel"/>
-	</data>
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-	<RelativeLayout
-		android:id="@+id/drawer_layout"
-		style="@style/ProjectSeparator"
-		android:layout_height="match_parent"
-		android:foreground="?android:windowContentOverlay">
+    <data>
 
-		<FrameLayout
-			android:id="@+id/rewards_list_image_container"
-			android:layout_width="wrap_content"
-			android:layout_height="260dp">
+        <import type="me.tatarka.bindingcollectionadapter2.LayoutManagers" />
 
+        <variable
+            name="model"
+            type="com.byoutline.kickmaterial.features.rewardlist.RewardListViewModel" />
+    </data>
 
-			<ImageView
-				android:id="@+id/category_circle_iv"
-				style="@style/CategoryCircle"
-				android:src="@drawable/circle"
-				android:visibility="gone"/>
+    <RelativeLayout
+        android:id="@+id/drawer_layout"
+        style="@style/ProjectSeparator"
+        android:layout_height="match_parent"
+        android:foreground="?android:windowContentOverlay">
+
+        <FrameLayout
+            android:id="@+id/rewards_list_image_container"
+            android:layout_width="wrap_content"
+            android:layout_height="260dp">
 
 
-			<com.byoutline.secretsauce.views.RoundedImageView
-				android:id="@+id/selected_category_iv"
-				style="@style/CategoryCircle"
-				android:scaleType="centerCrop"
-				app:corner_radius="500dp"/>
+            <ImageView
+                android:id="@+id/category_circle_iv"
+                style="@style/CategoryCircle"
+                android:src="@drawable/circle"
+                android:visibility="gone" />
 
 
-			<ImageView
-				android:id="@+id/category_circle_reveal_iv"
-				style="@style/CategoryCircle"
-				android:src="@drawable/circle_semi_trans"
-				android:visibility="gone"/>
+            <com.byoutline.secretsauce.views.RoundedImageView
+                android:id="@+id/selected_category_iv"
+                style="@style/CategoryCircle"
+                android:scaleType="centerCrop"
+                app:corner_radius="500dp" />
 
 
-		</FrameLayout>
+            <ImageView
+                android:id="@+id/category_circle_reveal_iv"
+                style="@style/CategoryCircle"
+                android:src="@drawable/circle_semi_trans"
+                android:visibility="gone" />
 
 
-		<android.support.v7.widget.RecyclerView
-			android:id="@+id/categories_rv"
-			style="@style/RecylerViewCategories"
-			android:paddingTop="165dp"
-			app:itemBinding="@{model.itemBinding}"
-			app:items="@{model.items}"
-			app:layoutManager="@{LayoutManagers.linear()}"
-		/>
-
-		<LinearLayout
-			android:id="@+id/categories_header_ll"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:layout_gravity="top|center_horizontal"
-			android:gravity="center"
-			android:orientation="vertical"
-			android:paddingTop="25dp">
+        </FrameLayout>
 
 
-			<com.software.shell.fab.ActionButton
-				android:id="@+id/close_categories_iv"
-				style="@style/ActionButtonStyle"
-				android:layout_marginBottom="@dimen/fab_margin"
-				android:alpha="0.75"
-				android:elevation="8dp"
-				fab:button_color="@color/black"
-				fab:image="@drawable/icon_plus"
-				tools:ignore="UnusedAttribute"/>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/categories_rv"
+            style="@style/RecylerViewCategories"
+            android:paddingTop="165dp"
+            app:itemBinding="@{model.itemBinding}"
+            app:items="@{model.items}"
+            app:layoutManager="@{LayoutManagers.linear()}" />
 
-			<TextView
-				android:id="@+id/select_category_tv"
-				style="@style/LightFontStyle"
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:layout_marginBottom="15dp"
-				android:gravity="center"
-				android:padding="7dp"
-				android:text="@string/choose_category"
-				android:textColor="@color/white"
-				android:textSize="@dimen/font_22"/>
-
-		</LinearLayout>
+        <LinearLayout
+            android:id="@+id/categories_header_ll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|center_horizontal"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingTop="25dp">
 
 
-	</RelativeLayout>
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/close_categories_iv"
+                style="@style/ActionButtonStyle"
+                android:layout_marginBottom="@dimen/fab_margin"
+                android:alpha="0.75"
+                android:elevation="8dp"
+                android:src="@drawable/icon_plus"
+                app:backgroundTint="@color/black"
+                tools:ignore="UnusedAttribute" />
+
+            <TextView
+                android:id="@+id/select_category_tv"
+                style="@style/LightFontStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:gravity="center"
+                android:padding="7dp"
+                android:text="@string/choose_category"
+                android:textColor="@color/white"
+                android:textSize="@dimen/font_22" />
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
 </layout>
