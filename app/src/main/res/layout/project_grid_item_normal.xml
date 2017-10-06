@@ -6,7 +6,7 @@
 
     <data>
 
-        <import type="com.byoutline.kickmaterial.projectlist.ProjectItemViewModel"/>
+        <import type="com.byoutline.kickmaterial.features.projectlist.ProjectItemViewModel"/>
 
         <variable
             name="viewModel"

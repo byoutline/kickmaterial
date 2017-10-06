@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.byoutline.kickmaterial.search.SearchItemViewModel"/>
+            type="com.byoutline.kickmaterial.features.search.SearchItemViewModel"/>
     </data>
 
     <android.support.v7.widget.CardView

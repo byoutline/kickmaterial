@@ -4,7 +4,7 @@ import android.graphics.Color
 import android.support.annotation.ColorRes
 import android.support.annotation.DrawableRes
 import android.support.annotation.StringRes
-import com.byoutline.kickmaterial.selectcategory.ColorMixer
+import com.byoutline.kickmaterial.features.selectcategory.ColorMixer
 import paperparcel.PaperParcel
 import paperparcel.PaperParcelable
 

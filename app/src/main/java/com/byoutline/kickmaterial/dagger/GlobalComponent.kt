@@ -4,11 +4,11 @@ import com.byoutline.cachedfield.CachedFieldWithArg
 import com.byoutline.kickmaterial.KickMaterialApp
 import com.byoutline.kickmaterial.model.DiscoverQuery
 import com.byoutline.kickmaterial.model.DiscoverResponse
-import com.byoutline.kickmaterial.projectdetails.ProjectDetailsActivity
-import com.byoutline.kickmaterial.projectlist.ProjectsListFragment
-import com.byoutline.kickmaterial.rewardlist.RewardsListActivity
-import com.byoutline.kickmaterial.search.SearchListFragment
-import com.byoutline.kickmaterial.selectcategory.CategoriesListActivity
+import com.byoutline.kickmaterial.features.projectdetails.ProjectDetailsActivity
+import com.byoutline.kickmaterial.features.projectlist.ProjectsListFragment
+import com.byoutline.kickmaterial.features.rewardlist.RewardsListActivity
+import com.byoutline.kickmaterial.features.search.SearchListFragment
+import com.byoutline.kickmaterial.features.selectcategory.CategoriesListActivity
 import com.squareup.otto.Bus
 import dagger.Component
 

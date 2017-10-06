@@ -1,7 +1,7 @@
 package com.byoutline.kickmaterial.dagger
 
 
-import com.byoutline.kickmaterial.login.AccessTokenProvider
+import com.byoutline.kickmaterial.features.login.AccessTokenProvider
 import com.byoutline.secretsauce.di.AppComponentInterface
 import dagger.Component
 

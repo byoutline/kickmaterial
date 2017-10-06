@@ -3,7 +3,7 @@
         xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <variable name="header" type="com.byoutline.kickmaterial.rewardlist.RewardHeader"/>
+        <variable name="header" type="com.byoutline.kickmaterial.features.rewardlist.RewardHeader"/>
     </data>
     <TextView
         android:id="@+id/reward_header_tv"

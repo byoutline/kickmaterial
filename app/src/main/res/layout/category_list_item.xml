@@ -12,7 +12,7 @@
 
         <variable
             name="categoryClickListener"
-            type="com.byoutline.kickmaterial.selectcategory.CategoryClickListener"/>
+            type="com.byoutline.kickmaterial.features.selectcategory.CategoryClickListener"/>
 
     </data>
 

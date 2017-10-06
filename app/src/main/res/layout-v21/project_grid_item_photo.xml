@@ -7,7 +7,7 @@ there is no reason to do it twice -->
 	<data>
 		<variable
 			name="viewModel"
-			type="com.byoutline.kickmaterial.projectlist.ProjectItemViewModel"/>
+			type="com.byoutline.kickmaterial.features.projectlist.ProjectItemViewModel"/>
 	</data>
 
 	<ImageView

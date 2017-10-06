@@ -6,7 +6,7 @@
 
 		<variable
 			name="viewModel"
-			type="com.byoutline.kickmaterial.projectlist.ProjectItemViewModel"/>
+			type="com.byoutline.kickmaterial.features.projectlist.ProjectItemViewModel"/>
 	</data>
 
 	<merge tools:showIn="@layout/project_grid_item_big">

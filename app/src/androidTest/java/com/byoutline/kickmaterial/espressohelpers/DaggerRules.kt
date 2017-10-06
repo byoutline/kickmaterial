@@ -12,7 +12,7 @@ import com.byoutline.kickmaterial.KickMaterialApp
 import com.byoutline.kickmaterial.dagger.AppComponent
 import com.byoutline.kickmaterial.dagger.DaggerGlobalComponent
 import com.byoutline.kickmaterial.dagger.GlobalModule
-import com.byoutline.kickmaterial.projectlist.MainActivity
+import com.byoutline.kickmaterial.features.projectlist.MainActivity
 import com.squareup.spoon.Spoon
 import org.junit.runner.Description
 import org.junit.runners.model.Statement

@@ -11,7 +11,7 @@
             type="android.databinding.ObservableField&lt;com.byoutline.kickmaterial.model.ProjectDetails>"/>
         <variable
             name="model"
-            type="com.byoutline.kickmaterial.projectdetails.ProjectDetailsViewModel"/>
+            type="com.byoutline.kickmaterial.features.projectdetails.ProjectDetailsViewModel"/>
     </data>
 
     <FrameLayout
@@ -20,7 +20,7 @@
         android:background="@color/white">
 
 
-        <com.byoutline.kickmaterial.projectdetails.ObservableScrollView
+        <com.byoutline.kickmaterial.features.projectdetails.ObservableScrollView
             android:id="@+id/scroll_view"
             style="@style/ProjectSeparator"
             android:layout_height="match_parent"
@@ -181,7 +181,7 @@
 
             </FrameLayout>
 
-        </com.byoutline.kickmaterial.projectdetails.ObservableScrollView>
+        </com.byoutline.kickmaterial.features.projectdetails.ObservableScrollView>
 
 
         <RelativeLayout
