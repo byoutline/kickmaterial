@@ -47,8 +47,12 @@ public class CommonEspressoCalls {
         onView(withText(textId)).check(matches(isDisplayed()));
     }
 
-    public static void viewWithTextIsDisplayed(@NotNull String text) {
-        onView(withText(text)).check(matches(isDisplayed()));
+    public static void viewWithTextIsDisplayed(@NotNull String text, boolean isDisplayed) {
+        if (isDisplayed) {
+            onView(withText(text)).check(matches(isDisplayed()));
+        } else {
+            onView(withText(text)).check(matches(not(isDisplayed())));
+        }
     }
 
     public static void viewWithIdIsDisplayed(@IdRes int viewId, boolean isDisplayed) {

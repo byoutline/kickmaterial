@@ -39,7 +39,7 @@ public class MainActivityViewsTest extends WithCachedFieldIdlingResourcesTest {
 
     @Test
     public void testProjectTileShouldBeVisible() {
-        viewWithTextIsDisplayed("Smart thermos");
+        viewWithTextIsDisplayed("Smart thermos",true);
     }
 
     private void scrollDownView() {
