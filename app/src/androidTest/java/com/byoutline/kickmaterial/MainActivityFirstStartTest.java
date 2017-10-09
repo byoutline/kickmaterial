@@ -1,12 +1,11 @@
 package com.byoutline.kickmaterial;
 
-import android.support.test.espresso.Espresso;
 import android.support.test.rule.ActivityTestRule;
-import com.byoutline.cachedfield.utils.CachedFieldIdlingResource;
+
 import com.byoutline.kickmaterial.espressohelpers.DaggerRules;
+import com.byoutline.kickmaterial.espressohelpers.WithCachedFieldIdlingResourcesTest;
 import com.byoutline.kickmaterial.features.projectlist.MainActivity;
-import org.junit.After;
-import org.junit.Before;
+
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -18,21 +17,9 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
 /**
  * @author Sebastian Kacprzak <sebastian.kacprzak at byoutline.com>
  */
-public class MainActivityFirstStartTest {
+public class MainActivityFirstStartTest extends WithCachedFieldIdlingResourcesTest {
     @Rule
     public ActivityTestRule<MainActivity> activityRule = DaggerRules.INSTANCE.userFirstLaunchRule();
-    private CachedFieldIdlingResource cachedFieldIdlingResource;
-
-    @Before
-    public void registerIdlingResources() {
-        cachedFieldIdlingResource = CachedFieldIdlingResource.from(KickMaterialApp.component.getDiscoverField());
-        Espresso.registerIdlingResources(cachedFieldIdlingResource);
-    }
-
-    @After
-    public void unregisterIdlingResources() {
-        Espresso.unregisterIdlingResources(cachedFieldIdlingResource);
-    }
 
     @Test
     public void testAllCategoriesShouldBeVisible() {
