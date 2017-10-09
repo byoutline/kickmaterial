@@ -6,13 +6,19 @@ import android.support.test.espresso.ViewInteraction;
 import android.support.test.espresso.matcher.ViewMatchers;
 import android.support.test.rule.ActivityTestRule;
 
+import org.jetbrains.annotations.NotNull;
+
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.scrollTo;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
-import static android.support.test.espresso.matcher.ViewMatchers.*;
+import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static android.support.test.espresso.matcher.ViewMatchers.withEffectiveVisibility;
+import static android.support.test.espresso.matcher.ViewMatchers.withId;
+import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static com.byoutline.kickmaterial.espressohelpers.CustomMatchers.withErrorSet;
 import static org.hamcrest.core.AllOf.allOf;
+import static org.hamcrest.core.IsNot.not;
 
 /**
  * Static methods that wraps most common espresso calls. <br />
@@ -25,8 +31,8 @@ public class CommonEspressoCalls {
         onView(withId(btnId)).perform(click());
     }
 
-    public static void onBtnWithTextClick(@StringRes int stringId) {
-        onView(allOf(withText(stringId), withEffectiveVisibility(ViewMatchers.Visibility.VISIBLE))).perform(click());
+    public static void onViewWithTextClick(@NotNull String text) {
+        onView(allOf(withText(text), withEffectiveVisibility(ViewMatchers.Visibility.VISIBLE))).perform(click());
     }
 
     public static ViewInteraction checkErrorIsDisplayed(@IdRes int viewId, @StringRes int errorId, ActivityTestRule activityRule) {
@@ -35,5 +41,21 @@ public class CommonEspressoCalls {
 
     public static void onBtnWithTextScrollAndClick(@StringRes int stringId) {
         onView(withText(stringId)).perform(scrollTo(), click());
+    }
+
+    public static void viewWithTextIsDisplayed(@StringRes int textId) {
+        onView(withText(textId)).check(matches(isDisplayed()));
+    }
+
+    public static void viewWithTextIsDisplayed(@NotNull String text) {
+        onView(withText(text)).check(matches(isDisplayed()));
+    }
+
+    public static void viewWithIdIsDisplayed(@IdRes int viewId, boolean isDisplayed) {
+        if (isDisplayed) {
+            onView(withId(viewId)).check(matches(isDisplayed()));
+        } else {
+            onView(withId(viewId)).check(matches(not(isDisplayed())));
+        }
     }
 }
