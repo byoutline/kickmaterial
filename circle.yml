@@ -25,7 +25,7 @@ dependencies:
   cache_directories:
     - /usr/local/android-sdk-linux/tools
     - /usr/local/android-sdk-linux/extras
-    - /usr/local/android-sdk-linux/build-tools/26.0.1
+    - /usr/local/android-sdk-linux/build-tools/26.0.2
     - ~/.android
   override:
     - ./gradlew dependencies
