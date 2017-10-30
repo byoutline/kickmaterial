@@ -9,9 +9,7 @@ import android.support.test.espresso.Espresso
 import android.support.test.espresso.base.DefaultFailureHandler
 import android.support.test.rule.ActivityTestRule
 import com.byoutline.kickmaterial.KickMaterialApp
-import com.byoutline.kickmaterial.dagger.AppComponent
-import com.byoutline.kickmaterial.dagger.DaggerGlobalComponent
-import com.byoutline.kickmaterial.dagger.GlobalModule
+import com.byoutline.kickmaterial.dagger.GlobalComponent
 import com.byoutline.kickmaterial.features.projectlist.MainActivity
 import com.squareup.spoon.Spoon
 import org.junit.runner.Description
@@ -25,21 +23,18 @@ import org.junit.runners.model.Statement
 object DaggerRules {
 
     fun userFirstLaunchRule(): ActivityTestRule<MainActivity>
-            = getActivityRule({ TestComponents.getFirstRunAppComponent(it) }, MainActivity::class.java)
+            = getActivityRule({ TestComponents.getFirstRunComponent(it) }, MainActivity::class.java)
 
     fun userNextLaunchRule(): ActivityTestRule<MainActivity>
-            = getActivityRule({ TestComponents.getNextRunAppComponent(it) }, MainActivity::class.java)
+            = getActivityRule({ TestComponents.getNextRunComponent(it) }, MainActivity::class.java)
 
-    private fun <ACTIVITY : Activity> getActivityRule(mainComponentProv: (KickMaterialApp) -> AppComponent,
+    private fun <ACTIVITY : Activity> getActivityRule(mainComponentProv: (KickMaterialApp) -> GlobalComponent,
                                                       clazz: Class<ACTIVITY>): ActivityTestRule<ACTIVITY> {
         val mainHandler = Handler(Looper.getMainLooper())
         return DaggerActivityTestRule(clazz, beforeActivityLaunchedAction = { application ->
             val app = application as KickMaterialApp
-            val appComponent = mainComponentProv(app)
-            val globalComponent = DaggerGlobalComponent.builder()
-                    .globalModule(GlobalModule(app, appComponent.bus))
-                    .build()
-            mainHandler.post { app.setComponents(globalComponent, appComponent) }
+            val globalComponent = mainComponentProv(app)
+            mainHandler.post { app.setComponents(globalComponent) }
         })
     }
 }

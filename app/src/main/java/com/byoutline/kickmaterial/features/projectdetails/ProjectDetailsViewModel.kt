@@ -5,17 +5,16 @@ import android.graphics.Color
 import android.graphics.drawable.BitmapDrawable
 import android.support.annotation.ColorInt
 import android.support.annotation.StringRes
-import android.view.View
 import android.widget.ImageView
+import com.byoutline.kickmaterial.KickMaterialApp
 import com.byoutline.kickmaterial.R
 import com.byoutline.kickmaterial.model.Project
 import com.byoutline.kickmaterial.model.ProjectDetails
 import com.byoutline.kickmaterial.model.ProjectIdAndSignature
-import com.byoutline.kickmaterial.model.ProjectVideo
 import com.byoutline.kickmaterial.transitions.PaletteAndAplaTransformation
 import com.byoutline.observablecachedfield.ObservableCachedFieldWithArg
 import com.byoutline.rx.invokeOnAPause
-import com.byoutline.secretsauce.utils.ViewUtils
+import com.byoutline.secretsauce.utils.showToast
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import com.trello.rxlifecycle2.LifecycleProvider
@@ -63,7 +62,7 @@ class ProjectDetailsViewModel(val projectDetailsField: ObservableCachedFieldWith
     fun executeIfCachedProjectDetailsAreAvailable(@StringRes errorResId: Int, action: (ProjectDetails) -> Unit) {
         val details = projectDetailsField.observable().get()
         if (details == null) {
-            ViewUtils.showToast(errorResId)
+            KickMaterialApp.component.app.showToast(errorResId)
             postProjectDetails()
         } else {
             action(details)

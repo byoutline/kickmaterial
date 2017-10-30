@@ -11,16 +11,16 @@ import android.support.annotation.CheckResult
 import android.support.annotation.NonNull
 import android.support.annotation.StringRes
 import android.support.v4.view.ViewCompat
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.support.v7.widget.Toolbar
 import android.util.Pair
 import android.view.View
 import android.view.Window
 import android.view.animation.DecelerateInterpolator
+import android.widget.TextView
 import com.byoutline.kickmaterial.R
-import com.byoutline.secretsauce.activities.BaseAppCompatActivity
-import com.byoutline.secretsauce.fragments.MenuOption
-import com.byoutline.secretsauce.fragments.NavigationDrawerFragment
 import com.byoutline.secretsauce.utils.ViewUtils
 import com.trello.rxlifecycle2.LifecycleProvider
 import com.trello.rxlifecycle2.LifecycleTransformer
@@ -35,18 +35,32 @@ import java.util.*
 /**
  * @author Pawel Karczewski <pawel.karczewski at byoutline.com> on 2015-01-03
  */
-abstract class KickMaterialBaseActivity : BaseAppCompatActivity(), KickMaterialFragment.HostActivity,
-        NavigationDrawerFragment.NavigationDrawerCallbacks, LifecycleProvider<ActivityEvent> {
+abstract class KickMaterialBaseActivity : AppCompatActivity(), KickMaterialFragment.HostActivity,
+        LifecycleProvider<ActivityEvent> {
     private var actionBarAutoHideSensitivity = 0
     private var actionBarAutoHideMinY = 0
     private var actionBarAutoHideSignal = 0
     private var actionBarShown = true
+    protected var toolbar: Toolbar? = null
+    private var toolbarTitle: TextView? = null
 
     @CallSuper
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         blockOrientationOnBuggedAndroidVersions()
         lifecycleSubject.onNext(ActivityEvent.CREATE)
+    }
+
+    override fun onPostCreate(savedInstanceState: Bundle?) {
+        super.onPostCreate(savedInstanceState)
+        toolbar = findViewById(R.id.toolbar)
+        toolbarTitle = findViewById(R.id.toolbar_title_tv)
+        // Video does not have toolbar
+        toolbar?.let { bar ->
+            setSupportActionBar(bar)
+            ViewCompat.setElevation(bar, ViewUtils.convertDpToPixel(4.0f, this))
+        }
+
     }
 
     protected open fun shouldBlockOrientationOnBuggedAndroidVersions() = true
@@ -61,11 +75,6 @@ abstract class KickMaterialBaseActivity : BaseAppCompatActivity(), KickMaterialF
         if (Build.VERSION.SDK_INT == Build.VERSION_CODES.LOLLIPOP) {
             requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         }
-    }
-
-    protected fun injectViewsAndSetUpToolbar() {
-        injectViewsAndSetUpToolbar(R.id.toolbar, R.id.toolbar_title_tv)
-        ViewCompat.setElevation(this.toolbar, ViewUtils.convertDpToPixel(4.0f, this))
     }
 
     override fun enableActionBarAutoHide(listView: RecyclerView) {
@@ -95,8 +104,7 @@ abstract class KickMaterialBaseActivity : BaseAppCompatActivity(), KickMaterialF
      */
     private fun initActionBarAutoHide() {
         actionBarAutoHideMinY = resources.getDimensionPixelSize(R.dimen.action_bar_auto_hide_min_y)
-        actionBarAutoHideSensitivity = resources.getDimensionPixelSize(
-                R.dimen.action_bar_auto_hide_sensitivity)
+        actionBarAutoHideSensitivity = resources.getDimensionPixelSize(R.dimen.action_bar_auto_hide_sensitivity)
     }
 
     /**
@@ -137,7 +145,7 @@ abstract class KickMaterialBaseActivity : BaseAppCompatActivity(), KickMaterialF
     }
 
     protected fun onActionBarAutoShowOrHide(shown: Boolean) {
-        val view = toolbar
+        val view = toolbar ?: return
 
         if (shown) {
             view.animate()
@@ -165,13 +173,12 @@ abstract class KickMaterialBaseActivity : BaseAppCompatActivity(), KickMaterialF
         }
     }
 
-    override fun setToolbarText(@StringRes textId: Int) {
-        setToolbarText(getString(textId))
+    fun setToolbarText(@StringRes textId: Int) {
+        toolbarTitle?.setText(textId)
     }
 
-    override fun onNavigationDrawerItemSelected(menuOption: MenuOption): Class<out android.support.v4.app.Fragment>? {
-        // Currently there is no drawer
-        return null
+    override fun setDisplayHomeAsUpEnabled(enabled: Boolean) {
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
     companion object {
@@ -185,7 +192,6 @@ abstract class KickMaterialBaseActivity : BaseAppCompatActivity(), KickMaterialF
                 Bundle()
             }
         }
-
 
         @TargetApi(Build.VERSION_CODES.LOLLIPOP)
         private fun getSharedElementsBundleL(activity: Activity, vararg sharedViews: View?): Bundle {
@@ -220,7 +226,7 @@ abstract class KickMaterialBaseActivity : BaseAppCompatActivity(), KickMaterialF
 
     @CheckResult
     override fun <T> bindUntilEvent(event: ActivityEvent): LifecycleTransformer<T>
-        = RxLifecycle.bindUntilEvent(lifecycleSubject, event)
+            = RxLifecycle.bindUntilEvent(lifecycleSubject, event)
 
     @NonNull
     @CheckResult

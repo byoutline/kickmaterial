@@ -54,7 +54,6 @@ class CategoriesListActivity : KickMaterialBaseActivity(), CategoryClickListener
         binding = DataBindingUtil.setContentView(this, R.layout.activity_category_list)
         category = intent.extras.getParcelable(ARG_CATEGORY)
 
-        injectViewsAndSetUpToolbar()
         KickMaterialApp.component.inject(this)
         setUpAdapters()
         setUpListeners()

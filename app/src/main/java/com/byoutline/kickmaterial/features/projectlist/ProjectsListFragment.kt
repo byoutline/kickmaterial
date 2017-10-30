@@ -23,7 +23,9 @@ import com.byoutline.kickmaterial.transitions.SharedViews
 import com.byoutline.kickmaterial.utils.*
 import com.byoutline.kickmaterial.views.EndlessRecyclerView
 import com.byoutline.ottoeventcallback.PostFromAnyThreadBus
+import com.byoutline.secretsauce.activities.showFragment
 import com.byoutline.secretsauce.utils.ViewUtils
+import com.byoutline.secretsauce.utils.showDebugToast
 import com.squareup.otto.Bus
 import com.squareup.otto.Subscribe
 import javax.inject.Inject
@@ -82,8 +84,7 @@ class ProjectsListFragment : KickMaterialFragment(), ProjectClickListener, Field
         }
     }
 
-    override fun setUpListeners() {
-        super.setUpListeners()
+    fun setUpListeners() {
         binding.showCategoriesFab.setOnClickListener {
             CategoriesListActivity.launch(activity, category, binding.showCategoriesFab)
         }
@@ -190,7 +191,7 @@ class ProjectsListFragment : KickMaterialFragment(), ProjectClickListener, Field
 
     @Subscribe
     fun onCategoriesFetched(event: CategoriesFetchedEvent) {
-        ViewUtils.showDebugToast(event.response.toString())
+        context.showDebugToast(event.response.toString())
     }
 
     @Subscribe
@@ -224,7 +225,7 @@ class ProjectsListFragment : KickMaterialFragment(), ProjectClickListener, Field
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         val searchView = SearchListFragment.getSearchView(activity, menu!!)
         searchView.isIconified = true
-        searchView.setOnSearchClickListener { _ -> hostActivity?.showFragment(SearchListFragment(), true) }
+        searchView.setOnSearchClickListener { _ -> activity?.showFragment(SearchListFragment(), true) }
     }
 
     override fun fieldStateChanged(newState: FieldState) {

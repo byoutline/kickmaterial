@@ -1,6 +1,7 @@
 package com.byoutline.kickmaterial.dagger
 
 import android.content.SharedPreferences
+import android.preference.PreferenceManager
 import com.byoutline.cachedfield.CachedField
 import com.byoutline.cachedfield.CachedFieldWithArg
 import com.byoutline.ibuscachedfield.util.RetrofitHelper.apiValueProv
@@ -9,16 +10,17 @@ import com.byoutline.kickmaterial.api.KickMaterialRequestInterceptor
 import com.byoutline.kickmaterial.api.KickMaterialService
 import com.byoutline.kickmaterial.features.login.AccessTokenProvider
 import com.byoutline.kickmaterial.features.login.LoginManager
-import com.byoutline.kickmaterial.model.*
 import com.byoutline.kickmaterial.features.projectdetails.LruCacheWithPlaceholders
 import com.byoutline.kickmaterial.features.projectlist.ProjectListViewModel
 import com.byoutline.kickmaterial.features.projectlist.ProjectsListFragment
 import com.byoutline.kickmaterial.features.search.SearchViewModel
+import com.byoutline.kickmaterial.model.*
 import com.byoutline.kickmaterial.utils.CategoriesFetchedEvent
 import com.byoutline.kickmaterial.utils.DiscoverProjectsFetchedErrorEvent
 import com.byoutline.kickmaterial.utils.DiscoverProjectsFetchedEvent
 import com.byoutline.observablecachedfield.ObservableCachedFieldWithArg
 import com.byoutline.ottocachedfield.CachedFieldBuilder
+import com.byoutline.ottoeventcallback.PostFromAnyThreadBus
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
@@ -35,7 +37,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 
 @Module
-class GlobalModule(private val app: KickMaterialApp, private val bus: Bus) {
+open class GlobalModule(private val app: KickMaterialApp) {
     private val picassoCache: LruCacheWithPlaceholders = LruCacheWithPlaceholders(app)
 
     init {
@@ -48,7 +50,7 @@ class GlobalModule(private val app: KickMaterialApp, private val bus: Bus) {
 
     @GlobalScope
     @Provides
-    internal fun providesOttoBus(): Bus = bus
+    internal fun providesOttoBus(): Bus = PostFromAnyThreadBus()
 
     @Provides
     internal fun providesApp(): KickMaterialApp = app
@@ -104,7 +106,7 @@ class GlobalModule(private val app: KickMaterialApp, private val bus: Bus) {
 
     @Provides
     @GlobalScope
-    fun providesSharedPreferences(): SharedPreferences = app.sharedPrefs
+    open fun provideSharedPrefs(): SharedPreferences = PreferenceManager.getDefaultSharedPreferences(app)
 
     @Provides
     @Reusable

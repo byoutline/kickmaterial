@@ -10,7 +10,7 @@ import com.byoutline.kickmaterial.R
 import com.byoutline.kickmaterial.dagger.GlobalScope
 import com.byoutline.kickmaterial.model.Reward
 import com.byoutline.kickmaterial.model.RewardItem
-import com.byoutline.secretsauce.utils.ViewUtils
+import com.byoutline.secretsauce.utils.showDebugToast
 import me.tatarka.bindingcollectionadapter2.ItemBinding
 import me.tatarka.bindingcollectionadapter2.itembindings.OnItemBindClass
 import paperparcel.PaperParcel
@@ -29,14 +29,14 @@ class RewardListViewModel
     init {
         val itemBind = OnItemBindClass<RewardItem>()
                 .map(RewardHeader::class.java, BR.header, R.layout.reward_header_item)
-                .map(Reward::class.java, { itemBinding, position, item ->
-                    @ColorInt val bgColor = if (position == 0) semiGreenColor else Color.WHITE
+                .map(Reward::class.java, { itemBinding, position, _ ->
+                    @ColorInt val bgColor: Int = if (position == 0) semiGreenColor else Color.WHITE
                     itemBinding.clearExtras()
                             .set(BR.reward, R.layout.reward_list_item)
                             .bindExtra(BR.bgColor, bgColor)
                             .bindExtra(BR.rewardClickListener, object : RewardClickListener {
                                 override fun rewardClicked(reward: RewardItem) {
-                                    ViewUtils.showDebugToast("RewardClicked " + reward)
+                                    KickMaterialApp.component.app.showDebugToast("RewardClicked " + reward)
                                 }
                             })
                 })

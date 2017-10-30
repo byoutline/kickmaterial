@@ -11,14 +11,15 @@ import com.byoutline.cachedfield.CachedFieldWithArg
 import com.byoutline.kickmaterial.KickMaterialApp
 import com.byoutline.kickmaterial.R
 import com.byoutline.kickmaterial.databinding.FragmentSearchResultsBinding
-import com.byoutline.kickmaterial.model.*
 import com.byoutline.kickmaterial.features.projectdetails.startProjectDetailsActivity
 import com.byoutline.kickmaterial.features.projectlist.ProjectClickListener
+import com.byoutline.kickmaterial.model.*
 import com.byoutline.kickmaterial.transitions.SharedViews
 import com.byoutline.kickmaterial.utils.DiscoverProjectsFetchedEvent
 import com.byoutline.kickmaterial.utils.KickMaterialFragment
 import com.byoutline.kickmaterial.utils.LUtils
 import com.byoutline.kickmaterial.views.EndlessRecyclerView
+import com.byoutline.secretsauce.activities.hideKeyboard
 import com.squareup.otto.Bus
 import com.squareup.otto.Subscribe
 import javax.inject.Inject
@@ -102,7 +103,7 @@ class SearchListFragment : KickMaterialFragment(), ProjectClickListener, Endless
                 updateSearchTerm(searchTerm)
                 // On landscape entry field and soft keyboard may cover whole screen.
                 // Close keyboard when they press search, so they can see result.
-                hostActivity?.hideKeyboard()
+                activity?.hideKeyboard()
                 return true
             }
 

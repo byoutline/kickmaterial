@@ -1,11 +1,9 @@
 package com.byoutline.kickmaterial.utils
 
 import android.app.Activity
-import android.os.Bundle
 import android.support.v7.widget.RecyclerView
 import android.text.TextUtils
-import android.view.View
-import com.byoutline.secretsauce.utils.LogUtils
+import com.byoutline.secretsauce.activities.hideKeyboard
 import com.trello.rxlifecycle2.components.support.RxFragment
 
 
@@ -26,7 +24,6 @@ abstract class KickMaterialFragment : RxFragment() {
                     + " does not implement " + HostActivity::class.java.simpleName
                     + " interface")
         }
-
     }
 
 
@@ -35,24 +32,11 @@ abstract class KickMaterialFragment : RxFragment() {
         baseActivity?.setDisplayHomeAsUpEnabled(show)
     }
 
-
-    protected open fun setUpListeners() {
-        //empty by default
-    }
-
     override fun onDetach() {
         super.onDetach()
         hostActivity = StubHostActivity()
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        setUpValidators()
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-    }
 
     override fun onResume() {
         super.onResume()
@@ -65,13 +49,10 @@ abstract class KickMaterialFragment : RxFragment() {
 
     override fun onDestroyView() {
         if (!isAdded) {
-            hostActivity?.hideKeyboard()
+            activity?.hideKeyboard()
         }
         super.onDestroyView()
     }
-
-    val screenName: String
-        get() = javaClass.simpleName
 
     private fun setActionbar() {
         val baseActivity = activity as? KickMaterialBaseActivity
@@ -97,38 +78,25 @@ abstract class KickMaterialFragment : RxFragment() {
 
     abstract fun showBackButtonInActionbar(): Boolean
 
-    protected fun setUpValidators() {
 
-    }
-
-    interface HostActivity : com.byoutline.secretsauce.activities.HostActivityV4 {
+    interface HostActivity {
         fun enableActionBarAutoHide(listView: RecyclerView)
 
         fun showActionbar(show: Boolean, animate: Boolean)
 
         fun setToolbarAlpha(alpha: Float)
 
+        fun setDisplayHomeAsUpEnabled(enabled: Boolean)
     }
 
-    private class StubHostActivity : com.byoutline.secretsauce.activities.StubHostActivityV4(), HostActivity {
+    private class StubHostActivity: HostActivity {
 
         override fun enableActionBarAutoHide(listView: RecyclerView) {}
 
-        override fun showActionbar(show: Boolean, animate: Boolean) {
+        override fun showActionbar(show: Boolean, animate: Boolean) {}
 
-        }
+        override fun setToolbarAlpha(alpha: Float) {}
 
-        override fun setToolbarAlpha(alpha: Float) {
-
-        }
-    }
-
-    fun fakeOnResume() {
-        setActionbarTitle(fragmentActionbarName)
-    }
-
-    companion object {
-
-        private val TAG = LogUtils.makeLogTag(KickMaterialFragment::class.java)
+        override fun setDisplayHomeAsUpEnabled(enabled: Boolean) {}
     }
 }

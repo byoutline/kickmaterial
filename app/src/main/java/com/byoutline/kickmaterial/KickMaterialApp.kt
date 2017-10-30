@@ -1,19 +1,23 @@
 package com.byoutline.kickmaterial
 
+import android.app.Application
 import android.support.annotation.VisibleForTesting
 import com.byoutline.androidstubserver.AndroidStubServer
+import com.byoutline.cachedfield.utils.SameSessionIdProvider
 import com.byoutline.ibuscachedfield.util.RetrofitHelper
-import com.byoutline.kickmaterial.dagger.*
+import com.byoutline.kickmaterial.dagger.DaggerGlobalComponent
+import com.byoutline.kickmaterial.dagger.GlobalComponent
+import com.byoutline.kickmaterial.dagger.GlobalModule
 import com.byoutline.mockserver.NetworkType
-import com.byoutline.secretsauce.BaseApp
-import com.byoutline.secretsauce.utils.ViewUtils
-import com.squareup.otto.Bus
+import com.byoutline.ottocachedfield.OttoCachedField
+import com.byoutline.secretsauce.Settings
+import com.byoutline.secretsauce.utils.showToast
 import timber.log.Timber
 
 /**
  * @author Pawel Karczewski <pawel.karczewski at byoutline.com> on 2015-01-03
  */
-class KickMaterialApp : BaseApp() {
+class KickMaterialApp : Application() {
 
     override fun onCreate() {
         super.onCreate()
@@ -21,34 +25,25 @@ class KickMaterialApp : BaseApp() {
             Timber.plant(Timber.DebugTree())
         }
         AndroidStubServer.start(this, NetworkType.UMTS)
-        RetrofitHelper.MSG_DISPLAYER = RetrofitHelper.MsgDisplayer { msg -> ViewUtils.showToast(msg, true) }
+        RetrofitHelper.MSG_DISPLAYER = RetrofitHelper.MsgDisplayer { msg -> this.showToast(msg, true) }
 
         resetComponents()
     }
-
-    override fun isDebug(): Boolean = BuildConfig.DEBUG
-
     @VisibleForTesting
-    @Synchronized fun setComponents(mainComponent: GlobalComponent, appComponent: AppComponent) {
+    @Synchronized fun setComponents(mainComponent: GlobalComponent) {
         component = mainComponent
-        init(appComponent)
+        Settings.set(debug = BuildConfig.DEBUG, containerViewId =  R.id.container)
+        OttoCachedField.init(SameSessionIdProvider(), mainComponent.bus)
     }
 
     private fun resetComponents() {
-        val appComponent = createAppComponent()
-        val mainComponent = createGlobalComponent(appComponent.bus)
-        setComponents(mainComponent, appComponent)
+        val mainComponent = createGlobalComponent()
+        setComponents(mainComponent)
     }
 
-    private fun createGlobalComponent(bus: Bus): GlobalComponent {
+    private fun createGlobalComponent(): GlobalComponent {
         return DaggerGlobalComponent.builder()
-                .globalModule(GlobalModule(this, bus))
-                .build()
-    }
-
-    private fun createAppComponent(): AppComponent {
-        return DaggerAppComponent.builder()
-                .appModule(AppModule(this))
+                .globalModule(GlobalModule(this))
                 .build()
     }
 

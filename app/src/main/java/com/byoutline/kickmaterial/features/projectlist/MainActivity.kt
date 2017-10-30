@@ -6,11 +6,12 @@ import android.os.Build
 import android.os.Bundle
 import android.view.Menu
 import com.byoutline.kickmaterial.R
-import com.byoutline.kickmaterial.model.Category
 import com.byoutline.kickmaterial.features.selectcategory.ARG_CATEGORY
 import com.byoutline.kickmaterial.features.selectcategory.CategoriesListActivity
 import com.byoutline.kickmaterial.features.selectcategory.DataManager
+import com.byoutline.kickmaterial.model.Category
 import com.byoutline.kickmaterial.utils.KickMaterialBaseActivity
+import com.byoutline.secretsauce.activities.showFragment
 
 
 /**
@@ -22,7 +23,6 @@ class MainActivity : KickMaterialBaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        injectViewsAndSetUpToolbar()
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
                     .add(R.id.container, ProjectsListFragment.newInstance(DataManager.categoryAll))
@@ -31,7 +31,7 @@ class MainActivity : KickMaterialBaseActivity() {
     }
 
     override fun setToolbarAlpha(alpha: Float) {
-        toolbar.background.alpha = (alpha * 255).toInt()
+        toolbar?.background?.alpha = (alpha * 255).toInt()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -45,7 +45,7 @@ class MainActivity : KickMaterialBaseActivity() {
         if (categorySelection && resultCode == CategoriesListActivity.RESULT_CATEGORY_SELECTED) {
             val category = data?.getParcelableExtra<Category>(ARG_CATEGORY) ?: return
             showFragment(ProjectsListFragment.newInstance(category), true)
-            setToolbarText(getString(category.nameResId))
+            setToolbarText(category.nameResId)
         }
     }
 }

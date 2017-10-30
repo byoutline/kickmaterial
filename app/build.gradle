@@ -26,9 +26,7 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'groovyx.grooid.groovy-android'
 
 repositories {
-    jcenter()
-
-    maven { url "http://oss.sonatype.org/content/repositories/snapshots/" }
+    mavenCentral()
 }
 
 

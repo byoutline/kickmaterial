@@ -18,10 +18,9 @@ dependencies {
     implementation "com.android.support:recyclerview-v7:$support_version"
     implementation "com.android.support:palette-v7:$support_version"
     implementation "com.android.support:design:$support_version"
-    implementation 'com.byoutline.secretsauce:secretsauce:0.5.3'
-    implementation 'com.byoutline.ottocachedfield:observablecachedfield:1.1.0'
-    implementation 'com.byoutline.androidstubserver:stubserver:2.0.0-beta2-SNAPSHOT'
-    implementation 'com.byoutline.eventcallback:eventcallback-api:1.0.1'
+    implementation 'com.byoutline.secretsauce:secretsaucekt:0.6.0-beta1'
+    implementation "com.byoutline.ottocachedfield:observablecachedfield:1.7.0-RC1"
+    implementation 'com.byoutline.androidstubserver:stubserver:2.0.0-beta2'
     implementation 'com.byoutline.ottoeventcallback:anythreadbus:1.0.0'
     implementation "com.squareup.retrofit2:retrofit:$retrofit_ver"
     implementation "com.squareup.retrofit2:converter-gson:$retrofit_ver"

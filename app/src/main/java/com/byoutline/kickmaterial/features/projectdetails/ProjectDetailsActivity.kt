@@ -16,8 +16,8 @@ import android.view.animation.AnimationUtils
 import com.byoutline.kickmaterial.KickMaterialApp
 import com.byoutline.kickmaterial.R
 import com.byoutline.kickmaterial.databinding.ActivityProjectDetailsBinding
-import com.byoutline.kickmaterial.model.Project
 import com.byoutline.kickmaterial.features.rewardlist.RewardsListActivity
+import com.byoutline.kickmaterial.model.Project
 import com.byoutline.kickmaterial.transitions.SharedViews
 import com.byoutline.kickmaterial.utils.KickMaterialBaseActivity
 import com.byoutline.kickmaterial.utils.LUtils
@@ -49,9 +49,6 @@ class ProjectDetailsActivity : KickMaterialBaseActivity(), DelayedTransitionActi
         supportPostponeEnterTransition()
         setUpListeners()
 
-        injectViewsAndSetUpToolbar()
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        supportActionBar!!.setDisplayShowTitleEnabled(false) // Hide default toolbar title
         binding.scrollView.addCallbacks(ProjectDetailsScrollListener(this, binding))
 
         binding.detailsContainer.startAnimation(AnimationUtils.loadAnimation(this@ProjectDetailsActivity, R.anim.slide_from_bottom))
@@ -62,6 +59,12 @@ class ProjectDetailsActivity : KickMaterialBaseActivity(), DelayedTransitionActi
         ViewCompat.setElevation(binding.detailsContainer, ViewUtils.convertDpToPixel(4f, this))
         viewModel.loadProjectPhoto(binding.projectPhotoIv)
         launchPostTransitionAnimations()
+    }
+
+    override fun onPostCreate(savedInstanceState: Bundle?) {
+        super.onPostCreate(savedInstanceState)
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        supportActionBar!!.setDisplayShowTitleEnabled(false) // Hide default toolbar title
     }
 
     private fun launchPostTransitionAnimations() {
@@ -124,7 +127,7 @@ class ProjectDetailsActivity : KickMaterialBaseActivity(), DelayedTransitionActi
     public override fun onResume() {
         super.onResume()
         title = " "
-        toolbar.setBackgroundColor(Color.TRANSPARENT)
+        toolbar?.setBackgroundColor(Color.TRANSPARENT)
 
         viewModel.attachViewUntilPause(this)
     }
