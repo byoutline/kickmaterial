@@ -17,12 +17,10 @@ import android.view.View
 import com.byoutline.kickmaterial.KickMaterialApp
 import com.byoutline.kickmaterial.R
 import com.byoutline.kickmaterial.databinding.FragmentRewardsListBinding
-import com.byoutline.kickmaterial.features.login.LoginManager
-import com.byoutline.kickmaterial.model.ProjectDetails
 import com.byoutline.kickmaterial.features.selectcategory.CategoriesListSeparator
+import com.byoutline.kickmaterial.model.ProjectDetails
 import com.byoutline.kickmaterial.utils.KickMaterialBaseActivity
 import com.byoutline.kickmaterial.utils.LUtils
-import com.squareup.otto.Bus
 import com.squareup.picasso.Picasso
 import com.squareup.picasso.Target
 import javax.inject.Inject
@@ -32,10 +30,6 @@ import javax.inject.Inject
  */
 class RewardsListActivity : KickMaterialBaseActivity() {
 
-    @Inject
-    lateinit var bus: Bus
-    @Inject
-    lateinit var loginManager: LoginManager
     @Inject
     lateinit var viewModel: RewardListViewModel
 
@@ -94,19 +88,11 @@ class RewardsListActivity : KickMaterialBaseActivity() {
 
     public override fun onResume() {
         super.onResume()
-        bus.register(this)
-
         rewardsListRv.post { rewardsListRv.startAnimation(LUtils.loadAnimationWithLInterpolator(applicationContext, R.anim.slide_from_bottom)) }
-    }
-
-    override fun onPause() {
-        bus.unregister(this)
-        super.onPause()
     }
 
 
     override fun setToolbarAlpha(alpha: Float) {
-
     }
 
 

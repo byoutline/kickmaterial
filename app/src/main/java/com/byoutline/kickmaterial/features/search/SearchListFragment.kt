@@ -7,21 +7,17 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.SearchView
 import android.text.TextUtils
 import android.view.*
-import com.byoutline.cachedfield.CachedFieldWithArg
 import com.byoutline.kickmaterial.KickMaterialApp
 import com.byoutline.kickmaterial.R
 import com.byoutline.kickmaterial.databinding.FragmentSearchResultsBinding
 import com.byoutline.kickmaterial.features.projectdetails.startProjectDetailsActivity
 import com.byoutline.kickmaterial.features.projectlist.ProjectClickListener
-import com.byoutline.kickmaterial.model.*
+import com.byoutline.kickmaterial.model.Project
 import com.byoutline.kickmaterial.transitions.SharedViews
-import com.byoutline.kickmaterial.utils.DiscoverProjectsFetchedEvent
 import com.byoutline.kickmaterial.utils.KickMaterialFragment
 import com.byoutline.kickmaterial.utils.LUtils
 import com.byoutline.kickmaterial.views.EndlessRecyclerView
 import com.byoutline.secretsauce.activities.hideKeyboard
-import com.squareup.otto.Bus
-import com.squareup.otto.Subscribe
 import javax.inject.Inject
 
 class SearchListFragment : KickMaterialFragment(), ProjectClickListener, EndlessRecyclerView.EndlessScrollListener {
@@ -29,17 +25,8 @@ class SearchListFragment : KickMaterialFragment(), ProjectClickListener, Endless
     private lateinit var projectListRv: EndlessRecyclerView
 
     @Inject
-    lateinit var bus: Bus
-    @Inject
-    lateinit var discoverField: CachedFieldWithArg<DiscoverResponse, DiscoverQuery>
-    @Inject
     lateinit var viewModel: SearchViewModel
 
-    internal var page = DEFAULT_PAGE
-    private var loading: Boolean = false
-    private var hasMore = true
-    private val currentProjects = HashSet<Project>()
-    private var currentSearchTerm: String? = null
     private var searchView: SearchView? = null
     private var restoredSearchQuery: CharSequence = ""
 
@@ -61,13 +48,8 @@ class SearchListFragment : KickMaterialFragment(), ProjectClickListener, Endless
     override fun onResume() {
         super.onResume()
         restoreDefaultScreenLook()
-        bus.register(this)
         hostActivity?.setToolbarAlpha(1f)
-    }
-
-    override fun onPause() {
-        bus.unregister(this)
-        super.onPause()
+        viewModel.attachViewUntilPause(this)
     }
 
     private fun setUpAdapters() {
@@ -100,7 +82,7 @@ class SearchListFragment : KickMaterialFragment(), ProjectClickListener, Endless
         searchView!!.isIconified = false
         searchView!!.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(searchTerm: String): Boolean {
-                updateSearchTerm(searchTerm)
+                viewModel.updateSearchTerm(searchTerm)
                 // On landscape entry field and soft keyboard may cover whole screen.
                 // Close keyboard when they press search, so they can see result.
                 activity?.hideKeyboard()
@@ -108,7 +90,7 @@ class SearchListFragment : KickMaterialFragment(), ProjectClickListener, Endless
             }
 
             override fun onQueryTextChange(searchTerm: String): Boolean {
-                updateSearchTerm(searchTerm)
+                viewModel.updateSearchTerm(searchTerm)
                 return true
             }
         })
@@ -120,23 +102,6 @@ class SearchListFragment : KickMaterialFragment(), ProjectClickListener, Endless
         super.onCreateOptionsMenu(menu, inflater)
     }
 
-    private fun updateSearchTerm(searchTerm: String) {
-        currentSearchTerm = searchTerm
-        page = DEFAULT_PAGE
-        currentProjects.clear()
-
-        if (!TextUtils.isEmpty(searchTerm)) {
-            refreshSearchResult()
-        } else {
-            viewModel.items.clear()
-        }
-    }
-
-    private fun refreshSearchResult() {
-        loading = true
-        val query = DiscoverQuery.getDiscoverSearch(currentSearchTerm!!, null, page, SortTypes.MAGIC)
-        discoverField.postValue(query)
-    }
 
     override val fragmentActionbarName: String
         get() = " "
@@ -149,29 +114,12 @@ class SearchListFragment : KickMaterialFragment(), ProjectClickListener, Endless
         activity.startProjectDetailsActivity(project, views)
     }
 
-    @Subscribe
-    fun onSearchResultFetched(event: DiscoverProjectsFetchedEvent) {
-        loading = false
-
-        hasMore = event.response.projects?.isNotEmpty() == true
-
-        if (event.argValue.discoverType == DiscoverType.SEARCH) {
-            currentProjects.addAll(event.response.projects!!)
-            viewModel.setItems(currentProjects)
-        }
-    }
-
     override val lastVisibleItemPosition: Int
         get() = (projectListRv.layoutManager as LinearLayoutManager).findLastVisibleItemPosition()
 
-    override fun loadMoreData() {
-        page++
-        refreshSearchResult()
-    }
+    override fun loadMoreData()= viewModel.loadMoreData()
 
-    override fun hasMoreDataAndNotLoading(): Boolean {
-        return !loading && hasMore
-    }
+    override fun hasMoreDataAndNotLoading() = viewModel.hasMoreDataAndNotLoading()
 
     companion object {
         const val DEFAULT_PAGE = 1

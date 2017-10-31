@@ -1,18 +1,21 @@
 package com.byoutline.kickmaterial.features.projectlist
 
 import android.databinding.BindingAdapter
-import android.databinding.ObservableInt
 import android.databinding.ViewDataBinding
 import android.view.View
 import android.widget.ImageView
+import com.byoutline.cachedfield.FieldState
 import com.byoutline.kickmaterial.BR
 import com.byoutline.kickmaterial.R
 import com.byoutline.kickmaterial.databinding.ProjectGridItemBigBinding
 import com.byoutline.kickmaterial.databinding.ProjectGridItemNormalBinding
 import com.byoutline.kickmaterial.features.search.BaseProjectItemViewModel
-import com.byoutline.kickmaterial.model.Project
+import com.byoutline.kickmaterial.model.*
 import com.byoutline.kickmaterial.transitions.AplaTransformation
 import com.byoutline.kickmaterial.transitions.SharedViews
+import com.byoutline.observablecachedfield.ObservableCachedFieldWithArg
+import com.byoutline.observablecachedfield.util.RetrofitHelper
+import com.byoutline.observablecachedfield.util.registerChangeCallback
 import com.byoutline.rx.invokeOnFPause
 import com.squareup.picasso.Picasso
 import me.tatarka.bindingcollectionadapter2.BindingRecyclerViewAdapter
@@ -24,9 +27,9 @@ import javax.inject.Provider
 /**
  * @author Sebastian Kacprzak <sebastian.kacprzak at byoutline.com>
  */
-class ProjectListViewModel(showHeader: Boolean) {
+class ProjectListViewModel(showHeader: Boolean,
+                           val discoverField: ObservableCachedFieldWithArg<DiscoverResponse, DiscoverQuery>) {
     private val projects = DiffObservableList<ProjectItemViewModel>(getProjectItemDiffObservableCallback(), false)
-
     val items = MergeObservableList<ProjectItemViewModel>()
     //    val itemBinding = ItemBinding.of<ProjectItemViewModel>(BR.categoryItem, R.layout.category_list_item)
     val itemBinding: ItemBinding<ProjectItemViewModel> = ItemBinding.of { itemBinding, _, item ->
@@ -44,20 +47,25 @@ class ProjectListViewModel(showHeader: Boolean) {
     private var projectClickListener: ProjectClickListener? = null
     private val projectClickListenerProv = Provider { projectClickListener }
 
+    private var page = 1
+    private var lastAvailablePage = Integer.MAX_VALUE
+
     init {
         if (showHeader) items.insertItem(header)
         items.insertList(projects)
     }
 
-    fun setItems(items: List<Project>)
-            = projects.update(items.mapToViewModels())
-
-    fun addItems(items: Collection<Project>)
-            = projects.update((projects + items.mapToViewModels(projects.size)).toSet().toList())
-
     fun attachViewUntilPause(fragment: ProjectsListFragment) {
         this.projectClickListener = fragment
-        fragment.invokeOnFPause { this.projectClickListener = null }
+        val discoverFieldCallback = discoverField.registerChangeCallback(
+                onNext = this::onDiscoverProjects,
+                onError = this::onDiscoverProjectsFail
+        )
+        fragment.invokeOnFPause {
+            this.projectClickListener = null
+            discoverField.observable().removeOnPropertyChangedCallback(discoverFieldCallback)
+            discoverField.observableError.removeOnPropertyChangedCallback(discoverFieldCallback)
+        }
     }
 
     private fun Collection<Project>.mapToViewModels(offset: Int = 0) = mapIndexed { index, project ->
@@ -71,7 +79,61 @@ class ProjectListViewModel(showHeader: Boolean) {
             ProjectItemViewModel.NORMAL_ITEM
         }
     }
+
+    private fun onDiscoverProjectsFail(exception: Exception, arg: DiscoverQuery) {
+        if (isDiscoverFetchErrorCausedByLastPage(exception)) {
+            val failedPage = arg.pageFromQuery
+            if (failedPage != null) {
+                page = failedPage - 1
+                lastAvailablePage = page
+            }
+        }
+    }
+
+    private fun isDiscoverFetchErrorCausedByLastPage(exception: Exception): Boolean {
+        if (exception is RetrofitHelper.ApiException) {
+            return exception.errorResponse?.code() == 404
+        }
+        return false
+    }
+
+    private fun setItems(items: List<Project>)
+            = projects.update(items.mapToViewModels())
+
+    private fun addItems(items: Collection<Project>)
+            = projects.update((projects + items.mapToViewModels(projects.size)).toSet().toList())
+
+    private fun onDiscoverProjects(response: DiscoverResponse, arg: DiscoverQuery) {
+        // ignore search result.
+        if (arg.discoverType == DiscoverType.SEARCH) return
+        if (response.projects == null || response.projects.isEmpty()) {
+            lastAvailablePage = page
+            return
+        }
+        lastAvailablePage = Integer.MAX_VALUE
+
+        if (page == 1) {
+            setItems(response.projects)
+        } else {
+            addItems(response.projects)
+        }
+    }
+
+    private fun hasMore(): Boolean = page < lastAvailablePage
+
+    fun loadMoreData(category: Category) {
+        page++
+        loadCurrentPage(category)
+    }
+
+    fun loadCurrentPage(category: Category) {
+        val query = DiscoverQuery.getDiscoverQuery(category, page)
+        discoverField.postValue(query)
+    }
+
+    fun hasMoreDataAndNotLoading() = discoverField.state != FieldState.CURRENTLY_LOADING && hasMore()
 }
+
 
 fun <T : BaseProjectItemViewModel> getProjectItemDiffObservableCallback() = object : DiffObservableList.Callback<T> {
     // Projects are immutable with unique IDs

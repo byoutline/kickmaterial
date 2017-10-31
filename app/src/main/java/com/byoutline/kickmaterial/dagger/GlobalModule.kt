@@ -2,30 +2,25 @@ package com.byoutline.kickmaterial.dagger
 
 import android.content.SharedPreferences
 import android.preference.PreferenceManager
-import com.byoutline.cachedfield.CachedField
-import com.byoutline.cachedfield.CachedFieldWithArg
-import com.byoutline.ibuscachedfield.util.RetrofitHelper.apiValueProv
 import com.byoutline.kickmaterial.KickMaterialApp
 import com.byoutline.kickmaterial.api.KickMaterialRequestInterceptor
 import com.byoutline.kickmaterial.api.KickMaterialService
-import com.byoutline.kickmaterial.features.login.AccessTokenProvider
-import com.byoutline.kickmaterial.features.login.LoginManager
 import com.byoutline.kickmaterial.features.projectdetails.LruCacheWithPlaceholders
 import com.byoutline.kickmaterial.features.projectlist.ProjectListViewModel
 import com.byoutline.kickmaterial.features.projectlist.ProjectsListFragment
 import com.byoutline.kickmaterial.features.search.SearchViewModel
-import com.byoutline.kickmaterial.model.*
-import com.byoutline.kickmaterial.utils.CategoriesFetchedEvent
-import com.byoutline.kickmaterial.utils.DiscoverProjectsFetchedErrorEvent
-import com.byoutline.kickmaterial.utils.DiscoverProjectsFetchedEvent
+import com.byoutline.kickmaterial.model.DiscoverQuery
+import com.byoutline.kickmaterial.model.DiscoverResponse
+import com.byoutline.kickmaterial.model.ProjectDetails
+import com.byoutline.kickmaterial.model.ProjectIdAndSignature
+import com.byoutline.observablecachedfield.ObservableCachedFieldBuilder
 import com.byoutline.observablecachedfield.ObservableCachedFieldWithArg
-import com.byoutline.ottocachedfield.CachedFieldBuilder
-import com.byoutline.ottoeventcallback.PostFromAnyThreadBus
+import com.byoutline.observablecachedfield.util.AndroidExecutor
+import com.byoutline.observablecachedfield.util.RetrofitHelper.apiValueProv
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.google.gson.JsonDeserializer
-import com.squareup.otto.Bus
 import com.squareup.picasso.Picasso
 import dagger.Module
 import dagger.Provides
@@ -47,10 +42,6 @@ open class GlobalModule(private val app: KickMaterialApp) {
             // singleton was already set
         }
     }
-
-    @GlobalScope
-    @Provides
-    internal fun providesOttoBus(): Bus = PostFromAnyThreadBus()
 
     @Provides
     internal fun providesApp(): KickMaterialApp = app
@@ -94,55 +85,36 @@ open class GlobalModule(private val app: KickMaterialApp) {
 
     @Provides
     @GlobalScope
-    fun provideATP(): AccessTokenProvider = AccessTokenProvider()
-
-    @Provides
-    @GlobalScope
-    fun providesLoginManager(bus: Bus, service: KickMaterialService, accessTokenProvider: AccessTokenProvider): LoginManager {
-        val instance = LoginManager(service, accessTokenProvider)
-        bus.register(instance)
-        return instance
-    }
-
-    @Provides
-    @GlobalScope
     open fun provideSharedPrefs(): SharedPreferences = PreferenceManager.getDefaultSharedPreferences(app)
 
     @Provides
     @Reusable
-    fun provideProjectListViewModel(sharedPrefs: SharedPreferences): ProjectListViewModel {
+    fun provideProjectListViewModel(sharedPrefs: SharedPreferences,
+                                    discoverField: ObservableCachedFieldWithArg<DiscoverResponse, DiscoverQuery>): ProjectListViewModel {
         // show header on first launch
         val showHeader = sharedPrefs.getBoolean(ProjectsListFragment.PREFS_SHOW_HEADER, true)
         sharedPrefs.edit().putBoolean(ProjectsListFragment.PREFS_SHOW_HEADER, false).apply()
-        return ProjectListViewModel(showHeader)
+        return ProjectListViewModel(showHeader, discoverField)
     }
 
     @Provides
     @Reusable
-    fun provideSearchViewModel() = SearchViewModel()
+    fun provideSearchViewModel(discoverField: ObservableCachedFieldWithArg<DiscoverResponse, DiscoverQuery>)
+            = SearchViewModel(discoverField)
 
     @Provides
     @GlobalScope
-    fun provideCategories(service: KickMaterialService): CachedField<List<Category>>
-            = CachedFieldBuilder()
-            .withValueProvider(apiValueProv<List<Category>>{ service.categories })
-            .withSuccessEvent(CategoriesFetchedEvent())
-            .build()
-
-    @Provides
-    @GlobalScope
-    fun provideDiscover(service: KickMaterialService): CachedFieldWithArg<DiscoverResponse, DiscoverQuery>
-            = CachedFieldBuilder()
-            .withValueProviderWithArg(apiValueProv<DiscoverResponse, DiscoverQuery> { query -> service.getDiscover(query.queryMap) })
-            .withSuccessEvent(DiscoverProjectsFetchedEvent())
-            .withErrorEvent(DiscoverProjectsFetchedErrorEvent())
-            .build()
+    fun provideDiscover(service: KickMaterialService): ObservableCachedFieldWithArg<DiscoverResponse, DiscoverQuery> {
+        return ObservableCachedFieldBuilder()
+                .withValueProviderWithArg(apiValueProv<DiscoverResponse, DiscoverQuery> { query -> service.getDiscover(query.queryMap) })
+                .withCustomStateListenerExecutor(AndroidExecutor.MAIN_THREAD_EXECUTOR)
+                .build()
+    }
 
     @Provides
     @GlobalScope
     fun provideProjectDetails(service: KickMaterialService): ObservableCachedFieldWithArg<ProjectDetails, ProjectIdAndSignature>
-            = CachedFieldBuilder()
+            = ObservableCachedFieldBuilder()
             .withValueProviderWithArg(apiValueProv<ProjectDetails, ProjectIdAndSignature> { (id, queryParams) -> service.getProjectDetails(id, queryParams) })
-            .asObservable()
             .build()
 }

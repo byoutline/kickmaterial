@@ -7,10 +7,8 @@ import android.support.v4.content.ContextCompat
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.*
-import com.byoutline.cachedfield.CachedFieldWithArg
 import com.byoutline.cachedfield.FieldState
 import com.byoutline.cachedfield.FieldStateListener
-import com.byoutline.ibuscachedfield.util.RetrofitHelper
 import com.byoutline.kickmaterial.KickMaterialApp
 import com.byoutline.kickmaterial.R
 import com.byoutline.kickmaterial.databinding.FragmentProjectsBinding
@@ -18,16 +16,15 @@ import com.byoutline.kickmaterial.features.projectdetails.startProjectDetailsAct
 import com.byoutline.kickmaterial.features.search.SearchListFragment
 import com.byoutline.kickmaterial.features.selectcategory.ARG_CATEGORY
 import com.byoutline.kickmaterial.features.selectcategory.CategoriesListActivity
-import com.byoutline.kickmaterial.model.*
+import com.byoutline.kickmaterial.model.Category
+import com.byoutline.kickmaterial.model.DiscoverQuery
+import com.byoutline.kickmaterial.model.Project
 import com.byoutline.kickmaterial.transitions.SharedViews
-import com.byoutline.kickmaterial.utils.*
+import com.byoutline.kickmaterial.utils.KickMaterialFragment
+import com.byoutline.kickmaterial.utils.LUtils
 import com.byoutline.kickmaterial.views.EndlessRecyclerView
-import com.byoutline.ottoeventcallback.PostFromAnyThreadBus
 import com.byoutline.secretsauce.activities.showFragment
 import com.byoutline.secretsauce.utils.ViewUtils
-import com.byoutline.secretsauce.utils.showDebugToast
-import com.squareup.otto.Bus
-import com.squareup.otto.Subscribe
 import javax.inject.Inject
 
 /**
@@ -37,15 +34,10 @@ class ProjectsListFragment : KickMaterialFragment(), ProjectClickListener, Field
     private var summaryScrolled: Float = 0f
 
     @Inject
-    lateinit var bus: Bus
-    @Inject
-    lateinit var discoverField: CachedFieldWithArg<DiscoverResponse, DiscoverQuery>
-    @Inject
     lateinit var viewModel: ProjectListViewModel
-    private var actionbarScrollPoint: Float = 0.toFloat()
-    private var maxScroll: Float = 0.toFloat()
-    private var page = 1
-    private var lastAvailablePage = Integer.MAX_VALUE
+    private var actionbarScrollPoint: Float = 0F
+    private var maxScroll: Float = 0F
+
     private lateinit var category: Category
     private lateinit var binding: FragmentProjectsBinding
     /**
@@ -74,13 +66,13 @@ class ProjectsListFragment : KickMaterialFragment(), ProjectClickListener, Field
         configureSwipeRefresh()
     }
 
-    fun configureSwipeRefresh() {
+    private fun configureSwipeRefresh() {
         val altColor = category.colorResId
         binding.swipeRefreshProjectsSrl.setColorSchemeResources(altColor, R.color.green_primary)
         binding.swipeRefreshProjectsSrl.setOnRefreshListener {
             // Throw away all loaded categories and start over.
             val pageToRefresh = 1
-            discoverField.refresh(DiscoverQuery.getDiscoverQuery(category, pageToRefresh))
+            viewModel.discoverField.refresh(DiscoverQuery.getDiscoverQuery(category, pageToRefresh))
         }
     }
 
@@ -136,23 +128,15 @@ class ProjectsListFragment : KickMaterialFragment(), ProjectClickListener, Field
         super.onResume()
         restoreDefaultScreenLook()
         viewModel.attachViewUntilPause(this)
-        bus.register(this)
-        discoverField.addStateListener(this)
-        loadCurrentPage()
-        binding.showCategoriesFab.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(context, category.colorResId)))
+        viewModel.discoverField.addStateListener(this)
+        viewModel.loadCurrentPage(category)
+        binding.showCategoriesFab.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(context, category.colorResId))
     }
 
     override fun onPause() {
-        discoverField.removeStateListener(this)
-        bus.unregister(this)
+        viewModel.discoverField.removeStateListener(this)
         super.onPause()
     }
-
-    private fun loadCurrentPage() {
-        val query = DiscoverQuery.getDiscoverQuery(category, page)
-        discoverField.postValue(query)
-    }
-
 
     private fun setUpAdapters() {
         layoutManager = GridLayoutManager(activity, 2)
@@ -181,47 +165,6 @@ class ProjectsListFragment : KickMaterialFragment(), ProjectClickListener, Field
         activity.startProjectDetailsActivity(project, views)
     }
 
-    private fun isDiscoverFetchErrorCausedByLastPage(event: DiscoverProjectsFetchedErrorEvent): Boolean {
-        val exception = event.response
-        if (exception is RetrofitHelper.ApiException) {
-            return exception.errorResponse?.code() == 404
-        }
-        return false
-    }
-
-    @Subscribe
-    fun onCategoriesFetched(event: CategoriesFetchedEvent) {
-        context.showDebugToast(event.response.toString())
-    }
-
-    @Subscribe
-    fun onDiscoverProjectsFail(event: DiscoverProjectsFetchedErrorEvent) {
-        if (isDiscoverFetchErrorCausedByLastPage(event)) {
-            val failedPage = event.argValue.pageFromQuery
-            if (failedPage != null) {
-                page = failedPage - 1
-                lastAvailablePage = page
-            }
-        }
-    }
-
-    @Subscribe
-    fun onDiscoverProjects(event: DiscoverProjectsFetchedEvent) {
-        // ignore search result.
-        if (event.argValue.discoverType != DiscoverType.SEARCH) {
-            if (event.response.projects != null && event.response.projects!!.isNotEmpty()) {
-                lastAvailablePage = Integer.MAX_VALUE
-            }
-
-            val projects = ArrayList(event.response.projects!!)
-            if (page == 1) {
-                viewModel.setItems(projects)
-            } else {
-                viewModel.addItems(projects)
-            }
-        }
-    }
-
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         val searchView = SearchListFragment.getSearchView(activity, menu!!)
         searchView.isIconified = true
@@ -229,24 +172,17 @@ class ProjectsListFragment : KickMaterialFragment(), ProjectClickListener, Field
     }
 
     override fun fieldStateChanged(newState: FieldState) {
-        PostFromAnyThreadBus.runInMainThread {
-            binding.swipeRefreshProjectsSrl.isRefreshing = newState == FieldState.CURRENTLY_LOADING
-        }
+        binding.swipeRefreshProjectsSrl.isRefreshing = newState == FieldState.CURRENTLY_LOADING
     }
 
     override val lastVisibleItemPosition: Int
         get() = layoutManager.findLastVisibleItemPosition()
 
     override fun loadMoreData() {
-        page++
-        loadCurrentPage()
+        viewModel.loadMoreData(category)
     }
 
-    private fun hasMore(): Boolean = page < lastAvailablePage
-
-    @Synchronized override fun hasMoreDataAndNotLoading(): Boolean {
-        return discoverField.state != FieldState.CURRENTLY_LOADING && hasMore()
-    }
+    @Synchronized override fun hasMoreDataAndNotLoading() = viewModel.hasMoreDataAndNotLoading()
 
     companion object {
         const val PREFS_SHOW_HEADER = "PREFS_SHOW_HEADER"

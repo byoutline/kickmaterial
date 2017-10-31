@@ -1,15 +1,14 @@
 package com.byoutline.kickmaterial.dagger
 
-import com.byoutline.cachedfield.CachedFieldWithArg
 import com.byoutline.kickmaterial.KickMaterialApp
-import com.byoutline.kickmaterial.model.DiscoverQuery
-import com.byoutline.kickmaterial.model.DiscoverResponse
 import com.byoutline.kickmaterial.features.projectdetails.ProjectDetailsActivity
 import com.byoutline.kickmaterial.features.projectlist.ProjectsListFragment
 import com.byoutline.kickmaterial.features.rewardlist.RewardsListActivity
 import com.byoutline.kickmaterial.features.search.SearchListFragment
 import com.byoutline.kickmaterial.features.selectcategory.CategoriesListActivity
-import com.squareup.otto.Bus
+import com.byoutline.kickmaterial.model.DiscoverQuery
+import com.byoutline.kickmaterial.model.DiscoverResponse
+import com.byoutline.observablecachedfield.ObservableCachedFieldWithArg
 import dagger.Component
 
 /**
@@ -24,7 +23,6 @@ interface GlobalComponent {
     fun inject(activity: ProjectDetailsActivity)
     fun inject(rewardsListActivity: RewardsListActivity)
 
-    val bus: Bus
     val app: KickMaterialApp
-    val discoverField: CachedFieldWithArg<DiscoverResponse, DiscoverQuery>
+    val discoverField: ObservableCachedFieldWithArg<DiscoverResponse, DiscoverQuery>
 }

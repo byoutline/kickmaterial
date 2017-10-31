@@ -27,6 +27,7 @@ apply plugin: 'groovyx.grooid.groovy-android'
 
 repositories {
     mavenCentral()
+    maven { url "http://oss.sonatype.org/content/repositories/snapshots/" }
 }
 
 

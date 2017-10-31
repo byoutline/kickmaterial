@@ -19,7 +19,6 @@ import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewAnimationUtils
 import android.view.animation.OvershootInterpolator
-import com.byoutline.cachedfield.CachedFieldWithArg
 import com.byoutline.kickmaterial.KickMaterialApp
 import com.byoutline.kickmaterial.R
 import com.byoutline.kickmaterial.databinding.ActivityCategoryListBinding
@@ -28,6 +27,7 @@ import com.byoutline.kickmaterial.model.DiscoverQuery
 import com.byoutline.kickmaterial.model.DiscoverResponse
 import com.byoutline.kickmaterial.utils.KickMaterialBaseActivity
 import com.byoutline.kickmaterial.utils.LUtils
+import com.byoutline.observablecachedfield.ObservableCachedFieldWithArg
 import com.byoutline.secretsauce.utils.ViewUtils
 import javax.inject.Inject
 
@@ -38,7 +38,7 @@ import javax.inject.Inject
 class CategoriesListActivity : KickMaterialBaseActivity(), CategoryClickListener {
 
     @Inject
-    lateinit var discoverField: CachedFieldWithArg<DiscoverResponse, DiscoverQuery>
+    lateinit var discoverField: ObservableCachedFieldWithArg<DiscoverResponse, DiscoverQuery>
     @Inject
     lateinit var viewModel: CategoriesListViewModel
 

@@ -3,13 +3,11 @@ package com.byoutline.kickmaterial
 import android.app.Application
 import android.support.annotation.VisibleForTesting
 import com.byoutline.androidstubserver.AndroidStubServer
-import com.byoutline.cachedfield.utils.SameSessionIdProvider
-import com.byoutline.ibuscachedfield.util.RetrofitHelper
 import com.byoutline.kickmaterial.dagger.DaggerGlobalComponent
 import com.byoutline.kickmaterial.dagger.GlobalComponent
 import com.byoutline.kickmaterial.dagger.GlobalModule
 import com.byoutline.mockserver.NetworkType
-import com.byoutline.ottocachedfield.OttoCachedField
+import com.byoutline.observablecachedfield.util.RetrofitHelper
 import com.byoutline.secretsauce.Settings
 import com.byoutline.secretsauce.utils.showToast
 import timber.log.Timber
@@ -25,15 +23,16 @@ class KickMaterialApp : Application() {
             Timber.plant(Timber.DebugTree())
         }
         AndroidStubServer.start(this, NetworkType.UMTS)
-        RetrofitHelper.MSG_DISPLAYER = RetrofitHelper.MsgDisplayer { msg -> this.showToast(msg, true) }
+        RetrofitHelper.setMsgDisplayer { msg -> this.showToast(msg, true) }
 
         resetComponents()
     }
+
     @VisibleForTesting
-    @Synchronized fun setComponents(mainComponent: GlobalComponent) {
+    @Synchronized
+    fun setComponents(mainComponent: GlobalComponent) {
         component = mainComponent
-        Settings.set(debug = BuildConfig.DEBUG, containerViewId =  R.id.container)
-        OttoCachedField.init(SameSessionIdProvider(), mainComponent.bus)
+        Settings.set(debug = BuildConfig.DEBUG, containerViewId = R.id.container)
     }
 
     private fun resetComponents() {
