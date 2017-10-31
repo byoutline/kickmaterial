@@ -24,4 +24,4 @@ then cat ${PROP} && for pack in "tools" "extra-android-m2repository" "extra-goog
 done ;
 fi
 
-if [ ! -e $ANDROID_HOME/build-tools/26.0.1 ]; then echo y | android update sdk -u -a -t "build-tools-26.0.1"; fi
+if [ ! -e $ANDROID_HOME/build-tools/26.0.2 ]; then echo y | android update sdk -u -a -t "build-tools-26.0.2"; fi

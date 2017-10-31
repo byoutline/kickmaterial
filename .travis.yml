@@ -15,7 +15,9 @@ env:
 android:
   components:
     - tools
+    - build-tools-26.0.2
     - platform-tools
+    - android-26
 
 before_install:
   - mkdir "$ANDROID_HOME/licenses" || true

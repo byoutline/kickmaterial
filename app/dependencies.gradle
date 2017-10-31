@@ -18,8 +18,8 @@ dependencies {
     implementation "com.android.support:recyclerview-v7:$support_version"
     implementation "com.android.support:palette-v7:$support_version"
     implementation "com.android.support:design:$support_version"
-    implementation 'com.byoutline.secretsauce:secretsaucekt:0.6.0-beta1'
-    implementation "com.byoutline.observablecachedfield:observablecachedfield:1.7.0-alpha1-SNAPSHOT"
+    implementation 'com.byoutline.secretsauce:secretsaucekt:0.6.0-beta2'
+    implementation "com.byoutline.observablecachedfield:observablecachedfield:1.7.0-RC2"
     implementation 'com.byoutline.androidstubserver:stubserver:2.0.0-beta2'
     implementation "com.squareup.retrofit2:retrofit:$retrofit_ver"
     implementation "com.squareup.retrofit2:converter-gson:$retrofit_ver"
@@ -95,8 +95,4 @@ dependencies {
 configurations.all {
     resolutionStrategy.force "com.android.support:support-annotations:$support_version"
     resolutionStrategy.force 'com.google.code.findbugs:jsr305:3.0.1'
-}
-configurations.all {
-    // check for updates every build
-    resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
 }
