@@ -49,7 +49,8 @@ class LUtils private constructor() {
             iv.colorFilter = filter
         }
 
-        @JvmOverloads fun loadAnimationWithLInterpolator(context: Context, @AnimRes animId: Int, interpolator: android.view.animation.Interpolator = LinearOutSlowInInterpolator()): Animation {
+        @JvmOverloads
+        fun loadAnimationWithLInterpolator(context: Context, @AnimRes animId: Int, interpolator: android.view.animation.Interpolator = LinearOutSlowInInterpolator()): Animation {
             val animation = AnimationUtils.loadAnimation(context, animId)
             animation.interpolator = interpolator
             return animation

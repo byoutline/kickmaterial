@@ -117,7 +117,7 @@ class SearchListFragment : KickMaterialFragment(), ProjectClickListener, Endless
     override val lastVisibleItemPosition: Int
         get() = (projectListRv.layoutManager as LinearLayoutManager).findLastVisibleItemPosition()
 
-    override fun loadMoreData()= viewModel.loadMoreData()
+    override fun loadMoreData() = viewModel.loadMoreData()
 
     override fun hasMoreDataAndNotLoading() = viewModel.hasMoreDataAndNotLoading()
 

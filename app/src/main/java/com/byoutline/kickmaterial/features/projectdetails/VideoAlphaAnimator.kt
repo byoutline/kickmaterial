@@ -24,7 +24,6 @@ class VideoAlphaAnimator {
     private var lastRunnable: WeakReference<Runnable>? = null
 
 
-
     fun animateVideoBtn(videoBtn: View, video: ProjectVideo?) {
         val videoExist: Boolean = video != null
         Timber.d("playVisibility: $videoExist")

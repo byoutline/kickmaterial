@@ -7,10 +7,10 @@
         android:layout_height="wrap_content"
         android:gravity="center"
 
-        android:paddingTop="@dimen/project_header_padding_top"
         android:paddingBottom="@dimen/project_header_padding_bottom"
+        android:paddingTop="@dimen/project_header_padding_top"
         android:text="@string/explore"
         android:textColor="@color/black"
-        android:textSize="@dimen/font_34"/>
+        android:textSize="@dimen/font_34" />
 </layout>
 

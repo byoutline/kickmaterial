@@ -1,115 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-	xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:card_view="http://schemas.android.com/apk/res-auto"
-	xmlns:tools="http://schemas.android.com/tools" >
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-	<data>
+    <data>
 
-		<variable
-			name="reward"
-			type="com.byoutline.kickmaterial.model.Reward"
-		/>
+        <variable
+            name="reward"
+            type="com.byoutline.kickmaterial.model.Reward" />
 
-		<variable name="bgColor" type="int"/>
-		<variable
-			name="rewardClickListener"
-			type="com.byoutline.kickmaterial.features.rewardlist.RewardClickListener"
-		/>
-	</data>
+        <variable
+            name="bgColor"
+            type="int" />
 
-	<android.support.v7.widget.CardView
-		android:id="@+id/reward_container_cv"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:background="@color/white_89"
-		android:onClick="@{() -> rewardClickListener.rewardClicked(reward)}"
-		card_view:cardBackgroundColor="@{bgColor}"
-		card_view:cardCornerRadius="6dp"
-	>
-		<!--card_view:cardBackgroundColor="#E3FAFAFA"-->
+        <variable
+            name="rewardClickListener"
+            type="com.byoutline.kickmaterial.features.rewardlist.RewardClickListener" />
+    </data>
 
-
-		<LinearLayout
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:orientation="horizontal"
-			android:padding="25dp"
-		>
-
-			<LinearLayout
-				android:layout_width="0dp"
-				android:layout_height="match_parent"
-				android:layout_weight="1 "
-				android:orientation="vertical"
-			>
-
-				<TextView
-					android:id="@+id/reward_item_amount_tv"
-					style="@style/LightFontStyle"
-					android:layout_width="match_parent"
-					android:layout_height="wrap_content"
-					android:textColor="@color/green_primary"
-					android:textSize="@dimen/font_20"
-					android:maxLines="1"
-					android:text="@{@string/reward_value(reward.minimum)}"
-					tools:text="1+"
-				/>
+    <android.support.v7.widget.CardView
+        android:id="@+id/reward_container_cv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white_89"
+        android:onClick="@{() -> rewardClickListener.rewardClicked(reward)}"
+        card_view:cardBackgroundColor="@{bgColor}"
+        card_view:cardCornerRadius="6dp">
+        <!--card_view:cardBackgroundColor="#E3FAFAFA"-->
 
 
-				<TextView
-					android:id="@+id/reward_item_currency_tv"
-					style="@style/RewardItemCurrencyStyle"
-					android:textSize="@dimen/font_11"
-					android:maxLines="1"
-					android:text="@string/currency_usd"
-				/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="25dp">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1 "
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/reward_item_amount_tv"
+                    style="@style/LightFontStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxLines="1"
+                    android:text="@{@string/reward_value(reward.minimum)}"
+                    android:textColor="@color/green_primary"
+                    android:textSize="@dimen/font_20"
+                    tools:text="1+" />
 
 
-			</LinearLayout>
+                <TextView
+                    android:id="@+id/reward_item_currency_tv"
+                    style="@style/RewardItemCurrencyStyle"
+                    android:maxLines="1"
+                    android:text="@string/currency_usd"
+                    android:textSize="@dimen/font_11" />
 
 
-			<LinearLayout
-				android:layout_width="0dp"
-				android:layout_height="match_parent"
-				android:layout_weight="3"
-				android:orientation="vertical"
-			>
+            </LinearLayout>
 
 
-				<TextView
-					android:id="@+id/reward_item_type_tv"
-					style="@style/RegularFontStyle"
-					android:layout_width="match_parent"
-					android:layout_height="wrap_content"
-					android:layout_marginBottom="2dp"
-					android:layout_marginTop="2dp"
-					android:textColor="@color/category_name"
-					android:textSize="@dimen/font_16"
-					android:maxLines="1"
-					android:text="@{reward.reward}"
-					tools:text="No reward"
-				/>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:orientation="vertical">
 
 
-				<TextView
-					android:id="@+id/reward_item_desc_tv"
-					style="@style/RewardItemCurrencyStyle"
-					android:ellipsize="end"
-					android:maxLines="3"
-					android:textSize="@dimen/font_14"
-					android:text="@{reward.description}"
-					tools:text="I just want to help the project"
-				/>
+                <TextView
+                    android:id="@+id/reward_item_type_tv"
+                    style="@style/RegularFontStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginTop="2dp"
+                    android:maxLines="1"
+                    android:text="@{reward.reward}"
+                    android:textColor="@color/category_name"
+                    android:textSize="@dimen/font_16"
+                    tools:text="No reward" />
 
 
-			</LinearLayout>
-		</LinearLayout>
+                <TextView
+                    android:id="@+id/reward_item_desc_tv"
+                    style="@style/RewardItemCurrencyStyle"
+                    android:ellipsize="end"
+                    android:maxLines="3"
+                    android:text="@{reward.description}"
+                    android:textSize="@dimen/font_14"
+                    tools:text="I just want to help the project" />
 
-		<View
-			android:layout_width="match_parent"
-			android:layout_height="1dp"
-			android:background="#15000000"
-		/>
-	</android.support.v7.widget.CardView>
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#15000000" />
+    </android.support.v7.widget.CardView>
 </layout>

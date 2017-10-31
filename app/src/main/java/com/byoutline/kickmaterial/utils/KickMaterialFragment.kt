@@ -89,7 +89,7 @@ abstract class KickMaterialFragment : RxFragment() {
         fun setDisplayHomeAsUpEnabled(enabled: Boolean)
     }
 
-    private class StubHostActivity: HostActivity {
+    private class StubHostActivity : HostActivity {
 
         override fun enableActionBarAutoHide(listView: RecyclerView) {}
 

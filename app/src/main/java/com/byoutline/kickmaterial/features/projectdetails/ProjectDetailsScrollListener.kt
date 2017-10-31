@@ -7,7 +7,7 @@ import com.byoutline.kickmaterial.databinding.ActivityProjectDetailsBinding
 import com.byoutline.secretsauce.utils.ViewUtils
 
 class ProjectDetailsScrollListener(context: Context,
-                                   private val binding: ActivityProjectDetailsBinding): ObservableScrollView.Callbacks {
+                                   private val binding: ActivityProjectDetailsBinding) : ObservableScrollView.Callbacks {
     private val minTitlesMarginTop: Int
     private val maxTitlesMarginTop: Int
     private val maxTitlesMarginLeft: Int
@@ -15,6 +15,7 @@ class ProjectDetailsScrollListener(context: Context,
     private val titleFontMaxSize: Int
     private val titleFontMinSize: Int
     private val maxTitlePaddingRight: Int
+
     init {
         val applicationContext = context.applicationContext
         val res = context.resources

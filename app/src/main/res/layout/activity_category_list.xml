@@ -84,10 +84,10 @@
                 android:id="@+id/close_categories_iv"
                 style="@style/ActionButtonStyle"
                 android:alpha="0.75"
-                app:backgroundTint="@color/black"
-                app:rippleColor="@color/green_primary"
                 android:src="@drawable/icon_plus"
                 android:transitionName=""
+                app:backgroundTint="@color/black"
+                app:rippleColor="@color/green_primary"
                 tools:ignore="UnusedAttribute" />
 
             <TextView

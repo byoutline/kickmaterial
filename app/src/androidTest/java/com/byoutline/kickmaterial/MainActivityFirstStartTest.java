@@ -2,9 +2,11 @@ package com.byoutline.kickmaterial;
 
 import android.support.test.espresso.Espresso;
 import android.support.test.rule.ActivityTestRule;
+
 import com.byoutline.cachedfield.utils.CachedFieldIdlingResource;
 import com.byoutline.kickmaterial.espressohelpers.DaggerRules;
 import com.byoutline.kickmaterial.features.projectlist.MainActivity;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;

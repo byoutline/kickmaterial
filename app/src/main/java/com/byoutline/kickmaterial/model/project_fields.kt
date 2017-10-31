@@ -63,8 +63,6 @@ class ProjectVideo(
 }
 
 
-
-
 @PaperParcel
 class ProjectUrlsApi(val project: String?) : PaperParcelable {
 

@@ -1,214 +1,211 @@
 <resources>
 
 
-	<style name="AppTheme.Base" parent="Theme.AppCompat.Light.NoActionBar">
-		<item name="windowActionBar">false</item>
-		<item name="android:windowActionBarOverlay">true</item>
-		<item name="windowActionBarOverlay">true</item>
-		<item name="colorPrimary">@color/green_primary</item>
-		<item name="colorPrimaryDark">@color/status_bar_color</item>
-		<item name="colorAccent">@android:color/holo_red_dark</item>
-		<item name="colorControlHighlight">@color/green_dark_50</item>
-		<item name="colorControlNormal">@color/ab_text_color</item>
-		<item name="colorControlActivated">@color/green_primary</item>
-		<item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
-		<item name="android:actionMenuTextColor">#999999</item>
-		<item name="actionMenuTextColor">#999999</item>
-		<item name="android:windowBackground">@color/main_bg</item>
-	</style>
+    <style name="AppTheme.Base" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="android:windowActionBarOverlay">true</item>
+        <item name="windowActionBarOverlay">true</item>
+        <item name="colorPrimary">@color/green_primary</item>
+        <item name="colorPrimaryDark">@color/status_bar_color</item>
+        <item name="colorAccent">@android:color/holo_red_dark</item>
+        <item name="colorControlHighlight">@color/green_dark_50</item>
+        <item name="colorControlNormal">@color/ab_text_color</item>
+        <item name="colorControlActivated">@color/green_primary</item>
+        <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
+        <item name="android:actionMenuTextColor">#999999</item>
+        <item name="actionMenuTextColor">#999999</item>
+        <item name="android:windowBackground">@color/main_bg</item>
+    </style>
 
-	<style name="ToolbarStyle">
-		<item name="colorControlNormal">@color/white</item>
-	</style>
+    <style name="ToolbarStyle">
+        <item name="colorControlNormal">@color/white</item>
+    </style>
 
-	<style name="AppTheme.BaseTranslucentStatus" parent="AppTheme.Base">
-	</style>
+    <style name="AppTheme.BaseTranslucentStatus" parent="AppTheme.Base"></style>
 
-	<style name="AppTheme" parent="AppTheme.BaseTranslucentStatus">
-	</style>
+    <style name="AppTheme" parent="AppTheme.BaseTranslucentStatus"></style>
 
-	<style name="TitleTextStyle">
-		<item name="android:textSize">18sp</item>
-		<item name="android:color">@color/ab_text_color</item>
-		<item name="android:textColor">@color/ab_text_color</item>
-	</style>
+    <style name="TitleTextStyle">
+        <item name="android:textSize">18sp</item>
+        <item name="android:color">@color/ab_text_color</item>
+        <item name="android:textColor">@color/ab_text_color</item>
+    </style>
 
-	<style name="DrawerArrowStyle" parent="Widget.AppCompat.DrawerArrowToggle">
-		<item name="spinBars">true</item>
-	</style>
+    <style name="DrawerArrowStyle" parent="Widget.AppCompat.DrawerArrowToggle">
+        <item name="spinBars">true</item>
+    </style>
 
-	<style name="ProjectItemBoldValue" parent="BoldFontStyle">
-		<item name="android:layout_weight">1</item>
-		<item name="android:layout_width">0dp</item>
-		<item name="android:gravity">left</item>
-		<item name="android:layout_height">wrap_content</item>
-		<item name="android:singleLine">true</item>
-		<item name="android:textColor">@color/text_dark_black</item>
-		<item name="android:textSize">@dimen/font_20</item>
-	</style>
+    <style name="ProjectItemBoldValue" parent="BoldFontStyle">
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:gravity">left</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:textColor">@color/text_dark_black</item>
+        <item name="android:textSize">@dimen/font_20</item>
+    </style>
 
 
-	<style name="ProjectItemLightWhite" parent="ProjectItemBoldValue">
-		<item name="android:fontFamily">@font/roboto_light</item>
-		<item name="android:textColor">@color/white</item>
-	</style>
+    <style name="ProjectItemLightWhite" parent="ProjectItemBoldValue">
+        <item name="android:fontFamily">@font/roboto_light</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
 
-	<style name="ProjectItemBoldValue.Normal">
-		<item name="android:fontFamily">@font/roboto_light</item>
-		<item name="android:textStyle">normal</item>
-		<item name="android:textSize">@dimen/font_13</item>
-		<item name="android:textColor">@color/black</item>
-	</style>
+    <style name="ProjectItemBoldValue.Normal">
+        <item name="android:fontFamily">@font/roboto_light</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">@dimen/font_13</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
 
-	<style name="ProjectItemBoldValue.Normal.Light">
-		<item name="android:textColor">@color/white_73</item>
-	</style>
+    <style name="ProjectItemBoldValue.Normal.Light">
+        <item name="android:textColor">@color/white_73</item>
+    </style>
 
-	<style name="SeekBarStyleBase">
-		<item name="android:paddingLeft">0dp</item>
-		<item name="android:paddingRight">0dp</item>
-		<item name="android:layout_width">match_parent</item>
-		<item name="android:layout_height">wrap_content</item>
-		<item name="android:layout_marginBottom">11dp</item>
-		<item name="android:layout_marginTop">11dp</item>
-		<item name="android:maxHeight">9dp</item>
-		<item name="android:minHeight">9dp</item>
-		<item name="android:progress">50</item>
-		<item name="android:progressDrawable">@drawable/progress_drawable</item>
-		<item name="android:thumb">@android:color/transparent</item>
-		<item name="android:background">@drawable/elevation_shadow</item>
-	</style>
+    <style name="SeekBarStyleBase">
+        <item name="android:paddingLeft">0dp</item>
+        <item name="android:paddingRight">0dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginBottom">11dp</item>
+        <item name="android:layout_marginTop">11dp</item>
+        <item name="android:maxHeight">9dp</item>
+        <item name="android:minHeight">9dp</item>
+        <item name="android:progress">50</item>
+        <item name="android:progressDrawable">@drawable/progress_drawable</item>
+        <item name="android:thumb">@android:color/transparent</item>
+        <item name="android:background">@drawable/elevation_shadow</item>
+    </style>
 
-	<style name="SeekBarStyle" parent="SeekBarStyleBase">
-	</style>
-
-
-	<style name="LightFontStyle">
-		<item name="android:fontFamily">@font/roboto_light</item>
-	</style>
-
-	<style name="ThinFontStyle">
-		<item name="android:fontFamily">@font/roboto_thin</item>
-	</style>
-
-	<style name="BoldFontStyle">
-		<item name="android:fontFamily">@font/roboto_bold</item>
-	</style>
-
-	<style name="RegularFontStyle">
-		<item name="android:fontFamily">@font/roboto</item>
-	</style>
-
-	<style name="ProjectDescription" parent="LightFontStyle">
-		<item name="android:textColor">@color/text_grey</item>
-		<item name="android:layout_width">match_parent</item>
-		<item name="android:layout_height">wrap_content</item>
-		<item name="android:textSize">@dimen/font_14</item>
-	</style>
+    <style name="SeekBarStyle" parent="SeekBarStyleBase"></style>
 
 
-	<style name="ToolbarCustom" parent="@style/Widget.AppCompat.Toolbar">
-		<item name="contentInsetStart">0dp</item>
-	</style>
+    <style name="LightFontStyle">
+        <item name="android:fontFamily">@font/roboto_light</item>
+    </style>
 
-	<style name="CategoryCircle">
-		<item name="android:layout_width">480dp</item>
-		<item name="android:layout_height">480dp</item>
-		<item name="android:layout_gravity">center_horizontal</item>
-		<item name="android:layout_marginTop">-220dp</item>
-	</style>
+    <style name="ThinFontStyle">
+        <item name="android:fontFamily">@font/roboto_thin</item>
+    </style>
 
-	<style name="ProjectItemNameStyle" parent="LightFontStyle">
-		<item name="android:maxLines">2</item>
-		<item name="android:ellipsize">end</item>
-		<item name="android:layout_width">match_parent</item>
-		<item name="android:layout_height">wrap_content</item>
-		<item name="android:layout_gravity">bottom</item>
-		<item name="android:paddingBottom">@dimen/project_item_small_padding</item>
-		<item name="android:layout_marginLeft">@dimen/project_item_big_padding</item>
-		<item name="android:layout_marginRight">@dimen/project_item_big_padding</item>
-		<item name="android:paddingTop">@dimen/project_item_small_padding</item>
-		<item name="android:textColor">@color/white</item>
-		<item name="android:textSize">22sp</item>
-		<item name="android:textStyle">bold</item>
-	</style>
+    <style name="BoldFontStyle">
+        <item name="android:fontFamily">@font/roboto_bold</item>
+    </style>
 
-	<style name="ProjectAuthorDetails" parent="LightFontStyle">
-		<item name="android:layout_marginLeft">8dp</item>
-		<item name="android:textColor">@color/black_33</item>
-		<item name="android:layout_width">match_parent</item>
-		<item name="android:layout_height">wrap_content</item>
-		<item name="android:textSize">@dimen/font_14</item>
-	</style>
+    <style name="RegularFontStyle">
+        <item name="android:fontFamily">@font/roboto</item>
+    </style>
 
-	<style name="ProjectSeparator">
-		<item name="android:layout_width">match_parent</item>
-		<item name="android:background">@color/main_bg</item>
-	</style>
+    <style name="ProjectDescription" parent="LightFontStyle">
+        <item name="android:textColor">@color/text_grey</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/font_14</item>
+    </style>
 
-	<style name="ProjectAuthorDescStyle" parent="RegularFontStyle">
-		<item name="android:layout_width">wrap_content</item>
-		<item name="android:layout_height">wrap_content</item>
-		<item name="android:layout_marginLeft">8dp</item>
-		<item name="android:textColor">@color/project_author_name</item>
-		<item name="android:textSize">@dimen/font_15</item>
-	</style>
 
-	<style name="ProjectAuthorValueStyle" parent="BoldFontStyle">
-		<item name="android:background">@drawable/rounded_buble</item>
-		<item name="android:layout_marginRight">25dp</item>
-		<item name="android:layout_width">55dp</item>
-		<item name="android:padding">4dp</item>
-		<item name="android:gravity">center</item>
-		<item name="android:layout_height">wrap_content</item>
-		<item name="android:layout_marginLeft">5dp</item>
-		<item name="android:textColor">@color/white</item>
-		<item name="android:textSize">@dimen/font_13</item>
-	</style>
+    <style name="ToolbarCustom" parent="@style/Widget.AppCompat.Toolbar">
+        <item name="contentInsetStart">0dp</item>
+    </style>
 
-	<style name="ProjectAuthorDescContainer">
-		<item name="android:layout_width">match_parent</item>
-		<item name="android:layout_height">wrap_content</item>
-		<item name="android:gravity">center_vertical</item>
-		<item name="android:orientation">horizontal</item>
-		<item name="android:paddingBottom">@dimen/project_auth_padding</item>
-		<item name="android:paddingTop">@dimen/project_auth_padding</item>
-	</style>
+    <style name="CategoryCircle">
+        <item name="android:layout_width">480dp</item>
+        <item name="android:layout_height">480dp</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:layout_marginTop">-220dp</item>
+    </style>
 
-	<style name="RewardItemCurrencyStyle" parent="LightFontStyle">
-		<item name="android:layout_width">match_parent</item>
-		<item name="android:layout_height">wrap_content</item>
-		<item name="android:textColor">@color/text_grey</item>
-		<item name="android:textSize">@dimen/font_14</item>
-	</style>
+    <style name="ProjectItemNameStyle" parent="LightFontStyle">
+        <item name="android:maxLines">2</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">bottom</item>
+        <item name="android:paddingBottom">@dimen/project_item_small_padding</item>
+        <item name="android:layout_marginLeft">@dimen/project_item_big_padding</item>
+        <item name="android:layout_marginRight">@dimen/project_item_big_padding</item>
+        <item name="android:paddingTop">@dimen/project_item_small_padding</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">22sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
 
-	<style name="RecylerViewCategories">
-		<item name="android:paddingLeft">8dp</item>
-		<item name="android:paddingRight">8dp</item>
-		<item name="android:layout_width">match_parent</item>
-		<item name="android:layout_height">match_parent</item>
+    <style name="ProjectAuthorDetails" parent="LightFontStyle">
+        <item name="android:layout_marginLeft">8dp</item>
+        <item name="android:textColor">@color/black_33</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/font_14</item>
+    </style>
 
-		<item name="android:background">@android:color/transparent</item>
-		<item name="android:clipToPadding">false</item>
-		<item name="android:foreground">?android:windowContentOverlay</item>
-		<item name="android:paddingBottom">21dp</item>
-	</style>
+    <style name="ProjectSeparator">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:background">@color/main_bg</item>
+    </style>
 
-	<style name="ActionButtonStyle">
-		<item name="elevation">8dp</item>
-		<item name="borderWidth">0dp</item>
-		<item name="fabSize">normal</item>
-		<item name="android:clickable">true</item>
-		<item name="android:layout_width">@dimen/button_size</item>
-		<item name="android:layout_height">@dimen/button_size</item>
-		<item name="android:layout_marginBottom">@dimen/fab_margin</item>
-	</style>
+    <style name="ProjectAuthorDescStyle" parent="RegularFontStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">8dp</item>
+        <item name="android:textColor">@color/project_author_name</item>
+        <item name="android:textSize">@dimen/font_15</item>
+    </style>
 
-	<color name="black_33">#55000000</color>
+    <style name="ProjectAuthorValueStyle" parent="BoldFontStyle">
+        <item name="android:background">@drawable/rounded_buble</item>
+        <item name="android:layout_marginRight">25dp</item>
+        <item name="android:layout_width">55dp</item>
+        <item name="android:padding">4dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">5dp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/font_13</item>
+    </style>
 
-	<style name="ActionBarThemeOverlay" parent="">
-		<item name="android:textColorPrimary">#fff</item>
-		<item name="colorControlNormal">#fff</item>
-		<item name="colorControlHighlight">#3fff</item>
-	</style>
+    <style name="ProjectAuthorDescContainer">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:paddingBottom">@dimen/project_auth_padding</item>
+        <item name="android:paddingTop">@dimen/project_auth_padding</item>
+    </style>
+
+    <style name="RewardItemCurrencyStyle" parent="LightFontStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/text_grey</item>
+        <item name="android:textSize">@dimen/font_14</item>
+    </style>
+
+    <style name="RecylerViewCategories">
+        <item name="android:paddingLeft">8dp</item>
+        <item name="android:paddingRight">8dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:clipToPadding">false</item>
+        <item name="android:foreground">?android:windowContentOverlay</item>
+        <item name="android:paddingBottom">21dp</item>
+    </style>
+
+    <style name="ActionButtonStyle">
+        <item name="elevation">8dp</item>
+        <item name="borderWidth">0dp</item>
+        <item name="fabSize">normal</item>
+        <item name="android:clickable">true</item>
+        <item name="android:layout_width">@dimen/button_size</item>
+        <item name="android:layout_height">@dimen/button_size</item>
+        <item name="android:layout_marginBottom">@dimen/fab_margin</item>
+    </style>
+
+    <color name="black_33">#55000000</color>
+
+    <style name="ActionBarThemeOverlay" parent="">
+        <item name="android:textColorPrimary">#fff</item>
+        <item name="colorControlNormal">#fff</item>
+        <item name="colorControlHighlight">#3fff</item>
+    </style>
 </resources>

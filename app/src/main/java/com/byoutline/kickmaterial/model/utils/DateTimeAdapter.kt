@@ -1,4 +1,4 @@
-package com.byoutline.kickmaterial.model.utils;
+package com.byoutline.kickmaterial.model.utils
 
 import android.os.Parcel
 import org.joda.time.DateTime
