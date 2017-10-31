@@ -4,7 +4,6 @@ import android.databinding.BindingAdapter
 import android.graphics.drawable.Drawable
 import android.support.annotation.ColorRes
 import android.support.v4.content.ContextCompat
-import android.view.View
 import android.widget.ImageView
 import com.squareup.picasso.Picasso
 
@@ -36,9 +35,4 @@ fun loadImage(view: ImageView, imageUrl: String) {
 fun setColorFilter(view: ImageView, @ColorRes colorResId: Int) {
     val color = ContextCompat.getColor(view.context, colorResId)
     view.setColorFilter(color)
-}
-
-@BindingAdapter("onClick")
-fun onClickBinding(view: View, listener: Runnable) {
-    view.setOnClickListener { listener.run() }
 }
