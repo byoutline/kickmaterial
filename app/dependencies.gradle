@@ -1,5 +1,5 @@
 ext {
-    support_version = '26.1.0'
+    support_version = '27.0.0'
     dagger_version = '2.11'
     retrofit_ver = '2.2.0'
     okhttp_ver = '3.7.0'
@@ -55,13 +55,13 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     testImplementation 'org.mockito:mockito-core:2.8.9'
     testImplementation 'com.squareup.assertj:assertj-android:1.1.0'
-    testImplementation 'org.robolectric:robolectric:3.0'
+    testImplementation 'org.robolectric:robolectric:3.4.2'
 
-    testImplementation 'org.robospock:robospock:1.0.0'
-    testImplementation 'org.robolectric:shadows-multidex:3.0'
-    testImplementation 'org.codehaus.groovy:groovy-all:2.4.9'
-    testImplementation 'org.spockframework:spock-core:1.0-groovy-2.4'
-    testImplementation 'cglib:cglib-nodep:3.2.0'
+    testImplementation 'org.robospock:robospock:1.0.1'
+    testImplementation 'org.robolectric:shadows-multidex:3.3.2'
+    testImplementation 'org.codehaus.groovy:groovy-all:2.4.12'
+    testImplementation 'org.spockframework:spock-core:1.1-groovy-2.4'
+    testImplementation 'cglib:cglib-nodep:3.2.4'
     testImplementation 'org.objenesis:objenesis:2.5'
 
     androidTestImplementation "com.android.support:appcompat-v7:$support_version"

@@ -13,7 +13,5 @@ class DisabledSeekBar : AppCompatSeekBar {
 
     constructor(context: Context) : super(context)
 
-    override fun onTouchEvent(event: MotionEvent): Boolean {
-        return true
-    }
+    override fun onTouchEvent(event: MotionEvent): Boolean = true
 }

@@ -49,9 +49,7 @@ class SharedElementTransition(context: Context, attrs: AttributeSet) : Transitio
         return transProps.toTypedArray()
     }
 
-    override fun getTransitionProperties(): Array<String> {
-        return transitionProperties
-    }
+    override fun getTransitionProperties(): Array<String> = transitionProperties
 
     override fun captureStartValues(transitionValues: TransitionValues) {
         if (isFabTransition(transitionValues)) {

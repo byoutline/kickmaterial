@@ -37,9 +37,9 @@ import android.view.ViewGroup
 @TargetApi(Build.VERSION_CODES.LOLLIPOP)
 class CircleTransition : Transition {
 
-    constructor() {}
+    constructor()
 
-    constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {}
+    constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
 
     override fun getTransitionProperties(): Array<String> {
         return TRANSITION_PROPERTIES

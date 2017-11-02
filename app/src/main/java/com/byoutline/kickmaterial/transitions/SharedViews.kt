@@ -13,13 +13,9 @@ class SharedViews(vararg views: View?) {
         this.views.addAll(listOf(*views).filterNotNull())
     }
 
-    fun asArrayList(): ArrayList<View> {
-        return views
-    }
+    fun asArrayList(): ArrayList<View> = views
 
-    fun asArray(): Array<View> {
-        return views.toTypedArray()
-    }
+    fun asArray(): Array<View> = views.toTypedArray()
 
     fun add(view: View) {
         views.add(view)

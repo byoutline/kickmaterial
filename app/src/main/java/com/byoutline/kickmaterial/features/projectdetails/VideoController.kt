@@ -31,12 +31,13 @@ class VideoController : MediaController {
     override fun setAnchorView(view: View) {
         super.setAnchorView(view)
 
-        searchButton = Button(context)
-        searchButton!!.text = "Back This project"
-        searchButton!!.setOnClickListener { _ ->
-            val intent = Intent(context, WebViewActivityV7::class.java)
-            intent.putExtra(WebViewActivityV7.BUNDLE_URL, url)
-            context.startActivity(intent)
+        searchButton = Button(context).apply {
+            text = "Back This project"
+            setOnClickListener { _ ->
+                val intent = Intent(context, WebViewActivityV7::class.java)
+                intent.putExtra(WebViewActivityV7.BUNDLE_URL, url)
+                context.startActivity(intent)
+            }
         }
         val params = FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT)
         params.gravity = Gravity.RIGHT

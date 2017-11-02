@@ -54,12 +54,12 @@ class ProjectsListFragment : KickMaterialFragment(), ProjectClickListener, Field
         hostActivity?.enableActionBarAutoHide(binding.projectRecyclerView)
         maxScroll = (2 * resources.getDimensionPixelSize(R.dimen.project_header_padding_top) + ViewUtils.dpToPx(48f, activity)).toFloat()
         actionbarScrollPoint = ViewUtils.dpToPx(24f, activity).toFloat()
-        category = arguments.getParcelable(ARG_CATEGORY)
+        category = arguments!!.getParcelable(ARG_CATEGORY)
         setHasOptionsMenu(true)
         return binding.root
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setUpAdapters()
         setUpListeners()
@@ -76,9 +76,9 @@ class ProjectsListFragment : KickMaterialFragment(), ProjectClickListener, Field
         }
     }
 
-    fun setUpListeners() {
+    private fun setUpListeners() {
         binding.showCategoriesFab.setOnClickListener {
-            CategoriesListActivity.launch(activity, category, binding.showCategoriesFab)
+            CategoriesListActivity.launch(activity!!, category, binding.showCategoriesFab)
         }
         binding.projectRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
 
@@ -114,8 +114,8 @@ class ProjectsListFragment : KickMaterialFragment(), ProjectClickListener, Field
         })
     }
 
-    override fun onSaveInstanceState(outState: Bundle?) {
-        outState!!.putFloat(INSTANCE_STATE_SUMMARY_SCROLLED, summaryScrolled)
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putFloat(INSTANCE_STATE_SUMMARY_SCROLLED, summaryScrolled)
         super.onSaveInstanceState(outState)
     }
 
@@ -130,7 +130,7 @@ class ProjectsListFragment : KickMaterialFragment(), ProjectClickListener, Field
         viewModel.attachViewUntilPause(this)
         viewModel.discoverField.addStateListener(this)
         viewModel.loadCurrentPage(category)
-        binding.showCategoriesFab.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(context, category.colorResId))
+        binding.showCategoriesFab.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(context!!, category.colorResId))
     }
 
     override fun onPause() {
@@ -152,7 +152,7 @@ class ProjectsListFragment : KickMaterialFragment(), ProjectClickListener, Field
 
     private fun restoreDefaultScreenLook() {
         hostActivity?.showActionbar(true, false)
-        LUtils.setStatusBarColor(activity, ContextCompat.getColor(context, R.color.status_bar_color))
+        LUtils.setStatusBarColor(activity!!, ContextCompat.getColor(context!!, R.color.status_bar_color))
     }
 
     override val fragmentActionbarName: String
@@ -162,11 +162,11 @@ class ProjectsListFragment : KickMaterialFragment(), ProjectClickListener, Field
 
     override fun projectClicked(project: Project, views: SharedViews) {
         views.add(binding.showCategoriesFab)
-        activity.startProjectDetailsActivity(project, views)
+        activity?.startProjectDetailsActivity(project, views)
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
-        val searchView = SearchListFragment.getSearchView(activity, menu!!)
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater?) {
+        val searchView = SearchListFragment.getSearchView(activity!!, menu)
         searchView.isIconified = true
         searchView.setOnSearchClickListener { _ -> activity?.showFragment(SearchListFragment(), true) }
     }

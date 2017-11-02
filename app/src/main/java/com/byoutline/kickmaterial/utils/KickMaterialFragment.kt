@@ -26,25 +26,14 @@ abstract class KickMaterialFragment : RxFragment() {
         }
     }
 
-
-    fun showBackButtonInActionbar(show: Boolean) {
-        val baseActivity = activity as? KickMaterialBaseActivity
-        baseActivity?.setDisplayHomeAsUpEnabled(show)
-    }
-
     override fun onDetach() {
         super.onDetach()
         hostActivity = StubHostActivity()
     }
 
-
     override fun onResume() {
         super.onResume()
         setActionbar()
-    }
-
-    override fun onPause() {
-        super.onPause()
     }
 
     override fun onDestroyView() {
@@ -55,24 +44,12 @@ abstract class KickMaterialFragment : RxFragment() {
     }
 
     private fun setActionbar() {
-        val baseActivity = activity as? KickMaterialBaseActivity
-        if (baseActivity != null) {
-            if (!TextUtils.isEmpty(fragmentActionbarName)) {
-                baseActivity.title = fragmentActionbarName
-            }
-            //            baseActivity.setDisplayHomeAsUpEnabled(showBackButtonInActionbar());
+        val baseActivity = activity as? KickMaterialBaseActivity ?: return
+        if (!TextUtils.isEmpty(fragmentActionbarName)) {
+            baseActivity.title = fragmentActionbarName
         }
+        //            baseActivity.setDisplayHomeAsUpEnabled(showBackButtonInActionbar());
     }
-
-    fun setActionbarTitle(title: String) {
-        val baseActivity = activity as? KickMaterialBaseActivity
-        if (baseActivity != null) {
-            if (!TextUtils.isEmpty(title)) {
-                baseActivity.title = title
-            }
-        }
-    }
-
 
     abstract val fragmentActionbarName: String
 

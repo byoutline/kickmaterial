@@ -28,20 +28,14 @@ class PaletteAndAplaTransformation private constructor(private val aplaTransform
         return result
     }
 
-    override fun key(): String {
-        return javaClass.simpleName
-    }
+    override fun key(): String = javaClass.simpleName
 
     companion object {
         private val INSTANCE = PaletteAndAplaTransformation(AplaTransformation())
         private val CACHE = WeakHashMap<Bitmap, Palette>()
 
-        fun instance(): PaletteAndAplaTransformation {
-            return INSTANCE
-        }
+        fun instance(): PaletteAndAplaTransformation = INSTANCE
 
-        fun getPalette(bitmap: Bitmap): Palette? {
-            return CACHE[bitmap]
-        }
+        fun getPalette(bitmap: Bitmap): Palette? = CACHE[bitmap]
     }
 }

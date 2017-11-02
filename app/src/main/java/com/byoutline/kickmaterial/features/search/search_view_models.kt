@@ -74,7 +74,7 @@ class SearchViewModel
         discoverField.postValue(query)
     }
 
-    fun onSearchResultFetched(response: DiscoverResponse, arg: DiscoverQuery) {
+    private fun onSearchResultFetched(response: DiscoverResponse, arg: DiscoverQuery) {
         if (arg.discoverType != DiscoverType.SEARCH) return
 
         hasMore = response.projects?.isNotEmpty() == true

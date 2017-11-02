@@ -18,7 +18,5 @@ enum class SortTypes(@StringRes nameResId: Int) {
     val apiName: String = name.toLowerCase(Locale.ENGLISH)
     private val displayName: String by lazy { KickMaterialApp.component.app.getString(nameResId) }
 
-    override fun toString(): String {
-        return displayName
-    }
+    override fun toString() = displayName
 }

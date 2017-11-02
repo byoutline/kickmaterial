@@ -40,7 +40,7 @@ class SearchListFragment : KickMaterialFragment(), ProjectClickListener, Endless
         return projectListRv
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setUpAdapters()
     }
@@ -54,16 +54,16 @@ class SearchListFragment : KickMaterialFragment(), ProjectClickListener, Endless
 
     private fun setUpAdapters() {
         projectListRv.setEndlessScrollListener(this)
-        projectListRv.addItemDecoration(SearchListSeparator(activity.applicationContext))
+        projectListRv.addItemDecoration(SearchListSeparator(KickMaterialApp.component.app))
     }
 
     private fun restoreDefaultScreenLook() {
         hostActivity?.showActionbar(true, false)
-        LUtils.setStatusBarColor(activity, ContextCompat.getColor(context, R.color.status_bar_color))
+        LUtils.setStatusBarColor(activity!!, ContextCompat.getColor(context!!, R.color.status_bar_color))
     }
 
-    override fun onSaveInstanceState(outState: Bundle?) {
-        outState!!.putCharSequence(SI_KEY_SEARCH_QUERY, searchView!!.query)
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putCharSequence(SI_KEY_SEARCH_QUERY, searchView!!.query)
         super.onSaveInstanceState(outState)
     }
 
@@ -76,42 +76,39 @@ class SearchListFragment : KickMaterialFragment(), ProjectClickListener, Endless
         }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
-        searchView = getSearchView(activity, menu!!)
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater?) {
+        searchView = getSearchView(activity!!, menu).apply {
+            isIconified = false
+            setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+                override fun onQueryTextSubmit(searchTerm: String): Boolean {
+                    viewModel.updateSearchTerm(searchTerm)
+                    // On landscape entry field and soft keyboard may cover whole screen.
+                    // Close keyboard when they press search, so they can see result.
+                    activity?.hideKeyboard()
+                    return true
+                }
 
-        searchView!!.isIconified = false
-        searchView!!.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(searchTerm: String): Boolean {
-                viewModel.updateSearchTerm(searchTerm)
-                // On landscape entry field and soft keyboard may cover whole screen.
-                // Close keyboard when they press search, so they can see result.
-                activity?.hideKeyboard()
-                return true
+                override fun onQueryTextChange(searchTerm: String): Boolean {
+                    viewModel.updateSearchTerm(searchTerm)
+                    return true
+                }
+            })
+            setQuery(restoredSearchQuery, false)
+            setOnCloseListener {
+                // Allow only clearing, do not allow closing.
+                TextUtils.isEmpty(searchView!!.query)
             }
-
-            override fun onQueryTextChange(searchTerm: String): Boolean {
-                viewModel.updateSearchTerm(searchTerm)
-                return true
-            }
-        })
-        searchView!!.setQuery(restoredSearchQuery, false)
-        searchView!!.setOnCloseListener {
-            // Allow only clearing, do not allow closing.
-            TextUtils.isEmpty(searchView!!.query)
         }
         super.onCreateOptionsMenu(menu, inflater)
     }
 
 
-    override val fragmentActionbarName: String
-        get() = " "
+    override val fragmentActionbarName: String = " "
 
-    override fun showBackButtonInActionbar(): Boolean {
-        return false
-    }
+    override fun showBackButtonInActionbar(): Boolean = false
 
     override fun projectClicked(project: Project, views: SharedViews) {
-        activity.startProjectDetailsActivity(project, views)
+        activity?.startProjectDetailsActivity(project, views)
     }
 
     override val lastVisibleItemPosition: Int
