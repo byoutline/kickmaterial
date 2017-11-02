@@ -61,12 +61,6 @@ class ProjectDetailsActivity : KickMaterialBaseActivity(), DelayedTransitionActi
         launchPostTransitionAnimations()
     }
 
-    override fun onPostCreate(savedInstanceState: Bundle?) {
-        super.onPostCreate(savedInstanceState)
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        supportActionBar!!.setDisplayShowTitleEnabled(false) // Hide default toolbar title
-    }
-
     private fun launchPostTransitionAnimations() {
         if (LUtils.hasL()) {
             ActivityCompat.setEnterSharedElementCallback(this, object : SharedElementCallback() {

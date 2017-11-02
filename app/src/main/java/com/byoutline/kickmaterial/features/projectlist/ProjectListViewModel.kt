@@ -22,6 +22,7 @@ import me.tatarka.bindingcollectionadapter2.BindingRecyclerViewAdapter
 import me.tatarka.bindingcollectionadapter2.ItemBinding
 import me.tatarka.bindingcollectionadapter2.collections.DiffObservableList
 import me.tatarka.bindingcollectionadapter2.collections.MergeObservableList
+import timber.log.Timber
 import javax.inject.Provider
 
 /**
@@ -48,6 +49,13 @@ class ProjectListViewModel(showHeader: Boolean,
     private val projectClickListenerProv = Provider { projectClickListener }
 
     private var page = 1
+    var category: Category? = null
+        set(value) {
+            if(value != field) {
+                page = 1
+                field = value
+            }
+        }
     private var lastAvailablePage = Integer.MAX_VALUE
 
     init {
@@ -61,6 +69,8 @@ class ProjectListViewModel(showHeader: Boolean,
                 onNext = this::onDiscoverProjects,
                 onError = this::onDiscoverProjectsFail
         )
+        discoverField.observable().notifyChange()
+        discoverField.observableError.notifyChange()
         fragment.invokeOnFPause {
             this.projectClickListener = null
             discoverField.observable().removeOnPropertyChangedCallback(discoverFieldCallback)
@@ -121,12 +131,12 @@ class ProjectListViewModel(showHeader: Boolean,
 
     private fun hasMore(): Boolean = page < lastAvailablePage
 
-    fun loadMoreData(category: Category) {
+    fun loadMoreData() {
         page++
-        loadCurrentPage(category)
+        loadCurrentPage()
     }
 
-    fun loadCurrentPage(category: Category) {
+    fun loadCurrentPage() {
         val query = DiscoverQuery.getDiscoverQuery(category, page)
         discoverField.postValue(query)
     }
@@ -146,8 +156,6 @@ class ProjectItemViewModel(project: Project, val type: Int, listenerProv: Provid
     val percentProgress: Int = project.percentProgress.toInt()
 
     fun getTimeLeft() = project.getTimeLeft()
-
-    fun onClick(view: View) = onClick()
 
     fun onClick() {
         val listener = listenerProv.get() ?: return

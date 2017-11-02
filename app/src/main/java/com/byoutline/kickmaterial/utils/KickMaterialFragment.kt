@@ -1,8 +1,8 @@
 package com.byoutline.kickmaterial.utils
 
 import android.app.Activity
+import android.support.annotation.StringRes
 import android.support.v7.widget.RecyclerView
-import android.text.TextUtils
 import com.byoutline.secretsauce.activities.hideKeyboard
 import com.trello.rxlifecycle2.components.support.RxFragment
 
@@ -33,7 +33,7 @@ abstract class KickMaterialFragment : RxFragment() {
 
     override fun onResume() {
         super.onResume()
-        setActionbar()
+        setToolbarTitle()
     }
 
     override fun onDestroyView() {
@@ -43,37 +43,31 @@ abstract class KickMaterialFragment : RxFragment() {
         super.onDestroyView()
     }
 
-    private fun setActionbar() {
+    private fun setToolbarTitle() {
         val baseActivity = activity as? KickMaterialBaseActivity ?: return
-        if (!TextUtils.isEmpty(fragmentActionbarName)) {
-            baseActivity.title = fragmentActionbarName
-        }
-        //            baseActivity.setDisplayHomeAsUpEnabled(showBackButtonInActionbar());
+        baseActivity.setToolbarText(getFragmentToolbarName())
     }
 
-    abstract val fragmentActionbarName: String
+    @StringRes
+    abstract fun getFragmentToolbarName(): Int
 
-    abstract fun showBackButtonInActionbar(): Boolean
+    abstract fun showBackButtonInToolbar(): Boolean
 
 
     interface HostActivity {
-        fun enableActionBarAutoHide(listView: RecyclerView)
+        fun enableToolbarAutoHide(listView: RecyclerView)
 
-        fun showActionbar(show: Boolean, animate: Boolean)
+        fun showToolbar(show: Boolean, animate: Boolean)
 
         fun setToolbarAlpha(alpha: Float)
-
-        fun setDisplayHomeAsUpEnabled(enabled: Boolean)
     }
 
     private class StubHostActivity : HostActivity {
 
-        override fun enableActionBarAutoHide(listView: RecyclerView) {}
+        override fun enableToolbarAutoHide(listView: RecyclerView) {}
 
-        override fun showActionbar(show: Boolean, animate: Boolean) {}
+        override fun showToolbar(show: Boolean, animate: Boolean) {}
 
         override fun setToolbarAlpha(alpha: Float) {}
-
-        override fun setDisplayHomeAsUpEnabled(enabled: Boolean) {}
     }
 }

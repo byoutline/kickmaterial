@@ -5,6 +5,8 @@
         <item name="windowActionBar">false</item>
         <item name="android:windowActionBarOverlay">true</item>
         <item name="windowActionBarOverlay">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowActionBar">false</item>
         <item name="colorPrimary">@color/green_primary</item>
         <item name="colorPrimaryDark">@color/status_bar_color</item>
         <item name="colorAccent">@android:color/holo_red_dark</item>
@@ -17,7 +19,7 @@
         <item name="android:windowBackground">@color/main_bg</item>
     </style>
 
-    <style name="ToolbarStyle">
+    <style name="ToolbarTheme">
         <item name="colorControlNormal">@color/white</item>
     </style>
 
@@ -207,5 +209,24 @@
         <item name="android:textColorPrimary">#fff</item>
         <item name="colorControlNormal">#fff</item>
         <item name="colorControlHighlight">#3fff</item>
+    </style>
+
+    <style name="toolbarStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@color/white</item>
+        <item name="android:minHeight">83dp</item>
+        <item name="android:paddingTop">@dimen/status_bar_height_half</item>
+        <item name="android:title"></item>
+        <item name="android:transitionName">toolbar</item>
+    </style>
+
+    <style name="toolbarTitleStyle" parent="TitleTextStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:textColor">@color/ab_text_color</item>
+        <item name="android:maxLines">2</item>
+        <item name="android:paddingTop">@dimen/status_bar_height_half</item>
     </style>
 </resources>

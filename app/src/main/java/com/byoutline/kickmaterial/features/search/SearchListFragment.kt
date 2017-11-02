@@ -58,7 +58,7 @@ class SearchListFragment : KickMaterialFragment(), ProjectClickListener, Endless
     }
 
     private fun restoreDefaultScreenLook() {
-        hostActivity?.showActionbar(true, false)
+        hostActivity?.showToolbar(true, false)
         LUtils.setStatusBarColor(activity!!, ContextCompat.getColor(context!!, R.color.status_bar_color))
     }
 
@@ -102,10 +102,9 @@ class SearchListFragment : KickMaterialFragment(), ProjectClickListener, Endless
         super.onCreateOptionsMenu(menu, inflater)
     }
 
+    override fun getFragmentToolbarName() = R.string.empty
 
-    override val fragmentActionbarName: String = " "
-
-    override fun showBackButtonInActionbar(): Boolean = false
+    override fun showBackButtonInToolbar(): Boolean = false
 
     override fun projectClicked(project: Project, views: SharedViews) {
         activity?.startProjectDetailsActivity(project, views)

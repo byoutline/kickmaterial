@@ -14,7 +14,7 @@ import com.byoutline.secretsauce.utils.ViewUtils
 class VideoController : MediaController {
 
     private val url: String
-    private var searchButton: Button? = null
+    private var webActionButton: Button? = null
 
     constructor(context: Context, attrs: AttributeSet, url: String) : super(context, attrs) {
         this.url = url
@@ -31,7 +31,7 @@ class VideoController : MediaController {
     override fun setAnchorView(view: View) {
         super.setAnchorView(view)
 
-        searchButton = Button(context).apply {
+        webActionButton = Button(context).apply {
             text = "Back This project"
             setOnClickListener { _ ->
                 val intent = Intent(context, WebViewActivityV7::class.java)
@@ -42,6 +42,6 @@ class VideoController : MediaController {
         val params = FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT)
         params.gravity = Gravity.RIGHT
         params.topMargin = ViewUtils.dpToPx(4f, context)
-        addView(searchButton, params)
+        addView(webActionButton, params)
     }
 }

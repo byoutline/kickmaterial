@@ -212,7 +212,7 @@
             </FrameLayout>
 
 
-            <include layout="@layout/toolbar" />
+            <include layout="@layout/toolbar_with_back" />
 
             <LinearLayout
                 android:id="@+id/project_details_title_container"

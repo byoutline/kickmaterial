@@ -37,10 +37,10 @@ import java.util.*
  */
 abstract class KickMaterialBaseActivity : AppCompatActivity(), KickMaterialFragment.HostActivity,
         LifecycleProvider<ActivityEvent> {
-    private var actionBarAutoHideSensitivity = 0
-    private var actionBarAutoHideMinY = 0
-    private var actionBarAutoHideSignal = 0
-    private var actionBarShown = true
+    private var toolbarAutoHideSensitivity = 0
+    private var toolbarAutoHideMinY = 0
+    private var toolbarAutoHideSignal = 0
+    private var toolbarShown = true
     protected var toolbar: Toolbar? = null
     private var toolbarTitle: TextView? = null
 
@@ -53,14 +53,14 @@ abstract class KickMaterialBaseActivity : AppCompatActivity(), KickMaterialFragm
 
     override fun onPostCreate(savedInstanceState: Bundle?) {
         super.onPostCreate(savedInstanceState)
-        toolbar = findViewById(R.id.toolbar)
-        toolbarTitle = findViewById(R.id.toolbar_title_tv)
         // Video does not have toolbar
-        toolbar?.let { bar ->
-            setSupportActionBar(bar)
-            ViewCompat.setElevation(bar, ViewUtils.convertDpToPixel(4.0f, this))
+        toolbar = findViewById<Toolbar?>(R.id.toolbar)?.apply {
+            setSupportActionBar(this)
+            supportActionBar?.setDisplayShowTitleEnabled(false)
+            toolbarTitle = findViewById(R.id.toolbar_title_tv)
+            ViewCompat.setElevation(this, ViewUtils.convertDpToPixel(4.0f, this@KickMaterialBaseActivity))
+            setNavigationOnClickListener { onBackPressed() }
         }
-
     }
 
     protected open fun shouldBlockOrientationOnBuggedAndroidVersions() = true
@@ -77,8 +77,8 @@ abstract class KickMaterialBaseActivity : AppCompatActivity(), KickMaterialFragm
         }
     }
 
-    override fun enableActionBarAutoHide(listView: RecyclerView) {
-        initActionBarAutoHide()
+    override fun enableToolbarAutoHide(listView: RecyclerView) {
+        initToolbarAutoHide()
         listView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             internal val ITEMS_THRESHOLD = 1
             internal var lastFvi = 0
@@ -100,11 +100,11 @@ abstract class KickMaterialBaseActivity : AppCompatActivity(), KickMaterialFragm
     }
 
     /**
-     * Initializes the Action Bar auto-hide (aka Quick Recall) effect.
+     * Initializes the Toolbar auto-hide (aka Quick Recall) effect.
      */
-    private fun initActionBarAutoHide() {
-        actionBarAutoHideMinY = resources.getDimensionPixelSize(R.dimen.action_bar_auto_hide_min_y)
-        actionBarAutoHideSensitivity = resources.getDimensionPixelSize(R.dimen.action_bar_auto_hide_sensitivity)
+    private fun initToolbarAutoHide() {
+        toolbarAutoHideMinY = resources.getDimensionPixelSize(R.dimen.action_bar_auto_hide_min_y)
+        toolbarAutoHideSensitivity = resources.getDimensionPixelSize(R.dimen.action_bar_auto_hide_sensitivity)
     }
 
     /**
@@ -117,68 +117,55 @@ abstract class KickMaterialBaseActivity : AppCompatActivity(), KickMaterialFragm
      */
     private fun onMainContentScrolled(currentY: Int, deltaY: Int) {
         var deltaY = deltaY
-        if (deltaY > actionBarAutoHideSensitivity) {
-            deltaY = actionBarAutoHideSensitivity
-        } else if (deltaY < -actionBarAutoHideSensitivity) {
-            deltaY = -actionBarAutoHideSensitivity
+        if (deltaY > toolbarAutoHideSensitivity) {
+            deltaY = toolbarAutoHideSensitivity
+        } else if (deltaY < -toolbarAutoHideSensitivity) {
+            deltaY = -toolbarAutoHideSensitivity
         }
 
-        if (Math.signum(deltaY.toFloat()) * Math.signum(actionBarAutoHideSignal.toFloat()) < 0) {
+        if (Math.signum(deltaY.toFloat()) * Math.signum(toolbarAutoHideSignal.toFloat()) < 0) {
             // deltaY is a motion opposite to the accumulated signal, so reset signal
-            actionBarAutoHideSignal = deltaY
+            toolbarAutoHideSignal = deltaY
         } else {
             // add to accumulated signal
-            actionBarAutoHideSignal += deltaY
+            toolbarAutoHideSignal += deltaY
         }
 
-        val shouldShow = currentY < actionBarAutoHideMinY || actionBarAutoHideSignal <= -actionBarAutoHideSensitivity
-        autoShowOrHideActionBar(shouldShow)
+        val shouldShow = currentY < toolbarAutoHideMinY || toolbarAutoHideSignal <= -toolbarAutoHideSensitivity
+        autoShowOrHideToolbar(shouldShow)
     }
 
-    protected fun autoShowOrHideActionBar(show: Boolean) {
-        if (show == actionBarShown) {
+    protected fun autoShowOrHideToolbar(show: Boolean) {
+        if (show == toolbarShown) {
             return
         }
 
-        actionBarShown = show
-        onActionBarAutoShowOrHide(show)
+        toolbarShown = show
+        onToolbarAutoShowOrHide(show)
     }
 
-    protected fun onActionBarAutoShowOrHide(shown: Boolean) {
-        val view = toolbar ?: return
+    protected fun onToolbarAutoShowOrHide(shown: Boolean) {
+        val bar = toolbar ?: return
 
-        if (shown) {
-            view.animate()
-                    .translationY(0f)
-                    .alpha(1f)
-                    .setDuration(HEADER_HIDE_ANIM_DURATION.toLong()).interpolator = DecelerateInterpolator()
-        } else {
-            view.animate()
-                    .translationY((-view.bottom).toFloat())
-                    .alpha(0f)
-                    .setDuration(HEADER_HIDE_ANIM_DURATION.toLong()).interpolator = DecelerateInterpolator()
-        }
+        val translationY = if (shown) 0f else (-bar.bottom).toFloat()
+        val alpha = if (shown) 1f else 0f
+        bar.animate()
+                .translationY(translationY)
+                .alpha(alpha)
+                .setDuration(HEADER_HIDE_ANIM_DURATION.toLong()).interpolator = DecelerateInterpolator()
     }
 
 
-    override fun showActionbar(show: Boolean, animate: Boolean) {
+    override fun showToolbar(show: Boolean, animate: Boolean) {
         if (animate) {
-            autoShowOrHideActionBar(show)
+            autoShowOrHideToolbar(show)
         } else {
-            if (show) {
-                supportActionBar!!.show()
-            } else {
-                supportActionBar!!.hide()
-            }
+            ViewUtils.showView(toolbar, show)
         }
     }
 
     fun setToolbarText(@StringRes textId: Int) {
         toolbarTitle?.setText(textId)
-    }
-
-    override fun setDisplayHomeAsUpEnabled(enabled: Boolean) {
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
     companion object {

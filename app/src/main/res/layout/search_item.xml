@@ -14,6 +14,7 @@
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="100dp"
+        app:onClick="@{viewModel::onClick}"
         card_view:cardBackgroundColor="@color/white"
         card_view:cardCornerRadius="@dimen/global_list_card_view_radius">
 

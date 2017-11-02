@@ -74,9 +74,9 @@ class SharedElementTransition(context: Context, attrs: AttributeSet) : Transitio
         return fabTransitionName == view.transitionName
     }
 
-    override fun createAnimator(sceneRoot: ViewGroup, startValues: TransitionValues, endValues: TransitionValues): Animator {
+    override fun createAnimator(sceneRoot: ViewGroup, startValues: TransitionValues, endValues: TransitionValues): Animator? {
         if (isFabTransition(endValues)) {
-            return fabTransition.createAnimator(sceneRoot, startValues, endValues)!!
+            return fabTransition.createAnimator(sceneRoot, startValues, endValues)
         } else {
             val imageAnimator = imageTransition.createAnimator(sceneRoot, startValues, endValues)
             val defaultAnimator = defaultTransition.createAnimator(sceneRoot, startValues, endValues)

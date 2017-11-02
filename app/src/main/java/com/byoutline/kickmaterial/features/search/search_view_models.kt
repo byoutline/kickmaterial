@@ -41,10 +41,11 @@ class SearchViewModel
     private fun Collection<Project>.mapToViewModels() = map { SearchItemViewModel(it, projectClickListenerProv) }
 
 
-    fun attachViewUntilPause(fragment: LifecycleProvider<FragmentEvent>) {
+    fun attachViewUntilPause(fragment: SearchListFragment) {
         val discoverFieldCallback = discoverField.registerChangeCallback(
                 onNext = this::onSearchResultFetched
         )
+        projectClickListener = fragment
         fragment.invokeOnFPause {
             this.projectClickListener = null
             discoverField.observable().removeOnPropertyChangedCallback(discoverFieldCallback)
@@ -106,7 +107,7 @@ open class BaseProjectItemViewModel(val project: Project, protected val listener
 }
 
 class SearchItemViewModel(project: Project, listenerProv: Provider<ProjectClickListener?>) : BaseProjectItemViewModel(project, listenerProv) {
-    fun onClick(view: View) {
+    fun onClick() {
         val listener = listenerProv.get() ?: return
         val bind = binding as SearchItemBinding
         val views = SharedViews(bind.searchItemPhotoIv, bind.searchItemTitleTv)

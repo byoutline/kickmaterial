@@ -110,7 +110,7 @@ class CategoriesListActivity : KickMaterialBaseActivity(), CategoryClickListener
     public override fun onResume() {
         super.onResume()
         viewModel.attachViewUntilPause(this)
-        showActionbar(false, false)
+        showToolbar(false, false)
     }
 
     public override fun onSaveInstanceState(outState: Bundle) {

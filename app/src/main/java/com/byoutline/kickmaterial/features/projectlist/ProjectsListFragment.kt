@@ -25,6 +25,7 @@ import com.byoutline.kickmaterial.utils.LUtils
 import com.byoutline.kickmaterial.views.EndlessRecyclerView
 import com.byoutline.secretsauce.activities.showFragment
 import com.byoutline.secretsauce.utils.ViewUtils
+import timber.log.Timber
 import javax.inject.Inject
 
 /**
@@ -35,7 +36,7 @@ class ProjectsListFragment : KickMaterialFragment(), ProjectClickListener, Field
 
     @Inject
     lateinit var viewModel: ProjectListViewModel
-    private var actionbarScrollPoint: Float = 0F
+    private var toolbarScrollPoint: Float = 0F
     private var maxScroll: Float = 0F
 
     private lateinit var category: Category
@@ -51,10 +52,11 @@ class ProjectsListFragment : KickMaterialFragment(), ProjectClickListener, Field
         KickMaterialApp.component.inject(this)
         binding.viewModel = viewModel
 
-        hostActivity?.enableActionBarAutoHide(binding.projectRecyclerView)
+        hostActivity?.enableToolbarAutoHide(binding.projectRecyclerView)
         maxScroll = (2 * resources.getDimensionPixelSize(R.dimen.project_header_padding_top) + ViewUtils.dpToPx(48f, activity)).toFloat()
-        actionbarScrollPoint = ViewUtils.dpToPx(24f, activity).toFloat()
+        toolbarScrollPoint = ViewUtils.dpToPx(24f, activity).toFloat()
         category = arguments!!.getParcelable(ARG_CATEGORY)
+        viewModel.category = category
         setHasOptionsMenu(true)
         return binding.root
     }
@@ -85,15 +87,15 @@ class ProjectsListFragment : KickMaterialFragment(), ProjectClickListener, Field
             override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
 
-                if (dy > actionbarScrollPoint) {
-                    hostActivity?.showActionbar(false, true)
+                if (dy > toolbarScrollPoint) {
+                    hostActivity?.showToolbar(false, true)
                     if (binding.showCategoriesFab.visibility == View.VISIBLE) {
                         binding.showCategoriesFab.hide()
                     }
                 }
 
-                if (dy < actionbarScrollPoint * -1) {
-                    hostActivity?.showActionbar(true, true)
+                if (dy < toolbarScrollPoint * -1) {
+                    hostActivity?.showToolbar(true, true)
                     if (binding.showCategoriesFab.visibility == View.GONE) {
                         binding.showCategoriesFab.show()
                     }
@@ -127,9 +129,11 @@ class ProjectsListFragment : KickMaterialFragment(), ProjectClickListener, Field
     override fun onResume() {
         super.onResume()
         restoreDefaultScreenLook()
+        Timber.d("items will be attached")
         viewModel.attachViewUntilPause(this)
         viewModel.discoverField.addStateListener(this)
-        viewModel.loadCurrentPage(category)
+        Timber.d("items will be refreshed ${viewModel.category}")
+        viewModel.loadCurrentPage()
         binding.showCategoriesFab.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(context!!, category.colorResId))
     }
 
@@ -151,14 +155,13 @@ class ProjectsListFragment : KickMaterialFragment(), ProjectClickListener, Field
     }
 
     private fun restoreDefaultScreenLook() {
-        hostActivity?.showActionbar(true, false)
+        hostActivity?.showToolbar(true, false)
         LUtils.setStatusBarColor(activity!!, ContextCompat.getColor(context!!, R.color.status_bar_color))
     }
 
-    override val fragmentActionbarName: String
-        get() = getString(category.nameResId)
+    override fun getFragmentToolbarName() = category.nameResId
 
-    override fun showBackButtonInActionbar() = false
+    override fun showBackButtonInToolbar() = false
 
     override fun projectClicked(project: Project, views: SharedViews) {
         views.add(binding.showCategoriesFab)
@@ -178,9 +181,7 @@ class ProjectsListFragment : KickMaterialFragment(), ProjectClickListener, Field
     override val lastVisibleItemPosition: Int
         get() = layoutManager.findLastVisibleItemPosition()
 
-    override fun loadMoreData() {
-        viewModel.loadMoreData(category)
-    }
+    override fun loadMoreData() = viewModel.loadMoreData()
 
     @Synchronized override fun hasMoreDataAndNotLoading() = viewModel.hasMoreDataAndNotLoading()
 
