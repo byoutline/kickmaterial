@@ -14,7 +14,6 @@ import android.util.AttributeSet
 import android.view.ViewGroup
 import com.byoutline.kickmaterial.BuildConfig
 import com.byoutline.kickmaterial.R
-import java.util.*
 
 /**
  * Custom transition wrapper that delegates handling to [CircleTransition] for
@@ -24,29 +23,18 @@ import java.util.*
  */
 @TargetApi(Build.VERSION_CODES.LOLLIPOP)
 class SharedElementTransition(context: Context, attrs: AttributeSet) : Transition(context, attrs) {
-    private val fabTransition: CircleTransition
-    private val fabTransitionName: String
-    private val imageTransition: ChangeImageTransform
-    private val defaultTransition: ChangeBounds
-    private val transitionProperties: Array<String>
+    private val fabTransition: CircleTransition = CircleTransition(context, attrs)
+    private val fabTransitionName: String = context.getString(R.string.transition_fab)
+    private val imageTransition: ChangeImageTransform = ChangeImageTransform(context, attrs)
+    private val defaultTransition: ChangeBounds = ChangeBounds(context, attrs)
+    private val transitionProperties: Array<String> = arrayOf(*fabTransition.transitionProperties,
+            *imageTransition.transitionProperties,
+            *defaultTransition.transitionProperties)
 
     init {
-        fabTransition = CircleTransition(context, attrs)
-        imageTransition = ChangeImageTransform(context, attrs)
-        defaultTransition = ChangeBounds(context, attrs)
-        fabTransitionName = context.getString(R.string.transition_fab)
-        transitionProperties = initTransProps()
         if (BuildConfig.DEBUG && TextUtils.isEmpty(fabTransitionName)) {
             throw AssertionError("Transition name should not be empty")
         }
-    }
-
-    private fun initTransProps(): Array<String> {
-        val transProps = ArrayList<String>()
-        transProps.addAll(Arrays.asList(*fabTransition.transitionProperties))
-        transProps.addAll(Arrays.asList(*imageTransition.transitionProperties))
-        transProps.addAll(Arrays.asList(*defaultTransition.transitionProperties))
-        return transProps.toTypedArray()
     }
 
     override fun getTransitionProperties(): Array<String> = transitionProperties

@@ -6,7 +6,7 @@ import com.byoutline.kickmaterial.BR
 import com.byoutline.kickmaterial.R
 import com.byoutline.kickmaterial.dagger.GlobalScope
 import com.byoutline.kickmaterial.model.Category
-import com.byoutline.rx.invokeOnAPause
+import com.byoutline.secretsauce.rx.invokeOnAPause
 import me.tatarka.bindingcollectionadapter2.ItemBinding
 import javax.inject.Inject
 

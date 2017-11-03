@@ -76,9 +76,7 @@ class VideoActivity : KickMaterialBaseActivity() {
         videoView.start()
     }
 
-    override fun setToolbarAlpha(alpha: Float) {
-
-    }
+    override fun setToolbarAlpha(alpha: Float) {}
 
     companion object {
         const val BUNDLE_VIDEO_URL = "bundle_video_url"

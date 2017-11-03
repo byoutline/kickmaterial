@@ -13,7 +13,7 @@ import com.byoutline.kickmaterial.model.ProjectDetails
 import com.byoutline.kickmaterial.model.ProjectIdAndSignature
 import com.byoutline.kickmaterial.transitions.PaletteAndAplaTransformation
 import com.byoutline.observablecachedfield.ObservableCachedFieldWithArg
-import com.byoutline.rx.invokeOnAPause
+import com.byoutline.secretsauce.rx.invokeOnAPause
 import com.byoutline.secretsauce.utils.showToast
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso

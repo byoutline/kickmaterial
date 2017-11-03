@@ -1,11 +1,9 @@
 package com.byoutline.kickmaterial.features.projectlist
 
 import android.content.res.ColorStateList
-import android.graphics.Color
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.view.*
 import com.byoutline.cachedfield.FieldState
 import com.byoutline.cachedfield.FieldStateListener
@@ -24,7 +22,6 @@ import com.byoutline.kickmaterial.utils.KickMaterialFragment
 import com.byoutline.kickmaterial.utils.LUtils
 import com.byoutline.kickmaterial.views.EndlessRecyclerView
 import com.byoutline.secretsauce.activities.showFragment
-import com.byoutline.secretsauce.utils.ViewUtils
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -32,12 +29,10 @@ import javax.inject.Inject
  * @author Pawel Karczewski <pawel.karczewski at byoutline.com> on 2015-01-03
  */
 class ProjectsListFragment : KickMaterialFragment(), ProjectClickListener, FieldStateListener, EndlessRecyclerView.EndlessScrollListener {
-    private var summaryScrolled: Float = 0f
 
     @Inject
     lateinit var viewModel: ProjectListViewModel
-    private var toolbarScrollPoint: Float = 0F
-    private var maxScroll: Float = 0F
+
 
     private lateinit var category: Category
     private lateinit var binding: FragmentProjectsBinding
@@ -45,6 +40,7 @@ class ProjectsListFragment : KickMaterialFragment(), ProjectClickListener, Field
      * Endless scroll variables *
      */
     private lateinit var layoutManager: GridLayoutManager
+    private lateinit var scrollListener: ProjectsListScrollListener
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val binding = FragmentProjectsBinding.inflate(inflater, container, false)
@@ -53,8 +49,7 @@ class ProjectsListFragment : KickMaterialFragment(), ProjectClickListener, Field
         binding.viewModel = viewModel
 
         hostActivity?.enableToolbarAutoHide(binding.projectRecyclerView)
-        maxScroll = (2 * resources.getDimensionPixelSize(R.dimen.project_header_padding_top) + ViewUtils.dpToPx(48f, activity)).toFloat()
-        toolbarScrollPoint = ViewUtils.dpToPx(24f, activity).toFloat()
+
         category = arguments!!.getParcelable(ARG_CATEGORY)
         viewModel.category = category
         setHasOptionsMenu(true)
@@ -82,47 +77,17 @@ class ProjectsListFragment : KickMaterialFragment(), ProjectClickListener, Field
         binding.showCategoriesFab.setOnClickListener {
             CategoriesListActivity.launch(activity!!, category, binding.showCategoriesFab)
         }
-        binding.projectRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-
-            override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
-                super.onScrolled(recyclerView, dx, dy)
-
-                if (dy > toolbarScrollPoint) {
-                    hostActivity?.showToolbar(false, true)
-                    if (binding.showCategoriesFab.visibility == View.VISIBLE) {
-                        binding.showCategoriesFab.hide()
-                    }
-                }
-
-                if (dy < toolbarScrollPoint * -1) {
-                    hostActivity?.showToolbar(true, true)
-                    if (binding.showCategoriesFab.visibility == View.GONE) {
-                        binding.showCategoriesFab.show()
-                    }
-                }
-
-                summaryScrolled += dy.toFloat()
-                binding.bubblesIv.translationY = -0.5f * summaryScrolled
-
-                var alpha = summaryScrolled / maxScroll
-                alpha = Math.min(1.0f, alpha)
-
-                hostActivity?.setToolbarAlpha(alpha)
-
-                //change background color on scroll
-                val color = Math.max(BG_COLOR_MIN.toDouble(), BG_COLOR_MAX - summaryScrolled * 0.05).toInt()
-                binding.mainParentRl.setBackgroundColor(Color.argb(255, color, color, color))
-            }
-        })
+        scrollListener = ProjectsListScrollListener(context!!, { hostActivity }, binding)
+        binding.projectRecyclerView.addOnScrollListener(scrollListener)
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
-        outState.putFloat(INSTANCE_STATE_SUMMARY_SCROLLED, summaryScrolled)
+        outState.putFloat(INSTANCE_STATE_SUMMARY_SCROLLED, scrollListener.summaryScrolled)
         super.onSaveInstanceState(outState)
     }
 
     override fun onViewStateRestored(savedInstanceState: Bundle?) {
-        summaryScrolled = savedInstanceState?.getFloat(INSTANCE_STATE_SUMMARY_SCROLLED) ?: 0f
+        scrollListener.summaryScrolled = savedInstanceState?.getFloat(INSTANCE_STATE_SUMMARY_SCROLLED) ?: 0f
         super.onViewStateRestored(savedInstanceState)
     }
 
@@ -187,8 +152,6 @@ class ProjectsListFragment : KickMaterialFragment(), ProjectClickListener, Field
 
     companion object {
         const val PREFS_SHOW_HEADER = "PREFS_SHOW_HEADER"
-        private const val BG_COLOR_MAX = 255
-        private const val BG_COLOR_MIN = 232
         private const val INSTANCE_STATE_SUMMARY_SCROLLED = "INSTANCE_STATE_SUMMARY_SCROLLED"
 
         fun newInstance(category: Category?): ProjectsListFragment {

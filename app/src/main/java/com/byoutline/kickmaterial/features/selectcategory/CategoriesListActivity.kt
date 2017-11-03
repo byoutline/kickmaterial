@@ -15,7 +15,6 @@ import android.support.v4.app.ActivityCompat
 import android.support.v4.app.SharedElementCallback
 import android.support.v4.content.ContextCompat
 import android.support.v4.view.animation.FastOutSlowInInterpolator
-import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewAnimationUtils
 import android.view.animation.OvershootInterpolator
@@ -25,6 +24,7 @@ import com.byoutline.kickmaterial.databinding.ActivityCategoryListBinding
 import com.byoutline.kickmaterial.model.Category
 import com.byoutline.kickmaterial.model.DiscoverQuery
 import com.byoutline.kickmaterial.model.DiscoverResponse
+import com.byoutline.kickmaterial.utils.ContainerTranslationScrollListener
 import com.byoutline.kickmaterial.utils.KickMaterialBaseActivity
 import com.byoutline.kickmaterial.utils.LUtils
 import com.byoutline.observablecachedfield.ObservableCachedFieldWithArg
@@ -44,8 +44,8 @@ class CategoriesListActivity : KickMaterialBaseActivity(), CategoryClickListener
 
     private var revealAnimation: Animator? = null
     private var category: Category? = null
-    private var summaryScrolledValue: Int = 0
     private lateinit var binding: ActivityCategoryListBinding
+    private lateinit var scrollListener: ContainerTranslationScrollListener
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public override fun onCreate(savedInstanceState: Bundle?) {
@@ -62,14 +62,9 @@ class CategoriesListActivity : KickMaterialBaseActivity(), CategoryClickListener
 
     private fun setUpListeners() {
         with(binding) {
-            categoriesRv.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-                override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
-                    super.onScrolled(recyclerView, dx, dy)
-                    summaryScrolledValue += dy
-                    circleImageContainer.translationY = -0.5f * summaryScrolledValue
-                    categoriesHeaderLl.translationY = (-summaryScrolledValue).toFloat()
-                }
-            })
+            scrollListener = ContainerTranslationScrollListener(-0.5f,
+                    binding.circleImageContainer, binding.categoriesHeaderLl)
+            categoriesRv.addOnScrollListener(scrollListener)
             closeCategoriesIv.setOnClickListener { finishWithoutResult() }
         }
     }
@@ -114,13 +109,13 @@ class CategoriesListActivity : KickMaterialBaseActivity(), CategoryClickListener
     }
 
     public override fun onSaveInstanceState(outState: Bundle) {
-        outState.putInt(INSTANCE_STATE_SUMMARY_SCROLLED, summaryScrolledValue)
+        outState.putInt(INSTANCE_STATE_SUMMARY_SCROLLED, scrollListener.summaryScrolledValue)
         super.onSaveInstanceState(outState)
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
         if (savedInstanceState != null) {
-            summaryScrolledValue = savedInstanceState.getInt(INSTANCE_STATE_SUMMARY_SCROLLED)
+            scrollListener.summaryScrolledValue = savedInstanceState.getInt(INSTANCE_STATE_SUMMARY_SCROLLED)
         }
         super.onRestoreInstanceState(savedInstanceState)
     }
@@ -220,7 +215,7 @@ class CategoriesListActivity : KickMaterialBaseActivity(), CategoryClickListener
     }
 
     private fun runFinishAnimation(finishAction: Runnable) {
-        if (summaryScrolledValue > 0) {
+        if (scrollListener.summaryScrolledValue > 0) {
             binding.categoriesRv.smoothScrollToPosition(0)
         }
 

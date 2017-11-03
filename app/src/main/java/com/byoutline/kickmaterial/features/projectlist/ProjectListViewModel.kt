@@ -2,7 +2,6 @@ package com.byoutline.kickmaterial.features.projectlist
 
 import android.databinding.BindingAdapter
 import android.databinding.ViewDataBinding
-import android.view.View
 import android.widget.ImageView
 import com.byoutline.cachedfield.FieldState
 import com.byoutline.kickmaterial.BR
@@ -16,13 +15,12 @@ import com.byoutline.kickmaterial.transitions.SharedViews
 import com.byoutline.observablecachedfield.ObservableCachedFieldWithArg
 import com.byoutline.observablecachedfield.util.RetrofitHelper
 import com.byoutline.observablecachedfield.util.registerChangeCallback
-import com.byoutline.rx.invokeOnFPause
+import com.byoutline.secretsauce.rx.invokeOnFPause
 import com.squareup.picasso.Picasso
 import me.tatarka.bindingcollectionadapter2.BindingRecyclerViewAdapter
 import me.tatarka.bindingcollectionadapter2.ItemBinding
 import me.tatarka.bindingcollectionadapter2.collections.DiffObservableList
 import me.tatarka.bindingcollectionadapter2.collections.MergeObservableList
-import timber.log.Timber
 import javax.inject.Provider
 
 /**

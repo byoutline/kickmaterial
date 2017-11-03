@@ -19,6 +19,7 @@ import com.byoutline.kickmaterial.R
 import com.byoutline.kickmaterial.databinding.FragmentRewardsListBinding
 import com.byoutline.kickmaterial.features.selectcategory.CategoriesListSeparator
 import com.byoutline.kickmaterial.model.ProjectDetails
+import com.byoutline.kickmaterial.utils.ContainerTranslationScrollListener
 import com.byoutline.kickmaterial.utils.KickMaterialBaseActivity
 import com.byoutline.kickmaterial.utils.LUtils
 import com.squareup.picasso.Picasso
@@ -35,7 +36,6 @@ class RewardsListActivity : KickMaterialBaseActivity() {
 
     private lateinit var rewardsListRv: RecyclerView
     private lateinit var project: ProjectDetails
-    private var summaryScrolledValue: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,14 +52,10 @@ class RewardsListActivity : KickMaterialBaseActivity() {
     }
 
     private fun setUpListeners(binding: FragmentRewardsListBinding) {
-        binding.categoriesRv.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
-                super.onScrolled(recyclerView, dx, dy)
-                summaryScrolledValue += dy
-                binding.rewardsListImageContainer.translationY = -TRANSLATION_IMAGE_RATION * summaryScrolledValue
-                binding.categoriesHeaderLl.translationY = (-summaryScrolledValue).toFloat()
-            }
-        })
+        with(binding) {
+            categoriesRv.addOnScrollListener(ContainerTranslationScrollListener(-RewardsListActivity.TRANSLATION_IMAGE_RATION,
+                    rewardsListImageContainer, categoriesHeaderLl))
+        }
         binding.closeCategoriesIv.setOnClickListener { ActivityCompat.finishAfterTransition(this) }
     }
 
@@ -91,10 +87,7 @@ class RewardsListActivity : KickMaterialBaseActivity() {
         rewardsListRv.post { rewardsListRv.startAnimation(LUtils.loadAnimationWithLInterpolator(applicationContext, R.anim.slide_from_bottom)) }
     }
 
-
-    override fun setToolbarAlpha(alpha: Float) {
-    }
-
+    override fun setToolbarAlpha(alpha: Float) {}
 
     companion object {
 

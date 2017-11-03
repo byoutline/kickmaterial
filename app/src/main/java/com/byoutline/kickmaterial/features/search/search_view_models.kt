@@ -2,7 +2,6 @@ package com.byoutline.kickmaterial.features.search
 
 import android.databinding.ViewDataBinding
 import android.text.TextUtils
-import android.view.View
 import com.byoutline.cachedfield.FieldState
 import com.byoutline.kickmaterial.BR
 import com.byoutline.kickmaterial.R
@@ -14,9 +13,7 @@ import com.byoutline.kickmaterial.model.*
 import com.byoutline.kickmaterial.transitions.SharedViews
 import com.byoutline.observablecachedfield.ObservableCachedFieldWithArg
 import com.byoutline.observablecachedfield.util.registerChangeCallback
-import com.byoutline.rx.invokeOnFPause
-import com.trello.rxlifecycle2.LifecycleProvider
-import com.trello.rxlifecycle2.android.FragmentEvent
+import com.byoutline.secretsauce.rx.invokeOnFPause
 import me.tatarka.bindingcollectionadapter2.ItemBinding
 import me.tatarka.bindingcollectionadapter2.collections.DiffObservableList
 import javax.inject.Inject

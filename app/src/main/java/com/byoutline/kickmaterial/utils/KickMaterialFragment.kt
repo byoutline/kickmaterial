@@ -20,9 +20,8 @@ abstract class KickMaterialFragment : RxFragment() {
         try {
             hostActivity = activity as? HostActivity?
         } catch (e: ClassCastException) {
-            throw IllegalStateException(activity!!.javaClass.simpleName
-                    + " does not implement " + HostActivity::class.java.simpleName
-                    + " interface")
+            throw IllegalStateException("${activity!!.javaClass.simpleName} does not implement " +
+                    "${ HostActivity::class.java.simpleName} interface")
         }
     }
 

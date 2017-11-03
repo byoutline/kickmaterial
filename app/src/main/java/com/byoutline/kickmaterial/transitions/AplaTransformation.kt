@@ -27,7 +27,5 @@ class AplaTransformation : Transformation {
         return bitmap
     }
 
-    override fun key(): String {
-        return javaClass.simpleName
-    }
+    override fun key(): String =  javaClass.simpleName
 }
