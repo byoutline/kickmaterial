@@ -48,6 +48,6 @@ class VideoAlphaAnimator {
 }
 
 @BindingAdapter("projectVideo", "viewModel")
-fun animateVideoBtn(videoBtn: View, video: ProjectVideo?, viewModel: ProjectDetailsViewModel?) {
-    viewModel?.videoBtnAnimator?.animateVideoBtn(videoBtn, video)
+fun animateVideoBtn(videoBtn: View, video: ProjectVideo?, transitionHelper: ProjectDetailsTransitionHelper?) {
+    transitionHelper?.videoBtnAnimator?.animateVideoBtn(videoBtn, video)
 }

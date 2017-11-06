@@ -11,7 +11,7 @@
 
         <variable
             name="model"
-            type="com.byoutline.kickmaterial.features.projectdetails.ProjectDetailsViewModel" />
+            type="com.byoutline.kickmaterial.features.projectdetails.ProjectDetailsTransitionHelper" />
     </data>
 
     <FrameLayout

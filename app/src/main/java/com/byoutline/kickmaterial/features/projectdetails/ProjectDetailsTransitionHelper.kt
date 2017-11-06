@@ -1,6 +1,5 @@
 package com.byoutline.kickmaterial.features.projectdetails
 
-import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.BitmapDrawable
 import android.support.annotation.ColorInt
@@ -13,7 +12,6 @@ import com.byoutline.kickmaterial.model.ProjectDetails
 import com.byoutline.kickmaterial.model.ProjectIdAndSignature
 import com.byoutline.kickmaterial.transitions.PaletteAndAplaTransformation
 import com.byoutline.observablecachedfield.ObservableCachedFieldWithArg
-import com.byoutline.secretsauce.rx.invokeOnAPause
 import com.byoutline.secretsauce.utils.showToast
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
@@ -28,17 +26,20 @@ import javax.inject.Inject
 const val MAX_TRANSITION_DELAY = 800
 private const val IMAGE_RATIO = (4 / 3).toDouble()
 
+// Factory is reusable, but helper is not - due to it handling the postponed transition
+// it is bound to specific activity instance.
 @Reusable
-class ProjectDetailsViewModelFactory
+class ProjectDetailsTransitionHelperFactory
 @Inject constructor(
         private val projectDetailsField: ObservableCachedFieldWithArg<ProjectDetails, ProjectIdAndSignature>,
         private val picassoCache: LruCacheWithPlaceholders) {
 
-    fun create(project: Project, context: Context): ProjectDetailsViewModel {
-        val imageHeight = context.resources.getDimensionPixelSize(R.dimen.project_details_photo_height)
+    fun create(project: Project, projectDetailsActivity: ProjectDetailsActivity): ProjectDetailsTransitionHelper {
+        val imageHeight = projectDetailsActivity.resources.getDimensionPixelSize(R.dimen.project_details_photo_height)
         val imageWidth = (imageHeight * IMAGE_RATIO).toInt()
-        return ProjectDetailsViewModel(projectDetailsField, picassoCache, project,
-                imageWidth = imageWidth, imageHeight = imageHeight)
+        return ProjectDetailsTransitionHelper(projectDetailsField, picassoCache, project,
+                imageWidth = imageWidth, imageHeight = imageHeight,
+                delayedTransitionActivity = projectDetailsActivity)
     }
 }
 
@@ -49,12 +50,12 @@ interface DelayedTransitionActivity : LifecycleProvider<ActivityEvent> {
 }
 
 
-class ProjectDetailsViewModel(val projectDetailsField: ObservableCachedFieldWithArg<ProjectDetails, ProjectIdAndSignature>,
-                              private val picassoCache: LruCacheWithPlaceholders,
-                              val project: Project,
-                              private val imageWidth: Int,
-                              private val imageHeight: Int) {
-    private var delayedTransitionActivity: DelayedTransitionActivity? = null
+class ProjectDetailsTransitionHelper(val projectDetailsField: ObservableCachedFieldWithArg<ProjectDetails, ProjectIdAndSignature>,
+                                     private val picassoCache: LruCacheWithPlaceholders,
+                                     val project: Project,
+                                     private val imageWidth: Int,
+                                     private val imageHeight: Int,
+                                     private val delayedTransitionActivity: DelayedTransitionActivity) {
     @StringRes
     val projectBackingProgressTxtId: Int = if (project.isFunded) R.string.funded else R.string.backing_in_progress
     internal val videoBtnAnimator = VideoAlphaAnimator()
@@ -69,13 +70,7 @@ class ProjectDetailsViewModel(val projectDetailsField: ObservableCachedFieldWith
         }
     }
 
-    fun attachViewUntilPause(delayedTransitionActivity: DelayedTransitionActivity) {
-        this.delayedTransitionActivity = delayedTransitionActivity
-        delayedTransitionActivity.invokeOnAPause { this.delayedTransitionActivity = null }
-        postProjectDetails()
-    }
-
-    private fun postProjectDetails() {
+    fun postProjectDetails() {
         val params = ProjectIdAndSignature(project.id, project.detailsQueryMap)
         projectDetailsField.postValue(params)
     }
@@ -87,7 +82,7 @@ class ProjectDetailsViewModel(val projectDetailsField: ObservableCachedFieldWith
             projectPhotoIv.setImageBitmap(bitmap)
         }
         // Make sure that transition starts soon even if image is not ready.
-        projectPhotoIv.postDelayed({ delayedTransitionActivity?.startPostponedEnterTrans() }, MAX_TRANSITION_DELAY.toLong())
+        projectPhotoIv.postDelayed({ delayedTransitionActivity.startPostponedEnterTrans() }, MAX_TRANSITION_DELAY.toLong())
         Picasso.with(projectPhotoIv.context)
                 .load(project.bigPhotoUrl)
                 .resize(imageWidth, imageHeight)
@@ -98,13 +93,13 @@ class ProjectDetailsViewModel(val projectDetailsField: ObservableCachedFieldWith
                     override fun onSuccess() {
                         val bitmap = (projectPhotoIv.drawable as BitmapDrawable).bitmap // Ew!
                         PaletteAndAplaTransformation.getPalette(bitmap)?.let { palette ->
-                            delayedTransitionActivity?.setDetailsContainerBgColor(palette.getDarkVibrantColor(Color.BLACK))
+                            delayedTransitionActivity.setDetailsContainerBgColor(palette.getDarkVibrantColor(Color.BLACK))
                         }
-                        delayedTransitionActivity?.startPostponedEnterTrans()
+                        delayedTransitionActivity.startPostponedEnterTrans()
                     }
 
                     override fun onError() {
-                        delayedTransitionActivity?.startPostponedEnterTrans()
+                        delayedTransitionActivity.startPostponedEnterTrans()
                     }
                 })
     }

@@ -33,8 +33,8 @@ import javax.inject.Inject
 class ProjectDetailsActivity : KickMaterialBaseActivity(), DelayedTransitionActivity {
 
     @Inject
-    lateinit var viewModelFactory: ProjectDetailsViewModelFactory
-    lateinit var viewModel: ProjectDetailsViewModel
+    lateinit var transitionHelperFactory: ProjectDetailsTransitionHelperFactory
+    lateinit var transitionHelper: ProjectDetailsTransitionHelper
 
 
     private lateinit var binding: ActivityProjectDetailsBinding
@@ -43,9 +43,9 @@ class ProjectDetailsActivity : KickMaterialBaseActivity(), DelayedTransitionActi
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_project_details)
         KickMaterialApp.component.inject(this)
-        viewModel = viewModelFactory.create(intent.extras.getParcelable(EXTRA_PROJECT), context = this)
-        binding.model = viewModel
-        binding.project = viewModel.projectDetailsField.observable()
+        transitionHelper = transitionHelperFactory.create(intent.extras.getParcelable(EXTRA_PROJECT), projectDetailsActivity = this)
+        binding.model = transitionHelper
+        binding.project = transitionHelper.projectDetailsField.observable()
         supportPostponeEnterTransition()
         setUpListeners()
 
@@ -57,7 +57,7 @@ class ProjectDetailsActivity : KickMaterialBaseActivity(), DelayedTransitionActi
         }
 
         ViewCompat.setElevation(binding.detailsContainer, ViewUtils.convertDpToPixel(4f, this))
-        viewModel.loadProjectPhoto(binding.projectPhotoIv)
+        transitionHelper.loadProjectPhoto(binding.projectPhotoIv)
         launchPostTransitionAnimations()
     }
 
@@ -113,7 +113,7 @@ class ProjectDetailsActivity : KickMaterialBaseActivity(), DelayedTransitionActi
     }
 
     private fun showRewardList() {
-        viewModel.executeIfCachedProjectDetailsAreAvailable(R.string.retry_getting_project_rewards) { details ->
+        transitionHelper.executeIfCachedProjectDetailsAreAvailable(R.string.retry_getting_project_rewards) { details ->
             RewardsListActivity.launch(this, details, binding.playVideoBtn)
         }
     }
@@ -123,7 +123,7 @@ class ProjectDetailsActivity : KickMaterialBaseActivity(), DelayedTransitionActi
         title = " "
         toolbar?.setBackgroundColor(Color.TRANSPARENT)
 
-        viewModel.attachViewUntilPause(this)
+        transitionHelper.postProjectDetails()
     }
 
     override fun onDestroy() {
@@ -135,20 +135,20 @@ class ProjectDetailsActivity : KickMaterialBaseActivity(), DelayedTransitionActi
 
     private fun setUpListeners() {
         with(binding) {
-            projectCommentsLl.setOnClickListener { showWebView(viewModel.project.commentsUrl) }
-            projectUpdatesLl.setOnClickListener { showWebView(viewModel.project.updatesUrl) }
+            projectCommentsLl.setOnClickListener { showWebView(transitionHelper.project.commentsUrl) }
+            projectUpdatesLl.setOnClickListener { showWebView(transitionHelper.project.updatesUrl) }
             readMoreBtn.setOnClickListener {
                 val MAX_DESCRIPTION_LINES = 1000
                 binding.projectDescriptionTv.maxLines = MAX_DESCRIPTION_LINES
                 ViewUtils.showView(readMoreBtn, false)
             }
             playVideoBtn.setOnClickListener {
-                viewModel.executeIfCachedProjectDetailsAreAvailable(R.string.retry_getting_project_details) { details ->
+                transitionHelper.executeIfCachedProjectDetailsAreAvailable(R.string.retry_getting_project_details) { details ->
                     VideoActivity.showActivity(this@ProjectDetailsActivity, details)
                 }
             }
             listOf(projectAuthorNameLabelTv as View, authorPhotoIv, projectAuthorNameTv).forEach {
-                it.setOnClickListener { showWebView(viewModel.project.authorUrl, Intent(this@ProjectDetailsActivity, WebViewFlickrActivity::class.java)) }
+                it.setOnClickListener { showWebView(transitionHelper.project.authorUrl, Intent(this@ProjectDetailsActivity, WebViewFlickrActivity::class.java)) }
             }
         }
     }

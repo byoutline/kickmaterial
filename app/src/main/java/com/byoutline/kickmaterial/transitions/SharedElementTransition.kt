@@ -62,7 +62,10 @@ class SharedElementTransition(context: Context, attrs: AttributeSet) : Transitio
         return fabTransitionName == view.transitionName
     }
 
-    override fun createAnimator(sceneRoot: ViewGroup, startValues: TransitionValues, endValues: TransitionValues): Animator? {
+    override fun createAnimator(sceneRoot: ViewGroup, startValues: TransitionValues?, endValues: TransitionValues?): Animator? {
+        if (startValues == null || endValues == null) {
+            return null
+        }
         if (isFabTransition(endValues)) {
             return fabTransition.createAnimator(sceneRoot, startValues, endValues)
         } else {
