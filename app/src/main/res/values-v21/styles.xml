@@ -39,4 +39,8 @@
         <item name="android:elevation">@dimen/cardview_default_elevation</item>
     </style>
 
+    <style name="toolbarStyle" parent="toolbarStylePrivate">
+        <item name="android:transitionName">toolbar</item>
+    </style>
+
 </resources>

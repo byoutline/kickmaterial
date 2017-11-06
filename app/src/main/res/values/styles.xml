@@ -215,15 +215,16 @@
         <item name="colorControlHighlight">#3fff</item>
     </style>
 
-    <style name="toolbarStyle">
+    <style name="toolbarStylePrivate">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:background">@color/white</item>
         <item name="android:minHeight">83dp</item>
         <item name="android:paddingTop">@dimen/status_bar_height_half</item>
-        <item name="android:title"></item>
-        <item name="android:transitionName">toolbar</item>
+        <item name="android:title"/>
     </style>
+
+    <style name="toolbarStyle" parent="toolbarStylePrivate"/>
 
     <style name="toolbarTitleStyle" parent="TitleTextStyle">
         <item name="android:layout_width">wrap_content</item>
