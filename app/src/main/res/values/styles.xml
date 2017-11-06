@@ -20,6 +20,10 @@
     </style>
 
     <style name="ToolbarTheme">
+        <item name="colorControlNormal">@color/ab_text_color</item>
+    </style>
+
+    <style name="ToolbarThemeWhite">
         <item name="colorControlNormal">@color/white</item>
     </style>
 

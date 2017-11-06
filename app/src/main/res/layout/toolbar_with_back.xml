@@ -5,7 +5,7 @@
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
-        app:theme="@style/ToolbarTheme"
+        app:theme="@style/ToolbarThemeWhite"
         app:navigationIcon="?attr/homeAsUpIndicator"
         tools:ignore="UnusedAttribute"
         style="@style/toolbarStyle">
