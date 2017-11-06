@@ -65,17 +65,17 @@ class RewardsListActivity : KickMaterialBaseActivity() {
             selectCategoryTv.setBackgroundColor(Color.TRANSPARENT)
             categoryCircleIv.visibility = View.GONE
             Picasso.with(applicationContext).load(project.photoUrl).into(object : Target {
-                override fun onBitmapLoaded(bitmap: Bitmap, from: Picasso.LoadedFrom) {
+                override fun onBitmapLoaded(bitmap: Bitmap, from: Picasso.LoadedFrom?) {
                     selectedCategoryIv.setImageBitmap(bitmap)
                     LUtils.toGrayscale(binding.selectedCategoryIv)
                     selectedCategoryIv.drawable.setColorFilter(ContextCompat.getColor(this@RewardsListActivity, R.color.green_dark), PorterDuff.Mode.MULTIPLY)
                 }
 
-                override fun onBitmapFailed(errorDrawable: Drawable) {
+                override fun onBitmapFailed(errorDrawable: Drawable?) {
                     selectedCategoryIv.setImageResource(0)
                 }
 
-                override fun onPrepareLoad(placeHolderDrawable: Drawable) {
+                override fun onPrepareLoad(placeHolderDrawable: Drawable?) {
                     selectedCategoryIv.setImageResource(0)
                 }
             })
