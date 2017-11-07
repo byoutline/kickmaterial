@@ -14,7 +14,6 @@ import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.RecyclerView
 import android.view.View
-import com.byoutline.kickmaterial.KickMaterialApp
 import com.byoutline.kickmaterial.R
 import com.byoutline.kickmaterial.databinding.FragmentRewardsListBinding
 import com.byoutline.kickmaterial.features.selectcategory.CategoriesListSeparator
@@ -22,24 +21,22 @@ import com.byoutline.kickmaterial.model.ProjectDetails
 import com.byoutline.kickmaterial.utils.ContainerTranslationScrollListener
 import com.byoutline.kickmaterial.utils.KickMaterialBaseActivity
 import com.byoutline.kickmaterial.utils.LUtils
+import com.byoutline.secretsauce.di.lazyViewModel
 import com.squareup.picasso.Picasso
 import com.squareup.picasso.Target
-import javax.inject.Inject
 
 /**
  * @author Pawel Karczewski <pawel.karczewski at byoutline.com> on 2015-01-03
  */
 class RewardsListActivity : KickMaterialBaseActivity() {
 
-    @Inject
-    lateinit var viewModel: RewardListViewModel
+    private val viewModel by lazyViewModel(RewardListViewModel::class)
 
     private lateinit var rewardsListRv: RecyclerView
     private lateinit var project: ProjectDetails
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        KickMaterialApp.component.inject(this)
         val binding = DataBindingUtil.setContentView<FragmentRewardsListBinding>(this, R.layout.fragment_rewards_list)
         binding.model = viewModel
         rewardsListRv = binding.categoriesRv

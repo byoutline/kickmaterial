@@ -2,12 +2,12 @@ package com.byoutline.kickmaterial.utils
 
 import android.app.Activity
 import android.support.annotation.StringRes
+import android.support.v4.app.Fragment
 import android.support.v7.widget.RecyclerView
 import com.byoutline.secretsauce.activities.hideKeyboard
-import com.trello.rxlifecycle2.components.support.RxFragment
 
 
-abstract class KickMaterialFragment : RxFragment() {
+abstract class KickMaterialFragment : Fragment() {
 
     protected var hostActivity: HostActivity? = null
 
@@ -18,10 +18,10 @@ abstract class KickMaterialFragment : RxFragment() {
     override fun onAttach(activity: Activity?) {
         super.onAttach(activity)
         try {
-            hostActivity = activity as? HostActivity?
+            hostActivity = activity as HostActivity
         } catch (e: ClassCastException) {
-            throw IllegalStateException("${activity!!.javaClass.simpleName} does not implement " +
-                    "${ HostActivity::class.java.simpleName} interface")
+            throw IllegalStateException("${activity?.javaClass?.simpleName} does not implement " +
+                    "${HostActivity::class.java.simpleName} interface")
         }
     }
 

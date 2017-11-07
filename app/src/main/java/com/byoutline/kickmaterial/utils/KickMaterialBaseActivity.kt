@@ -7,8 +7,6 @@ import android.content.pm.ActivityInfo
 import android.os.Build
 import android.os.Bundle
 import android.support.annotation.CallSuper
-import android.support.annotation.CheckResult
-import android.support.annotation.NonNull
 import android.support.annotation.StringRes
 import android.support.v4.view.ViewCompat
 import android.support.v7.app.AppCompatActivity
@@ -22,21 +20,13 @@ import android.view.animation.DecelerateInterpolator
 import android.widget.TextView
 import com.byoutline.kickmaterial.R
 import com.byoutline.secretsauce.utils.ViewUtils
-import com.trello.rxlifecycle2.LifecycleProvider
-import com.trello.rxlifecycle2.LifecycleTransformer
-import com.trello.rxlifecycle2.RxLifecycle
-import com.trello.rxlifecycle2.android.ActivityEvent
-import com.trello.rxlifecycle2.android.RxLifecycleAndroid
-import io.reactivex.Observable
-import io.reactivex.subjects.BehaviorSubject
 import java.util.*
 
 
 /**
  * @author Pawel Karczewski <pawel.karczewski at byoutline.com> on 2015-01-03
  */
-abstract class KickMaterialBaseActivity : AppCompatActivity(), KickMaterialFragment.HostActivity,
-        LifecycleProvider<ActivityEvent> {
+abstract class KickMaterialBaseActivity : AppCompatActivity(), KickMaterialFragment.HostActivity {
     private var toolbarAutoHideSensitivity = 0
     private var toolbarAutoHideMinY = 0
     private var toolbarAutoHideSignal = 0
@@ -48,7 +38,6 @@ abstract class KickMaterialBaseActivity : AppCompatActivity(), KickMaterialFragm
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         blockOrientationOnBuggedAndroidVersions()
-        lifecycleSubject.onNext(ActivityEvent.CREATE)
     }
 
     override fun onPostCreate(savedInstanceState: Bundle?) {
@@ -203,49 +192,5 @@ abstract class KickMaterialBaseActivity : AppCompatActivity(), KickMaterialFragm
             options = ActivityOptions.makeSceneTransitionAnimation(activity, *arr).toBundle()
             return options
         }
-    }
-
-    // RxActivity:
-    private val lifecycleSubject = BehaviorSubject.create<ActivityEvent>()
-
-    @CheckResult
-    override fun lifecycle(): Observable<ActivityEvent> = lifecycleSubject.hide()
-
-    @CheckResult
-    override fun <T> bindUntilEvent(event: ActivityEvent): LifecycleTransformer<T>
-            = RxLifecycle.bindUntilEvent(lifecycleSubject, event)
-
-    @NonNull
-    @CheckResult
-    override fun <T> bindToLifecycle(): LifecycleTransformer<T> = RxLifecycleAndroid.bindActivity(lifecycleSubject)
-
-    @CallSuper
-    override fun onStart() {
-        super.onStart()
-        lifecycleSubject.onNext(ActivityEvent.START)
-    }
-
-    @CallSuper
-    override fun onResume() {
-        super.onResume()
-        lifecycleSubject.onNext(ActivityEvent.RESUME)
-    }
-
-    @CallSuper
-    override fun onPause() {
-        lifecycleSubject.onNext(ActivityEvent.PAUSE)
-        super.onPause()
-    }
-
-    @CallSuper
-    override fun onStop() {
-        lifecycleSubject.onNext(ActivityEvent.STOP)
-        super.onStop()
-    }
-
-    @CallSuper
-    override fun onDestroy() {
-        lifecycleSubject.onNext(ActivityEvent.DESTROY)
-        super.onDestroy()
     }
 }

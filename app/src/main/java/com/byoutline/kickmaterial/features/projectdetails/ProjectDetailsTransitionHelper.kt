@@ -5,18 +5,14 @@ import android.graphics.drawable.BitmapDrawable
 import android.support.annotation.ColorInt
 import android.support.annotation.StringRes
 import android.widget.ImageView
-import com.byoutline.kickmaterial.KickMaterialApp
 import com.byoutline.kickmaterial.R
 import com.byoutline.kickmaterial.model.Project
 import com.byoutline.kickmaterial.model.ProjectDetails
 import com.byoutline.kickmaterial.model.ProjectIdAndSignature
 import com.byoutline.kickmaterial.transitions.PaletteAndAplaTransformation
 import com.byoutline.observablecachedfield.ObservableCachedFieldWithArg
-import com.byoutline.secretsauce.utils.showToast
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
-import com.trello.rxlifecycle2.LifecycleProvider
-import com.trello.rxlifecycle2.android.ActivityEvent
 import dagger.Reusable
 import javax.inject.Inject
 
@@ -44,7 +40,7 @@ class ProjectDetailsTransitionHelperFactory
 }
 
 
-interface DelayedTransitionActivity : LifecycleProvider<ActivityEvent> {
+interface DelayedTransitionActivity {
     fun startPostponedEnterTrans()
     fun setDetailsContainerBgColor(@ColorInt color: Int)
 }
@@ -60,10 +56,10 @@ class ProjectDetailsTransitionHelper(val projectDetailsField: ObservableCachedFi
     val projectBackingProgressTxtId: Int = if (project.isFunded) R.string.funded else R.string.backing_in_progress
     internal val videoBtnAnimator = VideoAlphaAnimator()
 
-    fun executeIfCachedProjectDetailsAreAvailable(@StringRes errorResId: Int, action: (ProjectDetails) -> Unit) {
+    fun executeIfCachedProjectDetailsAreAvailable(action: (ProjectDetails) -> Any, displayErrorAction: ()-> Any) {
         val details = projectDetailsField.observable().get()
         if (details == null) {
-            KickMaterialApp.component.app.showToast(errorResId)
+            displayErrorAction()
             postProjectDetails()
         } else {
             action(details)

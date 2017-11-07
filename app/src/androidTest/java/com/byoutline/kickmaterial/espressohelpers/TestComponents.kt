@@ -3,13 +3,13 @@ package com.byoutline.kickmaterial.espressohelpers
 import android.content.SharedPreferences
 import android.preference.PreferenceManager
 import com.byoutline.kickmaterial.KickMaterialApp
-import com.byoutline.kickmaterial.dagger.DaggerGlobalComponent
-import com.byoutline.kickmaterial.dagger.GlobalComponent
-import com.byoutline.kickmaterial.dagger.GlobalModule
+import com.byoutline.kickmaterial.dagger.AppComponent
+import com.byoutline.kickmaterial.dagger.AppModule
+import com.byoutline.kickmaterial.dagger.DaggerAppComponent
 import com.byoutline.kickmaterial.features.projectlist.ProjectsListFragment
 
 /**
- * Methods returning test [GlobalComponent]s with changed injects.
+ * Methods returning test [AppComponent]s with changed injects.
  *
  * @author Sebastian Kacprzak <sebastian.kacprzak at byoutline.com>
  */
@@ -19,9 +19,9 @@ internal object TestComponents {
 
     fun getNextRunComponent(app: KickMaterialApp) = getComponent(app, getNextRunSharedPrefs(app))
 
-    private fun getComponent(app: KickMaterialApp, sharedPrefs: SharedPreferences): GlobalComponent {
-        return DaggerGlobalComponent.builder()
-                .globalModule(object : GlobalModule(app) {
+    private fun getComponent(app: KickMaterialApp, sharedPrefs: SharedPreferences): AppComponent {
+        return DaggerAppComponent.builder()
+                .appModule(object : AppModule(app) {
                     override fun provideSharedPrefs() = sharedPrefs
 
                     override fun provideAnimationDurationMultiplier() = 0

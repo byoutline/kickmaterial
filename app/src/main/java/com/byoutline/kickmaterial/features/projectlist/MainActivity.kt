@@ -4,6 +4,7 @@ import android.annotation.TargetApi
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.support.v4.app.Fragment
 import android.view.Menu
 import com.byoutline.kickmaterial.R
 import com.byoutline.kickmaterial.features.selectcategory.ARG_CATEGORY
@@ -12,12 +13,19 @@ import com.byoutline.kickmaterial.features.selectcategory.DataManager
 import com.byoutline.kickmaterial.model.Category
 import com.byoutline.kickmaterial.utils.KickMaterialBaseActivity
 import com.byoutline.secretsauce.activities.showFragment
+import dagger.android.AndroidInjector
+import dagger.android.DispatchingAndroidInjector
+import dagger.android.support.HasSupportFragmentInjector
+import javax.inject.Inject
 
 
 /**
  * @author Pawel Karczewski <pawel.karczewski at byoutline.com> on 2015-01-03
  */
-class MainActivity : KickMaterialBaseActivity() {
+class MainActivity : KickMaterialBaseActivity(), HasSupportFragmentInjector {
+    @Inject
+    lateinit var dispatchingFragmentInjector: DispatchingAndroidInjector<Fragment>
+    override fun supportFragmentInjector(): AndroidInjector<Fragment> = dispatchingFragmentInjector
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onCreate(savedInstanceState: Bundle?) {

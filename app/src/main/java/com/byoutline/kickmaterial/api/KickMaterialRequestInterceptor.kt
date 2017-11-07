@@ -1,15 +1,15 @@
 package com.byoutline.kickmaterial.api
 
-import com.byoutline.kickmaterial.dagger.GlobalScope
 import okhttp3.Interceptor
 import okhttp3.Response
 import java.io.IOException
 import javax.inject.Inject
+import javax.inject.Singleton
 
 /**
  * @author Sebastian Kacprzak <sebastian.kacprzak at byoutline.com> on 05.05.14.
  */
-@GlobalScope
+@Singleton
 class KickMaterialRequestInterceptor
 @Inject constructor() : Interceptor {
 

@@ -24,6 +24,7 @@ import com.byoutline.kickmaterial.utils.LUtils
 import com.byoutline.secretsauce.activities.WebViewActivityV7
 import com.byoutline.secretsauce.activities.WebViewFlickrActivity
 import com.byoutline.secretsauce.utils.ViewUtils
+import com.byoutline.secretsauce.utils.showToast
 import com.squareup.picasso.Picasso
 import javax.inject.Inject
 
@@ -113,9 +114,9 @@ class ProjectDetailsActivity : KickMaterialBaseActivity(), DelayedTransitionActi
     }
 
     private fun showRewardList() {
-        transitionHelper.executeIfCachedProjectDetailsAreAvailable(R.string.retry_getting_project_rewards) { details ->
+        transitionHelper.executeIfCachedProjectDetailsAreAvailable({ details ->
             RewardsListActivity.launch(this, details, binding.playVideoBtn)
-        }
+        }, displayErrorAction = { showToast(R.string.retry_getting_project_details) })
     }
 
     public override fun onResume() {
@@ -143,9 +144,9 @@ class ProjectDetailsActivity : KickMaterialBaseActivity(), DelayedTransitionActi
                 ViewUtils.showView(readMoreBtn, false)
             }
             playVideoBtn.setOnClickListener {
-                transitionHelper.executeIfCachedProjectDetailsAreAvailable(R.string.retry_getting_project_details) { details ->
+                transitionHelper.executeIfCachedProjectDetailsAreAvailable({ details ->
                     VideoActivity.showActivity(this@ProjectDetailsActivity, details)
-                }
+                }, displayErrorAction = { showToast(R.string.retry_getting_project_details) })
             }
             listOf(projectAuthorNameLabelTv as View, authorPhotoIv, projectAuthorNameTv).forEach {
                 it.setOnClickListener { showWebView(transitionHelper.project.authorUrl, Intent(this@ProjectDetailsActivity, WebViewFlickrActivity::class.java)) }

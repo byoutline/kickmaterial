@@ -11,7 +11,7 @@ import android.support.test.rule.ActivityTestRule
 import com.byoutline.cachedfield.CachedFieldWithArg
 import com.byoutline.cachedfield.utils.CachedFieldIdlingResource
 import com.byoutline.kickmaterial.KickMaterialApp
-import com.byoutline.kickmaterial.dagger.GlobalComponent
+import com.byoutline.kickmaterial.dagger.AppComponent
 import com.byoutline.kickmaterial.features.projectlist.MainActivity
 import com.squareup.spoon.Spoon
 import org.junit.rules.ExternalResource
@@ -20,7 +20,7 @@ import org.junit.runners.model.Statement
 import kotlin.reflect.KClass
 
 /**
- * Methods returning custom [ActivityTestRule]s that set test [GlobalComponent].
+ * Methods returning custom [ActivityTestRule]s that set test [AppComponent].
 
  * @author Sebastian Kacprzak <sebastian.kacprzak at byoutline.com>
  */
@@ -36,7 +36,7 @@ object DaggerRules {
             = CachedFieldIdlingResourceRule(KickMaterialApp.component.discoverField)
 
     private fun <ACTIVITY : Activity> getActivityRule(
-            mainComponentProv: (KickMaterialApp) -> GlobalComponent,
+            mainComponentProv: (KickMaterialApp) -> AppComponent,
             clazz: KClass<ACTIVITY>
     ): ActivityTestRule<ACTIVITY> {
         val mainHandler = Handler(Looper.getMainLooper())

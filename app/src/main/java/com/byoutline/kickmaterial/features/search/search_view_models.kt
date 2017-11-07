@@ -13,23 +13,22 @@ import com.byoutline.kickmaterial.model.*
 import com.byoutline.kickmaterial.transitions.SharedViews
 import com.byoutline.observablecachedfield.ObservableCachedFieldWithArg
 import com.byoutline.observablecachedfield.util.registerChangeCallback
-import com.byoutline.secretsauce.rx.invokeOnFPause
+import com.byoutline.secretsauce.di.AttachableViewModel
 import me.tatarka.bindingcollectionadapter2.ItemBinding
 import me.tatarka.bindingcollectionadapter2.collections.DiffObservableList
-import javax.inject.Inject
 import javax.inject.Provider
 
 /**
  * Displays search results
  */
-class SearchViewModel
-@Inject constructor(private val discoverField: ObservableCachedFieldWithArg<DiscoverResponse, DiscoverQuery>) {
+class SearchViewModel(
+        private val discoverField: ObservableCachedFieldWithArg<DiscoverResponse, DiscoverQuery>
+) : AttachableViewModel<ProjectClickListener>() {
 
     val adapter = ProjectListAdapter<SearchItemViewModel>()
     val items: DiffObservableList<SearchItemViewModel> = DiffObservableList(getProjectItemDiffObservableCallback(), false)
     val itemBinding: ItemBinding<SearchItemViewModel> = ItemBinding.of<SearchItemViewModel>(BR.viewModel, R.layout.search_item)
-    private var projectClickListener: ProjectClickListener? = null
-    private val projectClickListenerProv = Provider { projectClickListener }
+    private val projectClickListenerProv = Provider { view }
 
     private fun setItems(currentProjects: Collection<Project>) {
         items.update(currentProjects.mapToViewModels())
@@ -37,17 +36,14 @@ class SearchViewModel
 
     private fun Collection<Project>.mapToViewModels() = map { SearchItemViewModel(it, projectClickListenerProv) }
 
-
-    fun attachViewUntilPause(fragment: SearchListFragment) {
+    override fun onAttach(view: ProjectClickListener) {
         val discoverFieldCallback = discoverField.registerChangeCallback(
                 onNext = this::onSearchResultFetched
         )
-        projectClickListener = fragment
-        fragment.invokeOnFPause {
-            this.projectClickListener = null
+        super.onAttach(view, onDetachAction = {
             discoverField.observable().removeOnPropertyChangedCallback(discoverFieldCallback)
             discoverField.observableError.removeOnPropertyChangedCallback(discoverFieldCallback)
-        }
+        })
     }
 
     private var page = SearchListFragment.DEFAULT_PAGE

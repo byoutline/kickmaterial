@@ -6,9 +6,6 @@ import com.byoutline.kickmaterial.KickMaterialApp
 import com.byoutline.kickmaterial.api.KickMaterialRequestInterceptor
 import com.byoutline.kickmaterial.api.KickMaterialService
 import com.byoutline.kickmaterial.features.projectdetails.LruCacheWithPlaceholders
-import com.byoutline.kickmaterial.features.projectlist.ProjectListViewModel
-import com.byoutline.kickmaterial.features.projectlist.ProjectsListFragment
-import com.byoutline.kickmaterial.features.search.SearchViewModel
 import com.byoutline.kickmaterial.model.DiscoverQuery
 import com.byoutline.kickmaterial.model.DiscoverResponse
 import com.byoutline.kickmaterial.model.ProjectDetails
@@ -29,10 +26,11 @@ import okhttp3.OkHttpClient
 import org.joda.time.DateTime
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Singleton
 
 
 @Module
-open class GlobalModule(private val app: KickMaterialApp) {
+open class AppModule(private val app: KickMaterialApp) {
     private val picassoCache: LruCacheWithPlaceholders = LruCacheWithPlaceholders(app)
 
     init {
@@ -64,7 +62,7 @@ open class GlobalModule(private val app: KickMaterialApp) {
     }
 
     @Provides
-    @GlobalScope
+    @Singleton
     fun providesKickMaterialService(requestInterceptor: KickMaterialRequestInterceptor, gson: Gson): KickMaterialService
             = createService("http://localhost:8099", KickMaterialService::class.java, requestInterceptor, gson)
 
@@ -87,26 +85,11 @@ open class GlobalModule(private val app: KickMaterialApp) {
     }
 
     @Provides
-    @GlobalScope
+    @Reusable
     open fun provideSharedPrefs(): SharedPreferences = PreferenceManager.getDefaultSharedPreferences(app)
 
     @Provides
-    @Reusable
-    fun provideProjectListViewModel(sharedPrefs: SharedPreferences,
-                                    discoverField: ObservableCachedFieldWithArg<DiscoverResponse, DiscoverQuery>): ProjectListViewModel {
-        // show header on first launch
-        val showHeader = sharedPrefs.getBoolean(ProjectsListFragment.PREFS_SHOW_HEADER, true)
-        sharedPrefs.edit().putBoolean(ProjectsListFragment.PREFS_SHOW_HEADER, false).apply()
-        return ProjectListViewModel(showHeader, discoverField)
-    }
-
-    @Provides
-    @Reusable
-    fun provideSearchViewModel(discoverField: ObservableCachedFieldWithArg<DiscoverResponse, DiscoverQuery>)
-            = SearchViewModel(discoverField)
-
-    @Provides
-    @GlobalScope
+    @Singleton
     fun provideDiscover(service: KickMaterialService): ObservableCachedFieldWithArg<DiscoverResponse, DiscoverQuery> {
         return ObservableCachedFieldBuilder()
                 .withValueProviderWithArg(apiValueProv<DiscoverResponse, DiscoverQuery> { query -> service.getDiscover(query.queryMap) })
@@ -115,7 +98,7 @@ open class GlobalModule(private val app: KickMaterialApp) {
     }
 
     @Provides
-    @GlobalScope
+    @Singleton
     fun provideProjectDetails(service: KickMaterialService): ObservableCachedFieldWithArg<ProjectDetails, ProjectIdAndSignature>
             = ObservableCachedFieldBuilder()
             .withValueProviderWithArg(apiValueProv<ProjectDetails, ProjectIdAndSignature> { (id, queryParams) -> service.getProjectDetails(id, queryParams) })

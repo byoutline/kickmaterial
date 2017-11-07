@@ -1,5 +1,6 @@
 package com.byoutline.kickmaterial.features.rewardlist
 
+import android.arch.lifecycle.ViewModel
 import android.databinding.ObservableArrayList
 import android.graphics.Color
 import android.support.annotation.ColorInt
@@ -7,7 +8,6 @@ import android.support.v4.content.ContextCompat
 import com.byoutline.kickmaterial.BR
 import com.byoutline.kickmaterial.KickMaterialApp
 import com.byoutline.kickmaterial.R
-import com.byoutline.kickmaterial.dagger.GlobalScope
 import com.byoutline.kickmaterial.model.Reward
 import com.byoutline.kickmaterial.model.RewardItem
 import com.byoutline.secretsauce.utils.showDebugToast
@@ -16,11 +16,8 @@ import me.tatarka.bindingcollectionadapter2.itembindings.OnItemBindClass
 import paperparcel.PaperParcel
 import paperparcel.PaperParcelable
 import java.util.*
-import javax.inject.Inject
 
-@GlobalScope
-class RewardListViewModel
-@Inject constructor() {
+class RewardListViewModel : ViewModel() {
     val items = ObservableArrayList<RewardItem>()
     val itemBinding: ItemBinding<RewardItem>
     @ColorInt

@@ -15,7 +15,7 @@ import com.byoutline.kickmaterial.transitions.SharedViews
 import com.byoutline.observablecachedfield.ObservableCachedFieldWithArg
 import com.byoutline.observablecachedfield.util.RetrofitHelper
 import com.byoutline.observablecachedfield.util.registerChangeCallback
-import com.byoutline.secretsauce.rx.invokeOnFPause
+import com.byoutline.secretsauce.di.AttachableViewModel
 import com.squareup.picasso.Picasso
 import me.tatarka.bindingcollectionadapter2.BindingRecyclerViewAdapter
 import me.tatarka.bindingcollectionadapter2.ItemBinding
@@ -26,8 +26,10 @@ import javax.inject.Provider
 /**
  * @author Sebastian Kacprzak <sebastian.kacprzak at byoutline.com>
  */
-class ProjectListViewModel(showHeader: Boolean,
-                           val discoverField: ObservableCachedFieldWithArg<DiscoverResponse, DiscoverQuery>) {
+class ProjectListViewModel(
+        showHeader: Boolean,
+        val discoverField: ObservableCachedFieldWithArg<DiscoverResponse, DiscoverQuery>
+) : AttachableViewModel<ProjectClickListener>() {
     private val projects = DiffObservableList<ProjectItemViewModel>(getProjectItemDiffObservableCallback(), false)
     val items = MergeObservableList<ProjectItemViewModel>()
     //    val itemBinding = ItemBinding.of<ProjectItemViewModel>(BR.categoryItem, R.layout.category_list_item)
@@ -43,13 +45,12 @@ class ProjectListViewModel(showHeader: Boolean,
 
     val adapter = ProjectListAdapter<ProjectItemViewModel>()
     private val header = ProjectItemViewModel(Project(), ProjectItemViewModel.HEADER_ITEM, Provider { null })
-    private var projectClickListener: ProjectClickListener? = null
-    private val projectClickListenerProv = Provider { projectClickListener }
+    private val projectClickListenerProv = Provider { view }
 
     private var page = 1
     var category: Category? = null
         set(value) {
-            if(value != field) {
+            if (value != field) {
                 page = 1
                 field = value
             }
@@ -61,19 +62,17 @@ class ProjectListViewModel(showHeader: Boolean,
         items.insertList(projects)
     }
 
-    fun attachViewUntilPause(fragment: ProjectsListFragment) {
-        this.projectClickListener = fragment
+    override fun onAttach(view: ProjectClickListener) {
         val discoverFieldCallback = discoverField.registerChangeCallback(
                 onNext = this::onDiscoverProjects,
                 onError = this::onDiscoverProjectsFail
         )
         discoverField.observable().notifyChange()
         discoverField.observableError.notifyChange()
-        fragment.invokeOnFPause {
-            this.projectClickListener = null
+        super.onAttach(view, onDetachAction = {
             discoverField.observable().removeOnPropertyChangedCallback(discoverFieldCallback)
             discoverField.observableError.removeOnPropertyChangedCallback(discoverFieldCallback)
-        }
+        })
     }
 
     private fun Collection<Project>.mapToViewModels(offset: Int = 0) = mapIndexed { index, project ->

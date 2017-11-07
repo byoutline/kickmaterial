@@ -18,22 +18,20 @@ import com.byoutline.kickmaterial.utils.KickMaterialFragment
 import com.byoutline.kickmaterial.utils.LUtils
 import com.byoutline.kickmaterial.views.EndlessRecyclerView
 import com.byoutline.secretsauce.activities.hideKeyboard
-import javax.inject.Inject
+import com.byoutline.secretsauce.di.inflateAndSetViewModel
+import com.byoutline.secretsauce.di.lazyViewModelWithAutoLifecycle
 
 class SearchListFragment : KickMaterialFragment(), ProjectClickListener, EndlessRecyclerView.EndlessScrollListener {
 
     private lateinit var projectListRv: EndlessRecyclerView
 
-    @Inject
-    lateinit var viewModel: SearchViewModel
+    val viewModel: SearchViewModel by lazyViewModelWithAutoLifecycle(this, SearchViewModel::class)
 
     private var searchView: SearchView? = null
     private var restoredSearchQuery: CharSequence = ""
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val binding = FragmentSearchResultsBinding.inflate(inflater, container, false)
-        KickMaterialApp.component.inject(this)
-        binding.viewModel = viewModel
+        val binding: FragmentSearchResultsBinding = inflateAndSetViewModel(inflater, container, R.layout.fragment_search_results, viewModel)
         projectListRv = binding.searchRecyclerView
 
         setHasOptionsMenu(true)
@@ -49,7 +47,6 @@ class SearchListFragment : KickMaterialFragment(), ProjectClickListener, Endless
         super.onResume()
         restoreDefaultScreenLook()
         hostActivity?.setToolbarAlpha(1f)
-        viewModel.attachViewUntilPause(this)
     }
 
     private fun setUpAdapters() {

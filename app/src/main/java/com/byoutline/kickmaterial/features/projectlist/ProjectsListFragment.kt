@@ -7,7 +7,6 @@ import android.support.v7.widget.GridLayoutManager
 import android.view.*
 import com.byoutline.cachedfield.FieldState
 import com.byoutline.cachedfield.FieldStateListener
-import com.byoutline.kickmaterial.KickMaterialApp
 import com.byoutline.kickmaterial.R
 import com.byoutline.kickmaterial.databinding.FragmentProjectsBinding
 import com.byoutline.kickmaterial.features.projectdetails.startProjectDetailsActivity
@@ -22,20 +21,21 @@ import com.byoutline.kickmaterial.utils.KickMaterialFragment
 import com.byoutline.kickmaterial.utils.LUtils
 import com.byoutline.kickmaterial.views.EndlessRecyclerView
 import com.byoutline.secretsauce.activities.showFragment
+import com.byoutline.secretsauce.di.Injectable
+import com.byoutline.secretsauce.di.inflateAndSetViewModel
+import com.byoutline.secretsauce.di.lazyViewModelWithAutoLifecycle
 import timber.log.Timber
-import javax.inject.Inject
+
 
 /**
  * @author Pawel Karczewski <pawel.karczewski at byoutline.com> on 2015-01-03
  */
-class ProjectsListFragment : KickMaterialFragment(), ProjectClickListener, FieldStateListener, EndlessRecyclerView.EndlessScrollListener {
+class ProjectsListFragment : KickMaterialFragment(), Injectable, ProjectClickListener, FieldStateListener, EndlessRecyclerView.EndlessScrollListener {
 
-    @Inject
-    lateinit var viewModel: ProjectListViewModel
-
+    private val viewModel by lazyViewModelWithAutoLifecycle(this, ProjectListViewModel::class)
+    lateinit var binding: FragmentProjectsBinding
 
     private lateinit var category: Category
-    private lateinit var binding: FragmentProjectsBinding
     /**
      * Endless scroll variables *
      */
@@ -43,10 +43,7 @@ class ProjectsListFragment : KickMaterialFragment(), ProjectClickListener, Field
     private lateinit var scrollListener: ProjectsListScrollListener
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val binding = FragmentProjectsBinding.inflate(inflater, container, false)
-        this.binding = binding
-        KickMaterialApp.component.inject(this)
-        binding.viewModel = viewModel
+        binding = inflateAndSetViewModel(inflater, container, R.layout.fragment_projects, viewModel)
 
         hostActivity?.enableToolbarAutoHide(binding.projectRecyclerView)
 
@@ -94,8 +91,6 @@ class ProjectsListFragment : KickMaterialFragment(), ProjectClickListener, Field
     override fun onResume() {
         super.onResume()
         restoreDefaultScreenLook()
-        Timber.d("items will be attached")
-        viewModel.attachViewUntilPause(this)
         viewModel.discoverField.addStateListener(this)
         Timber.d("items will be refreshed ${viewModel.category}")
         viewModel.loadCurrentPage()

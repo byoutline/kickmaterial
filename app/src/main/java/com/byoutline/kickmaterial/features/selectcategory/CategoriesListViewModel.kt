@@ -4,25 +4,24 @@ import android.databinding.ObservableArrayList
 import android.view.View
 import com.byoutline.kickmaterial.BR
 import com.byoutline.kickmaterial.R
-import com.byoutline.kickmaterial.dagger.GlobalScope
 import com.byoutline.kickmaterial.model.Category
-import com.byoutline.secretsauce.rx.invokeOnAPause
+import com.byoutline.kickmaterial.model.DiscoverQuery
+import com.byoutline.kickmaterial.model.DiscoverResponse
+import com.byoutline.observablecachedfield.ObservableCachedFieldWithArg
+import com.byoutline.secretsauce.di.AttachableViewModel
 import me.tatarka.bindingcollectionadapter2.ItemBinding
-import javax.inject.Inject
 
-
-@GlobalScope
-class CategoriesListViewModel @Inject
-constructor() {
+class CategoriesListViewModel(
+        private val discoverField: ObservableCachedFieldWithArg<DiscoverResponse, DiscoverQuery>
+) : AttachableViewModel<CategoryClickListener>() {
     val items: ObservableArrayList<Category> = DataManager.categoriesList
     val itemBinding: ItemBinding<Category>
-    private var clickListener: CategoryClickListener? = null
 
     init {
         itemBinding = ItemBinding.of<Category>(BR.categoryItem, R.layout.category_list_item)
                 .bindExtra(BR.categoryClickListener, object : CategoryClickListener {
                     override fun categoryClicked(view: View, category: Category) {
-                        clickListener?.categoryClicked(view, category)
+                        this@CategoriesListViewModel.view?.categoryClicked(view, category)
                     }
                 })
     }
@@ -31,8 +30,7 @@ constructor() {
         items[0].setBgColor(color)
     }
 
-    fun attachViewUntilPause(activity: CategoriesListActivity) {
-        this.clickListener = activity
-        activity.invokeOnAPause { this.clickListener = null }
+    fun preloadCategory(category: Category) {
+        discoverField.postValue(DiscoverQuery.getDiscoverQuery(category, 1))
     }
 }

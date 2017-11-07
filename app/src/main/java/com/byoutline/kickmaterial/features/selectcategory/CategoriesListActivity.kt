@@ -18,18 +18,14 @@ import android.support.v4.view.animation.FastOutSlowInInterpolator
 import android.view.View
 import android.view.ViewAnimationUtils
 import android.view.animation.OvershootInterpolator
-import com.byoutline.kickmaterial.KickMaterialApp
 import com.byoutline.kickmaterial.R
 import com.byoutline.kickmaterial.databinding.ActivityCategoryListBinding
 import com.byoutline.kickmaterial.model.Category
-import com.byoutline.kickmaterial.model.DiscoverQuery
-import com.byoutline.kickmaterial.model.DiscoverResponse
 import com.byoutline.kickmaterial.utils.ContainerTranslationScrollListener
 import com.byoutline.kickmaterial.utils.KickMaterialBaseActivity
 import com.byoutline.kickmaterial.utils.LUtils
-import com.byoutline.observablecachedfield.ObservableCachedFieldWithArg
+import com.byoutline.secretsauce.di.lazyViewModelWithAutoLifecycle
 import com.byoutline.secretsauce.utils.ViewUtils
-import javax.inject.Inject
 
 
 /**
@@ -37,10 +33,7 @@ import javax.inject.Inject
  */
 class CategoriesListActivity : KickMaterialBaseActivity(), CategoryClickListener {
 
-    @Inject
-    lateinit var discoverField: ObservableCachedFieldWithArg<DiscoverResponse, DiscoverQuery>
-    @Inject
-    lateinit var viewModel: CategoriesListViewModel
+    private val viewModel by lazyViewModelWithAutoLifecycle(this, CategoriesListViewModel::class)
 
     private var revealAnimation: Animator? = null
     private var category: Category? = null
@@ -54,7 +47,6 @@ class CategoriesListActivity : KickMaterialBaseActivity(), CategoryClickListener
         binding = DataBindingUtil.setContentView(this, R.layout.activity_category_list)
         category = intent.extras.getParcelable(ARG_CATEGORY)
 
-        KickMaterialApp.component.inject(this)
         setUpAdapters()
         setUpListeners()
         launchPostTransitionAnimations()
@@ -104,7 +96,6 @@ class CategoriesListActivity : KickMaterialBaseActivity(), CategoryClickListener
 
     public override fun onResume() {
         super.onResume()
-        viewModel.attachViewUntilPause(this)
         showToolbar(false, false)
     }
 
@@ -140,7 +131,7 @@ class CategoriesListActivity : KickMaterialBaseActivity(), CategoryClickListener
     private fun categoryClicked(category: Category) {
         animateCategoryColor(category)
         // start loading data from API during animation
-        discoverField.postValue(DiscoverQuery.getDiscoverQuery(category, 1))
+        viewModel.preloadCategory(category)
     }
 
 
