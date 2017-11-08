@@ -52,11 +52,6 @@ android {
         testInstrumentationRunner 'com.jakewharton.u2020.U2020TestRunner'
     }
 
-    dexOptions {
-        javaMaxHeapSize "8g"
-        dexInProcess true
-    }
-
     buildTypes {
         release {
             debuggable false
