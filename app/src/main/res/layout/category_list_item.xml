@@ -65,8 +65,8 @@
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:padding="9dp"
-                        android:src="@drawable/icon_tick" />
+                        android:padding="6dp"
+                        android:src="@drawable/ic_check" />
                 </FrameLayout>
 
             </FrameLayout>

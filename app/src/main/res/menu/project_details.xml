@@ -5,7 +5,7 @@
 
     <item
         android:id="@+id/favourite_project"
-        android:icon="@drawable/favourite_ico"
+        android:icon="@drawable/ic_favorite"
         android:menuCategory="secondary"
         android:orderInCategory="1"
         android:title="@string/back_project"
@@ -14,7 +14,7 @@
 
     <item
         android:id="@+id/back_project"
-        android:icon="@drawable/dolar_ico_small"
+        android:icon="@drawable/ic_dolar"
         android:menuCategory="secondary"
         android:orderInCategory="1"
         android:title="@string/back_project"

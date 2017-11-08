@@ -8,8 +8,7 @@
             type="com.byoutline.kickmaterial.features.projectlist.ProjectListViewModel" />
     </data>
 
-    <RelativeLayout
-
+    <android.support.design.widget.CoordinatorLayout
         android:id="@+id/main_parent_rl"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -49,11 +48,13 @@
             style="@style/ActionButtonStyle"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
+            android:layout_gravity="bottom|right"
             android:layout_marginBottom="@dimen/fab_margin"
             android:layout_marginRight="@dimen/fab_margin"
             android:src="@drawable/categories_icon"
             app:backgroundTint="@color/green_primary"
+            app:layout_behavior="com.byoutline.kickmaterial.features.projectlist.FABBehaviour"
             app:rippleColor="@color/green_dark" />
 
-    </RelativeLayout>
+    </android.support.design.widget.CoordinatorLayout>
 </layout>

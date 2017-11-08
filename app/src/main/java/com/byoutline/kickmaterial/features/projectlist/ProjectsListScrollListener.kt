@@ -3,7 +3,6 @@ package com.byoutline.kickmaterial.features.projectlist
 import android.content.Context
 import android.graphics.Color
 import android.support.v7.widget.RecyclerView
-import android.view.View
 import com.byoutline.kickmaterial.R
 import com.byoutline.kickmaterial.databinding.FragmentProjectsBinding
 import com.byoutline.kickmaterial.utils.KickMaterialFragment
@@ -29,16 +28,10 @@ class ProjectsListScrollListener(context: Context,
 
         if (dy > toolbarScrollPoint) {
             hostActivityProv()?.showToolbar(false, true)
-            if (binding.showCategoriesFab.visibility == View.VISIBLE) {
-                binding.showCategoriesFab.hide()
-            }
         }
 
         if (dy < toolbarScrollPoint * -1) {
             hostActivityProv()?.showToolbar(true, true)
-            if (binding.showCategoriesFab.visibility == View.GONE) {
-                binding.showCategoriesFab.show()
-            }
         }
 
         summaryScrolled += dy.toFloat()

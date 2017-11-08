@@ -71,8 +71,9 @@
                 style="@style/ActionButtonStyle"
                 android:layout_marginBottom="@dimen/fab_margin"
                 android:alpha="0.75"
+                app:fabSize="auto"
                 android:elevation="8dp"
-                android:src="@drawable/icon_plus"
+                android:src="@drawable/ic_close"
                 app:backgroundTint="@color/black"
                 tools:ignore="UnusedAttribute" />
 
