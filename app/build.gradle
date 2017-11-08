@@ -1,12 +1,14 @@
 buildscript {
     repositories {
         jcenter()
+        maven { url 'https://plugins.gradle.org/m2/' }
     }
 
     dependencies {
         classpath 'net.saliman:gradle-cobertura-plugin:2.0.0'
         classpath 'org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.5.0-x'
         classpath 'com.stanfy.spoon:spoon-gradle-plugin:1.2.2'
+        classpath 'gradle.plugin.com.metova:cappuccino-plugin:0.7.3'
     }
 
     configurations.all {
@@ -24,6 +26,7 @@ apply from: "$rootDir/gradle/coverage.gradle"
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'groovyx.grooid.groovy-android'
+apply plugin: "com.metova.cappuccino-animations"
 
 repositories {
     mavenCentral()
