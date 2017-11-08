@@ -35,6 +35,7 @@ local.properties
 *.swp
 *.DS_Store
 /build
+/captures
 
 /app/crashlytics.properties
 /app/src/main/assets/crashlytics-build.properties
