@@ -1,5 +1,7 @@
 language: android
 
+sudo: false
+
 jdk: oraclejdk8
 
 notifications:
@@ -8,15 +10,17 @@ notifications:
 
 env:
   matrix:
-    - ANDROID_TARGET=android-18  ANDROID_ABI=armeabi-v7a JAVA6_HOME=/usr/lib/jvm/java-6-openjdk-amd64 JAVA7_HOME=/usr/lib/jvm/java-7-openjdk-amd64 JAVA8_HOME=/usr/lib/jvm/java-8-oracle TERM=dumb
-    - ANDROID_TARGET=android-22  ANDROID_ABI=armeabi-v7a JAVA6_HOME=/usr/lib/jvm/java-6-openjdk-amd64 JAVA7_HOME=/usr/lib/jvm/java-7-openjdk-amd64 JAVA8_HOME=/usr/lib/jvm/java-8-oracle TERM=dumb
+    - ANDROID_TARGET=android-18  ANDROID_ABI=armeabi-v7a TERM=dumb
 
 android:
   components:
     - tools
-    - android-25
+    - build-tools-26.0.2
     - platform-tools
-    - build-tools-25.0.0
-    - extra-android-m2repository
+    - android-26
 
-script: ./gradlew check jacocoTestReport coveralls
+before_install:
+  - mkdir "$ANDROID_HOME/licenses" || true
+  - echo "8933bad161af4178b1185d1a37fbf41ea5269c55" > "$ANDROID_HOME/licenses/android-sdk-license"
+
+script: ./gradlew check testDebugUnitTestCoverage -x lint coveralls

@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:card_view="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
         <variable
             name="categoryItem"
-            type="com.byoutline.kickmaterial.model.Category"/>
+            type="com.byoutline.kickmaterial.model.Category" />
 
         <variable
             name="categoryClickListener"
-            type="com.byoutline.kickmaterial.adapters.CategoryClickListener"/>
+            type="com.byoutline.kickmaterial.features.selectcategory.CategoryClickListener" />
 
     </data>
 
@@ -20,12 +20,10 @@
         android:id="@+id/category_container_cv"
         android:layout_width="match_parent"
         android:layout_height="@dimen/category_list_item_height"
+        android:onClick="@{(view) -> categoryClickListener.categoryClicked(view, categoryItem)}"
         card_view:cardBackgroundColor="@{categoryItem.getBgColor()}"
         card_view:cardCornerRadius="4dp"
-        card_view:cardPreventCornerOverlap="false"
-        app:onClick="@{categoryClickListener}"
-        app:category="@{categoryItem}"
-    >
+        card_view:cardPreventCornerOverlap="false">
 
 
         <LinearLayout
@@ -48,7 +46,7 @@
                     android:layout_height="@dimen/category_dot_size"
                     android:layout_gravity="center"
                     android:src="@drawable/circle"
-                    app:colorFilterRes="@{categoryItem.colorResId}"/>
+                    app:colorFilterRes="@{categoryItem.colorResId}" />
 
 
                 <FrameLayout
@@ -62,19 +60,19 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:src="@drawable/circle"
-                        app:colorFilterRes="@{categoryItem.colorResId}"/>
+                        app:colorFilterRes="@{categoryItem.colorResId}" />
 
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:padding="9dp"
-                        android:src="@drawable/icon_tick"/>
+                        android:padding="6dp"
+                        android:src="@drawable/ic_check" />
                 </FrameLayout>
 
             </FrameLayout>
 
 
-            <com.byoutline.secretsauce.views.CustomFontTextView
+            <TextView
                 android:id="@+id/category_name_tv"
                 style="@style/RegularFontStyle"
                 android:layout_width="0dp"
@@ -85,7 +83,7 @@
                 android:text="@{categoryItem.nameResId}"
                 android:textColor="@color/category_name"
                 android:textSize="@dimen/font_15"
-                tools:text="Comics"/>
+                tools:text="Comics" />
 
 
         </LinearLayout>
@@ -93,7 +91,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#15000000"/>
+            android:background="#15000000" />
 
     </android.support.v7.widget.CardView>
 </layout>

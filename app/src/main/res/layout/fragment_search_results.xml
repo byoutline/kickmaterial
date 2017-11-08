@@ -1,11 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.byoutline.kickmaterial.views.EndlessRecyclerView
-    android:id="@+id/search_recycler_view"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:clipToPadding="false"
-    android:paddingBottom="16dp"
-    android:paddingLeft="@dimen/recyler_padding"
-    android:paddingRight="@dimen/recyler_padding"
-    android:paddingTop="89dp"/>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="me.tatarka.bindingcollectionadapter2.LayoutManagers" />
+
+        <variable
+            name="viewModel"
+            type="com.byoutline.kickmaterial.features.search.SearchViewModel" />
+    </data>
+
+    <com.byoutline.kickmaterial.views.EndlessRecyclerView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/search_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:paddingBottom="16dp"
+        android:paddingLeft="@dimen/recyler_padding"
+        android:paddingRight="@dimen/recyler_padding"
+        android:paddingTop="89dp"
+        app:adapter="@{viewModel.adapter}"
+        app:itemBinding="@{viewModel.itemBinding}"
+        app:items="@{viewModel.items}"
+        app:layoutManager="@{LayoutManagers.linear()}" />
+</layout>

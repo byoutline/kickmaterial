@@ -5,8 +5,8 @@ import android.support.test.espresso.NoMatchingViewException;
 import android.support.test.rule.ActivityTestRule;
 
 import com.byoutline.cachedfield.utils.CachedFieldIdlingResource;
-import com.byoutline.kickmaterial.activities.MainActivity;
 import com.byoutline.kickmaterial.espressohelpers.DaggerRules;
+import com.byoutline.kickmaterial.features.projectlist.MainActivity;
 
 import org.junit.After;
 import org.junit.Before;
@@ -23,7 +23,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
  */
 public class MainActivityNextStartTest {
     @Rule
-    public ActivityTestRule<MainActivity> activityRule = DaggerRules.userNextLaunchRule();
+    public ActivityTestRule<MainActivity> activityRule = DaggerRules.INSTANCE.userNextLaunchRule();
     private CachedFieldIdlingResource cachedFieldIdlingResource;
 
     @Before
@@ -37,7 +37,7 @@ public class MainActivityNextStartTest {
         Espresso.unregisterIdlingResources(cachedFieldIdlingResource);
     }
 
-    @Test(expected=NoMatchingViewException.class)
+    @Test(expected = NoMatchingViewException.class)
     public void testHeaderShouldNotBeVisible() {
         onView(withText(R.string.explore))
                 .check(matches(isDisplayed()));

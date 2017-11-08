@@ -1,14 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- On L devices card layout will round corner,
 there is no reason to do it twice -->
-<ImageView
-    android:id="@+id/project_item_big_photo_iv"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:contentDescription="@string/content_description_project_photo"
-    android:scaleType="centerCrop"
-    android:transitionName="@string/transition_project_photo"
-    tools:showIn="@layout/project_grid_item_big"
-    tools:src="@drawable/photo_big"/>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.byoutline.kickmaterial.features.projectlist.ProjectItemViewModel" />
+    </data>
+
+    <ImageView
+        android:id="@+id/project_item_big_photo_iv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:contentDescription="@string/content_description_project_photo"
+        android:scaleType="centerCrop"
+        android:transitionName="@string/transition_project_photo"
+        app:projectImg="@{viewModel}"
+        tools:showIn="@layout/project_grid_item_big"
+        tools:src="@drawable/photo_big" />
+</layout>

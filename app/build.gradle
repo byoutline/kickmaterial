@@ -1,34 +1,39 @@
-apply plugin: 'com.android.application'
-apply from: '../gradle/byoutline/retrolambdaConfig.gradle'
-apply from: "$rootDir/gradle/checkstyle.gradle"
-apply from: "$rootDir/gradle/pmd.gradle"
-apply plugin: 'jacoco' /// used only by tests
-
 buildscript {
-    ext.support_version = '25.0.0'
-    ext.dagger_version = '2.7'
-
     repositories {
         jcenter()
     }
 
     dependencies {
         classpath 'net.saliman:gradle-cobertura-plugin:2.0.0'
-        classpath 'org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.3.1'
-        classpath 'com.stanfy.spoon:spoon-gradle-plugin:1.0.4'
+        classpath 'org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.5.0-x'
+        classpath 'com.stanfy.spoon:spoon-gradle-plugin:1.2.2'
+    }
+
+    configurations.all {
+        resolutionStrategy {
+            force 'org.jacoco:org.jacoco.report:0.7.4.201502262128'
+            force 'org.jacoco:org.jacoco.core:0.7.4.201502262128'
+        }
     }
 }
 
-repositories {
-    jcenter()
+apply plugin: 'com.android.application'
+apply from: "$rootDir/gradle/checkstyle.gradle"
+apply from: "$rootDir/gradle/pmd.gradle"
+apply from: "$rootDir/gradle/coverage.gradle"
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'groovyx.grooid.groovy-android'
 
-    maven { url "http://oss.sonatype.org/content/repositories/snapshots/" }
+repositories {
+    mavenCentral()
+//    maven { url "http://oss.sonatype.org/content/repositories/snapshots/" }
 }
 
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion '25'
+    compileSdkVersion 26
+    buildToolsVersion '26.0.2'
 
     dataBinding {
         enabled = true
@@ -37,13 +42,13 @@ android {
     defaultConfig {
         applicationId 'com.byoutline.kickmaterial'
         minSdkVersion 18
-        targetSdkVersion 25
-        versionCode 2
-        versionName '1.0.1'
+        targetSdkVersion 26
+        versionCode 3
+        versionName '1.0.2'
 
         multiDexEnabled false
 
-        // CircleCi needs custom runner to turn off animations.
+        // We use custom runner to turn off animations.
         testInstrumentationRunner 'com.jakewharton.u2020.U2020TestRunner'
     }
 
@@ -55,110 +60,22 @@ android {
         }
     }
 
-//    applicationVariants.all { variant ->
-//        variant.outputs.each { output ->
-//            def file = output.outputFile
-//            output.outputFile = new File(file.parent, 'kickmaterial-' + defaultConfig.versionName + '.apk')
-//        }
-//    }
-
-    testOptions {
-        //unitTests.returnDefaultValues = true
-    }
-
     lintOptions {
         lintConfig file('lint.xml')
-//        textOutput 'stdout'
-        textReport true
     }
 
     packagingOptions {
         exclude 'META-INF/DEPENDENCIES'
-        exclude 'META-INF/NOTICE'
         exclude 'META-INF/LICENSE'
         exclude 'META-INF/LICENSE.txt'
-        exclude 'META-INF/NOTICE.txt'
         exclude 'META-INF/ASL2.0'
         exclude 'META-INF/services/javax.annotation.processing.Processor'
         exclude 'LICENSE.txt'
     }
-
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
-
-    productFlavors {
-    }
 }
 
-dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile project(':appjava')
-    compile "com.android.support:appcompat-v7:$support_version"
-    compile "com.android.support:cardview-v7:$support_version"
-    compile "com.android.support:recyclerview-v7:$support_version"
-    compile "com.android.support:palette-v7:$support_version"
-    compile 'com.jakewharton:butterknife:8.0.1'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:8.0.1'
-    compile 'com.byoutline.secretsauce:secretsauce:0.5.2'
-    compile 'com.byoutline.ottocachedfield:observablecachedfield:1.1.0'
-    compile 'com.byoutline.androidstubserver:stubserver:2.0.0-beta2-SNAPSHOT'
-    compile 'com.byoutline.eventcallback:eventcallback-api:1.0.1'
-    compile 'com.byoutline.ottoeventcallback:anythreadbus:1.0.0'
-    compile 'com.squareup.retrofit2:retrofit:2.0.2'
-    compile 'com.squareup.retrofit2:converter-gson:2.0.2'
-    compile 'com.squareup.okhttp3:okhttp:3.2.0'
-    compile 'com.squareup.okhttp3:okhttp-urlconnection:3.2.0'
-    compile 'com.squareup.picasso:picasso:2.5.2'
-    compile 'javax.inject:javax.inject:1'
-    // For dagger 2
-    compile "com.google.dagger:dagger:$dagger_version"
-    annotationProcessor "com.google.dagger:dagger-compiler:$dagger_version"
 
-    compile 'com.kenai.nbpwr:edu-umd-cs-findbugs-annotations:1.3.2-201002241900'
-    compile 'com.jakewharton.timber:timber:3.1.0'
-    compile 'com.github.shell-software:fab:1.0.5'
-    compile 'commons-collections:commons-collections:3.2.1'
-    compile 'me.tatarka.bindingcollectionadapter:bindingcollectionadapter:1.3.0'
-    compile 'me.tatarka.bindingcollectionadapter:bindingcollectionadapter-recyclerview:1.3.0'
-    testCompile 'junit:junit:4.12'
-    testCompile 'org.mockito:mockito-core:1.9.5'
-    testCompile 'com.squareup.assertj:assertj-android:1.0.0'
-    testCompile 'org.robolectric:robolectric:2.4'
-    testCompile 'com.google.code.findbugs:jsr305:3.0.0'
-    androidTestCompile "com.android.support:appcompat-v7:$support_version"
-    androidTestCompile "com.android.support:recyclerview-v7:$support_version"
-    androidTestCompile "com.android.support:cardview-v7:$support_version"
-    androidTestCompile "com.android.support:palette-v7:$support_version"
-    androidTestCompile "com.android.support:support-annotations:25.0.0"
-    androidTestCompile ('com.android.support.test.espresso:espresso-core:2.2.2') {
-        // AS does not want to run tests without this exclude
-        exclude group: 'com.android.support'
-    }
-    androidTestCompile ('com.android.support.test.espresso:espresso-contrib:2.2.2') {
-        exclude group: 'com.android.support'
-    }
-    androidTestCompile ('com.android.support.test.espresso:espresso-intents:2.2.2') {
-        exclude group: 'com.android.support'
-    }
-    androidTestCompile ('com.android.support.test:rules:0.5') {
-        exclude group: 'com.android.support'
-    }
-    androidTestCompile ('com.android.support.test:runner:0.5') {
-        exclude group: 'com.android.support'
-    }
-    androidTestCompile 'com.google.code.findbugs:jsr305:3.0.0'
-    androidTestCompile 'com.squareup.spoon:spoon-client:1.3.1'
-    androidTestCompile 'com.byoutline.cachedfield:idlingresource:1.0.0'
-    androidTestCompile 'com.byoutline.cachedfield:cachedfield:1.5.3'
-}
-
-// AS does not want to run application with play button without resolution strategy
-// (despite app installing and working fine for tests)
-configurations.all {
-    resolutionStrategy.force "com.android.support:support-annotations:$support_version"
-}
+apply from: 'dependencies.gradle'
 
 // Wait before applying spoon plugin, because otherwise it does not see custom apk name.
 apply plugin: 'spoon'
@@ -169,7 +86,3 @@ spoon {
     debug = true
 }
 
-//configurations.all {
-//    // check for updates every build
-//    resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
-//}

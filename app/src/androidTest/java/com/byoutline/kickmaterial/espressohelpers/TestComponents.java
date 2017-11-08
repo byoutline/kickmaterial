@@ -1,14 +1,15 @@
 package com.byoutline.kickmaterial.espressohelpers;
 
 import android.content.SharedPreferences;
-import com.byoutline.kickmaterial.dagger.AppComponent;
-import com.byoutline.kickmaterial.dagger.AppModule;
-import com.byoutline.kickmaterial.dagger.DaggerAppComponent;
-import com.byoutline.kickmaterial.fragments.ProjectsListFragment;
-import com.byoutline.secretsauce.BaseApp;
+import android.preference.PreferenceManager;
+import com.byoutline.kickmaterial.KickMaterialApp;
+import com.byoutline.kickmaterial.dagger.DaggerGlobalComponent;
+import com.byoutline.kickmaterial.dagger.GlobalComponent;
+import com.byoutline.kickmaterial.dagger.GlobalModule;
+import com.byoutline.kickmaterial.features.projectlist.ProjectsListFragment;
 
 /**
- * Methods returning test {@link AppComponent}s with changed injects.
+ * Methods returning test {@link GlobalComponent}s with changed injects.
  *
  * @author Sebastian Kacprzak <sebastian.kacprzak at byoutline.com>
  */
@@ -17,17 +18,17 @@ final class TestComponents {
     }
 
 
-    static AppComponent getFirstRunAppComponent(BaseApp app) {
-        return getAppComponent(app, getFirstRunSharedPrefs(app));
+    static GlobalComponent getFirstRunComponent(KickMaterialApp app) {
+        return getComponent(app, getFirstRunSharedPrefs(app));
     }
 
-    static AppComponent getNextRunAppComponent(BaseApp app) {
-        return getAppComponent(app, getNextRunSharedPrefs(app));
+    static GlobalComponent getNextRunComponent(KickMaterialApp app) {
+        return getComponent(app, getNextRunSharedPrefs(app));
     }
 
-    private static AppComponent getAppComponent(final BaseApp app, final SharedPreferences sharedPrefs) {
-        return DaggerAppComponent.builder()
-                .appModule(new AppModule(app) {
+    private static GlobalComponent getComponent(final KickMaterialApp app, final SharedPreferences sharedPrefs) {
+        return DaggerGlobalComponent.builder()
+                .globalModule(new GlobalModule(app) {
                     @Override
                     public SharedPreferences provideSharedPrefs() {
                         return sharedPrefs;
@@ -36,14 +37,14 @@ final class TestComponents {
                 .build();
     }
 
-    private static SharedPreferences getFirstRunSharedPrefs(BaseApp app) {
-        final SharedPreferences sharedPrefs = app.getSharedPrefs();
+    private static SharedPreferences getFirstRunSharedPrefs(KickMaterialApp app) {
+        final SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(app);
         sharedPrefs.edit().clear().apply();
         return sharedPrefs;
     }
 
-    private static SharedPreferences getNextRunSharedPrefs(BaseApp app) {
-        final SharedPreferences sharedPrefs = app.getSharedPrefs();
+    private static SharedPreferences getNextRunSharedPrefs(KickMaterialApp app) {
+        final SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(app);
         sharedPrefs.edit().putBoolean(ProjectsListFragment.PREFS_SHOW_HEADER, false).apply();
         return sharedPrefs;
     }

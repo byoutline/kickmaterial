@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        app:theme="@style/ToolbarThemeWhite"
+        app:navigationIcon="?attr/homeAsUpIndicator"
+        tools:ignore="UnusedAttribute"
+        style="@style/toolbarStyle">
+
+        <TextView
+            android:id="@+id/toolbar_title_tv"
+            style="@style/toolbarTitleStyle" />
+
+    </android.support.v7.widget.Toolbar>
+</layout>

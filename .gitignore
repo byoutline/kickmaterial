@@ -20,7 +20,9 @@ local.properties
 .project
 
 # Android Studio
-.idea/
+/.idea/*
+!/.idea/codeStyleSettings.xml
+!/.idea/vcs.xml
 .gradle
 /*/local.properties
 /*/out

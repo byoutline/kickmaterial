@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.byoutline.kickmaterial">
 
 
@@ -12,12 +10,11 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_kick_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme"
-        tools:replace="android:icon">
+        android:theme="@style/AppTheme">
 
 
         <activity
-            android:name="com.byoutline.kickmaterial.activities.MainActivity"
+            android:name="com.byoutline.kickmaterial.features.projectlist.MainActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,12 +23,12 @@
         </activity>
 
         <activity
-            android:name="com.byoutline.kickmaterial.activities.ProjectDetailsActivity"
-            android:parentActivityName="com.byoutline.kickmaterial.activities.MainActivity" />
-        <activity android:name="com.byoutline.kickmaterial.activities.RewardsListActivity" />
-        <activity android:name="com.byoutline.kickmaterial.activities.CategoriesListActivity" />
+            android:name="com.byoutline.kickmaterial.features.projectdetails.ProjectDetailsActivity"
+            android:parentActivityName="com.byoutline.kickmaterial.features.projectlist.MainActivity" />
+        <activity android:name="com.byoutline.kickmaterial.features.rewardlist.RewardsListActivity" />
+        <activity android:name="com.byoutline.kickmaterial.features.selectcategory.CategoriesListActivity" />
         <activity
-            android:name="com.byoutline.kickmaterial.activities.VideoActivity"
+            android:name="com.byoutline.kickmaterial.features.projectdetails.VideoActivity"
             android:screenOrientation="landscape" />
         <activity
             android:name="com.byoutline.secretsauce.activities.WebViewActivityV7"
@@ -43,9 +40,4 @@
             android:theme="@style/AppTheme.Base" />
 
     </application>
-
-    <instrumentation
-        android:name="com.byoutline.kickmaterial.espressohelpers.U2020TestRunner"
-        android:targetPackage="com.byoutline.kickmaterial"
-        />
 </manifest>
