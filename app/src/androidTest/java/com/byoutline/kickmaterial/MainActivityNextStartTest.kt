@@ -12,6 +12,8 @@ import org.junit.Test
 class MainActivityNextStartTest {
     @get:Rule
     val activityRule = DaggerRules.userNextLaunchRule()
+    @get:Rule
+    val idlingResourceRule = DaggerRules.idlingResourceDiscoverField()
 
     @Test(expected = NoMatchingViewException::class)
     fun testHeaderShouldNotBeVisible() {

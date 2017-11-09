@@ -11,6 +11,8 @@ import org.junit.Test
 class MainActivityFirstStartTest {
     @get:Rule
     val activityRule = DaggerRules.userFirstLaunchRule()
+    @get:Rule
+    val idlingResourceRule = DaggerRules.idlingResourceDiscoverField()
 
     @Test
     fun testAllCategoriesShouldBeVisible() {

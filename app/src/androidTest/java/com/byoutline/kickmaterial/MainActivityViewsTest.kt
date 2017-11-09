@@ -13,6 +13,8 @@ import org.junit.Test
 class MainActivityViewsTest {
     @get:Rule
     val activityRule = DaggerRules.userNextLaunchRule()
+    @get:Rule
+    val idlingResourceRule = DaggerRules.idlingResourceDiscoverField()
 
     @Test
     fun testHeaderShouldNotBeVisibleAfterScroll() {

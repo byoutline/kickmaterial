@@ -8,6 +8,8 @@ import org.junit.Test
 class UserScenarioTest {
     @get:Rule
     val activityRule = DaggerRules.userNextLaunchRule()
+    @get:Rule
+    val idlingResourceRule = DaggerRules.idlingResourceDiscoverField()
 
     private val transitionsRobot = UserScenarioRobot()
 

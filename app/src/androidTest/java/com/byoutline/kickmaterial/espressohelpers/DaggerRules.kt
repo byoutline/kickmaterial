@@ -17,57 +17,47 @@ import com.squareup.spoon.Spoon
 import org.junit.rules.ExternalResource
 import org.junit.runner.Description
 import org.junit.runners.model.Statement
+import kotlin.reflect.KClass
 
 /**
- * Methods returning custom [ActivityTestRule]s that set test [AppComponent].
+ * Methods returning custom [ActivityTestRule]s that set test [GlobalComponent].
 
  * @author Sebastian Kacprzak <sebastian.kacprzak at byoutline.com>
  */
 object DaggerRules {
 
-    fun userFirstLaunchRule(useCachedFieldIdlRes: Boolean = true): ActivityTestRule<MainActivity>
-            = getActivityRule({ TestComponents.getFirstRunComponent(it) }, MainActivity::class.java, useCachedFieldIdlRes)
+    fun userFirstLaunchRule(): ActivityTestRule<MainActivity>
+            = getActivityRule({ TestComponents.getFirstRunComponent(it) }, MainActivity::class)
 
-    fun userNextLaunchRule(useCachedFieldIdlRes: Boolean = true): ActivityTestRule<MainActivity>
-            = getActivityRule({ TestComponents.getNextRunComponent(it) }, MainActivity::class.java, useCachedFieldIdlRes)
+    fun userNextLaunchRule(): ActivityTestRule<MainActivity>
+            = getActivityRule({ TestComponents.getNextRunComponent(it) }, MainActivity::class)
+
+    fun idlingResourceDiscoverField()
+            = CachedFieldIdlingResourceRule(KickMaterialApp.component.discoverField)
 
     private fun <ACTIVITY : Activity> getActivityRule(
             mainComponentProv: (KickMaterialApp) -> GlobalComponent,
-            clazz: Class<ACTIVITY>, useCachedFieldIdlRes: Boolean
+            clazz: KClass<ACTIVITY>
     ): ActivityTestRule<ACTIVITY> {
         val mainHandler = Handler(Looper.getMainLooper())
-        return DaggerActivityTestRule(clazz, beforeActivityLaunchedAction = { application ->
+        return DaggerActivityTestRule(clazz.java, beforeActivityLaunchedAction = { application ->
             val app = application as KickMaterialApp
             val globalComponent = mainComponentProv(app)
             mainHandler.post { app.setComponents(globalComponent) }
-        }, useCachedFieldIdlRes = useCachedFieldIdlRes)
+        })
     }
 }
 
 class DaggerActivityTestRule<T : Activity>(
         activityClass: Class<T>, initialTouchMode: Boolean = false,
         launchActivity: Boolean = true,
-        private val beforeActivityLaunchedAction: (Application) -> Unit = {},
-        private val useCachedFieldIdlRes: Boolean
+        private val beforeActivityLaunchedAction: (Application) -> Unit = {}
 ) : ActivityTestRule<T>(activityClass, initialTouchMode, launchActivity) {
-
-    private lateinit var cachedFieldIdlingResource: CachedFieldIdlingResource
 
     override fun beforeActivityLaunched() {
         super.beforeActivityLaunched()
         beforeActivityLaunchedAction(InstrumentationRegistry.getInstrumentation()
                 .targetContext.applicationContext as Application)
-        if (useCachedFieldIdlRes) {
-            cachedFieldIdlingResource = CachedFieldIdlingResource.from(KickMaterialApp.component.discoverField)
-            Espresso.registerIdlingResources(cachedFieldIdlingResource)
-        }
-    }
-
-    override fun afterActivityFinished() {
-        if (useCachedFieldIdlRes) {
-            Espresso.unregisterIdlingResources(cachedFieldIdlingResource)
-        }
-        super.afterActivityFinished()
     }
 
     override fun apply(base: Statement, description: Description): Statement {
