@@ -25,4 +25,5 @@ interface GlobalComponent {
 
     val app: KickMaterialApp
     val discoverField: ObservableCachedFieldWithArg<DiscoverResponse, DiscoverQuery>
+    @AnimationDurationMultiplier fun getAnimationDurationMultiplier(): Int
 }

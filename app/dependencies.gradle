@@ -5,6 +5,7 @@ ext {
     okhttp_ver = '3.7.0'
     rxlifecycle_ver = '2.1.0'
     binding_collection_adapter_ver = '2.2.0'
+    cappuccino_ver = '0.9.1'
 }
 
 apply plugin: 'kotlin-kapt'
@@ -51,6 +52,12 @@ dependencies {
     implementation 'commons-collections:commons-collections:3.2.2'
     implementation "me.tatarka.bindingcollectionadapter2:bindingcollectionadapter:$binding_collection_adapter_ver"
     implementation "me.tatarka.bindingcollectionadapter2:bindingcollectionadapter-recyclerview:$binding_collection_adapter_ver"
+
+    // Disable animations during tests
+    debugImplementation("com.metova:cappuccino:$cappuccino_ver") {
+        transitive = false
+    }
+    releaseImplementation "com.metova:cappuccino-no-op:$cappuccino_ver"
 
     testImplementation 'junit:junit:4.12'
     testImplementation 'org.mockito:mockito-core:2.8.9'

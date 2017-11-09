@@ -46,6 +46,9 @@ open class GlobalModule(private val app: KickMaterialApp) {
     @Provides
     internal fun providesApp(): KickMaterialApp = app
 
+    @Provides @AnimationDurationMultiplier
+    open fun provideAnimationDurationMultiplier(): Int = 1
+
     @Provides
     internal fun providesPicassoCache(): LruCacheWithPlaceholders = picassoCache
 
