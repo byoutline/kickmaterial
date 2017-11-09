@@ -33,6 +33,6 @@ dependencies:
 
 test:
   pre:
-    - case $CIRCLE_NODE_INDEX in 0) ./gradlew assembleDebug ;; 1) ./gradlew check lint ;; esac:
+    - case $CIRCLE_NODE_INDEX in 0) ./gradlew assembleDebug ;; 1) ./gradlew check && ./gradlew lint ;; esac:
         parallel: true
 
