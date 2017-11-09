@@ -22,9 +22,9 @@ internal object TestComponents {
     private fun getComponent(app: KickMaterialApp, sharedPrefs: SharedPreferences): GlobalComponent {
         return DaggerGlobalComponent.builder()
                 .globalModule(object : GlobalModule(app) {
-                    override fun provideSharedPrefs(): SharedPreferences {
-                        return sharedPrefs
-                    }
+                    override fun provideSharedPrefs() = sharedPrefs
+
+                    override fun provideAnimationDurationMultiplier() = 0
                 })
                 .build()
     }
