@@ -7,6 +7,7 @@ ext {
     binding_collection_adapter_ver = '2.2.0'
     cached_field_ver = '1.7.0-RC3'
     cappuccino_ver = '0.9.1'
+    anko_ver = '0.10.2'
 }
 
 apply plugin: 'kotlin-kapt'
@@ -20,23 +21,38 @@ dependencies {
     implementation "com.android.support:recyclerview-v7:$support_version"
     implementation "com.android.support:palette-v7:$support_version"
     implementation "com.android.support:design:$support_version"
+
     implementation 'com.byoutline.secretsauce:secretsaucekt:0.6.0-beta6'
     implementation "com.byoutline.observablecachedfield:observablecachedfield:$cached_field_ver"
     implementation 'com.byoutline.androidstubserver:stubserver:2.0.0-beta2'
+
+
     implementation "com.squareup.retrofit2:retrofit:$retrofit_ver"
     implementation "com.squareup.retrofit2:converter-gson:$retrofit_ver"
     implementation "com.squareup.okhttp3:okhttp:$okhttp_ver"
     implementation "com.squareup.okhttp3:okhttp-urlconnection:$okhttp_ver"
     implementation 'com.squareup.picasso:picasso:2.5.2'
-    implementation 'javax.inject:javax.inject:1'
+
+
     implementation 'nz.bradcampbell:paperparcel:2.0.1'
     implementation 'nz.bradcampbell:paperparcel-kotlin:2.0.1'
-    implementation 'io.reactivex.rxjava2:rxjava:2.1.3'
-    implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
-    implementation "android.arch.lifecycle:extensions:1.0.0"
     kapt 'nz.bradcampbell:paperparcel-compiler:2.0.1'
+
+
+    implementation "org.jetbrains.anko:anko-sdk25-listeners:$anko_ver"
+    implementation "org.jetbrains.anko:anko-commons:$anko_ver"
+    implementation "org.jetbrains.anko:anko-appcompat-v7-commons:$anko_ver"
+    implementation "org.jetbrains.anko:anko-appcompat-v7-listeners:$anko_ver"
+    implementation "org.jetbrains.anko:anko-support-v4:$anko_ver"
+
+    implementation 'io.reactivex.rxjava2:rxjava:2.1.6'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
+
+    implementation "android.arch.lifecycle:extensions:1.0.0"
+
     kapt "com.android.databinding:compiler:$buildscript_tools_ver"
-    // For dagger 2
+
+    implementation 'javax.inject:javax.inject:1'
     implementation "com.google.dagger:dagger:$dagger_version"
     kapt "com.google.dagger:dagger-compiler:$dagger_version"
     implementation 'com.google.dagger:dagger-android-support:2.12'
@@ -49,8 +65,11 @@ dependencies {
     kapt 'com.hannesdorfmann.fragmentargs:processor:3.0.2'
 
     implementation 'com.kenai.nbpwr:edu-umd-cs-findbugs-annotations:1.3.2-201002241900'
+
     implementation 'com.jakewharton.timber:timber:4.5.1'
+
     implementation 'commons-collections:commons-collections:3.2.2'
+
     implementation "me.tatarka.bindingcollectionadapter2:bindingcollectionadapter:$binding_collection_adapter_ver"
     implementation "me.tatarka.bindingcollectionadapter2:bindingcollectionadapter-recyclerview:$binding_collection_adapter_ver"
 
@@ -61,16 +80,16 @@ dependencies {
     releaseImplementation "com.metova:cappuccino-no-op:$cappuccino_ver"
 
     testImplementation 'junit:junit:4.12'
-    testImplementation 'org.mockito:mockito-core:2.8.9'
+    testImplementation 'org.mockito:mockito-core:2.11.0'
     testImplementation 'com.squareup.assertj:assertj-android:1.1.0'
-    testImplementation 'org.robolectric:robolectric:3.4.2'
+    testImplementation 'org.robolectric:robolectric:3.5.1'
 
     testImplementation 'org.robospock:robospock:1.0.1'
     testImplementation 'org.robolectric:shadows-multidex:3.3.2'
     testImplementation 'org.codehaus.groovy:groovy-all:2.4.12'
     testImplementation 'org.spockframework:spock-core:1.1-groovy-2.4'
-    testImplementation 'cglib:cglib-nodep:3.2.4'
-    testImplementation 'org.objenesis:objenesis:2.5'
+    testImplementation 'cglib:cglib-nodep:3.2.5'
+    testImplementation 'org.objenesis:objenesis:2.6'
 
     androidTestImplementation "com.android.support:appcompat-v7:$support_version"
     androidTestImplementation "com.android.support:recyclerview-v7:$support_version"

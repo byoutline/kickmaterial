@@ -24,6 +24,7 @@ import com.byoutline.kickmaterial.utils.LUtils
 import com.byoutline.secretsauce.di.lazyViewModel
 import com.squareup.picasso.Picasso
 import com.squareup.picasso.Target
+import org.jetbrains.anko.sdk25.listeners.onClick
 
 /**
  * @author Pawel Karczewski <pawel.karczewski at byoutline.com> on 2015-01-03
@@ -53,7 +54,7 @@ class RewardsListActivity : KickMaterialBaseActivity() {
             categoriesRv.addOnScrollListener(ContainerTranslationScrollListener(-RewardsListActivity.TRANSLATION_IMAGE_RATION,
                     rewardsListImageContainer, categoriesHeaderLl))
         }
-        binding.closeCategoriesIv.setOnClickListener { ActivityCompat.finishAfterTransition(this) }
+        binding.closeCategoriesIv.onClick { ActivityCompat.finishAfterTransition(this) }
     }
 
     private fun loadProjectData(binding: FragmentRewardsListBinding) {

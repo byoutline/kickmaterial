@@ -51,7 +51,7 @@ class SearchViewModel(
     private var currentSearchTerm: String? = null
     private var hasMore = true
 
-    fun updateSearchTerm(searchTerm: String) {
+    fun updateSearchTerm(searchTerm: String?) {
         currentSearchTerm = searchTerm
         page = SearchListFragment.DEFAULT_PAGE
         currentProjects.clear()

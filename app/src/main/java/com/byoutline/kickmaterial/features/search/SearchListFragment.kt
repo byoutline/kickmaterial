@@ -20,6 +20,8 @@ import com.byoutline.kickmaterial.views.EndlessRecyclerView
 import com.byoutline.secretsauce.activities.hideKeyboard
 import com.byoutline.secretsauce.di.inflateAndSetViewModel
 import com.byoutline.secretsauce.di.lazyViewModelWithAutoLifecycle
+import org.jetbrains.anko.appcompat.v7.listeners.onClose
+import org.jetbrains.anko.appcompat.v7.listeners.onQueryTextListener
 
 class SearchListFragment : KickMaterialFragment(), ProjectClickListener, EndlessRecyclerView.EndlessScrollListener {
 
@@ -76,22 +78,22 @@ class SearchListFragment : KickMaterialFragment(), ProjectClickListener, Endless
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater?) {
         searchView = getSearchView(activity!!, menu).apply {
             isIconified = false
-            setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-                override fun onQueryTextSubmit(searchTerm: String): Boolean {
+            onQueryTextListener{
+                onQueryTextSubmit { searchTerm ->
                     viewModel.updateSearchTerm(searchTerm)
                     // On landscape entry field and soft keyboard may cover whole screen.
                     // Close keyboard when they press search, so they can see result.
                     activity?.hideKeyboard()
-                    return true
+                    true
                 }
 
-                override fun onQueryTextChange(searchTerm: String): Boolean {
+                onQueryTextChange { searchTerm ->
                     viewModel.updateSearchTerm(searchTerm)
-                    return true
+                    true
                 }
-            })
+            }
             setQuery(restoredSearchQuery, false)
-            setOnCloseListener {
+            onClose {
                 // Allow only clearing, do not allow closing.
                 TextUtils.isEmpty(searchView!!.query)
             }

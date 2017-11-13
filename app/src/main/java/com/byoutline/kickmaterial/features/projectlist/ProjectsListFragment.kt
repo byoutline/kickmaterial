@@ -24,6 +24,9 @@ import com.byoutline.secretsauce.activities.showFragment
 import com.byoutline.secretsauce.di.Injectable
 import com.byoutline.secretsauce.di.inflateAndSetViewModel
 import com.byoutline.secretsauce.di.lazyViewModelWithAutoLifecycle
+import org.jetbrains.anko.bundleOf
+import org.jetbrains.anko.sdk25.listeners.onClick
+import org.jetbrains.anko.support.v4.onRefresh
 import timber.log.Timber
 
 
@@ -63,7 +66,7 @@ class ProjectsListFragment : KickMaterialFragment(), Injectable, ProjectClickLis
     private fun configureSwipeRefresh() {
         val altColor = category.colorResId
         binding.swipeRefreshProjectsSrl.setColorSchemeResources(altColor, R.color.green_primary)
-        binding.swipeRefreshProjectsSrl.setOnRefreshListener {
+        binding.swipeRefreshProjectsSrl.onRefresh {
             // Throw away all loaded categories and start over.
             val pageToRefresh = 1
             viewModel.discoverField.refresh(DiscoverQuery.getDiscoverQuery(category, pageToRefresh))
@@ -71,7 +74,7 @@ class ProjectsListFragment : KickMaterialFragment(), Injectable, ProjectClickLis
     }
 
     private fun setUpListeners() {
-        binding.showCategoriesFab.setOnClickListener {
+        binding.showCategoriesFab.onClick {
             CategoriesListActivity.launch(activity!!, category, binding.showCategoriesFab)
         }
         scrollListener = ProjectsListScrollListener(context!!, { hostActivity }, binding)
@@ -150,11 +153,9 @@ class ProjectsListFragment : KickMaterialFragment(), Injectable, ProjectClickLis
         private const val INSTANCE_STATE_SUMMARY_SCROLLED = "INSTANCE_STATE_SUMMARY_SCROLLED"
 
         fun newInstance(category: Category?): ProjectsListFragment {
-            val instance = ProjectsListFragment()
-            val args = Bundle()
-            args.putParcelable(ARG_CATEGORY, category)
-            instance.arguments = args
-            return instance
+            return ProjectsListFragment().apply {
+                arguments = bundleOf(ARG_CATEGORY to category)
+            }
         }
     }
 }

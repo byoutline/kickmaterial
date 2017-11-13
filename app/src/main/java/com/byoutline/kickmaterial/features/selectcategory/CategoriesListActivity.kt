@@ -26,6 +26,7 @@ import com.byoutline.kickmaterial.utils.KickMaterialBaseActivity
 import com.byoutline.kickmaterial.utils.LUtils
 import com.byoutline.secretsauce.di.lazyViewModelWithAutoLifecycle
 import com.byoutline.secretsauce.utils.ViewUtils
+import org.jetbrains.anko.sdk25.listeners.onClick
 
 
 /**
@@ -57,7 +58,7 @@ class CategoriesListActivity : KickMaterialBaseActivity(), CategoryClickListener
             scrollListener = ContainerTranslationScrollListener(-0.5f,
                     binding.circleImageContainer, binding.categoriesHeaderLl)
             categoriesRv.addOnScrollListener(scrollListener)
-            closeCategoriesIv.setOnClickListener { finishWithoutResult() }
+            closeCategoriesIv.onClick { finishWithoutResult() }
         }
     }
 

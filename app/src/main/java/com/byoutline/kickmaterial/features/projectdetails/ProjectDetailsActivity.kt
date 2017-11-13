@@ -26,6 +26,8 @@ import com.byoutline.secretsauce.activities.WebViewFlickrActivity
 import com.byoutline.secretsauce.utils.ViewUtils
 import com.byoutline.secretsauce.utils.showToast
 import com.squareup.picasso.Picasso
+import org.jetbrains.anko.intentFor
+import org.jetbrains.anko.sdk25.listeners.onClick
 import javax.inject.Inject
 
 /**
@@ -136,20 +138,20 @@ class ProjectDetailsActivity : KickMaterialBaseActivity(), DelayedTransitionActi
 
     private fun setUpListeners() {
         with(binding) {
-            projectCommentsLl.setOnClickListener { showWebView(transitionHelper.project.commentsUrl) }
-            projectUpdatesLl.setOnClickListener { showWebView(transitionHelper.project.updatesUrl) }
-            readMoreBtn.setOnClickListener {
+            projectCommentsLl.onClick { showWebView(transitionHelper.project.commentsUrl) }
+            projectUpdatesLl.onClick { showWebView(transitionHelper.project.updatesUrl) }
+            readMoreBtn.onClick {
                 val MAX_DESCRIPTION_LINES = 1000
                 binding.projectDescriptionTv.maxLines = MAX_DESCRIPTION_LINES
                 ViewUtils.showView(readMoreBtn, false)
             }
-            playVideoBtn.setOnClickListener {
+            playVideoBtn.onClick {
                 transitionHelper.executeIfCachedProjectDetailsAreAvailable({ details ->
                     VideoActivity.showActivity(this@ProjectDetailsActivity, details)
                 }, displayErrorAction = { showToast(R.string.retry_getting_project_details) })
             }
             listOf(projectAuthorNameLabelTv as View, authorPhotoIv, projectAuthorNameTv).forEach {
-                it.setOnClickListener { showWebView(transitionHelper.project.authorUrl, Intent(this@ProjectDetailsActivity, WebViewFlickrActivity::class.java)) }
+                it.onClick { showWebView(transitionHelper.project.authorUrl, Intent(this@ProjectDetailsActivity, WebViewFlickrActivity::class.java)) }
             }
         }
     }
@@ -163,8 +165,7 @@ class ProjectDetailsActivity : KickMaterialBaseActivity(), DelayedTransitionActi
 private const val EXTRA_PROJECT = "DetailActivity:project"
 
 fun Activity.startProjectDetailsActivity(project: Project, sharedViews: SharedViews)
-        = Intent(this, ProjectDetailsActivity::class.java)
-        .apply { putExtra(EXTRA_PROJECT, project) }
+    = intentFor<ProjectDetailsActivity>(EXTRA_PROJECT to project)
         .let {
             // Preload big photo
             Picasso.with(this).load(project.bigPhotoUrl)

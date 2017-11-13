@@ -65,5 +65,6 @@
     <string name="gathered_format">$ %1$.0f</string>
     <string name="retry_getting_project_details">Getting project details failed. Retrying</string>
     <string name="retry_getting_project_rewards">Getting rewards failed. Retrying</string>
+    <string name="video_btn_back_this_project">Back This project</string>
 
 </resources>
