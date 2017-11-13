@@ -31,10 +31,8 @@ class RewardListViewModel : ViewModel() {
                     itemBinding.clearExtras()
                             .set(BR.reward, R.layout.reward_list_item)
                             .bindExtra(BR.bgColor, bgColor)
-                            .bindExtra(BR.rewardClickListener, object : RewardClickListener {
-                                override fun rewardClicked(reward: RewardItem) {
-                                    KickMaterialApp.component.app.showDebugToast("RewardClicked " + reward)
-                                }
+                            .bindExtra(BR.rewardClickListener, RewardClickListener { reward ->
+                                KickMaterialApp.component.app.showDebugToast("RewardClicked " + reward)
                             })
                 })
         itemBinding = ItemBinding.of(itemBind)
