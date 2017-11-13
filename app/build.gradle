@@ -75,6 +75,10 @@ android {
         exclude 'META-INF/services/javax.annotation.processing.Processor'
         exclude 'LICENSE.txt'
     }
+
+    dexOptions {
+        javaMaxHeapSize System.getenv('CI') ? "2g" : "4g"
+    }
 }
 
 

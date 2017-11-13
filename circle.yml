@@ -14,6 +14,7 @@ machine:
     JAVA8_HOME: "/usr/lib/jvm/jdk1.8.0"
     TERM: "dumb"
     ADB_INSTALL_TIMEOUT: "10"
+    _JAVA_OPTIONS: "-Xmx1400m -XX:ParallelGCThreads=2 -XX:ConcGCThreads=2 -XX:ParallelGCThreads=2 -Djava.util.concurrent.ForkJoinPool.common.parallelism=2"
   post:
     # Turn off unneeded services to free memory.
     - for service in "apache2" "beanstalkd" "cassandra" "couchbase-server" "couchdb" "docker" "elasticsearch" "memcached" "mongodb" "mysql" "neo4j-service" "postgresql" "puppet" "rabbitmq-server" "redis-server" "riak" "solr" "sphinxsearch" "zookeeper"; do sudo service $service stop; done
