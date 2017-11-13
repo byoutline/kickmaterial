@@ -121,7 +121,7 @@ class CircleTransition : Transition {
 
     private fun getStartView(sceneRoot: ViewGroup, startValues: TransitionValues, sceneRootLoc: IntArray, startLoc: IntArray): View {
         val startImage = startValues.values[PROPERTY_IMAGE] as Bitmap
-        val startBackground = BitmapDrawable(startImage)
+        val startBackground = BitmapDrawable(null, startImage)
         val startView = addViewToOverlay(sceneRoot, startImage.width,
                 startImage.height, startBackground)
 
