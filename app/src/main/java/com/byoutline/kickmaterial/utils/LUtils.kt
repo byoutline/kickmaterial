@@ -26,6 +26,7 @@ import android.support.annotation.AnimRes
 import android.support.v4.view.animation.LinearOutSlowInInterpolator
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import android.view.animation.Interpolator
 import android.widget.ImageView
 
 
@@ -50,7 +51,7 @@ class LUtils private constructor() {
         }
 
         @JvmOverloads
-        fun loadAnimationWithLInterpolator(context: Context, @AnimRes animId: Int, interpolator: android.view.animation.Interpolator = LinearOutSlowInInterpolator()): Animation {
+        fun loadAnimationWithLInterpolator(context: Context, @AnimRes animId: Int, interpolator: Interpolator = LinearOutSlowInInterpolator()): Animation {
             val animation = AnimationUtils.loadAnimation(context, animId)
             animation.interpolator = interpolator
             return animation
