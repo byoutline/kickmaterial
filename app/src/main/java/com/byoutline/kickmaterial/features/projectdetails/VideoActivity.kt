@@ -90,10 +90,11 @@ class VideoActivity : KickMaterialBaseActivity() {
         }
 
         fun showActivity(context: Context, videoUrl: String, altVideoUrl: String, webviewUrl: String) {
-            val intent = Intent(context, VideoActivity::class.java)
-            intent.putExtra(BUNDLE_VIDEO_URL, videoUrl)
-            intent.putExtra(BUNDLE_ALT_VIDEO_URL, altVideoUrl)
-            intent.putExtra(BUNDLE_WEBVIEW_URL, webviewUrl)
+            val intent = Intent(context, VideoActivity::class.java).apply {
+                putExtra(BUNDLE_VIDEO_URL, videoUrl)
+                putExtra(BUNDLE_ALT_VIDEO_URL, altVideoUrl)
+                putExtra(BUNDLE_WEBVIEW_URL, webviewUrl)
+            }
             context.startActivity(intent)
         }
     }
