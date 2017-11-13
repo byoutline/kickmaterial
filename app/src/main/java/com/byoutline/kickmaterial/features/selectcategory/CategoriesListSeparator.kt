@@ -7,12 +7,11 @@ import android.view.View
 import com.byoutline.kickmaterial.utils.LUtils
 import com.byoutline.secretsauce.utils.ViewUtils
 
-class CategoriesListSeparator @JvmOverloads constructor(context: Context, private val firstItemSpace: Int = ViewUtils.dpToPx(12f, context)) : RecyclerView.ItemDecoration() {
-    private val restItemPadding: Int = if (LUtils.hasL()) {
-        ViewUtils.dpToPx(-2f, context)
-    } else {
-        ViewUtils.dpToPx(-8f, context)
-    }
+class CategoriesListSeparator @JvmOverloads constructor(
+        context: Context,
+        private val firstItemSpace: Int = ViewUtils.dpToPx(12f, context)
+) : RecyclerView.ItemDecoration() {
+    private val restItemPadding: Int = ViewUtils.dpToPx(if (LUtils.hasL()) -2f else -8f, context)
 
     override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State?) {
         val pos = parent.getChildAdapterPosition(view)

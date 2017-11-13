@@ -1,12 +1,12 @@
 package com.byoutline.kickmaterial.features.selectcategory
 
+private const val ALPHA_CHANNEL: Int = 24
+private const val RED_CHANNEL: Int = 16
+private const val GREEN_CHANNEL: Int = 8
+private const val BLUE_CHANNEL: Int = 0
+
 object ColorMixer {
     fun mixTwoColors(color1: Int, color2: Int, amount: Float): Int {
-        val ALPHA_CHANNEL: Int = 24
-        val RED_CHANNEL: Int = 16
-        val GREEN_CHANNEL: Int = 8
-        val BLUE_CHANNEL: Int = 0
-
         val inverseAmount = 1.0f - amount
 
         val a = ((color1 shr ALPHA_CHANNEL and 0xff).toFloat() * amount + (color2 shr ALPHA_CHANNEL and 0xff).toFloat() * inverseAmount).toInt() and 0xff
