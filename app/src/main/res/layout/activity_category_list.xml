@@ -10,10 +10,6 @@
         <variable
             name="viewModel"
             type="com.byoutline.kickmaterial.features.selectcategory.CategoriesListViewModel" />
-
-        <variable
-            name="categoryClickListener"
-            type="com.byoutline.kickmaterial.features.selectcategory.CategoryClickListener" />
     </data>
 
     <FrameLayout
@@ -67,7 +63,6 @@
             app:itemBinding="@{viewModel.itemBinding}"
             app:items="@{viewModel.items}"
             app:layoutManager="@{LayoutManagers.linear()}" />
-        <!--app:adapter='@{categoryClickListener}'-->
 
 
         <LinearLayout

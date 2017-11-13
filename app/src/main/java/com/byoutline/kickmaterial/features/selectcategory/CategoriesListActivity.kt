@@ -117,7 +117,6 @@ class CategoriesListActivity : KickMaterialBaseActivity(), CategoryClickListener
         val itemColor = category?.colorResId ?: R.color.green_primary
         val bgColor = ContextCompat.getColor(this, itemColor)
         viewModel.setAllCategoriesBgColor(bgColor)
-        binding.categoryClickListener = this
         binding.viewModel = viewModel
     }
 
