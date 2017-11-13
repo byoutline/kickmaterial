@@ -190,7 +190,6 @@ class ProjectItemViewModel(project: Project, val type: Int, listenerProv: Provid
 
 const val IMAGE_RATIO = (4 / 3).toDouble()
 
-
 @BindingAdapter("projectImg")
 fun setProjectImage(view: ImageView, projectVM: ProjectItemViewModel?) {
     if (projectVM == null) return

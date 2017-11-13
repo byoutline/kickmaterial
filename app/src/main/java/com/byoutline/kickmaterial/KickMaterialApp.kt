@@ -66,6 +66,7 @@ open class KickMaterialApp : Application(), HasActivityInjector {
 
     companion object {
         lateinit var component: AppComponent
+            private set
     }
 }
 
