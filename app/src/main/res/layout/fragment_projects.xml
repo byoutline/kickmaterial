@@ -28,7 +28,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <com.byoutline.kickmaterial.views.EndlessRecyclerView
+            <android.support.v7.widget.RecyclerView
                 android:id="@+id/project_recycler_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

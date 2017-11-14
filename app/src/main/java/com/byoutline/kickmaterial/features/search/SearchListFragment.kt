@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.SearchView
 import android.text.TextUtils
 import android.view.*
@@ -16,16 +17,17 @@ import com.byoutline.kickmaterial.model.Project
 import com.byoutline.kickmaterial.transitions.SharedViews
 import com.byoutline.kickmaterial.utils.KickMaterialFragment
 import com.byoutline.kickmaterial.utils.LUtils
-import com.byoutline.kickmaterial.views.EndlessRecyclerView
+import com.byoutline.kickmaterial.views.EndlessScrollListener
+import com.byoutline.kickmaterial.views.setEndlessScrollListener
 import com.byoutline.secretsauce.activities.hideKeyboard
 import com.byoutline.secretsauce.di.inflateAndSetViewModel
 import com.byoutline.secretsauce.di.lazyViewModelWithAutoLifecycle
 import org.jetbrains.anko.appcompat.v7.listeners.onClose
 import org.jetbrains.anko.appcompat.v7.listeners.onQueryTextListener
 
-class SearchListFragment : KickMaterialFragment(), ProjectClickListener, EndlessRecyclerView.EndlessScrollListener {
+class SearchListFragment : KickMaterialFragment(), ProjectClickListener, EndlessScrollListener {
 
-    private lateinit var projectListRv: EndlessRecyclerView
+    private lateinit var projectListRv: RecyclerView
 
     val viewModel: SearchViewModel by lazyViewModelWithAutoLifecycle(this, SearchViewModel::class)
 

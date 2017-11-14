@@ -19,7 +19,8 @@ import com.byoutline.kickmaterial.model.Project
 import com.byoutline.kickmaterial.transitions.SharedViews
 import com.byoutline.kickmaterial.utils.KickMaterialFragment
 import com.byoutline.kickmaterial.utils.LUtils
-import com.byoutline.kickmaterial.views.EndlessRecyclerView
+import com.byoutline.kickmaterial.views.EndlessScrollListener
+import com.byoutline.kickmaterial.views.setEndlessScrollListener
 import com.byoutline.secretsauce.activities.showFragment
 import com.byoutline.secretsauce.di.Injectable
 import com.byoutline.secretsauce.di.inflateAndSetViewModel
@@ -33,7 +34,7 @@ import timber.log.Timber
 /**
  * @author Pawel Karczewski <pawel.karczewski at byoutline.com> on 2015-01-03
  */
-class ProjectsListFragment : KickMaterialFragment(), Injectable, ProjectClickListener, FieldStateListener, EndlessRecyclerView.EndlessScrollListener {
+class ProjectsListFragment : KickMaterialFragment(), Injectable, ProjectClickListener, FieldStateListener, EndlessScrollListener {
 
     private val viewModel by lazyViewModelWithAutoLifecycle(this, ProjectListViewModel::class)
     lateinit var binding: FragmentProjectsBinding
