@@ -65,17 +65,11 @@ open class Project : PaperParcelable {
 
     val isFunded: Boolean get() = gatheredAmount >= totalAmount
 
-    fun getGatheredAmount(): String {
-        return MONEY_USA_FORMATTER.format(gatheredAmount.toDouble())
-    }
+    fun getGatheredAmount(): String = MONEY_USA_FORMATTER.format(gatheredAmount.toDouble())
 
-    fun getGatheredAmountWithCurrency(): String {
-        return CURRENCY + getGatheredAmount()
-    }
+    fun getGatheredAmountWithCurrency(): String = CURRENCY + getGatheredAmount()
 
-    fun getTotalAmount(): String {
-        return MONEY_USA_FORMATTER.format(totalAmount.toDouble())
-    }
+    fun getTotalAmount(): String = MONEY_USA_FORMATTER.format(totalAmount.toDouble())
 
     val detailsQueryMap: Map<String, String>
         get() = QueryParamsExtractor.getQueryParams(urls!!.api!!.project!!)
@@ -88,25 +82,22 @@ open class Project : PaperParcelable {
 
     val updatesUrl: String get() = getGeneratedUrl("/updates")
 
-    private fun getGeneratedUrl(suffix: String): String {
-        return if (projectUrl.isEmpty()) "" else projectUrl + suffix
-    }
+    private fun getGeneratedUrl(suffix: String): String =
+            if (projectUrl.isEmpty()) "" else projectUrl + suffix
 
     val projectCreatorAvatar: String get() = creator?.avatar?.medium ?: ""
 
     val authorName: String get() = creator?.name ?: ""
 
 
-    override fun equals(o: Any?): Boolean {
-        if (this === o) return true
-        val project = o as? Project ?: return false
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        val project = other as? Project ?: return false
 
         return id == project.id
     }
 
-    override fun hashCode(): Int {
-        return id
-    }
+    override fun hashCode() = id
 
     override fun toString(): String {
         return "Project{" +

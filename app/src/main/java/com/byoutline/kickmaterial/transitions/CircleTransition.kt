@@ -41,9 +41,7 @@ class CircleTransition : Transition {
 
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
 
-    override fun getTransitionProperties(): Array<String> {
-        return TRANSITION_PROPERTIES
-    }
+    override fun getTransitionProperties(): Array<String> = TRANSITION_PROPERTIES
 
     private fun captureValues(transitionValues: TransitionValues) {
         val view = transitionValues.view

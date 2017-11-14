@@ -16,11 +16,11 @@ class DiscoverQuery(val queryMap: Map<String, String>, val discoverType: Discove
             return null
         }
 
-    override fun equals(o: Any?): Boolean {
-        if (this === o) return true
-        if (o == null || javaClass != o.javaClass) return false
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other == null || javaClass != other.javaClass) return false
 
-        val that = o as DiscoverQuery?
+        val that = other as DiscoverQuery?
 
         if (queryMap != that!!.queryMap) return false
         return discoverType == that.discoverType
@@ -36,17 +36,13 @@ class DiscoverQuery(val queryMap: Map<String, String>, val discoverType: Discove
     companion object {
         private const val PER_PAGE = 12
 
-        fun getDiscover(page: Int?): DiscoverQuery {
+        private fun getDiscover(page: Int?): DiscoverQuery {
             val firstPage = page == null || page == 1
             val params = if (firstPage) emptyMap<String, String>() else getDiscoverCategoryMap(null, page, PER_PAGE, null)
             return DiscoverQuery(params, DiscoverType.DISCOVER)
         }
 
-        fun getDiscoverMore(params: Map<String, String>): DiscoverQuery {
-            return DiscoverQuery(params, DiscoverType.DISCOVER_MORE)
-        }
-
-        fun getDiscoverCategory(categoryId: Int, page: Int, sort: SortTypes): DiscoverQuery {
+        private fun getDiscoverCategory(categoryId: Int, page: Int, sort: SortTypes): DiscoverQuery {
             val params = getDiscoverCategoryMap(categoryId, page, PER_PAGE, sort)
             return DiscoverQuery(params, DiscoverType.DISCOVER_CATEGORY)
         }

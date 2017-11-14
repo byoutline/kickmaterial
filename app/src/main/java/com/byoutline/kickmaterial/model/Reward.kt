@@ -23,9 +23,8 @@ class Reward(
     override val itemType: Int
         get() = RewardItem.ITEM
 
-    override fun toString(): String {
-        return "Reward(minimum=$minimum, reward=$reward, description=$description)"
-    }
+    override fun toString() =
+            "Reward(minimum=$minimum, reward=$reward, description=$description)"
 
     companion object {
         @JvmField

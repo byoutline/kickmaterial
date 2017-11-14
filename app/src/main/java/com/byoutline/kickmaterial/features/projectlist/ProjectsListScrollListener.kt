@@ -15,13 +15,9 @@ class ProjectsListScrollListener(context: Context,
                                  private val hostActivityProv: () -> KickMaterialFragment.HostActivity?,
                                  private val binding: FragmentProjectsBinding) : RecyclerView.OnScrollListener() {
     var summaryScrolled: Float = 0f
-    private var toolbarScrollPoint: Float = 0F
-    private var maxScroll: Float = 0F
+    private val toolbarScrollPoint: Float = ViewUtils.dpToPx(24f, context).toFloat()
+    private val maxScroll: Float = (2 * context.resources.getDimensionPixelSize(R.dimen.project_header_padding_top) + ViewUtils.dpToPx(48f, context)).toFloat()
 
-    init {
-        maxScroll = (2 * context.resources.getDimensionPixelSize(R.dimen.project_header_padding_top) + ViewUtils.dpToPx(48f, context)).toFloat()
-        toolbarScrollPoint = ViewUtils.dpToPx(24f, context).toFloat()
-    }
 
     override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
         super.onScrolled(recyclerView, dx, dy)
