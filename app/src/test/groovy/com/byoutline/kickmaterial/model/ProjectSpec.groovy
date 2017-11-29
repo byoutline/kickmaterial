@@ -3,12 +3,7 @@ package com.byoutline.kickmaterial.model
 import spock.lang.Specification
 import spock.lang.Unroll
 
-/**
- *
- * @author Sebastian Kacprzak <sebastian.kacprzak at byoutline.com>.
- */
 class ProjectSpec extends Specification {
-
 
     @Unroll
     def "getProgress should return value: #val for gathered amount: #gA and total amount: #tA"() {
@@ -40,5 +35,4 @@ class ProjectSpec extends Specification {
         then:
         result == [signature: '1427292197.67ec163ed8dbd36529f591b18fe0f7c4c5867ee1']
     }
-
 }

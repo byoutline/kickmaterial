@@ -87,10 +87,15 @@ project.afterEvaluate {
 }
 
 private def getClassDirs(String sourcePath, classDirExcludes) {
-    fileTree(
-            dir: "${project.buildDir}/intermediates/classes/${sourcePath}",
+    def java = fileTree(
+            dir: "${buildDir}/intermediates/classes/${sourcePath}",
             excludes: classDirExcludes
     )
+    def kotlin = fileTree(
+            dir: "${buildDir}/tmp/kotlin-classes/${sourcePath}",
+            excludes: classDirExcludes
+    )
+    files([java], [kotlin])
 }
 
 
