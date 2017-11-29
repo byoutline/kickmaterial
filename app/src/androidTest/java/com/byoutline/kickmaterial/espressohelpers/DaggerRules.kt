@@ -6,6 +6,7 @@ import android.os.Handler
 import android.os.Looper
 import android.support.test.InstrumentationRegistry
 import android.support.test.espresso.Espresso
+import android.support.test.espresso.IdlingRegistry
 import android.support.test.espresso.base.DefaultFailureHandler
 import android.support.test.rule.ActivityTestRule
 import com.byoutline.cachedfield.CachedFieldWithArg
@@ -79,11 +80,11 @@ class CachedFieldIdlingResourceRule(private val cachedFieldWithArg: CachedFieldW
     @Throws(Throwable::class)
     override fun before() {
         cachedFieldIdlingResource = CachedFieldIdlingResource.from(cachedFieldWithArg)
-        Espresso.registerIdlingResources(cachedFieldIdlingResource)
+        IdlingRegistry.getInstance().register(cachedFieldIdlingResource)
     }
 
     override fun after() {
-        Espresso.unregisterIdlingResources(cachedFieldIdlingResource)
+        IdlingRegistry.getInstance().unregister(cachedFieldIdlingResource)
     }
 }
 

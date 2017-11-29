@@ -31,7 +31,7 @@ import org.jetbrains.anko.sdk25.listeners.onClick
  */
 class RewardsListActivity : KickMaterialBaseActivity() {
 
-    private val viewModel by lazyViewModel(RewardListViewModel::class)
+    private val viewModel: RewardListViewModel by lazyViewModel()
 
     private lateinit var rewardsListRv: RecyclerView
     private lateinit var project: ProjectDetails

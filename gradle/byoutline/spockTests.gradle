@@ -1,29 +1,18 @@
-apply plugin: SpockTests
+apply plugin: 'groovyx.android'
 
-public final class SpockTests implements Plugin<Project>{
+dependencies {
+    testImplementation 'org.codehaus.groovy:groovy-all:2.4.12'
+    testImplementation 'junit:junit:4.12'
+    testImplementation 'org.spockframework:spock-core:1.1-groovy-2.4'
 
-    @Override
-    void apply(Project project) {
-        addDependencies(project)
-        applyPlugins(project)
-    }
+    // allows mocking of classes (in addition to interfaces)
+    testImplementation 'cglib:cglib-nodep:3.2.5'
+    // allows mocking of classes without default constructor (together with CGLIB)
+    testImplementation 'org.objenesis:objenesis:2.6'
 
-    private void addDependencies(Project project) {
-        project.afterEvaluate {
-            def pd = project.dependencies
-            pd.add('testCompile', 'org.codehaus.groovy:groovy-all:2.4.1')
-            pd.add('testCompile', 'junit:junit:4.12')
-            pd.add('testCompile', 'org.spockframework:spock-core:1.0-groovy-2.4')
-            // allows mocking of classes (in addition to interfaces)
-            pd.add('testRuntime', 'cglib:cglib-nodep:2.2.2')
-            // allows mocking of classes without default constructor (together with CGLIB)
-            pd.add('testRuntime', 'org.objenesis:objenesis:1.2')
-        }
-    }
-
-    private void applyPlugins(Project project) {
-        project.configure(project){
-            apply plugin: 'groovy'
-        }
-    }
+    testImplementation 'org.robolectric:robolectric:3.5.1'
+    testImplementation 'org.mockito:mockito-core:2.11.0'
+    testImplementation 'com.squareup.assertj:assertj-android:1.1.0'
+    testImplementation 'org.robospock:robospock:1.0.1'
+    testImplementation 'org.robolectric:shadows-multidex:3.3.2'
 }

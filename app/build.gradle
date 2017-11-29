@@ -10,13 +10,6 @@ buildscript {
         classpath 'com.stanfy.spoon:spoon-gradle-plugin:1.2.2'
         classpath 'gradle.plugin.com.metova:cappuccino-plugin:0.7.3'
     }
-
-    configurations.all {
-        resolutionStrategy {
-            force 'org.jacoco:org.jacoco.report:0.7.4.201502262128'
-            force 'org.jacoco:org.jacoco.core:0.7.4.201502262128'
-        }
-    }
 }
 
 apply plugin: 'com.android.application'
@@ -25,7 +18,6 @@ apply from: "$rootDir/gradle/pmd.gradle"
 apply from: "$rootDir/gradle/coverage.gradle"
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-apply plugin: 'groovyx.grooid.groovy-android'
 apply plugin: "com.metova.cappuccino-animations"
 
 repositories {
@@ -35,8 +27,8 @@ repositories {
 
 
 android {
-    compileSdkVersion 26
-    buildToolsVersion '26.0.2'
+    compileSdkVersion 27
+    buildToolsVersion '27.0.1'
 
     dataBinding {
         enabled = true
@@ -45,7 +37,7 @@ android {
     defaultConfig {
         applicationId 'com.byoutline.kickmaterial'
         minSdkVersion 18
-        targetSdkVersion 26
+        targetSdkVersion 27
         versionCode 3
         versionName '1.0.2'
 
@@ -83,6 +75,8 @@ android {
 
 
 apply from: 'dependencies.gradle'
+apply from: "$rootDir/gradle/byoutline/spockTests.gradle"
+
 
 // Wait before applying spoon plugin, because otherwise it does not see custom apk name.
 apply plugin: 'spoon'

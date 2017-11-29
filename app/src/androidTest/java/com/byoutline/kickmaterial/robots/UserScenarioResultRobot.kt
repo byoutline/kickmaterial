@@ -5,6 +5,7 @@ import com.byoutline.kickmaterial.R
 import com.byoutline.kickmaterial.espressohelpers.viewWithIdIsDisplayed
 import com.byoutline.kickmaterial.espressohelpers.viewWithTextIsDisplayed
 
+private const val ART_CATEGORY_NAME = "Art"
 
 class UserScenarioResultRobot {
 
@@ -13,8 +14,4 @@ class UserScenarioResultRobot {
     fun verifyDetailsScreenIsDisplayed() = viewWithIdIsDisplayed(R.id.play_video_btn, true)
 
     fun verifyCategoryHasChangedToDefault() = viewWithTextIsDisplayed(ART_CATEGORY_NAME, true)
-
-    companion object {
-        val ART_CATEGORY_NAME = "Art"
-    }
 }

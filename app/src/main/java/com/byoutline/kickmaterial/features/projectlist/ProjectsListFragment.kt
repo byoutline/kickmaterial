@@ -36,7 +36,7 @@ import timber.log.Timber
  */
 class ProjectsListFragment : KickMaterialFragment(), Injectable, ProjectClickListener, FieldStateListener, EndlessScrollListener {
 
-    private val viewModel by lazyViewModelWithAutoLifecycle(this, ProjectListViewModel::class)
+    private val viewModel: ProjectListViewModel by lazyViewModelWithAutoLifecycle(this as ProjectClickListener)
     lateinit var binding: FragmentProjectsBinding
 
     private lateinit var category: Category

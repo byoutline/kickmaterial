@@ -1,16 +1,16 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
-    ext.kotlin_version = '1.1.60'
-    ext.buildscript_tools_ver = '3.0.0'
+    ext.kotlin_version = '1.2.0'
+    ext.buildscript_tools_ver = '3.0.1'
     repositories {
         jcenter()
         maven { url "https://maven.google.com" }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.0.0'
+        classpath 'com.android.tools.build:gradle:3.0.1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath 'org.codehaus.groovy:gradle-groovy-android-plugin:0.3.8'
+        classpath 'org.codehaus.groovy:groovy-android-gradle-plugin:2.0.0'
     }
 }
 

@@ -9,6 +9,9 @@ import com.byoutline.kickmaterial.R
 import com.byoutline.kickmaterial.espressohelpers.onBtnWithIdClick
 import com.byoutline.kickmaterial.espressohelpers.onViewWithTextClick
 
+private const val DEFALT_PROJECT_NAME = "Smart thermos"
+private const val ART_CATEGORY_POSITION = 1
+
 class UserScenarioRobot {
 
     fun openDefaultProjectDetails(): UserScenarioResultRobot {
@@ -27,10 +30,4 @@ class UserScenarioRobot {
                 RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(ART_CATEGORY_POSITION, click()))
         return UserScenarioResultRobot()
     }
-
-    companion object {
-        private val DEFALT_PROJECT_NAME = "Smart thermos"
-        val ART_CATEGORY_POSITION = 1
-    }
-
 }

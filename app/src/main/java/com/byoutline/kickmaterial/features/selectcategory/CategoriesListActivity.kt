@@ -34,7 +34,7 @@ import org.jetbrains.anko.sdk25.listeners.onClick
  */
 class CategoriesListActivity : KickMaterialBaseActivity(), CategoryClickListener {
 
-    private val viewModel by lazyViewModelWithAutoLifecycle(this, CategoriesListViewModel::class)
+    private val viewModel: CategoriesListViewModel by lazyViewModelWithAutoLifecycle(this as CategoryClickListener)
 
     private var revealAnimation: Animator? = null
     private var category: Category? = null

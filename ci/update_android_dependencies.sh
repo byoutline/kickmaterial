@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -e
 PROP=${ANDROID_HOME}/tools/source.properties
-MIN_REV="Pkg.Revision=26.0.2"
+MIN_REV="Pkg.Revision=27.0.1"
 CUR_REV=$(cat ${ANDROID_HOME}/tools/source.properties | grep "Revision=")
 
 mkdir "$ANDROID_HOME/licenses" || true
@@ -13,7 +13,7 @@ update_needed() {
 }
 
 # always update
-for pack in "android-26" "platform-tools"  ;
+for pack in "android-27" "platform-tools"  ;
     do echo y | android update sdk -u -a -t ${pack} ;
 done ;
 
@@ -24,4 +24,4 @@ then cat ${PROP} && for pack in "tools" "extra-android-m2repository" "extra-goog
 done ;
 fi
 
-if [ ! -e $ANDROID_HOME/build-tools/26.0.2 ]; then echo y | android update sdk -u -a -t "build-tools-26.0.2"; fi
+if [ ! -e $ANDROID_HOME/build-tools/27.0.1 ]; then echo y | android update sdk -u -a -t "build-tools-27.0.1"; fi

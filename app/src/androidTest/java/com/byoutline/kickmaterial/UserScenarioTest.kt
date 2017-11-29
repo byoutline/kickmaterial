@@ -25,5 +25,4 @@ class UserScenarioTest {
     @Test
     fun testSelectedCategoryIsDisplayed()
             = transitionsRobot.selectDefaultCategory().verifyCategoryHasChangedToDefault()
-
 }

@@ -3,17 +3,11 @@
 apply plugin: 'jacoco'
 apply plugin: 'com.github.kt3k.coveralls'
 
-jacoco {
-    // Workaround for error `Incompatible version 1006`
-    toolVersion = '0.7.4.201502262128' // '0.7.7.201606060606'
-}
-
 android.testOptions.unitTests.all {
     jacoco {
         includeNoLocationClasses = true
     }
 }
-
 
 
 coveralls {
