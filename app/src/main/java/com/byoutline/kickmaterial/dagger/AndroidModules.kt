@@ -27,7 +27,7 @@ import javax.inject.Singleton
 
 @Module
 abstract class MainActivityModule {
-    @ContributesAndroidInjector(modules = arrayOf(ProjectsListFragmentsModule::class))
+    @ContributesAndroidInjector(modules = [ProjectsListFragmentsModule::class])
     abstract fun mainActivity(): MainActivity
 
     @ContributesAndroidInjector abstract fun projectDetailsActivity(): ProjectDetailsActivity

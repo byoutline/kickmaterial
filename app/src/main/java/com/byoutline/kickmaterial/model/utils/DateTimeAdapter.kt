@@ -19,7 +19,5 @@ class DateTimeAdapter : TypeAdapter<DateTime> {
     }
 }
 
-@ProcessorConfig(adapters = arrayOf(
-        Adapter(DateTimeAdapter::class)
-))
+@ProcessorConfig(adapters = [Adapter(DateTimeAdapter::class)])
 interface PaperParcelConfig

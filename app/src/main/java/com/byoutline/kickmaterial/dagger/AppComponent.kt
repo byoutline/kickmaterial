@@ -12,12 +12,12 @@ import javax.inject.Singleton
  * Created by Sebastian Kacprzak <sebastian.kacprzak at byoutline.com> on 27.03.15.
  */
 @Singleton
-@Component(modules = arrayOf(
-        AppModule::class,
-        MainActivityModule::class,
-        ViewModelMapModule::class,
-        ViewModelProvidersModule::class
-))
+@Component(modules = [
+    AppModule::class,
+    MainActivityModule::class,
+    ViewModelMapModule::class,
+    ViewModelProvidersModule::class
+])
 interface AppComponent {
     fun inject(activity: ProjectDetailsActivity)
     fun inject(app: KickMaterialApp)
