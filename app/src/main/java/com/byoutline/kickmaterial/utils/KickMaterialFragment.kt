@@ -43,7 +43,7 @@ abstract class KickMaterialFragment : Fragment() {
     }
 
     private fun setToolbarTitle() {
-        val baseActivity = activity as? KickMaterialBaseActivity ?: return
+        val baseActivity = activity as? AutoHideToolbarActivity ?: return
         baseActivity.setToolbarText(getFragmentToolbarName())
     }
 

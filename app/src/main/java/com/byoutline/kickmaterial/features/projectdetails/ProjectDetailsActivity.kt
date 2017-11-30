@@ -6,7 +6,6 @@ import android.graphics.Color
 import android.os.Bundle
 import android.support.annotation.ColorInt
 import android.support.v4.app.ActivityCompat
-import android.support.v4.app.SharedElementCallback
 import android.support.v4.view.ViewCompat
 import android.view.Menu
 import android.view.MenuItem
@@ -17,8 +16,10 @@ import com.byoutline.kickmaterial.databinding.ActivityProjectDetailsBinding
 import com.byoutline.kickmaterial.features.rewardlist.RewardsListActivity
 import com.byoutline.kickmaterial.model.Project
 import com.byoutline.kickmaterial.transitions.SharedViews
-import com.byoutline.kickmaterial.utils.KickMaterialBaseActivity
+import com.byoutline.kickmaterial.utils.AutoHideToolbarActivity
 import com.byoutline.kickmaterial.utils.LUtils
+import com.byoutline.kickmaterial.utils.getSharedElementsBundle
+import com.byoutline.kickmaterial.utils.setEnterSharedElementCallbackCompat
 import com.byoutline.secretsauce.activities.WebViewActivityV7
 import com.byoutline.secretsauce.activities.WebViewFlickrActivity
 import com.byoutline.secretsauce.di.Injectable
@@ -33,7 +34,7 @@ import javax.inject.Inject
 /**
  * @author Pawel Karczewski <pawel.karczewski at byoutline.com> on 2015-01-03
  */
-class ProjectDetailsActivity : KickMaterialBaseActivity(), DelayedTransitionActivity, Injectable {
+class ProjectDetailsActivity : AutoHideToolbarActivity(), DelayedTransitionActivity, Injectable {
 
     @Inject
     lateinit var transitionHelperFactory: ProjectDetailsTransitionHelperFactory
@@ -54,9 +55,7 @@ class ProjectDetailsActivity : KickMaterialBaseActivity(), DelayedTransitionActi
         binding.scrollView.addCallbacks(ProjectDetailsScrollListener(this, binding))
 
         binding.detailsContainer.startAnimation(AnimationUtils.loadAnimation(this@ProjectDetailsActivity, R.anim.slide_from_bottom))
-        if (LUtils.hasL()) {
-            animateAlphaAfterTransition(binding.projectSubtitleTv)
-        }
+        animateAlphaAfterTransition(binding.projectSubtitleTv)
 
         ViewCompat.setElevation(binding.detailsContainer, ViewUtils.convertDpToPixel(4f, this))
         transitionHelper.loadProjectPhoto(binding.projectPhotoIv)
@@ -64,15 +63,11 @@ class ProjectDetailsActivity : KickMaterialBaseActivity(), DelayedTransitionActi
     }
 
     private fun launchPostTransitionAnimations() {
-        if (LUtils.hasL()) {
-            ActivityCompat.setEnterSharedElementCallback(this, object : SharedElementCallback() {
-                override fun onSharedElementEnd(sharedElementNames: List<String>?, sharedElements: List<View>?, sharedElementSnapshots: List<View>?) {
-                    binding.detailsContainer.postDelayed({
-                        binding.detailsContainer.startAnimation(LUtils.loadAnimationWithLInterpolator(this@ProjectDetailsActivity, R.anim.slide_from_top))
-                        binding.scrollView.startAnimation(LUtils.loadAnimationWithLInterpolator(this@ProjectDetailsActivity, R.anim.slide_from_top_long))
-                    }, 0)
-                }
-            })
+        setEnterSharedElementCallbackCompat {
+            binding.detailsContainer.postDelayed({
+                binding.detailsContainer.startAnimation(LUtils.loadAnimationWithLInterpolator(this@ProjectDetailsActivity, R.anim.slide_from_top))
+                binding.scrollView.startAnimation(LUtils.loadAnimationWithLInterpolator(this@ProjectDetailsActivity, R.anim.slide_from_top_long))
+            }, 0)
         }
     }
 
@@ -88,15 +83,13 @@ class ProjectDetailsActivity : KickMaterialBaseActivity(), DelayedTransitionActi
     }
 
     private fun animateAlphaAfterTransition(view: View) {
-        view.alpha = 0f
-        ActivityCompat.setEnterSharedElementCallback(this, object : SharedElementCallback() {
-            override fun onSharedElementEnd(sharedElementNames: List<String>?, sharedElements: List<View>?, sharedElementSnapshots: List<View>?) {
-                val alphaAnimator = getAlphaAnimator(view)
-                alphaAnimator.duration = 600
-                alphaAnimator.start()
-                ActivityCompat.setEnterSharedElementCallback(this@ProjectDetailsActivity, null)
-            }
-        })
+        if (LUtils.hasL()) view.alpha = 0f
+        setEnterSharedElementCallbackCompat {
+            val alphaAnimator = getAlphaAnimator(view)
+            alphaAnimator.duration = 600
+            alphaAnimator.start()
+            ActivityCompat.setEnterSharedElementCallback(this@ProjectDetailsActivity, null)
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -168,6 +161,6 @@ fun Activity.startProjectDetailsActivity(project: Project, sharedViews: SharedVi
         .let {
             // Preload big photo
             Picasso.with(this).load(project.bigPhotoUrl)
-            val options = KickMaterialBaseActivity.getSharedElementsBundle(this, *sharedViews.asArray())
+            val options = getSharedElementsBundle(*sharedViews.asArray())
             ActivityCompat.startActivity(this, it, options)
         }

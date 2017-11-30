@@ -5,6 +5,7 @@ import android.content.Intent
 import android.media.MediaPlayer
 import android.net.Uri
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.text.TextUtils
 import android.view.Window
 import android.view.WindowManager
@@ -12,14 +13,14 @@ import android.widget.VideoView
 import com.byoutline.kickmaterial.R
 import com.byoutline.kickmaterial.databinding.ActivityVideoBinding
 import com.byoutline.kickmaterial.model.ProjectDetails
-import com.byoutline.kickmaterial.utils.KickMaterialBaseActivity
 import com.byoutline.secretsauce.di.bindContentView
 import com.byoutline.secretsauce.utils.LogUtils
 
 /**
- * @author Sebastian Kacprzak <sebastian.kacprzak at byoutline.com>
+ * Displays fullscreen video. Since it has neither fragments nor toolbar we do not extend
+ * [com.byoutline.kickmaterial.utils.AutoHideToolbarActivity]
  */
-class VideoActivity : KickMaterialBaseActivity() {
+class VideoActivity : AppCompatActivity() {
 
     lateinit var videoView: VideoView
 
@@ -33,9 +34,6 @@ class VideoActivity : KickMaterialBaseActivity() {
             setDataFromArgs()
         }
     }
-
-    // This activity is locked in landscape on all devices.
-    override fun shouldBlockOrientationOnBuggedAndroidVersions() = false
 
     private fun setDataFromArgs() {
         val intent = intent
@@ -75,8 +73,6 @@ class VideoActivity : KickMaterialBaseActivity() {
         super.onStart()
         videoView.start()
     }
-
-    override fun setToolbarAlpha(alpha: Float) {}
 
     companion object {
         const val BUNDLE_VIDEO_URL = "bundle_video_url"

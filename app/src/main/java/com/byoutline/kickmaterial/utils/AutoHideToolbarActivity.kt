@@ -8,6 +8,9 @@ import android.os.Build
 import android.os.Bundle
 import android.support.annotation.CallSuper
 import android.support.annotation.StringRes
+import android.support.v4.app.ActivityCompat
+import android.support.v4.app.FragmentActivity
+import android.support.v4.app.SharedElementCallback
 import android.support.v4.view.ViewCompat
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.GridLayoutManager
@@ -26,7 +29,9 @@ import java.util.*
 /**
  * @author Pawel Karczewski <pawel.karczewski at byoutline.com> on 2015-01-03
  */
-abstract class KickMaterialBaseActivity : AppCompatActivity(), KickMaterialFragment.HostActivity {
+private const val HEADER_HIDE_ANIM_DURATION = 300
+
+abstract class AutoHideToolbarActivity : AppCompatActivity(), KickMaterialFragment.HostActivity {
     private var toolbarAutoHideSensitivity = 0
     private var toolbarAutoHideMinY = 0
     private var toolbarAutoHideSignal = 0
@@ -42,22 +47,16 @@ abstract class KickMaterialBaseActivity : AppCompatActivity(), KickMaterialFragm
 
     override fun onPostCreate(savedInstanceState: Bundle?) {
         super.onPostCreate(savedInstanceState)
-        // Video does not have toolbar
-        toolbar = findViewById<Toolbar?>(R.id.toolbar)?.apply {
+        toolbar = findViewById<Toolbar>(R.id.toolbar).apply {
             setSupportActionBar(this)
             supportActionBar?.setDisplayShowTitleEnabled(false)
             toolbarTitle = findViewById(R.id.toolbar_title_tv)
-            ViewCompat.setElevation(this, ViewUtils.convertDpToPixel(4.0f, this@KickMaterialBaseActivity))
+            ViewCompat.setElevation(this, ViewUtils.convertDpToPixel(4.0f, this@AutoHideToolbarActivity))
             setNavigationOnClickListener { onBackPressed() }
         }
     }
 
-    protected open fun shouldBlockOrientationOnBuggedAndroidVersions() = true
-
     private fun blockOrientationOnBuggedAndroidVersions() {
-        if (!shouldBlockOrientationOnBuggedAndroidVersions()) {
-            return
-        }
         // On Android 5.0 rotating device in activity that was entered with
         // transition will cause crash during activity exit transition.
         // This bug was fixed in Android 5.1.
@@ -124,7 +123,7 @@ abstract class KickMaterialBaseActivity : AppCompatActivity(), KickMaterialFragm
         autoShowOrHideToolbar(shouldShow)
     }
 
-    protected fun autoShowOrHideToolbar(show: Boolean) {
+    private fun autoShowOrHideToolbar(show: Boolean) {
         if (show == toolbarShown) {
             return
         }
@@ -133,7 +132,7 @@ abstract class KickMaterialBaseActivity : AppCompatActivity(), KickMaterialFragm
         onToolbarAutoShowOrHide(show)
     }
 
-    protected fun onToolbarAutoShowOrHide(shown: Boolean) {
+    private fun onToolbarAutoShowOrHide(shown: Boolean) {
         val bar = toolbar ?: return
 
         val translationY = if (shown) 0f else (-bar.bottom).toFloat()
@@ -156,41 +155,44 @@ abstract class KickMaterialBaseActivity : AppCompatActivity(), KickMaterialFragm
     fun setToolbarText(@StringRes textId: Int) {
         toolbarTitle?.setText(textId)
     }
+}
 
-    companion object {
-
-        private const val HEADER_HIDE_ANIM_DURATION = 300
-
-        fun getSharedElementsBundle(activity: Activity, vararg sharedViews: View): Bundle {
-            return if (LUtils.hasL()) {
-                getSharedElementsBundleL(activity, *sharedViews)
-            } else {
-                Bundle()
-            }
-        }
-
-        @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-        private fun getSharedElementsBundleL(activity: Activity, vararg sharedViews: View?): Bundle {
-            val options: Bundle
-            val decor = activity.window.decorView
-
-            val navBar = decor.findViewById<View>(android.R.id.navigationBarBackground)
-            val toolbar = decor.findViewById<View>(R.id.toolbar)
-
-            val sharedElements = sharedViews
-                    .filterNotNull()
-                    .mapTo(ArrayList<Pair<View, String>>()) { Pair(it, it.transitionName) }
-
-            if (navBar != null) {
-                sharedElements.add(Pair(navBar, Window.NAVIGATION_BAR_BACKGROUND_TRANSITION_NAME))
-            }
-            if (toolbar != null) {
-                sharedElements.add(Pair(toolbar, "toolbar"))
-            }
-
-            val arr = sharedElements.toTypedArray()
-            options = ActivityOptions.makeSceneTransitionAnimation(activity, *arr).toBundle()
-            return options
-        }
+fun Activity.getSharedElementsBundle(vararg sharedViews: View): Bundle {
+    return if (LUtils.hasL()) {
+        getSharedElementsBundleL(*sharedViews)
+    } else {
+        Bundle()
     }
+}
+
+@TargetApi(Build.VERSION_CODES.LOLLIPOP)
+private fun Activity.getSharedElementsBundleL(vararg sharedViews: View?): Bundle {
+    val decor = window.decorView
+
+    val navBar = decor.findViewById<View>(android.R.id.navigationBarBackground)
+    val toolbar = decor.findViewById<View>(R.id.toolbar)
+
+    val sharedElements = sharedViews
+            .filterNotNull()
+            .mapTo(ArrayList<Pair<View, String>>()) { Pair(it, it.transitionName) }
+
+    if (navBar != null) {
+        sharedElements.add(Pair(navBar, Window.NAVIGATION_BAR_BACKGROUND_TRANSITION_NAME))
+    }
+    if (toolbar != null) {
+        sharedElements.add(Pair(toolbar, "toolbar"))
+    }
+
+    val arr = sharedElements.toTypedArray()
+    return ActivityOptions.makeSceneTransitionAnimation(this, *arr).toBundle()
+}
+
+fun FragmentActivity.setEnterSharedElementCallbackCompat(onSharedElementEnd: () -> Unit) {
+    if (!LUtils.hasL()) return
+
+    ActivityCompat.setEnterSharedElementCallback(this, object : SharedElementCallback() {
+        override fun onSharedElementEnd(sharedElementNames: List<String>?, sharedElements: List<View>?, sharedElementSnapshots: List<View>?) {
+            onSharedElementEnd()
+        }
+    })
 }

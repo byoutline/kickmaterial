@@ -11,7 +11,7 @@ import com.byoutline.kickmaterial.features.selectcategory.ARG_CATEGORY
 import com.byoutline.kickmaterial.features.selectcategory.CategoriesListActivity
 import com.byoutline.kickmaterial.features.selectcategory.DataManager
 import com.byoutline.kickmaterial.model.Category
-import com.byoutline.kickmaterial.utils.KickMaterialBaseActivity
+import com.byoutline.kickmaterial.utils.AutoHideToolbarActivity
 import com.byoutline.secretsauce.activities.showFragment
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
@@ -22,7 +22,7 @@ import javax.inject.Inject
 /**
  * @author Pawel Karczewski <pawel.karczewski at byoutline.com> on 2015-01-03
  */
-class MainActivity : KickMaterialBaseActivity(), HasSupportFragmentInjector {
+class MainActivity : AutoHideToolbarActivity(), HasSupportFragmentInjector {
     @Inject
     lateinit var dispatchingFragmentInjector: DispatchingAndroidInjector<Fragment>
     override fun supportFragmentInjector(): AndroidInjector<Fragment> = dispatchingFragmentInjector

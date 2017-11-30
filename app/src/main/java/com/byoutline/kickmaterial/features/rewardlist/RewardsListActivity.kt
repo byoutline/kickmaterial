@@ -17,9 +17,10 @@ import com.byoutline.kickmaterial.R
 import com.byoutline.kickmaterial.databinding.FragmentRewardsListBinding
 import com.byoutline.kickmaterial.features.selectcategory.CategoriesListSeparator
 import com.byoutline.kickmaterial.model.ProjectDetails
+import com.byoutline.kickmaterial.utils.AutoHideToolbarActivity
 import com.byoutline.kickmaterial.utils.ContainerTranslationScrollListener
-import com.byoutline.kickmaterial.utils.KickMaterialBaseActivity
 import com.byoutline.kickmaterial.utils.LUtils
+import com.byoutline.kickmaterial.utils.getSharedElementsBundle
 import com.byoutline.secretsauce.di.bindContentView
 import com.byoutline.secretsauce.di.lazyViewModel
 import com.squareup.picasso.Picasso
@@ -29,7 +30,7 @@ import org.jetbrains.anko.sdk25.listeners.onClick
 /**
  * @author Pawel Karczewski <pawel.karczewski at byoutline.com> on 2015-01-03
  */
-class RewardsListActivity : KickMaterialBaseActivity() {
+class RewardsListActivity : AutoHideToolbarActivity() {
 
     private val viewModel: RewardListViewModel by lazyViewModel()
 
@@ -95,7 +96,7 @@ class RewardsListActivity : KickMaterialBaseActivity() {
 
         @TargetApi(Build.VERSION_CODES.LOLLIPOP)
         fun launch(activity: Activity, project: ProjectDetails, sharedElement: View) {
-            val options = getSharedElementsBundle(activity, sharedElement)
+            val options = activity.getSharedElementsBundle(sharedElement)
             val intent = Intent(activity, RewardsListActivity::class.java)
             intent.putExtra(PROJECT_ARG, project)
             ActivityCompat.startActivity(activity, intent, options)

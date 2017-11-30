@@ -11,7 +11,6 @@ import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.support.v4.app.ActivityCompat
-import android.support.v4.app.SharedElementCallback
 import android.support.v4.content.ContextCompat
 import android.support.v4.view.animation.FastOutSlowInInterpolator
 import android.view.View
@@ -20,9 +19,7 @@ import android.view.animation.OvershootInterpolator
 import com.byoutline.kickmaterial.R
 import com.byoutline.kickmaterial.databinding.ActivityCategoryListBinding
 import com.byoutline.kickmaterial.model.Category
-import com.byoutline.kickmaterial.utils.ContainerTranslationScrollListener
-import com.byoutline.kickmaterial.utils.KickMaterialBaseActivity
-import com.byoutline.kickmaterial.utils.LUtils
+import com.byoutline.kickmaterial.utils.*
 import com.byoutline.secretsauce.di.bindContentView
 import com.byoutline.secretsauce.di.lazyViewModelWithAutoLifecycle
 import com.byoutline.secretsauce.utils.ViewUtils
@@ -32,7 +29,7 @@ import org.jetbrains.anko.sdk25.listeners.onClick
 /**
  * @author Pawel Karczewski <pawel.karczewski at byoutline.com> on 2015-01-03
  */
-class CategoriesListActivity : KickMaterialBaseActivity(), CategoryClickListener {
+class CategoriesListActivity : AutoHideToolbarActivity(), CategoryClickListener {
 
     private val viewModel: CategoriesListViewModel by lazyViewModelWithAutoLifecycle(this as CategoryClickListener)
 
@@ -76,21 +73,19 @@ class CategoriesListActivity : KickMaterialBaseActivity(), CategoryClickListener
         if (LUtils.hasL()) {
             binding.closeCategoriesIv.scaleX = 0f
             binding.closeCategoriesIv.scaleY = 0f
-            ActivityCompat.setEnterSharedElementCallback(this, object : SharedElementCallback() {
-                override fun onSharedElementEnd(sharedElementNames: List<String>?, sharedElements: List<View>?, sharedElementSnapshots: List<View>?) {
-                    binding.closeCategoriesIv.postDelayed({
-                        // remove listener, we do not want to trigger this animation on exit
-                        ActivityCompat.setEnterSharedElementCallback(this@CategoriesListActivity, null)
-                        if (isFinishing) {
-                            return@postDelayed
-                        }
+            setEnterSharedElementCallbackCompat {
+                binding.closeCategoriesIv.postDelayed({
+                    // remove listener, we do not want to trigger this animation on exit
+                    ActivityCompat.setEnterSharedElementCallback(this@CategoriesListActivity, null)
+                    if (isFinishing) {
+                        return@postDelayed
+                    }
 
-                        val closeCategoryAnim = AnimatorUtils.getScaleAnimator(binding.closeCategoriesIv, 0f, 1f)
-                        closeCategoryAnim.interpolator = OvershootInterpolator()
-                        closeCategoryAnim.start()
-                    }, 160)
-                }
-            })
+                    val closeCategoryAnim = AnimatorUtils.getScaleAnimator(binding.closeCategoriesIv, 0f, 1f)
+                    closeCategoryAnim.interpolator = OvershootInterpolator()
+                    closeCategoryAnim.start()
+                }, 160)
+            }
         }
         binding.categoriesRv.post { binding.categoriesRv.startAnimation(LUtils.loadAnimationWithLInterpolator(applicationContext, R.anim.slide_from_bottom)) }
     }
@@ -247,7 +242,7 @@ class CategoriesListActivity : KickMaterialBaseActivity(), CategoryClickListener
         private const val INSTANCE_STATE_SUMMARY_SCROLLED = "INSTANCE_STATE_SUMMARY_SCROLLED"
 
         fun launch(context: Activity, category: Category, sharedElement: View) {
-            val options = getSharedElementsBundle(context, sharedElement)
+            val options = context.getSharedElementsBundle(sharedElement)
             val intent = Intent(context, CategoriesListActivity::class.java)
                     .apply { putExtra(ARG_CATEGORY, category) }
             ActivityCompat.startActivityForResult(context, intent, DEFAULT_REQUEST_CODE, options)
