@@ -5,8 +5,7 @@ ext {
     okhttp_ver = '3.7.0'
     rxlifecycle_ver = '2.1.0'
     binding_collection_adapter_ver = '2.2.0'
-    cached_field_ver = '1.7.0-RC3'
-    obs_cached_field_ver = '1.7.0-RC4'
+    cached_field_ver = '1.7.0'
     cappuccino_ver = '0.9.1'
     anko_ver = '0.10.3'
     espresso_ver = '3.0.1'
@@ -25,7 +24,7 @@ dependencies {
     implementation "com.android.support:design:$support_version"
 
     implementation 'com.byoutline.secretsauce:secretsaucekt:0.6.0-beta7'
-    implementation "com.byoutline.observablecachedfield:observablecachedfield:$obs_cached_field_ver"
+    implementation "com.byoutline.observablecachedfield:observablecachedfield:$cached_field_ver"
     implementation 'com.byoutline.androidstubserver:stubserver:2.0.0-beta2'
 
 
@@ -47,7 +46,7 @@ dependencies {
     implementation "org.jetbrains.anko:anko-appcompat-v7-listeners:$anko_ver"
     implementation "org.jetbrains.anko:anko-support-v4:$anko_ver"
 
-    implementation 'io.reactivex.rxjava2:rxjava:2.1.6'
+    implementation 'io.reactivex.rxjava2:rxjava:2.1.7'
     implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
 
     implementation "android.arch.lifecycle:extensions:1.0.0"
@@ -106,7 +105,7 @@ dependencies {
     }
     androidTestImplementation 'com.squareup.spoon:spoon-client:1.7.1'
     androidTestImplementation 'com.byoutline.cachedfield:idlingresource:1.0.0'
-    androidTestImplementation "com.byoutline.observablecachedfield:observablecachedfield:$obs_cached_field_ver"
+    androidTestImplementation "com.byoutline.observablecachedfield:observablecachedfield:$cached_field_ver"
 }
 
 // AS does not want to run application with play button without resolution strategy
