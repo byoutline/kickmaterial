@@ -61,8 +61,7 @@ open class AppModule(private val app: KickMaterialApp) {
         return builder.create()
     }
 
-    @Provides
-    @Singleton
+    @Provides @Singleton
     fun providesKickMaterialService(requestInterceptor: KickMaterialRequestInterceptor, gson: Gson): KickMaterialService
             = createService("http://localhost:8099", KickMaterialService::class.java, requestInterceptor, gson)
 
@@ -84,12 +83,10 @@ open class AppModule(private val app: KickMaterialApp) {
         return builder.build().create(serviceClass)
     }
 
-    @Provides
-    @Reusable
+    @Provides @Reusable
     open fun provideSharedPrefs(): SharedPreferences = PreferenceManager.getDefaultSharedPreferences(app)
 
-    @Provides
-    @Singleton
+    @Provides @Singleton
     fun provideDiscover(service: KickMaterialService): ObservableCachedFieldWithArg<DiscoverResponse, DiscoverQuery> {
         return ObservableCachedFieldBuilder()
                 .withValueProviderWithArg(apiValueProv<DiscoverResponse, DiscoverQuery> { query -> service.getDiscover(query.queryMap) })
@@ -97,8 +94,7 @@ open class AppModule(private val app: KickMaterialApp) {
                 .build()
     }
 
-    @Provides
-    @Singleton
+    @Provides @Singleton
     fun provideProjectDetails(service: KickMaterialService): ObservableCachedFieldWithArg<ProjectDetails, ProjectIdAndSignature>
             = ObservableCachedFieldBuilder()
             .withValueProviderWithArg(apiValueProv<ProjectDetails, ProjectIdAndSignature> { (id, queryParams) -> service.getProjectDetails(id, queryParams) })

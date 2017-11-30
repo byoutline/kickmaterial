@@ -3,7 +3,6 @@ package com.byoutline.kickmaterial.features.rewardlist
 import android.annotation.TargetApi
 import android.app.Activity
 import android.content.Intent
-import android.databinding.DataBindingUtil
 import android.graphics.Bitmap
 import android.graphics.Color
 import android.graphics.PorterDuff
@@ -21,6 +20,7 @@ import com.byoutline.kickmaterial.model.ProjectDetails
 import com.byoutline.kickmaterial.utils.ContainerTranslationScrollListener
 import com.byoutline.kickmaterial.utils.KickMaterialBaseActivity
 import com.byoutline.kickmaterial.utils.LUtils
+import com.byoutline.secretsauce.di.bindContentView
 import com.byoutline.secretsauce.di.lazyViewModel
 import com.squareup.picasso.Picasso
 import com.squareup.picasso.Target
@@ -38,7 +38,7 @@ class RewardsListActivity : KickMaterialBaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val binding = DataBindingUtil.setContentView<FragmentRewardsListBinding>(this, R.layout.fragment_rewards_list)
+        val binding: FragmentRewardsListBinding = bindContentView(R.layout.fragment_rewards_list)
         binding.model = viewModel
         rewardsListRv = binding.categoriesRv
         project = intent.extras.getParcelable(PROJECT_ARG)!!

@@ -2,7 +2,6 @@ package com.byoutline.kickmaterial.features.projectdetails
 
 import android.app.Activity
 import android.content.Intent
-import android.databinding.DataBindingUtil
 import android.graphics.Color
 import android.os.Bundle
 import android.support.annotation.ColorInt
@@ -13,7 +12,6 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.view.animation.AnimationUtils
-import com.byoutline.kickmaterial.KickMaterialApp
 import com.byoutline.kickmaterial.R
 import com.byoutline.kickmaterial.databinding.ActivityProjectDetailsBinding
 import com.byoutline.kickmaterial.features.rewardlist.RewardsListActivity
@@ -23,6 +21,8 @@ import com.byoutline.kickmaterial.utils.KickMaterialBaseActivity
 import com.byoutline.kickmaterial.utils.LUtils
 import com.byoutline.secretsauce.activities.WebViewActivityV7
 import com.byoutline.secretsauce.activities.WebViewFlickrActivity
+import com.byoutline.secretsauce.di.Injectable
+import com.byoutline.secretsauce.di.bindContentView
 import com.byoutline.secretsauce.utils.ViewUtils
 import com.byoutline.secretsauce.utils.showToast
 import com.squareup.picasso.Picasso
@@ -33,19 +33,18 @@ import javax.inject.Inject
 /**
  * @author Pawel Karczewski <pawel.karczewski at byoutline.com> on 2015-01-03
  */
-class ProjectDetailsActivity : KickMaterialBaseActivity(), DelayedTransitionActivity {
+class ProjectDetailsActivity : KickMaterialBaseActivity(), DelayedTransitionActivity, Injectable {
 
     @Inject
     lateinit var transitionHelperFactory: ProjectDetailsTransitionHelperFactory
-    lateinit var transitionHelper: ProjectDetailsTransitionHelper
+    private lateinit var transitionHelper: ProjectDetailsTransitionHelper
 
 
     private lateinit var binding: ActivityProjectDetailsBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_project_details)
-        KickMaterialApp.component.inject(this)
+        binding = bindContentView(R.layout.activity_project_details)
         transitionHelper = transitionHelperFactory.create(intent.extras.getParcelable(EXTRA_PROJECT), projectDetailsActivity = this)
         binding.model = transitionHelper
         binding.project = transitionHelper.projectDetailsField.observable()
@@ -165,7 +164,7 @@ class ProjectDetailsActivity : KickMaterialBaseActivity(), DelayedTransitionActi
 private const val EXTRA_PROJECT = "DetailActivity:project"
 
 fun Activity.startProjectDetailsActivity(project: Project, sharedViews: SharedViews)
-    = intentFor<ProjectDetailsActivity>(EXTRA_PROJECT to project)
+        = intentFor<ProjectDetailsActivity>(EXTRA_PROJECT to project)
         .let {
             // Preload big photo
             Picasso.with(this).load(project.bigPhotoUrl)

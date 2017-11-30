@@ -1,7 +1,6 @@
 package com.byoutline.kickmaterial.dagger
 
 import com.byoutline.kickmaterial.KickMaterialApp
-import com.byoutline.kickmaterial.features.projectdetails.ProjectDetailsActivity
 import com.byoutline.kickmaterial.model.DiscoverQuery
 import com.byoutline.kickmaterial.model.DiscoverResponse
 import com.byoutline.observablecachedfield.ObservableCachedFieldWithArg
@@ -19,7 +18,6 @@ import javax.inject.Singleton
     ViewModelProvidersModule::class
 ])
 interface AppComponent {
-    fun inject(activity: ProjectDetailsActivity)
     fun inject(app: KickMaterialApp)
 
     val app: KickMaterialApp

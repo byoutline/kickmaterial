@@ -2,7 +2,6 @@ package com.byoutline.kickmaterial.features.projectdetails
 
 import android.content.Context
 import android.content.Intent
-import android.databinding.DataBindingUtil
 import android.media.MediaPlayer
 import android.net.Uri
 import android.os.Bundle
@@ -14,6 +13,7 @@ import com.byoutline.kickmaterial.R
 import com.byoutline.kickmaterial.databinding.ActivityVideoBinding
 import com.byoutline.kickmaterial.model.ProjectDetails
 import com.byoutline.kickmaterial.utils.KickMaterialBaseActivity
+import com.byoutline.secretsauce.di.bindContentView
 import com.byoutline.secretsauce.utils.LogUtils
 
 /**
@@ -27,7 +27,7 @@ class VideoActivity : KickMaterialBaseActivity() {
         requestWindowFeature(Window.FEATURE_NO_TITLE)
         window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
         super.onCreate(savedInstanceState)
-        val binding = DataBindingUtil.setContentView<ActivityVideoBinding>(this, R.layout.activity_video)
+        val binding: ActivityVideoBinding = bindContentView(R.layout.activity_video)
         videoView = binding.videoView
         if (savedInstanceState == null) {
             setDataFromArgs()

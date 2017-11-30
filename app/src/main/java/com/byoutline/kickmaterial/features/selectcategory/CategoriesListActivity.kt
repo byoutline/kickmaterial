@@ -7,7 +7,6 @@ import android.animation.ObjectAnimator
 import android.annotation.TargetApi
 import android.app.Activity
 import android.content.Intent
-import android.databinding.DataBindingUtil
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
@@ -24,6 +23,7 @@ import com.byoutline.kickmaterial.model.Category
 import com.byoutline.kickmaterial.utils.ContainerTranslationScrollListener
 import com.byoutline.kickmaterial.utils.KickMaterialBaseActivity
 import com.byoutline.kickmaterial.utils.LUtils
+import com.byoutline.secretsauce.di.bindContentView
 import com.byoutline.secretsauce.di.lazyViewModelWithAutoLifecycle
 import com.byoutline.secretsauce.utils.ViewUtils
 import org.jetbrains.anko.sdk25.listeners.onClick
@@ -45,7 +45,7 @@ class CategoriesListActivity : KickMaterialBaseActivity(), CategoryClickListener
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_category_list)
+        binding = bindContentView(R.layout.activity_category_list)
         category = intent.extras.getParcelable(ARG_CATEGORY)
 
         setUpAdapters()
