@@ -5,7 +5,7 @@ MIN_REV="Pkg.Revision=27.0.1"
 CUR_REV=$(cat ${ANDROID_HOME}/tools/source.properties | grep "Revision=")
 
 mkdir "$ANDROID_HOME/licenses" || true
-echo -e "\n8933bad161af4178b1185d1a37fbf41ea5269c55" > "$ANDROID_HOME/licenses/android-sdk-license"
+echo -e "\n8933bad161af4178b1185d1a37fbf41ea5269c55\nd56f5187479451eabf01fb78af6dfcb131a6481e" > "$ANDROID_HOME/licenses/android-sdk-license"
 
 update_needed() {
     # Check whether current version is older than required.

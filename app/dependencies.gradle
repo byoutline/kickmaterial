@@ -23,7 +23,7 @@ dependencies {
     implementation "com.android.support:palette-v7:$support_version"
     implementation "com.android.support:design:$support_version"
 
-    implementation 'com.byoutline.secretsauce:secretsaucekt:0.6.0-beta7'
+    implementation 'com.byoutline.secretsauce:secretsaucekt:0.6.0'
     implementation "com.byoutline.observablecachedfield:observablecachedfield:$cached_field_ver"
     implementation 'com.byoutline.androidstubserver:stubserver:2.0.0-beta2'
 
