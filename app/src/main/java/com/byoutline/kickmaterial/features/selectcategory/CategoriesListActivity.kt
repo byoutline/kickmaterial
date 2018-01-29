@@ -31,7 +31,7 @@ import org.jetbrains.anko.sdk25.listeners.onClick
  */
 class CategoriesListActivity : AutoHideToolbarActivity(), CategoryClickListener {
 
-    private val viewModel: CategoriesListViewModel by lazyViewModelWithAutoLifecycle(this as CategoryClickListener)
+    private val viewModel by lazyViewModelWithAutoLifecycle(CategoriesListViewModel::class)
 
     private var revealAnimation: Animator? = null
     private var category: Category? = null

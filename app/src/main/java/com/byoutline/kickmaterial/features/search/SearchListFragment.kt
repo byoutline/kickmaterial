@@ -29,7 +29,7 @@ class SearchListFragment : KickMaterialFragment(), ProjectClickListener, Endless
 
     private lateinit var projectListRv: RecyclerView
 
-    val viewModel: SearchViewModel by lazyViewModelWithAutoLifecycle(this as ProjectClickListener)
+    val viewModel by lazyViewModelWithAutoLifecycle(SearchViewModel::class)
 
     private var searchView: SearchView? = null
     private var restoredSearchQuery: CharSequence = ""
