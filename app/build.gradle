@@ -27,14 +27,14 @@ repositories {
 
 
 android {
-    compileSdkVersion 27
+    compileSdkVersion 28
 
     dataBinding.enabled = true
 
     defaultConfig {
         applicationId 'com.byoutline.kickmaterial'
         minSdkVersion 18
-        targetSdkVersion 27
+        targetSdkVersion 28
         versionCode 4
         versionName '1.0.3'
 
