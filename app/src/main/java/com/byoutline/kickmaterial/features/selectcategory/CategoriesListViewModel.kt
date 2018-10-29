@@ -7,7 +7,7 @@ import com.byoutline.kickmaterial.model.Category
 import com.byoutline.kickmaterial.model.DiscoverQuery
 import com.byoutline.kickmaterial.model.DiscoverResponse
 import com.byoutline.observablecachedfield.ObservableCachedFieldWithArg
-import com.byoutline.secretsauce.di.AttachableViewModel
+import com.byoutline.secretsauce.lifecycle.AttachableViewModel
 import me.tatarka.bindingcollectionadapter2.ItemBinding
 
 class CategoriesListViewModel(

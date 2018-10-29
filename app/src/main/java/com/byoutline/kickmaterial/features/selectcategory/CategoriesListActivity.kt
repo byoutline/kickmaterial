@@ -20,8 +20,8 @@ import com.byoutline.kickmaterial.R
 import com.byoutline.kickmaterial.databinding.ActivityCategoryListBinding
 import com.byoutline.kickmaterial.model.Category
 import com.byoutline.kickmaterial.utils.*
-import com.byoutline.secretsauce.di.bindContentView
-import com.byoutline.secretsauce.di.lazyViewModelWithAutoLifecycle
+import com.byoutline.secretsauce.databinding.bindContentView
+import com.byoutline.secretsauce.lifecycle.lazyViewModelWithAutoLifecycle
 import com.byoutline.secretsauce.utils.ViewUtils
 import org.jetbrains.anko.sdk25.listeners.onClick
 

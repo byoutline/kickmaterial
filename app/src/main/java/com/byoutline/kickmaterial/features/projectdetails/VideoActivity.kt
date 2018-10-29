@@ -13,7 +13,7 @@ import android.widget.VideoView
 import com.byoutline.kickmaterial.R
 import com.byoutline.kickmaterial.databinding.ActivityVideoBinding
 import com.byoutline.kickmaterial.model.ProjectDetails
-import com.byoutline.secretsauce.di.bindContentView
+import com.byoutline.secretsauce.databinding.bindContentView
 import com.byoutline.secretsauce.utils.LogUtils
 
 /**

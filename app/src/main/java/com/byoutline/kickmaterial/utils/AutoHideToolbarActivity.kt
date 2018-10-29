@@ -47,7 +47,7 @@ abstract class AutoHideToolbarActivity : AppCompatActivity(), KickMaterialFragme
 
     override fun onPostCreate(savedInstanceState: Bundle?) {
         super.onPostCreate(savedInstanceState)
-        toolbar = findViewById<Toolbar>(R.id.toolbar).apply {
+        toolbar = findViewById<Toolbar>(R.id.toolbar)?.apply {
             setSupportActionBar(this)
             supportActionBar?.setDisplayShowTitleEnabled(false)
             toolbarTitle = findViewById(R.id.toolbar_title_tv)
@@ -68,8 +68,8 @@ abstract class AutoHideToolbarActivity : AppCompatActivity(), KickMaterialFragme
     override fun enableToolbarAutoHide(listView: RecyclerView) {
         initToolbarAutoHide()
         listView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            internal val ITEMS_THRESHOLD = 1
-            internal var lastFvi = 0
+            val ITEMS_THRESHOLD = 1
+            var lastFvi = 0
 
             override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)

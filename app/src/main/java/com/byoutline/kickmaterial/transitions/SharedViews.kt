@@ -10,7 +10,7 @@ class SharedViews(vararg views: View?) {
     private val views = ArrayList<View>()
 
     init {
-        this.views.addAll(listOf(*views).filterNotNull())
+        this.views.addAll(listOfNotNull(*views))
     }
 
     fun asArrayList(): ArrayList<View> = views

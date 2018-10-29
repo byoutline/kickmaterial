@@ -13,7 +13,7 @@ import com.byoutline.kickmaterial.model.*
 import com.byoutline.kickmaterial.transitions.SharedViews
 import com.byoutline.observablecachedfield.ObservableCachedFieldWithArg
 import com.byoutline.observablecachedfield.util.registerChangeCallback
-import com.byoutline.secretsauce.di.AttachableViewModel
+import com.byoutline.secretsauce.lifecycle.AttachableViewModel
 import me.tatarka.bindingcollectionadapter2.ItemBinding
 import me.tatarka.bindingcollectionadapter2.collections.DiffObservableList
 import javax.inject.Provider
@@ -40,10 +40,11 @@ class SearchViewModel(
         val discoverFieldCallback = discoverField.registerChangeCallback(
                 onNext = this::onSearchResultFetched
         )
-        super.onAttach(view, onDetachAction = {
+        super.onAttach(view)
+        registerDetachAction {
             discoverField.observable().removeOnPropertyChangedCallback(discoverFieldCallback)
             discoverField.observableError.removeOnPropertyChangedCallback(discoverFieldCallback)
-        })
+        }
     }
 
     private var page = SearchListFragment.DEFAULT_PAGE

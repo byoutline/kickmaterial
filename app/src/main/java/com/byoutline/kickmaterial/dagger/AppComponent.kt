@@ -5,6 +5,7 @@ import com.byoutline.kickmaterial.model.DiscoverQuery
 import com.byoutline.kickmaterial.model.DiscoverResponse
 import com.byoutline.observablecachedfield.ObservableCachedFieldWithArg
 import dagger.Component
+import dagger.android.support.AndroidSupportInjectionModule
 import javax.inject.Singleton
 
 /**
@@ -14,6 +15,7 @@ import javax.inject.Singleton
 @Component(modules = [
     AppModule::class,
     MainActivityModule::class,
+    AndroidSupportInjectionModule::class,
     ViewModelMapModule::class,
     ViewModelProvidersModule::class
 ])

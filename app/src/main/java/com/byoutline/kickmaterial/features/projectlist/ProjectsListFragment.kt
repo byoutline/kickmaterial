@@ -22,8 +22,8 @@ import com.byoutline.kickmaterial.utils.LUtils
 import com.byoutline.kickmaterial.views.EndlessScrollListener
 import com.byoutline.kickmaterial.views.setEndlessScrollListener
 import com.byoutline.secretsauce.activities.showFragment
-import com.byoutline.secretsauce.di.inflateAndSetViewModel
-import com.byoutline.secretsauce.di.lazyViewModelWithAutoLifecycle
+import com.byoutline.secretsauce.databinding.inflateAndSetVM
+import com.byoutline.secretsauce.lifecycle.lazyViewModelWithAutoLifecycle
 import org.jetbrains.anko.bundleOf
 import org.jetbrains.anko.sdk25.listeners.onClick
 import org.jetbrains.anko.support.v4.onRefresh
@@ -46,7 +46,7 @@ class ProjectsListFragment : KickMaterialFragment(), ProjectClickListener, Field
     private lateinit var scrollListener: ProjectsListScrollListener
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding = inflateAndSetViewModel(inflater, container, R.layout.fragment_projects, viewModel)
+        binding = inflateAndSetVM(inflater, container, R.layout.fragment_projects, viewModel)
 
         hostActivity?.enableToolbarAutoHide(binding.projectRecyclerView)
 

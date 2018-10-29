@@ -22,8 +22,8 @@ import com.byoutline.kickmaterial.utils.getSharedElementsBundle
 import com.byoutline.kickmaterial.utils.setEnterSharedElementCallbackCompat
 import com.byoutline.secretsauce.activities.WebViewActivityV7
 import com.byoutline.secretsauce.activities.WebViewFlickrActivity
+import com.byoutline.secretsauce.databinding.bindContentView
 import com.byoutline.secretsauce.di.Injectable
-import com.byoutline.secretsauce.di.bindContentView
 import com.byoutline.secretsauce.utils.ViewUtils
 import com.byoutline.secretsauce.utils.showToast
 import com.squareup.picasso.Picasso
