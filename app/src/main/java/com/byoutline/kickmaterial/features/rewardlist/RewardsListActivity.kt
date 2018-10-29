@@ -21,8 +21,8 @@ import com.byoutline.kickmaterial.utils.AutoHideToolbarActivity
 import com.byoutline.kickmaterial.utils.ContainerTranslationScrollListener
 import com.byoutline.kickmaterial.utils.LUtils
 import com.byoutline.kickmaterial.utils.getSharedElementsBundle
-import com.byoutline.secretsauce.di.bindContentView
-import com.byoutline.secretsauce.di.lazyViewModel
+import com.byoutline.secretsauce.databinding.bindContentView
+import com.byoutline.secretsauce.lifecycle.lazyViewModel
 import com.squareup.picasso.Picasso
 import com.squareup.picasso.Target
 import org.jetbrains.anko.sdk25.listeners.onClick

@@ -15,7 +15,7 @@ import com.byoutline.kickmaterial.transitions.SharedViews
 import com.byoutline.observablecachedfield.ObservableCachedFieldWithArg
 import com.byoutline.observablecachedfield.util.RetrofitHelper
 import com.byoutline.observablecachedfield.util.registerChangeCallback
-import com.byoutline.secretsauce.di.AttachableViewModel
+import com.byoutline.secretsauce.lifecycle.AttachableViewModel
 import com.squareup.picasso.Picasso
 import me.tatarka.bindingcollectionadapter2.BindingRecyclerViewAdapter
 import me.tatarka.bindingcollectionadapter2.ItemBinding
@@ -69,10 +69,11 @@ class ProjectListViewModel(
         )
         discoverField.observable().notifyChange()
         discoverField.observableError.notifyChange()
-        super.onAttach(view, onDetachAction = {
+        super.onAttach(view)
+        registerDetachAction {
             discoverField.observable().removeOnPropertyChangedCallback(discoverFieldCallback)
             discoverField.observableError.removeOnPropertyChangedCallback(discoverFieldCallback)
-        })
+        }
     }
 
     private fun Collection<Project>.mapToViewModels(offset: Int = 0) = mapIndexed { index, project ->

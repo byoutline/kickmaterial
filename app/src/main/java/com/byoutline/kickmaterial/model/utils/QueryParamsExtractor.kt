@@ -18,10 +18,10 @@ object QueryParamsExtractor {
             val u = URL(url)
             splitQuery(u)
         } catch (e: MalformedURLException) {
-            Timber.e("Failed to get query params from url: " + url, e)
+            Timber.e(e, "Failed to get query params from url: $url")
             emptyMap()
         } catch (e: UnsupportedEncodingException) {
-            Timber.e("Failed to get query params from url: " + url, e)
+            Timber.e(e, "Failed to get query params from url: $url")
             emptyMap()
         }
 

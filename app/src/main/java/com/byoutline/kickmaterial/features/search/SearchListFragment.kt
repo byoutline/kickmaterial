@@ -20,8 +20,8 @@ import com.byoutline.kickmaterial.utils.LUtils
 import com.byoutline.kickmaterial.views.EndlessScrollListener
 import com.byoutline.kickmaterial.views.setEndlessScrollListener
 import com.byoutline.secretsauce.activities.hideKeyboard
-import com.byoutline.secretsauce.di.inflateAndSetViewModel
-import com.byoutline.secretsauce.di.lazyViewModelWithAutoLifecycle
+import com.byoutline.secretsauce.databinding.inflateAndSetVM
+import com.byoutline.secretsauce.lifecycle.lazyViewModelWithAutoLifecycle
 import org.jetbrains.anko.appcompat.v7.listeners.onClose
 import org.jetbrains.anko.appcompat.v7.listeners.onQueryTextListener
 
@@ -35,7 +35,7 @@ class SearchListFragment : KickMaterialFragment(), ProjectClickListener, Endless
     private var restoredSearchQuery: CharSequence = ""
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val binding: FragmentSearchResultsBinding = inflateAndSetViewModel(inflater, container, R.layout.fragment_search_results, viewModel)
+        val binding: FragmentSearchResultsBinding = inflateAndSetVM(inflater, container, R.layout.fragment_search_results, viewModel)
         projectListRv = binding.searchRecyclerView
 
         setHasOptionsMenu(true)
@@ -80,7 +80,7 @@ class SearchListFragment : KickMaterialFragment(), ProjectClickListener, Endless
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater?) {
         searchView = getSearchView(activity!!, menu).apply {
             isIconified = false
-            onQueryTextListener{
+            onQueryTextListener {
                 onQueryTextSubmit { searchTerm ->
                     viewModel.updateSearchTerm(searchTerm)
                     // On landscape entry field and soft keyboard may cover whole screen.
